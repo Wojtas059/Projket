@@ -1,0 +1,100 @@
+<MyGrid>
+    name: 'mygrid'
+    com: com
+    mainbutton: mainbutton
+    canvas.before:
+        Color:
+            rgba: (240/255,240/255,240/255,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        
+        spacing: 20
+        padding: 100
+
+        Button:
+            text: "Wybierz port com"
+            id: mainbutton
+
+
+        TextInput:
+            text: "Comunication"
+            multiline: False
+            id: com
+            color: 0,0,1,1
+            
+
+        Button:
+            text: "Start pomiaru"
+            id: butt
+            on_press: root.start_thread()
+
+        Button:
+            text: "Stop pomiaru"
+            on_press: root.stop()
+
+        Button:
+            text: "Zapisz"
+            on_press: root.save_file_()
+            
+            
+
+<Button>
+    size_hint: (0.5, 0.5)
+    width: 200
+    height: 50
+    pos_hint: {'center_x': 0.5}
+
+<CustomDropDown>:
+    Button:
+        text: 'COM1'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('COM1')
+    Button:
+        text: 'COM2'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('COM2')
+    Button:
+        text: 'COM3'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('COM3')
+    Button:
+        text: 'COM4'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('COM4')
+
+
+<SaveDialog>:
+    text_input: text_input
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+            on_selection: text_input.text = self.selection and self.selection[0] or ''
+
+        TextInput:
+            id: text_input
+            size_hint_y: None
+            height: 30
+            multiline: False
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Save"
+                on_release: root.save(filechooser.path, text_input.text)

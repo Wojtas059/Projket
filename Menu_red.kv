@@ -1,0 +1,46 @@
+<ScreenManagement>:
+    MenuScreen:
+    ProgramScreen:
+
+
+<MenuScreen>:
+    name: 'menu'
+    AnchorLayout:
+        GridLayout:
+            cols: 2
+            Button
+                text: "Start Application"
+                on_release: root.routine()
+
+<ProgramScreen>:
+    filler1: filler1
+    filler2: filler2
+    filler3: filler3
+    filler4: filler4
+    name: 'program'
+    GridLayout:
+        cols: 4
+        Button:
+            id: filler1
+            text: 'Filler 1'
+            halign: 'center'
+            padding_y: '300'
+            bcolor: 1,0,1,1
+        Button:
+            id: filler2
+            text: 'Filler 2'
+            halign: 'center'
+            padding_y: '300'
+            bcolor: 1,0,0,1
+        Button:
+            id: filler3
+            text: 'Filler 3'
+            halign: 'center'
+            padding_y: '300'
+            bcolor: 1,0,1,0
+        Button:
+            id: filler4
+            text: 'Filler 4'
+            halign: 'center'
+            padding_y: '40 '
+            bcolor: 0,0,1,1
