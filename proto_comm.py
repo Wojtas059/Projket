@@ -90,6 +90,7 @@ class ProtobufComm:
 
     def handle_data(self):
         data = self.read_data_packet()
+        print(f'{data.valueA}, {data.valueB}, {data.valueC}, {data.constantValue}')
         return str(f'{data.valueA}, {data.valueB}, {data.valueC}, {data.constantValue}\n')
 
     def toggle_led(self):

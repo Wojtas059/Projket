@@ -1,15 +1,14 @@
 <MyGrid>
     name: 'mygrid'
     com: com
-    mainbutton: mainbutton
-    spinner_id: spinner_id
+    spinner_port:spinner_port
     canvas.before:
         Color:
             rgba: (240/255,240/255,240/255,1)
         Rectangle:
             pos: self.pos
             size: self.size
-    
+        
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
@@ -17,16 +16,17 @@
         spacing: 20
         padding: 100
 
-        Button:
-            text: "Wybierz port com"
-            id: mainbutton
-        
         Spinner:
-            id: spinner_id
-            text: "dupa"
-            values: 'Home', 'Work', 'Other', 'Custom'
-            on_text: root.spinner_clicked(spinner_id.text)
-            
+            size_hint: (0.5, 0.5)
+            width: 200
+            height: 50
+            pos_hint: {'center_x': 0.5}
+
+            id: spinner_port
+            text: 'Wybirze port'
+            values: 'com1', 'com2', 'com3', 'com4'
+            on_text: root.spinner_clicked(spinner_port.text)
+
 
 
         TextInput:
@@ -36,52 +36,27 @@
             color: 0,0,1,1
             
 
-        Button:
+        MyButton:
             text: "Start pomiaru"
             id: butt
             on_press: root.start_thread()
 
-        Button:
+        MyButton:
             text: "Stop pomiaru"
             on_press: root.stop()
 
-        Button:
+        MyButton:
             text: "Zapisz"
             on_press: root.save_file_()
             
             
 
-<Button>
+<MyButton@Button>
     size_hint: (0.5, 0.5)
     width: 200
     height: 50
     pos_hint: {'center_x': 0.5}
 
-<CustomDropDown>:
-    Button:
-        text: 'COM1'
-        size_hint_y: None
-        height: 44
-        on_release: root.select('COM1')
-        on_press: root.change('COM1')
-    Button:
-        text: 'COM2'
-        size_hint_y: None
-        height: 44
-        on_release: root.select('COM2')
-        on_press: root.change('COM2')
-    Button:
-        text: 'COM3'
-        size_hint_y: None
-        height: 44
-        on_release: root.select('COM3')
-        on_press: root.change('COM3')
-    Button:
-        text: 'COM4'
-        size_hint_y: None
-        height: 44
-        on_release: root.select('COM4')
-        on_press: root.change('COM4')
 
 
 <SaveDialog>:
@@ -107,6 +82,6 @@
                 text: "Cancel"
                 on_release: root.cancel()
 
-            Button:
+            MyButton:
                 text: "Save"
                 on_release: root.save(filechooser.path, text_input.text)
