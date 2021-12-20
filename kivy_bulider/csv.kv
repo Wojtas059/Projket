@@ -2,6 +2,7 @@
     name: 'mygrid'
     com: com
     mainbutton: mainbutton
+    spinner_id: spinner_id
     canvas.before:
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -19,10 +20,17 @@
         Button:
             text: "Wybierz port com"
             id: mainbutton
+        
+        Spinner:
+            id: spinner_id
+            text: "dupa"
+            values: 'Home', 'Work', 'Other', 'Custom'
+            on_text: root.spinner_clicked(spinner_id.text)
+            
 
 
         TextInput:
-            text: "Comunication"
+            text: "Twoje wyniki pomiarowe"
             multiline: False
             id: com
             color: 0,0,1,1
@@ -55,21 +63,25 @@
         size_hint_y: None
         height: 44
         on_release: root.select('COM1')
+        on_press: root.change('COM1')
     Button:
         text: 'COM2'
         size_hint_y: None
         height: 44
         on_release: root.select('COM2')
+        on_press: root.change('COM2')
     Button:
         text: 'COM3'
         size_hint_y: None
         height: 44
         on_release: root.select('COM3')
+        on_press: root.change('COM3')
     Button:
         text: 'COM4'
         size_hint_y: None
         height: 44
         on_release: root.select('COM4')
+        on_press: root.change('COM4')
 
 
 <SaveDialog>:
