@@ -1,8 +1,8 @@
 import serial
 import threading
 import struct
-from proto_parser import ProtobufCommParser
-from ExampleProto_pb2 import DataPacket, DeviceRequest, DeviceResponse
+from proto_file.proto_parser import ProtobufCommParser
+from proto_file.ExampleProto_pb2 import DataPacket, DeviceRequest, DeviceResponse
 
 
 class ProtobufComm:

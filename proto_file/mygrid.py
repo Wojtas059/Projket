@@ -11,7 +11,7 @@ import os
 import serial.tools.list_ports as list_ports
 from serial.tools.list_ports_common import ListPortInfo
 import struct
-import proto_comm
+import proto_file.proto_comm as proto_comm
 import sys
 import serial
 from kivy.clock import Clock, mainthread
@@ -50,7 +50,7 @@ class MyGrid(Widget):
             self.csvQueue.put_nowait(self.comm.start_pom())
             while self.trump:
                 line_from_stm_output=self.comm.handle_data()
-                #self.com.text +=   line_from_stm_output
+                self.com.text +=   line_from_stm_output
                 self.csvQueue.put_nowait(line_from_stm_output)
             self.comm.stm.flush()
             self.comm.stm.flushInput()
@@ -108,6 +108,7 @@ class MyGrid(Widget):
             self.com.text += "Pomiar Zastopowano"
         
     def stop(self):
+        time.sleep(0.3)
         Thread(target=self.on_press_false).start()
         
 

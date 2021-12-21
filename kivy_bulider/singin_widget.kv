@@ -1,11 +1,20 @@
-<SingIn>
-    name: 'singin'
+<SingInWidget>
+    name: 'singinwidget'
     canvas.before:
         Color:
             rgba: (240/255,240/255,240/255,1)
         Rectangle:
             pos: self.pos
             size: self.size
+    FloatLayout:
+        size: root.width, root.height
+        spacing: 20
+        padding: 100
+        Log:
+            text: "Wróć"
+            on_press: 
+                root.manager.current = 'homewidget'
+                
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
@@ -31,6 +40,7 @@
             color: 0,0,0,1
         TextInput:
             id: pass_
+            password: True
             mulitiline: False
             pos_hint: {'center_x': 0.5}
             size_hint_x: 0.5
@@ -39,4 +49,4 @@
         
         Button:
             text: "Zaloguj się"
-            on_press: root.manager.current = 'mygrid'
+            on_press: root.manager.current = 'userwidget'
