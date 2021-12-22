@@ -32,35 +32,35 @@ class SingUpWidget(Screen):
             self.error_pop('', 'Uzupełnij wszytskie pola')
 
         else:
-            if ( self.password.text == self.c_password.text ):
+            if not( self.password.text == self.c_password.text ):
                 self.error_pop('', 'Wpisane hasła nie są takie same')
             else:
-                self.user = User(self.imie,self.nazwisko, self.password, self.login, self.email, self.kod)
+                self.user = User(self.imie.text,self.nazwisko.text, self.password.text, self.login.text, self.email.text, 0)
                 self.uvalid = UserValidator(self.user)
                 data_error = {}
                 data_error = self.uvalid.validateRegistration()
                 licznik = 0
                 str_error = ''
-                if not data_error.get('NAME') == 0:
+                if not data_error.get('NAME') == UserValidator.Flags.CORRECTFIELD:
                     licznik += 1
                     str_error +="Imie\njest za krotkie, minimum 4 zaki\n"
-                if not data_error.get('SURNAME') ==0:
+                if not data_error.get('SURNAME') ==UserValidator.Flags.CORRECTFIELD:
                     licznik += 1
                     str_error +="Nazwisko\njest za krotkie, minimum 4 zaki\n"
                 
-                if not data_error.get('PASSWORD') ==0:
+                if not data_error.get('PASSWORD') ==UserValidator.Flags.CORRECTFIELD:
                     licznik += 1
                     str_error +="Hasło\njest za krotkie, minimum 8 zaki\n"
-                if not data_error.get('LOGIN') ==0:
+                if not data_error.get('LOGIN') ==UserValidator.Flags.CORRECTFIELD:
                     licznik += 1
                     str_error +="Login\njest za krotki, minimum 4 zaki\n"
-                if not data_error.get('LOGINEXISTENCE') ==0:
+                if not data_error.get('LOGINEXISTENCE') ==UserValidator.Flags.CORRECTFIELD:
                     licznik += 1
                     str_error +="Login\nTaki login juz istnieje\n"
-                if not data_error.get('EMAIL') ==0:
+                if not data_error.get('EMAIL') ==UserValidator.Flags.CORRECTFIELD:
                     licznik += 1
                     str_error +="Email\njest nie poprawny\n"
-                if not data_error.get('EMAILEXISTENCE') == 0:
+                if not data_error.get('EMAILEXISTENCE') == UserValidator.Flags.CORRECTFIELD:
                     licznik += 1
                     str_error +="Email\nTaki email juz istnieje\n"
 

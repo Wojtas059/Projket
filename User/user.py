@@ -9,7 +9,7 @@ class User():
         self.email=email
         self.advanced=advanced
 
-    def  __init__(self,password:str,login:str):
-        self.id_user=0
-        self.password=password
-        self.login=login
+    #def  __init__(self,password:str,login:str):
+    #    self.id_user=0
+    #    self.password=password
+    #    self.login=login
