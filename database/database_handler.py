@@ -108,3 +108,9 @@ class DatabaseHandler():
         if(row==None):
             return True
         return False
+
+    def ValideUserPasswordByLogin(self,user:User):
+        self.createConnection()
+        hashed=self.findUserPassword(self.findUserByLogin(user))
+        self.closeConnection()
+        return SecurityCreator.verifyPassword(hashed,user.password)

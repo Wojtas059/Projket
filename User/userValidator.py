@@ -59,9 +59,10 @@ class UserValidator():
             return self.Flags.INCORRECTPASSWORD
 
     def validateUserPassword(self):
-         if SecurityCreator.verifyPassword(self.user):
+        databaseHandler=DatabaseHandler
+        if databaseHandler.ValideUserPasswordByLogin(self.user):
              return self.Flags.CORRECTFIELD
-         else:
+        else:
              return self.Flags.INCORRECTUSERPASSWORD
          
     def validateLogin(self):

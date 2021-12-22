@@ -2,7 +2,7 @@ import random
 import bcrypt
 
 from User.user import User
-from database.database_handler import DatabaseHandler
+
 
 
 class SecurityCreator():
@@ -19,12 +19,8 @@ class SecurityCreator():
         hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
         return hashed_password
 
-    def verifyPassword(user: User):
-        databaseHandler=DatabaseHandler
-        databaseHandler.createConnection()
-        hashed=databaseHandler.findUserPassword(databaseHandler.findUserByLogin(user))
-        databaseHandler.closeConnection()
-        password = str.encode(user.password)
+    def verifyPassword(hashed:str,password:str):
+        password = str.encode(password)
         if bcrypt.checkpw(password, hashed):
             return True
         else:
