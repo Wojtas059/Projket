@@ -1,4 +1,3 @@
-from _typeshed import Self
 from User.user import User
 from enum import Enum
 import re
@@ -91,7 +90,7 @@ class UserValidator():
             databaseHandler.closeConnection()
             return self.Flags.INCORRECTELOGINDUPLICATE
 
-    def validateRegistrations(self):
+    def validateRegistration(self):
         validationResults = {}
         validationResults["NAME"] = self.validateName()
         validationResults["SURNAME"] = self.validateSurname()

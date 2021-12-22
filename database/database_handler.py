@@ -48,8 +48,9 @@ class DatabaseHandler():
             print(database_error)
 
     def createUser(self, user:User):
-
-        self.insertPassword(self.insertUser())
+        self.createConnection()
+        self.insertPassword(self.insertUser(user))
+        self.closeConnection()
 
     def insertUser(self, user:User):
         try:

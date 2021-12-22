@@ -12,7 +12,9 @@ from kivy.properties import StringProperty
 from kivy.compat import string_types
 from kivy.factory import Factory
 from kivy.uix.popup import Popup
-
+from User.user import User
+from User.userValidator import UserValidator
+from database.database_handler import DatabaseHandler
 class Tooltip(Label):
     pass
 
@@ -30,9 +32,42 @@ class SingUpWidget(Screen):
             self.error_pop('', 'Uzupełnij wszytskie pola')
 
         else:
-            if self.login.text == 'wmaj':
-                self.error_pop('Login', 'Taki login już istnieje')
+            if ( self.password.text == self.c_password.text ):
+                self.error_pop('', 'Wpisane hasła nie są takie same')
+            else:
+                self.user = User(self.imie,self.nazwisko, self.password, self.login, self.email, self.kod)
+                self.uvalid = UserValidator(self.user)
+                data_error = {}
+                data_error = self.uvalid.validateRegistration()
+                licznik = 0
+                str_error = ''
+                if not data_error.get('NAME') == 0:
+                    licznik += 1
+                    str_error +="Imie\njest za krotkie, minimum 4 zaki\n"
+                if not data_error.get('SURNAME') ==0:
+                    licznik += 1
+                    str_error +="Nazwisko\njest za krotkie, minimum 4 zaki\n"
+                
+                if not data_error.get('PASSWORD') ==0:
+                    licznik += 1
+                    str_error +="Hasło\njest za krotkie, minimum 8 zaki\n"
+                if not data_error.get('LOGIN') ==0:
+                    licznik += 1
+                    str_error +="Login\njest za krotki, minimum 4 zaki\n"
+                if not data_error.get('LOGINEXISTENCE') ==0:
+                    licznik += 1
+                    str_error +="Login\nTaki login juz istnieje\n"
+                if not data_error.get('EMAIL') ==0:
+                    licznik += 1
+                    str_error +="Email\njest nie poprawny\n"
+                if not data_error.get('EMAILEXISTENCE') == 0:
+                    licznik += 1
+                    str_error +="Email\nTaki email juz istnieje\n"
 
+                if licznik == 0:
+                    DatabaseHandler.createUser(self.user)          
+                else:
+                    self.error_pop('', str_error)
 
         
 
