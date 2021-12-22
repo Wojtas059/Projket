@@ -1,6 +1,6 @@
 import sqlite3
-from repo.User.user import User
-from repo.crypto.securityCreator import SecurityCreator
+from User.user import User
+from crypto.securityCreator import SecurityCreator
 
 
 class DatabaseHandler():
