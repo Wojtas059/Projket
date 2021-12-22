@@ -11,9 +11,15 @@
         size: root.width, root.height
         spacing: 20
         padding: 100
-        Log:
+
+        Button:
+            size_hint: (0.1, 0.1)
+            pos_hint: {'x': 0, 'top': 1}
             text: "Wyloguj się"
-            on_press: root.manager.current = 'homewidget'
+            on_press:
+                root.parent.clear_screen()
+                root.manager.current = 'homewidget'
+                root.manager.transition.direction = 'right'
         
 
     BoxLayout:
@@ -26,14 +32,17 @@
 
         Button:
             text: "Historia "
-            on_press: root.manager.current = 'singinwidget'
-
+            on_press: 
+                #root.manager.current = ''
+                root.manager.current = root.parent.add_screen("userwidget")
         Button:
             text: "Rozpocznij tryb Auto"
 
         Button:
             text: "Pomoc"
-            on_press: root.manager.current = 'helpwidget'
+            on_press:
+                root.manager.current = root.parent.add_screen("userwidget") 
+                root.manager.current = 'helpwidget'
 
 
 
@@ -42,9 +51,3 @@
     width: 200
     height: 50
     pos_hint: {'center_x': 0.5}
-
-<Log@Button>
-    size_hint: (0.1, 0.1)
-    width: 100
-    height: 25
-    pos_hint: {'x': 0, 'top': 1}

@@ -1,0 +1,150 @@
+<SingUpWidget>
+    name: 'singupwidget'
+    imie: imie
+    nazwisko: nazwisko
+    login: login
+    password: password
+    c_password: c_password
+    kod: kod
+    email: email
+
+    canvas.before:
+        Color:
+            rgba: (240/255,240/255,240/255,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            
+    FloatLayout:
+        size: root.width, root.height
+        spacing: 20
+        padding: 100
+
+        Button:
+            size_hint: (0.1, 0.1)
+            pos_hint: {'x': 0, 'top': 1}
+            text: "Wróć"
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = root.parent.last_screen()
+                
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        
+        spacing: 10
+        padding: 30
+
+
+        Label:
+            text: "Imie"
+            width: 30
+            color: 0,0,0,1
+        ToolTextInput:
+            id: imie
+            mulitiline: False
+            tooltip_txt: 'Imie powinno składać się przynajmniej 3 znaków'
+            pos_hint: {'center_x': 0.5}
+            size_hint_x: 0.5
+            width: 100
+            line_height: 1
+        Label:
+            text: "Nazwisko"
+            width: 30
+            color: 0,0,0,1
+        ToolTextInput:
+            id: nazwisko
+            tooltip_txt: 'Nazwisko powinno składać się przynajmniej 3 znaków'
+            mulitiline: False
+            pos_hint: {'center_x': 0.5}
+            size_hint_x: 0.5
+            width: 100
+            line_height: 1
+
+        Label:
+            text: "Login"
+            width: 30
+            color: 0,0,0,1
+        ToolTextInput:
+            id: login
+            tooltip_txt: 'Login powinnien składać się  przynajmniej 3 znaków'
+            mulitiline: False
+            pos_hint: {'center_x': 0.5}
+            size_hint_x: 0.5
+            width: 100
+            line_height: 1
+            #background_color: (255/255, 102/255, 102/255, 1)
+        
+        Label:
+            text: "Email"
+            width: 30
+            color: 0,0,0,1
+        ToolTextInput:
+            id: email
+            mulitiline: False
+            pos_hint: {'center_x': 0.5}
+            size_hint_x: 0.5
+            width: 100
+            line_height: 1
+            #background_color: (255/255, 102/255, 102/255, 1)
+
+
+        Label:
+            text: "Hasło"
+            width: 30
+            color: 0,0,0,1
+        ToolTextInput:
+            id: password
+            tooltip_txt: 'Hasło powinno skłądać się przynajmniej z 8 znaków '
+            password: True
+            mulitiline: False
+            pos_hint: {'center_x': 0.5}
+            size_hint_x: 0.5
+            width:100
+            line_height: 1
+        
+        
+
+        Label:
+            text: "Powtórz hasło"
+            width: 30
+            color: 0,0,0,1
+        TextInput:
+            id: c_password
+            password: True
+            mulitiline: False
+            pos_hint: {'center_x': 0.5}
+            size_hint_x: 0.5
+            width:100
+            line_height: 1
+
+        Label:
+            text: "Kod identyfikacyjny"
+            width: 30
+            color: 0,0,0,1
+        ToolTextInput:
+            id: kod
+            tooltip_txt: 'Kod, który możesz uzyskać od swojego \n trenera aby miał podgląd do twoich wyników.'
+            mulitiline: False
+            pos_hint: {'center_x': 0.5}
+            size_hint_x: 0.5
+            width:100
+            line_height: 1
+        
+        Button:
+            text: " Zarejestruj się"
+            width: 100
+            on_press: 
+                #root.manager.current = 'singupwidget'
+                root.on_press()
+
+<ToolTipSpinner>:
+<Tooltip>:
+    size_hint: None, None
+    size: self.texture_size[0]+5, self.texture_size[1]+5
+    canvas.before:
+        Color:
+            rgb: 0.2, 0.2, 0.2
+        Rectangle:
+            size: self.size
+            pos: self.pos

@@ -13,3 +13,4 @@ def Upload():
     Builder.load_file('kivy_bulider/user_basic_w.kv')
     Builder.load_file('kivy_bulider/user_pro_w.kv')
     Builder.load_file('kivy_bulider/users_see_widget.kv')
+    Builder.load_file('kivy_bulider/singup_widget.kv')

@@ -18,18 +18,29 @@
 
         Button:
             text: "Zaloguj się"
-            on_press: root.manager.current = 'singinwidget'
+            on_press:
+                root.parent.add_screen('homewidget')
+                root.manager.current = 'singinwidget'
+                root.manager.transition.direction = 'left'
 
         Button:
             text: "Rozpocznij tryb Auto"
+            on_press:
+                root.parent.add_screen('homewidget')
 
         Button:
             text: "Pomoc"
-            on_press: root.manager.current = 'helpwidget'
+            on_press:
+                root.parent.add_screen('homewidget')
+                root.manager.current = 'helpwidget'
+                root.manager.transition.direction = 'left'
         
         Button:
             text: "Pogląd trybu zaawansowanego"
-            on_press: root.manager.current = 'userprowidget'
+            on_press:
+                root.parent.add_screen('homewidget')
+                root.manager.current = 'userprowidget'
+                root.manager.transition.direction = 'left'
 
 
 <Button>
