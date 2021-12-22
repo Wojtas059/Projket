@@ -1,8 +1,8 @@
 import random
 import bcrypt
 
-from repo.User.user import User
-from repo.database.database_handler import DatabaseHandler
+from User.user import User
+from database.database_handler import DatabaseHandler
 
 
 class SecurityCreator():
