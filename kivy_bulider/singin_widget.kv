@@ -29,7 +29,7 @@
         padding: 200
 
         Label:
-            text: "Name"
+            text: "Login"
             width: 30
             color: 0,0,0,1
         TextInput:
@@ -56,7 +56,11 @@
         Button:
             text: "Zaloguj się"
             on_press: 
-                root.on_press()
+                if root.on_press():\
+                login.text = "";\
+                password.text = "";\
+                root.parent.clear_screen();\
+                root.manager.current = 'userwidget'
         
         Button:
             text: " Zarejestruj się"

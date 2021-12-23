@@ -20,7 +20,8 @@ from kivy.loader import Loader
 import asynckivy as ak
 from kivy.uix.popup import Popup
 import queue
-
+import logging
+from datetime import datetime
 
 
 
@@ -28,10 +29,14 @@ class MyGrid(Widget):
     com = ObjectProperty(None)
     comm = None
     port = ''
+    name_csv = ObjectProperty(None)
     csvQueue=queue.Queue()
     def __init__(self, **var_args):
         super(MyGrid, self).__init__(**var_args)
-        
+        try:
+            os.mkdir('pomiary')
+        except FileExistsError:
+            pass
         
     trump =False              
     
@@ -59,15 +64,13 @@ class MyGrid(Widget):
             self.comm.stop_data_output()
             self.comm = None
         except serial.serialutil.SerialException:
-             Thread(target = self.error_win("Błąd połączenia się z portem ")).start()
+            logging.error(serial.serialutil.SerialException)
+            Thread(target = self.error_win("Błąd połączenia się z portem ")).start()
         except struct.error:
+            logging.error(struct.error)
             Thread(target = self.error_win('Urządzenie zostało odłączone')).start()
-            self.comm.stm.flush()
-            self.comm.stm.flushInput()
-            self.comm.stm.read_all()
-            self.comm.stm.flushOutput()
-            self.comm.stop_data_output()
         except TypeError:
+            logging.error(TypeError)
             Thread(target = self.error_win("Błąd połączenia się z portem ")).start()
         self.trump =False
         
@@ -80,14 +83,18 @@ class MyGrid(Widget):
 
     def save_file(self):
         self.trump =True
-        f = open("zapis.csv", "a")
+        now = datetime.now()
+        f = open("pomiary/zapis_"+now.strftime("%d_%m_%Y")+"_"+now.strftime("%H_%M_%S")+".csv", "w")
         dataArray1 = []
-        print('Przed loop')
+        if self.name_csv.text =='':
+            f.write('Tu znajduje sie opis mojich pomiarow\n')
+        else:
+            f.write(self.name_csv.text+'\n')
         while(self.csvQueue.qsize( )>0 ):
             dataArray1 = self.csvQueue.get_nowait()
             f.write(str(dataArray1))
-        print('Po loop')
         f.close()
+        self.trump =False
 
 
     def start_thread(self):

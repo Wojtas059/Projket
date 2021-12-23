@@ -1,6 +1,7 @@
 <MyGrid>
     name: 'mygrid'
     com: com
+    name_csv: name_csv
     spinner_port:spinner_port
     canvas.before:
         Color:
@@ -44,6 +45,13 @@
         MyButton:
             text: "Stop pomiaru"
             on_press: root.stop()
+
+        TextInput:
+            hint_text: "Dodaj opis do pliku csv"
+            multiline: False
+            size_hint: (1, 0.4)
+            id: name_csv
+            color: 0,0,1,1
 
         MyButton:
             text: "Zapisz"

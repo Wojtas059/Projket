@@ -16,15 +16,15 @@ class SingInWidget(Screen):
         if  self.login.text == '' or self.password.text == '':
             self.error_pop('', 'Uzupełnij wszytskie pola')
         else:
-            self.user = User()
+            self.user = User(self.login.text,self.password.text )
             self.uvaild = UserValidator(self.user)
             data_error = {}
             data_error = self.uvaild.validateLogin()
         if data_error.get("USERLOGIN") == UserValidator.Flags.CORRECTFIELD and data_error.get("USERPASSWORD") == UserValidator.Flags.CORRECTFIELD :
-            pass
+            return True
         else:
             self.error_pop('', 'Nie poprawy email lub haslo')
-
+            return False
 
     def error_pop(self, name, text):
         pop = Popup(title='Invalid Form',

@@ -3,6 +3,7 @@ import threading
 import struct
 from proto_file.proto_parser import ProtobufCommParser
 from proto_file.ExampleProto_pb2 import DataPacket, DeviceRequest, DeviceResponse
+import logging
 
 
 class ProtobufComm:
@@ -91,6 +92,7 @@ class ProtobufComm:
     def handle_data(self):
         data = self.read_data_packet()
         print(f'{data.valueA}, {data.valueB}, {data.valueC}, {data.constantValue}')
+        logging.info(f'{data.valueA}, {data.valueB}, {data.valueC}, {data.constantValue}')
         return str(f'{data.valueA}, {data.valueB}, {data.valueC}, {data.constantValue}\n')
 
     def toggle_led(self):
