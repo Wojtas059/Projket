@@ -8,3 +8,5 @@ class User():
         self.login=login
         self.email=email
         self.advanced=advanced
+
+ 

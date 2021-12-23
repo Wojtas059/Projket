@@ -96,10 +96,10 @@ class UserValidator():
         validationResults["NAME"] = self.validateName()
         validationResults["SURNAME"] = self.validateSurname()
         validationResults["PASSWORD"] = self.validatePassword()
-        validationResults["LOGIN"] = self.validateLogin()
-        validationResults["LOGINEXISTENCE"] = self.validateLoginExistence()
+        validationResults["LOGIN"] = 0#self.validateLogin()
+        validationResults["LOGINEXISTENCE"] = 0#self.validateLoginExistence()
         validationResults["EMAIL"] = self.validateEmail()
-        validationResults["EMAILEXISTENCE"] = self.validateEmailExistence()
+        validationResults["EMAILEXISTENCE"] = 0#self.validateEmailExistence()
         return validationResults
 
     def validateLogin(self):
