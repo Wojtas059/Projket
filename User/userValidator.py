@@ -25,13 +25,13 @@ class UserValidator():
         self.user = user
 
     def validateName(self):
-        if len(self.user.name) > 3:
+        if len(self.user.name) > 2:
             return self.Flags.CORRECTFIELD
         else:
             return self.Flags.INCORRECTNAME
 
     def validateSurname(self):
-        if len(self.user.surname) > 3:
+        if len(self.user.surname) > 2:
             return self.Flags.CORRECTFIELD
         else:
             return self.Flags.INCORRECTSURNAME
@@ -53,7 +53,7 @@ class UserValidator():
             return self.Flags.INCORRECTEMAILDUPLICATE
 
     def validatePassword(self):
-        if len(self.user.password) > 8:
+        if len(self.user.password) > 7:
             return self.Flags.CORRECTFIELD
         else:
             return self.Flags.INCORRECTPASSWORD
@@ -66,7 +66,7 @@ class UserValidator():
              return self.Flags.INCORRECTUSERPASSWORD
          
     def validateUserLogin(self):
-        if len(self.user.login) > 3:
+        if len(self.user.login) > 2:
             return self.Flags.CORRECTFIELD
         else:
             return self.Flags.INCORRECTLOGIN
