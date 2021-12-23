@@ -12,7 +12,7 @@ from crypto.securityCreator import SecurityCreator
 class DatabaseHandler():
 
     def __init__(self):
-        self.databasePath='repo\database\database.db'
+        self.databasePath='.\database\database.db'
 
     def createConnection(self):
         self.connection = sqlite3.connect(self.databasePath)

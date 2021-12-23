@@ -43,7 +43,7 @@ class UserValidator():
             return self.Flags.INCORRECTEMAIL
 
     def validateEmailExistence(self):
-        databaseHandler = DatabaseHandler
+        databaseHandler = DatabaseHandler()
         databaseHandler.createConnection()
         if databaseHandler.findAnyEmail(self.user.email):
             databaseHandler.closeConnection()
@@ -59,7 +59,7 @@ class UserValidator():
             return self.Flags.INCORRECTPASSWORD
 
     def validateUserPassword(self):
-        databaseHandler=DatabaseHandler
+        databaseHandler=DatabaseHandler()
         if databaseHandler.ValideUserPasswordByLogin(self.user):
              return self.Flags.CORRECTFIELD
         else:
@@ -72,7 +72,7 @@ class UserValidator():
             return self.Flags.INCORRECTLOGIN
 
     def validateUserLogin(self):
-        databaseHandler = DatabaseHandler
+        databaseHandler = DatabaseHandler()
         databaseHandler.createConnection()
         if databaseHandler.findAnyLogin(self.user.login):
             databaseHandler.closeConnection()
@@ -82,7 +82,7 @@ class UserValidator():
             return self.Flags.INCORRECTLOGIN
 
     def validateLoginExistence(self):
-        databaseHandler = DatabaseHandler
+        databaseHandler = DatabaseHandler()
         databaseHandler.createConnection()
         if databaseHandler.findAnyEmail(self.user.login):
             databaseHandler.closeConnection()
