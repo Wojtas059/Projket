@@ -15,6 +15,7 @@ from kivy.uix.popup import Popup
 from User.user import User
 from User.userValidator import UserValidator
 from database_handlers.database_handler import DatabaseHandler
+from threading import Thread
 class Tooltip(Label):
     pass
 
@@ -39,6 +40,7 @@ class SingUpWidget(Screen):
                 self.uvalid = UserValidator(self.user)
                 data_error = {}
                 data_error = self.uvalid.validateRegistration()
+                print(data_error)
                 licznik = 0
                 str_error = ''
                 if not data_error.get('NAME') == UserValidator.Flags.CORRECTFIELD:
@@ -65,7 +67,11 @@ class SingUpWidget(Screen):
                     str_error +="Email\nTaki email juz istnieje\n"
 
                 if licznik == 0:
-                    DatabaseHandler.createUser(self.user)          
+                    databaseHandler=DatabaseHandler()
+                    databaseHandler.createUser(self.user)
+                        
+                    
+                      
                 else:
                     self.error_pop('', str_error)
 

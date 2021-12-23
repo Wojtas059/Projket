@@ -6,7 +6,7 @@ from User.user import User
 
 class SecurityCreator():
 
-    def createAdvancedUserCode(self):
+    def createAdvancedUserCode():
         ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         chars = []
         for i in range(16):
@@ -16,11 +16,13 @@ class SecurityCreator():
     def createPassword(user: User):
         password = str.encode(user.password)
         hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
-        return hashed_password
+        return hashed_password.decode()
 
     def verifyPassword(hashed: str, password: str):
-        password = str.encode(password)
+        password = password.encode()
+        hashed=hashed.encode()
         if bcrypt.checkpw(password, hashed):
             return True
         else:
             return False
+

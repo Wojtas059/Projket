@@ -65,26 +65,18 @@ class UserValidator():
         else:
              return self.Flags.INCORRECTUSERPASSWORD
          
-    def validateLogin(self):
-        if len(self.user.name) > 3:
+    def validateUserLogin(self):
+        if len(self.user.login) > 3:
             return self.Flags.CORRECTFIELD
         else:
             return self.Flags.INCORRECTLOGIN
 
-    def validateUserLogin(self):
-        databaseHandler = DatabaseHandler()
-        databaseHandler.createConnection()
-        if databaseHandler.findAnyLogin(self.user.login):
-            databaseHandler.closeConnection()
-            return self.Flags.CORRECTFIELD
-        else:
-            databaseHandler.closeConnection()
-            return self.Flags.INCORRECTLOGIN
+   
 
     def validateLoginExistence(self):
         databaseHandler = DatabaseHandler()
         databaseHandler.createConnection()
-        if databaseHandler.findAnyEmail(self.user.login):
+        if databaseHandler.findAnyLogin(self.user.login):
             databaseHandler.closeConnection()
             return self.Flags.CORRECTFIELD
         else:
@@ -96,7 +88,7 @@ class UserValidator():
         validationResults["NAME"] = self.validateName()
         validationResults["SURNAME"] = self.validateSurname()
         validationResults["PASSWORD"] = self.validatePassword()
-        validationResults["LOGIN"] = self.validateLogin()
+        validationResults["LOGIN"] = self.validateUserLogin()
         validationResults["LOGINEXISTENCE"] = self.validateLoginExistence()
         validationResults["EMAIL"] = self.validateEmail()
         validationResults["EMAILEXISTENCE"] = self.validateEmailExistence()

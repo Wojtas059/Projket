@@ -57,47 +57,58 @@ class DatabaseHandler():
             print(database_error)
 
     def createUser(self, user:User):
+       
         self.createConnection()
-        self.insertPassword(self.insertUser(user))
+        user=self.insertUser(user)
+        self.insertPassword(user)
         self.closeConnection()
+        return True
+      
+        
 
     def insertUser(self, user:User):
         try:
             self.cursor.execute(
-                '''insert into Users values (?,?,?,?,?)''',(user.name, user.surname, user.login, user.email, user.advanced,))
+                '''insert into Users values (null,?,?,?,?,?)''',(user.name, user.surname, user.login, user.email, user.advanced,))
             self.connection.commit()
             return self.findUserByLogin(user)
         except sqlite3.Error as database_error:
             print(database_error)
-            return user
+            self.closeConnection()
+        return user
 
     def insertPassword(self, user:User):
-        hashed_password = SecurityCreator.createPassword(user)
-        if(user.advanced):
-            self.cursor.execute('''insert into passwords (id_user,hash) values (?,?)''',(user.id_user,hashed_password,))
-        else:
-            advanced_user_key=SecurityCreator.createAdvancedUserCode()
-            while(self.findAnyAdvancedUserCode(advanced_user_key)):
-                    advanced_user_key=SecurityCreator.createAdvancedUserCode()
-            self.cursor.execute('''insert into passwords values (?,?,?)''',(user.id_user,hashed_password,advanced_user_key,))
-        self.connection.commit()
+        try:
+            hashed_password = SecurityCreator.createPassword(user)
+            if(user.advanced==0):
+                self.cursor.execute('''insert into passwords (id_user,hash) values (?,?)''',(user.id_user,hashed_password,))
+            else:
+                advanced_user_key=SecurityCreator.createAdvancedUserCode()
+                while(self.findAnyAdvancedUserCode(advanced_user_key)):
+                        advanced_user_key=SecurityCreator.createAdvancedUserCode()
+                self.cursor.execute('''insert into passwords values (?,?,?)''',(user.id_user,hashed_password,advanced_user_key,))
+            self.connection.commit()
+        except sqlite3.Error as database_error:
+            print(str(database_error)+"Password")
+            self.closeConnection()
 
     def findUserByLogin(self,user:User):
         self.cursor.execute(
                 "select id_user from users where login=?",(user.login,))
         row = self.cursor.fetchone()
-        user.id_user = row['id_user']
+        user.id_user = row[0]
         return user
 
     def findUserPassword(self,id_user:int):
         self.cursor.execute(
                 "select hash from passwords where id_user=?",(id_user,))
         row = self.cursor.fetchone()
-        hash = row['hash']
+        hash = row[0]
         return hash
+
     def findAnyAdvancedUserCode(self,advanced_user_key:str):
         self.cursor.execute(
-                "select advanced_user_key from passwords where advanced_user_key=?"(advanced_user_key,))
+                "select advanced_user_key from passwords where advanced_user_key=?",(advanced_user_key,))
         row = self.cursor.fetchone()
         if(row==None):
             return True
