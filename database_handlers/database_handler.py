@@ -64,7 +64,7 @@ class DatabaseHandler():
     def insertUser(self, user:User):
         try:
             self.cursor.execute(
-                '''insert into Users values ({name},{surname},{login},{email},{advanced}})'''.format(name=user.name, surname=user.surname, login=user.login, email=user.email, advanced=user.advanced))
+                '''insert into Users values (?,?,?,?,?)''',(user.name, user.surname, user.login, user.email, user.advanced,))
             self.connection.commit()
             return self.findUserByLogin(user)
         except sqlite3.Error as database_error:
