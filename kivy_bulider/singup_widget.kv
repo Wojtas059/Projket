@@ -5,7 +5,7 @@
     login: login
     password: password
     c_password: c_password
-    kod: kod
+    u_pro: u_pro
     email: email
 
     canvas.before:
@@ -32,7 +32,7 @@
         orientation: "vertical"
         size: root.width, root.height
         
-        spacing: 10
+        spacing: 13
         padding: 30
 
 
@@ -117,26 +117,23 @@
             size_hint_x: 0.5
             width:100
             line_height: 1
-
+        
         Label:
-            text: "Kod identyfikacyjny"
+            text: "Użytkownik zaawansowany"
             width: 30
             color: 0,0,0,1
-        ToolTextInput:
-            id: kod
-            tooltip_txt: 'Kod, który możesz uzyskać od swojego \n trenera aby miał podgląd do twoich wyników.'
-            mulitiline: False
-            pos_hint: {'center_x': 0.5}
-            size_hint_x: 0.5
-            width:100
-            line_height: 1
+        
+        Switch:
+            id: u_pro
         
         Button:
             text: " Zarejestruj się"
             width: 100
             on_press: 
                 #root.manager.current = 'singupwidget'
-                root.on_press()
+                if root.on_press():\
+                root.manager.transition.direction = 'right';\
+                root.manager.current = root.parent.last_screen()
 
 <ToolTipSpinner>:
 <Tooltip>:

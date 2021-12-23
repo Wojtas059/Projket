@@ -1,3 +1,4 @@
+
 from logging import error
 import kivy
 kivy.require('1.0.6') # replace with your current kivy version !
@@ -24,11 +25,16 @@ class SingUpWidget(Screen):
     nazwisko=ObjectProperty(None)
     login=ObjectProperty(None)
     password=ObjectProperty(None)
-    c_password=ObjectProperty(None)
-    kod=ObjectProperty(None)
+    u_password=ObjectProperty(None)
+    u_pro=ObjectProperty(None)
     email=ObjectProperty(None)
     
     def on_press(self):
+        u_pro_ = 0
+        if self.u_pro.active:
+            u_pro_ = 1
+
+
         if self.imie.text == '' or self.nazwisko.text == '' or self.login.text == '' or self.password.text == '' or self.c_password.text == '' or self.email.text == '':
             self.error_pop('', 'Uzupełnij wszytskie pola')
 
@@ -36,7 +42,7 @@ class SingUpWidget(Screen):
             if not( self.password.text == self.c_password.text ):
                 self.error_pop('', 'Wpisane hasła nie są takie same')
             else:
-                self.user = User( self.login.text,self.password.text,self.imie.text,self.nazwisko.text,  self.email.text, 0)
+                self.user = User( self.login.text,self.password.text,self.imie.text,self.nazwisko.text,  self.email.text, u_pro_)
                 self.uvalid = UserValidator(self.user)
                 data_error = {}
                 data_error = self.uvalid.validateRegistration()
@@ -69,11 +75,11 @@ class SingUpWidget(Screen):
                 if licznik == 0:
                     databaseHandler=DatabaseHandler()
                     databaseHandler.createUser(self.user)
-                        
-                    
-                      
+                    self.error_pop('Rejestracja', 'Rejestracja powowiodła się pomyślnie')
+                    return True
                 else:
                     self.error_pop('', str_error)
+                    return False
 
         
 
