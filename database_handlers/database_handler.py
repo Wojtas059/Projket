@@ -84,7 +84,7 @@ class DatabaseHandler():
                 self.cursor.execute('''insert into passwords (id_user,hash) values (?,?)''',(user.id_user,hashed_password,))
             else:
                 advanced_user_key=SecurityCreator.createAdvancedUserCode()
-                while(self.findAnyAdvancedUserCode(advanced_user_key)):
+                while(not self.findAnyAdvancedUserCode(advanced_user_key)):
                         advanced_user_key=SecurityCreator.createAdvancedUserCode()
                 self.cursor.execute('''insert into passwords values (?,?,?)''',(user.id_user,hashed_password,advanced_user_key,))
             self.connection.commit()
