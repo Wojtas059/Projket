@@ -74,46 +74,44 @@ class DatabaseHandler():
     def insertPassword(self, user:User):
         hashed_password = SecurityCreator.createPassword(user)
         if(user.advanced):
-            self.cursor.execute('''insert into passwords (id_user,hash) values ({id_user},{hash})'''.format(
-                id_user=user.id_user, hash=hashed_password))
+            self.cursor.execute('''insert into passwords (id_user,hash) values (?,?)''',(user.id_user,hashed_password,))
         else:
             advanced_user_key=SecurityCreator.createAdvancedUserCode()
             while(self.findAnyAdvancedUserCode(advanced_user_key)):
                     advanced_user_key=SecurityCreator.createAdvancedUserCode()
-            self.cursor.execute('''insert into passwords values ({id_user},{hash},{advanced_user_key})'''.format(
-                id_user=user.id_user, hash=hashed_password, advanced_user_key=advanced_user_key))
+            self.cursor.execute('''insert into passwords values (?,?,?)''',(user.id_user,hashed_password,advanced_user_key,))
         self.connection.commit()
 
     def findUserByLogin(self,user:User):
         self.cursor.execute(
-                "select id_user from users where login={login}".format(login=user.login))
+                "select id_user from users where login=?",(user.login,))
         row = self.cursor.fetchone()
         user.id_user = row['id_user']
         return user
 
     def findUserPassword(self,id_user:int):
         self.cursor.execute(
-                "select hash from passwords where id_user={id_user}".format(id_user=id_user))
+                "select hash from passwords where id_user=?",(id_user,))
         row = self.cursor.fetchone()
         hash = row['hash']
         return hash
     def findAnyAdvancedUserCode(self,advanced_user_key:str):
         self.cursor.execute(
-                "select advanced_user_key from passwords where advanced_user_key={advanced_user_key}".format(advanced_user_key=advanced_user_key))
+                "select advanced_user_key from passwords where advanced_user_key=?"(advanced_user_key,))
         row = self.cursor.fetchone()
         if(row==None):
             return True
         return False
     def findAnyLogin(self,login:str):
         self.cursor.execute(
-                "select login from users where login={login}".format(login=login))
+                "select login from users where login=?",(login,))
         row = self.cursor.fetchone()
         if(row==None):
             return True
         return False
     def findAnyEmail(self,email:str):
         self.cursor.execute(
-                "select login from users where email={email}".format(email=email))
+                "select login from users where email=?",(email,))
         row = self.cursor.fetchone()
         if(row==None):
             return True
