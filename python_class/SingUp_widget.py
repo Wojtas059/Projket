@@ -14,7 +14,7 @@ from kivy.factory import Factory
 from kivy.uix.popup import Popup
 from User.user import User
 from User.userValidator import UserValidator
-from database.database_handler import DatabaseHandler
+from database_handlers.database_handler import DatabaseHandler
 class Tooltip(Label):
     pass
 

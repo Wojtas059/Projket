@@ -3,7 +3,7 @@ from enum import Enum
 import re
 from crypto.securityCreator import SecurityCreator
 
-from database.database_handler import DatabaseHandler
+from database_handlers.database_handler import DatabaseHandler
 
 
 class UserValidator():

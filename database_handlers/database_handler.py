@@ -3,7 +3,16 @@ from User.user import User
 from crypto.securityCreator import SecurityCreator
 
 
+
+
+
+
+
+
 class DatabaseHandler():
+
+    def __init__(self):
+        self.databasePath='repo\database\database.db'
 
     def createConnection(self):
         self.connection = sqlite3.connect(self.databasePath)
@@ -34,7 +43,7 @@ class DatabaseHandler():
         try:
             self.cursor.execute(
                 '''CREATE TABLE Passwords(id_user integer(11) not null,
-                hash varchar(255) not null,advanced_user_key varchar(255)''')
+                hash varchar(255) not null,advanced_user_key varchar(255))''')
             self.connection.commit()
         except sqlite3.Error as database_error:
             print(database_error)
@@ -73,6 +82,7 @@ class DatabaseHandler():
                     advanced_user_key=SecurityCreator.createAdvancedUserCode()
             self.cursor.execute('''insert into passwords values ({id_user},{hash},{advanced_user_key})'''.format(
                 id_user=user.id_user, hash=hashed_password, advanced_user_key=advanced_user_key))
+        self.connection.commit()
 
     def findUserByLogin(self,user:User):
         self.cursor.execute(
@@ -114,3 +124,5 @@ class DatabaseHandler():
         hashed=self.findUserPassword(self.findUserByLogin(user))
         self.closeConnection()
         return SecurityCreator.verifyPassword(hashed,user.password)
+
+

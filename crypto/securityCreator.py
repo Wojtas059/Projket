@@ -4,7 +4,6 @@ import bcrypt
 from User.user import User
 
 
-
 class SecurityCreator():
 
     def createAdvancedUserCode(self):
@@ -19,7 +18,7 @@ class SecurityCreator():
         hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
         return hashed_password
 
-    def verifyPassword(hashed:str,password:str):
+    def verifyPassword(hashed: str, password: str):
         password = str.encode(password)
         if bcrypt.checkpw(password, hashed):
             return True
