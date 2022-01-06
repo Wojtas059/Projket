@@ -15,11 +15,20 @@ import python_class.User_widget as User
 import python_class.User_pro_w as UserPro
 import python_class.Users_see as USee
 import python_class.SingUp_widget as SingUp
+import python_class.Choose_user_widget as ChooseUser
+import python_class.Choose_method_widget as ChooseMeth
+import python_class.Start_guest_widget as StartGuest
+import python_class.Choose_lots_muscles_widget as ChooseLots
+import python_class.Managment_s_widget as ManagmentS
+import python_class.Start_reference_widget as StartRef
+import python_class.Reference_inst_widget as RefInstr
+import python_class.Observation_ref_widget as ObserRef
+import python_class.Finish_ref_widget as FinishRef
+import python_class.Observation_exp_widget as ObserExp
+import python_class.Pauze_exp_widget as PauzeExp
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 import queue
-
-
 
 class ScreenManagement(ScreenManager):
     q1 = queue.LifoQueue()
@@ -33,9 +42,18 @@ class ScreenManagement(ScreenManager):
         self.add_widget(UserPro.UserProWidget(name="userprowidget"))
         self.add_widget(USee.UsersSeeWidget(name="usersseewidget"))
         self.add_widget(SingUp.SingUpWidget(name="singupwidget"))
-
+        self.add_widget(ChooseUser.ChooseUserWidget(name="chooseuserwidget"))
+        self.add_widget(ChooseMeth.ChooseMethodWidget(name="choosemethodwidget"))
+        self.add_widget(StartGuest.StartGuestWidget(name="startguestwidget"))
+        self.add_widget(ChooseLots.ChooseLotsMusclesWidget(name="chooselotsmuscleswidget"))
+        self.add_widget(ManagmentS.ManagmentSensorsWidget(name="managmentsensorsidget"))
+        self.add_widget(StartRef.StartReferenceWidget(name="startreferencewidget"))
+        self.add_widget(RefInstr.ReferenceInstWidget(name="referenceinstwidget"))
+        self.add_widget(ObserRef.ObservationRefWidget(name="observationrefwidget"))
+        self.add_widget(FinishRef.FinishRefWidget(name="finishrefwidget"))
+        self.add_widget(ObserExp.ObservationExpWidget(name="observationexpwidget"))
+        self.add_widget(PauzeExp.PauzeExpWidget(name="pauzeexpwidget"))
     def add_screen(self, name):
-
         self.q1.put(name)
 
     def last_screen(self):

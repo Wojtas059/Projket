@@ -1,0 +1,95 @@
+<ChooseMethodWidget>
+    name: 'choosemethodwidget'
+    reh: reh
+    activ: activ
+    canvas.before: 
+        Color:
+            rgba: (240/255,240/255,240/255,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+
+    FloatLayout:
+        size: root.width, root.height
+        spacing: 20
+        padding: 100
+
+        Button:
+            size_hint: (0.1, 0.1)
+            pos_hint: {'x': 0, 'top': 1}
+            text: "Wróć"
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = root.parent.last_screen()
+
+        
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        
+        spacing: 20
+        padding: 100
+        
+        Spinner:
+            size_hint: (0.5, 0.5)
+            width: 200
+            height: 50
+            pos_hint: {'center_x': 0.5}
+
+            id: spinner_port
+            text: 'Wybierz rodzaj ćwiczeń'
+            values: 'Aktywność', 'Rehabilitacja'
+            on_text: root.choose_clicked(spinner_port.text)
+
+        Spinner:
+            id: activ
+            size_hint: (0.5, 0.5)
+            width: 200
+            height: 50
+            pos_hint: {'center_x': 0.5}
+            disabled: True
+            text: 'Wybierz aktywność'
+            values: 'Statyczna', 'Dynamiczna'
+            on_text: #root.spinner_clicked(spinner_port.text)
+
+        Spinner:
+            id: reh
+            size_hint: (0.5, 0.5)
+            width: 200
+            height: 50
+            pos_hint: {'center_x': 0.5}
+
+            text: 'Wybierz rehabilitacje'
+            disabled: True
+            values: 'Ćw. bierne', 'Ćw. czynne', 'Pacjent leżący'
+            on_text:
+
+        Spinner:
+            size_hint: (0.5, 0.5)
+            width: 200
+            height: 50
+            pos_hint: {'center_x': 0.5}
+
+            text: 'Wybierz typ budowy ciała'
+            values: 'Atletyczna', 'normalna', 'otyła'
+            on_text:
+
+
+        TextInput:
+            id: humidity
+            hint_text: "Wprowadź % wilgotności powietrza"
+            mulitiline: False
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.5, 0.3)
+            width: 100
+            line_height: 1
+        
+        UButton:
+            text: "Dalej"
+            on_press:
+                root.parent.add_screen('choosemethodwidget')
+                root.manager.current = 'chooselotsmuscleswidget'
+                root.manager.transition.direction = 'left'
+

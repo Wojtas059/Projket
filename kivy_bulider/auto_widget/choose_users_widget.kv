@@ -1,5 +1,5 @@
-<HelpWidget>
-    name: 'helpwidget'
+<ChooseUserWidget>
+    name: 'chooseuserwidget'
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -31,16 +31,20 @@
         padding: 100
         
 
-        HButton:
-            text: "Instrukcja obsługi"
+        UButton:
+            text: "Wybierz użytkownika"
 
-        HButton:
-            text: "Procedura pomiarowa"
-
-        HButton:
-            text: "Chatbot"
-
-
+        UButton:
+            text: "Nowy użytkownik"
+        
+        UButton:
+            text: "Dalej"
 
 
 
+
+<UButton@Button>
+    size_hint: (0.4, 0.1)
+    width: 200
+    height: 50
+    pos_hint: {'center_x': 0.5}

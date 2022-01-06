@@ -1,5 +1,5 @@
-<HelpWidget>
-    name: 'helpwidget'
+<ReferenceInstWidget>
+    name: 'referenceinstwidget'
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -31,16 +31,17 @@
         padding: 100
         
 
-        HButton:
-            text: "Instrukcja obsługi"
+        
+        TextInput:
+            text: "Tu pojawi się instrukcja zapoznająca\n z cwiczeniem referencyjnym"
+            multiline: False
+            id: com
+            color: 0,0,1,1
 
-        HButton:
-            text: "Procedura pomiarowa"
-
-        HButton:
-            text: "Chatbot"
-
-
-
-
-
+        
+        UButton:
+            text: "Rozpocznij ćwiczenie"
+            on_press:
+                root.parent.add_screen('referenceinstwidget')
+                root.manager.current = 'observationrefwidget'
+                root.manager.transition.direction = 'left'

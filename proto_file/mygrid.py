@@ -1,3 +1,4 @@
+from enum import _auto_null, auto
 import kivy
 kivy.require('1.0.6') # replace with your current kivy version !
 from kivy.uix.widget import Widget
@@ -22,6 +23,7 @@ from kivy.uix.popup import Popup
 import queue
 import logging
 from datetime import datetime
+import serial.tools.list_ports
 
 
 
@@ -38,8 +40,26 @@ class MyGrid(Widget):
         except FileExistsError:
             pass
         
+            
     trump =False              
     
+
+    def auto_connect(self):
+        portData = serial.tools.list_ports.comports()
+        commPport = 'None'
+        dataport = []
+        for j in portData:
+            dataport = str(j).split()
+            for i in dataport:
+                if i == 'STMicroelectronics':
+                    self.port=dataport[0]
+                    commPport = 'Start'
+                    Thread(target = self.error_win('Urządzenie zostało podłączone')).start()
+                    break
+        
+        if commPport == 'Start':
+            self.start_thread()
+
 
     def on_press(self):
         self.trump =True

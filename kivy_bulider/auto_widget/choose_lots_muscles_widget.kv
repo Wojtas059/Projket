@@ -1,0 +1,53 @@
+<ChooseLotsMusclesWidget>
+    name: 'chooselotsmuscleswidget'
+
+    canvas.before: 
+        Color:
+            rgba: (240/255,240/255,240/255,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+
+    FloatLayout:
+        size: root.width, root.height
+        spacing: 20
+        padding: 100
+
+        Button:
+            size_hint: (0.1, 0.1)
+            pos_hint: {'x': 0, 'top': 1}
+            text: "Wróć"
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = root.parent.last_screen()
+
+        
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        
+        spacing: 20
+        padding: 250
+        
+        Spinner:
+            size_hint: (0.5, 0.1)
+            width: 200
+            height: 50
+            pos_hint: {'center_x': 0.5}
+
+            id: spinner_port
+            text: 'Wybierz partii mięśni'
+            values: 'Czterogłowy', 'Trzygłowy','Dwugłowy', 'Brzuch','Biceps','Triceps','przedramię','Barki'
+            on_text: #root.choose_clicked(spinner_port.text)
+
+        
+        UButton:
+            text: "Dalej"
+            
+            on_press:
+                root.parent.add_screen('chooselotsmuscleswidget')
+                root.manager.current = 'managmentsensorsidget'
+                root.manager.transition.direction = 'left'
+

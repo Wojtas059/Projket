@@ -5,6 +5,6 @@ from kivy.uix.screenmanager import  Screen
 
 
 
-class HelpWidget(Screen):
+class ManagmentSensorsWidget(Screen):
     pass
     

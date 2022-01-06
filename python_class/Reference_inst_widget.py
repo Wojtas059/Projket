@@ -5,6 +5,5 @@ from kivy.uix.screenmanager import  Screen
 
 
 
-class HelpWidget(Screen):
+class ReferenceInstWidget(Screen):
     pass
-    

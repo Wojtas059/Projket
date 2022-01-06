@@ -1,0 +1,69 @@
+<ManagmentSensorsWidget>
+    name: 'managmentsensorsidget'
+
+    canvas.before: 
+        Color:
+            rgba: (240/255,240/255,240/255,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+
+    FloatLayout:
+        size: root.width, root.height
+        spacing: 20
+        padding: 100
+
+        Button:
+            size_hint: (0.1, 0.1)
+            pos_hint: {'x': 0, 'top': 1}
+            text: "Wróć"
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = root.parent.last_screen()
+
+        
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        
+        spacing: 20
+        padding: 200
+        
+        TextInput:
+            hint_text: "Wprowadź address do taśmy 1"
+            mulitiline: False
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.5, 0.15)
+            width: 100
+            line_height: 1
+        
+        UButton:
+            text: "Połącz"
+            on_press:
+                #root.parent.add_screen('chooselotsmuscleswidget')
+                #root.manager.current = ''
+                #root.manager.transition.direction = 'left'
+
+        TextInput:
+            hint_text: "Wprowadź address do taśmy 2"
+            mulitiline: False
+            pos_hint: {'center_x': 0.5}
+            size_hint: (0.5, 0.15)
+            width: 100
+            line_height: 1
+        
+        UButton:
+            text: "Połącz"
+            on_press:
+                #root.parent.add_screen('chooselotsmuscleswidget')
+                #root.manager.current = ''
+                #root.manager.transition.direction = 'left'
+        
+        UButton:
+            text: "Dalej"
+            on_press:
+                root.parent.add_screen('managmentsensorsidget')
+                root.manager.current = 'startreferencewidget'
+                root.manager.transition.direction = 'left'

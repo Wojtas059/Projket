@@ -1,0 +1,64 @@
+<PauzeExpWidget>
+    name: 'pauzeexpwidget'
+    canvas.before: 
+        Color:
+            rgba: (240/255,240/255,240/255,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+
+    FloatLayout:
+        size: root.width, root.height
+        spacing: 20
+        padding: 100
+
+        Button:
+            size_hint: (0.1, 0.1)
+            pos_hint: {'x': 0, 'top': 1}
+            text: "Wróć"
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = root.parent.last_screen()
+
+        
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        
+        spacing: 20
+        padding: 100
+        
+
+        
+        Label:
+            text: "Wstrzymano badanie"
+            color: 0,0,0,1
+
+        TextInput:
+            text: "Twoje wyniki pomiarowe"
+            multiline: False
+            id: com
+            color: 0,0,1,1
+
+        UButton:
+            text: "Wznów badanie"
+            on_press:
+                root.parent.add_screen('pauzeexpwidget')
+                root.manager.current = ''
+                root.manager.transition.direction = 'left'
+
+        UButton:
+            text: "Analiza pomiarowa"
+            on_press:
+                root.parent.add_screen('pauzeexpwidget')
+                root.manager.current = ''
+                root.manager.transition.direction = 'left'
+
+        UButton:
+            text: "Zakończ badanie"
+            on_press:
+                root.parent.add_screen('pauzeexpwidget')
+                root.manager.current = 'homewidget'
+                root.manager.transition.direction = 'left'

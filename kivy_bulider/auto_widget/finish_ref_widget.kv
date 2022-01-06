@@ -1,5 +1,5 @@
-<HelpWidget>
-    name: 'helpwidget'
+<FinishRefWidget>
+    name: 'finishrefwidget'
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -31,16 +31,19 @@
         padding: 100
         
 
-        HButton:
-            text: "Instrukcja obsługi"
+        
+        Label:
+            text: "Pomiar referencyjny się zakończył"
+            color: 0,0,0,1
 
-        HButton:
-            text: "Procedura pomiarowa"
-
-        HButton:
-            text: "Chatbot"
-
-
-
-
-
+        UButton:
+            text: "Zapisz wyniki"
+            on_press:
+                
+        
+        UButton:
+            text: "Rozpocznij pomiar badania"
+            on_press:
+                root.parent.add_screen('finishrefwidget')
+                root.manager.current = 'observationexpwidget'
+                root.manager.transition.direction = 'left'

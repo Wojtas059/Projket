@@ -16,26 +16,28 @@
         padding: 100
         
 
-        Button:
+        HButton:
             text: "Zaloguj się"
             on_press:
                 root.parent.add_screen('homewidget')
                 root.manager.current = 'singinwidget'
                 root.manager.transition.direction = 'left'
 
-        Button:
+        HButton:
             text: "Rozpocznij tryb Auto"
             on_press:
                 root.parent.add_screen('homewidget')
+                root.manager.current ='startguestwidget'
+                root.manager.transition.direction = 'left'
 
-        Button:
+        HButton:
             text: "Pomoc"
             on_press:
                 root.parent.add_screen('homewidget')
                 root.manager.current = 'helpwidget'
                 root.manager.transition.direction = 'left'
         
-        Button:
+        HButton:
             text: "Pogląd trybu zaawansowanego"
             on_press:
                 root.parent.add_screen('homewidget')
@@ -43,7 +45,7 @@
                 root.manager.transition.direction = 'left'
 
 
-<Button>
+<HButton@Button>
     size_hint: (0.5, 0.5)
     width: 200
     height: 50
