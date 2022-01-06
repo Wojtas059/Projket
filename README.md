@@ -15,3 +15,5 @@ If you've configured different baudrate, pass it as optional argument `--baud`, 
 ## Running the project manually
 
 Install the dependencies manually, via `pip`, or other package manager. This script requires only `pyserial` and `protobuf` to run.
+
+okok
