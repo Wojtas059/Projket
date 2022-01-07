@@ -33,6 +33,8 @@ import queue
 class dane():
     liczba_tasm = 0
 
+class User():
+    pass
 
 class ScreenManagement(ScreenManager):
     q1 = queue.LifoQueue()
@@ -67,7 +69,7 @@ class ScreenManagement(ScreenManager):
         while not self.q1.empty():
             self.q1.get()
 
-
+    
 
 class MyApp(App):
     def build(self):

@@ -34,14 +34,19 @@
             text: "Historia "
             on_press: 
                 #root.manager.current = ''
-                root.manager.current = root.parent.add_screen("userwidget")
+                #root.manager.current = root.parent.add_screen("userwidget")
         HButton:
             text: "Rozpocznij tryb Auto"
+            on_press:
+                root.parent.add_screen("userwidget") 
+                root.manager.current = 'choosemethodwidget'
+                root.manager.transition.direction = 'left'
 
         HButton:
             text: "Pomoc"
             on_press:
-                root.manager.current = root.parent.add_screen("userwidget") 
+                root.parent.add_screen("userwidget") 
                 root.manager.current = 'helpwidget'
+                root.manager.transition.direction = 'left'
 
 

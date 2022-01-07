@@ -1,5 +1,6 @@
-<StartGuestWidget>
-    name: 'startguestwidget'
+<ChooseLotsMusclesWidget>
+    name: 'chooselotsmuscleswidget'
+
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -28,29 +29,25 @@
         size: root.width, root.height
         
         spacing: 20
-        padding: 150
+        padding: 250
         
+        Spinner:
+            size_hint: (0.5, 0.1)
+            width: 200
+            height: 50
+            pos_hint: {'center_x': 0.5}
+
+            id: spinner_port
+            text: 'Wybierz partii mięśni'
+            values: 'Czterogłowy', 'Trzygłowy','Dwugłowy', 'Brzuch','Biceps','Triceps','przedramię','Barki'
+            on_text: #root.choose_clicked(spinner_port.text)
 
         
-        Label:
-            text: "Jesteś w trybie gość\nJeśli chcesz aby Twoje wyniki były zapisane\na także abyś mógł korzystać z większej ilości usług,\nzaloguj się lub zarejestruj się"
-            color: 0,0,0,1
-            font_size: 20
-
-        HButton:
-            text: "Zaloguj się lub Zarejestruj się"
-            on_press:
-                root.parent.add_screen('startguestwidget')
-                root.manager.current = 'singinwidget'
-                root.manager.transition.direction = 'left'
-        
-        HButton:
+        UButton:
             text: "Dalej"
+            
             on_press:
-                root.parent.add_screen('startguestwidget')
-                root.manager.current = 'choosemethodwidget'
+                root.parent.add_screen('chooselotsmuscleswidget')
+                root.manager.current = 'managmentsensorsidget'
                 root.manager.transition.direction = 'left'
-
-
-
 

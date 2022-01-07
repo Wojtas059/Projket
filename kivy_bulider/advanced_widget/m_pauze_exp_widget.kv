@@ -1,5 +1,5 @@
-<ObservationExpWidget>
-    name: 'observationexpwidget'
+<PauzeExpWidget>
+    name: 'pauzeexpwidget'
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -33,7 +33,7 @@
 
         
         Label:
-            text: "Wykonuj Ćwiczenia wybranych mięśni"
+            text: "Wstrzymano badanie"
             color: 0,0,0,1
 
         TextInput:
@@ -42,9 +42,23 @@
             id: com
             color: 0,0,1,1
 
-        HButton:
-            text: "Wstrzymaj badanie"
+        UButton:
+            text: "Wznów badanie"
             on_press:
-                root.parent.add_screen('observationexpwidget')
-                root.manager.current = 'pauzeexpwidget'
+                root.parent.add_screen('pauzeexpwidget')
+                root.manager.current = ''
+                root.manager.transition.direction = 'left'
+
+        UButton:
+            text: "Analiza pomiarowa"
+            on_press:
+                root.parent.add_screen('pauzeexpwidget')
+                root.manager.current = ''
+                root.manager.transition.direction = 'left'
+
+        UButton:
+            text: "Zakończ badanie"
+            on_press:
+                root.parent.add_screen('pauzeexpwidget')
+                root.manager.current = 'homewidget'
                 root.manager.transition.direction = 'left'

@@ -26,43 +26,45 @@
         size: root.width, root.height
         
         spacing: 20
-        padding: 200
+        padding: 150
 
-        Label:
+        HLabel:
             text: "Login"
-            width: 30
+            width: 10
+            size_hint: (0.5, 0.5)
             color: 0,0,0,1
         TextInput:
             id: login
             mulitiline: False
             pos_hint: {'center_x': 0.5}
-            size_hint_x: 0.5
+            size_hint: (0.5, 0.5)
             width: 100
             line_height: 1
 
-        Label:
+        HLabel:
             text: "Hasło"
-            width: 30
+            width: 10
+            size_hint: (0.5, 0.5)
             color: 0,0,0,1
         TextInput:
             id: password
             password: True
             mulitiline: False
             pos_hint: {'center_x': 0.5}
-            size_hint_x: 0.5
+            size_hint: (0.5, 0.5)
             width:100
             line_height: 1
         
-        Button:
+        HButton:
             text: "Zaloguj się"
             on_press: 
                 if root.on_press():\
-                login.text = "";\
-                password.text = "";\
+                #login.text = "";\
+                #password.text = "";\
                 root.parent.clear_screen();\
                 root.manager.current = 'userwidget'
         
-        Button:
+        HButton:
             text: " Zarejestruj się"
             on_press:
                 root.parent.add_screen('singinwidget')

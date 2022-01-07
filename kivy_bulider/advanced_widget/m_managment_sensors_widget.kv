@@ -35,7 +35,7 @@
             hint_text: "Wprowadź address do taśmy 1"
             mulitiline: False
             pos_hint: {'center_x': 0.5}
-            size_hint: (0.5, 0.35)
+            size_hint: (0.5, 0.15)
             width: 100
             line_height: 1
         
@@ -50,7 +50,7 @@
             hint_text: "Wprowadź address do taśmy 2"
             mulitiline: False
             pos_hint: {'center_x': 0.5}
-            size_hint: (0.5, 0.35)
+            size_hint: (0.5, 0.15)
             width: 100
             line_height: 1
         
@@ -61,7 +61,7 @@
                 #root.manager.current = ''
                 #root.manager.transition.direction = 'left'
         
-        HButton:
+        UButton:
             text: "Dalej"
             on_press:
                 root.parent.add_screen('managmentsensorsidget')

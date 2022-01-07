@@ -11,20 +11,31 @@ from database_handlers.database_handler import DatabaseHandler
 class SingInWidget(Screen):
     login=ObjectProperty(None)
     password=ObjectProperty(None)
+    login_ = ""
     
     def on_press(self):
+        
         if  self.login.text == '' or self.password.text == '':
             self.error_pop('', 'Uzupełnij wszytskie pola')
+
         else:
             self.user = User(self.login.text,self.password.text )
             self.uvaild = UserValidator(self.user)
             data_error = {}
             data_error = self.uvaild.validateLogin()
-        if data_error.get("USERLOGIN") == UserValidator.Flags.CORRECTFIELD and data_error.get("USERPASSWORD") == UserValidator.Flags.CORRECTFIELD :
-            return True
+            if data_error.get("USERLOGIN") == UserValidator.Flags.CORRECTFIELD and data_error.get("USERPASSWORD") == UserValidator.Flags.CORRECTFIELD :
+                self.login_ = self.login.test
+                return True
+
+            else:
+                self.error_pop('', 'Nie poprawy email lub haslo')
+                return False
+
+    def bool_advance(self):
+        if :
+            return 'userprowidget'
         else:
-            self.error_pop('', 'Nie poprawy email lub haslo')
-            return False
+            return 'userwidget'
 
     def error_pop(self, name, text):
         pop = Popup(title='Invalid Form',
