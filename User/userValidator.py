@@ -19,6 +19,7 @@ class UserValidator():
         INCORRECTELOGINDUPLICATE = 6
         INCORRECTEMAIL = 7
         INCORRECTEMAILDUPLICATE = 8
+        NONEXISTENTADVANCEDUSERKEY = 9
         CORRECTFIELD = 0
 
     def __init__(self, user: User):
@@ -59,19 +60,17 @@ class UserValidator():
             return self.Flags.INCORRECTPASSWORD
 
     def validateUserPassword(self):
-        databaseHandler=DatabaseHandler()
+        databaseHandler = DatabaseHandler()
         if databaseHandler.ValideUserPasswordByLogin(self.user):
-             return self.Flags.CORRECTFIELD
+            return self.Flags.CORRECTFIELD
         else:
-             return self.Flags.INCORRECTUSERPASSWORD
-         
+            return self.Flags.INCORRECTUSERPASSWORD
+
     def validateUserLogin(self):
         if len(self.user.login) > 2:
             return self.Flags.CORRECTFIELD
         else:
             return self.Flags.INCORRECTLOGIN
-
-   
 
     def validateLoginExistence(self):
         databaseHandler = DatabaseHandler()
@@ -82,6 +81,13 @@ class UserValidator():
         else:
             databaseHandler.closeConnection()
             return self.Flags.INCORRECTELOGINDUPLICATE
+
+    def validateAdvancedUserCode(self, advanced_user_key):
+        databaseHandler = DatabaseHandler()
+        databaseHandler.createConnection()
+        if databaseHandler.findAnyAdvancedUserCode(advanced_user_key):
+            return self.Flags.CORRECTFIELD
+        return self.Flags.NONEXISTENTADVANCEDUSERKEY
 
     def validateRegistration(self):
         validationResults = {}
@@ -96,9 +102,24 @@ class UserValidator():
 
     def validateLogin(self):
         validationResults = {}
-        validationResults["USERLOGIN"]=self.validateUserLogin()
-        if validationResults["USERLOGIN"]==self.Flags.CORRECTFIELD:
-            validationResults["USERPASSWORD"]=self.validatePassword()
+        validationResults["USERLOGIN"] = self.validateUserLogin()
+        if validationResults["USERLOGIN"] == self.Flags.CORRECTFIELD:
+            validationResults["USERPASSWORD"] = self.validatePassword()
         else:
-            validationResults["USERPASSWORD"]=self.Flags.INCORRECTUSERPASSWORD
+            validationResults["USERPASSWORD"] = self.Flags.INCORRECTUSERPASSWORD
+        return validationResults
+
+    # Correct verification of login
+    def validateLoginOperation(self):
+        validationResults = {}
+        validationResults["LOGINEXISTENCE"] = self.validateLoginExistence()
+        if validationResults["LOGINEXISTENCE"] == self.Flags.CORRECTFIELD:
+            databaseHandler = DatabaseHandler()
+            databaseHandler.createConnection()
+            databaseHandler.findUserByLogin(self.user.login)
+            hash=databaseHandler.findUserPassword(self.user.id_user)
+            if SecurityCreator.verifyPassword(hashed=hash,password=self.user.password):
+                 validationResults["PASSWORDCORRECTNESS"]=self.Flags.CORRECTFIELD
+            else:
+                 validationResults["PASSWORDCORRECTNESS"]=self.Flags.INCORRECTPASSWORD
         return validationResults
