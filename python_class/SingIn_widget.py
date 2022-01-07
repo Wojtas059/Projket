@@ -5,6 +5,7 @@ from kivy.uix.screenmanager import  Screen
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from User.user import User
+import logging
 from User.userValidator import UserValidator
 from database_handlers.database_handler import DatabaseHandler
 
@@ -24,15 +25,20 @@ class SingInWidget(Screen):
             data_error = {}
             data_error = self.uvaild.validateLogin()
             if data_error.get("USERLOGIN") == UserValidator.Flags.CORRECTFIELD and data_error.get("USERPASSWORD") == UserValidator.Flags.CORRECTFIELD :
-                self.login_ = self.login.test
+                self.login_ = self.login.text
                 return True
 
             else:
                 self.error_pop('', 'Nie poprawy email lub haslo')
                 return False
 
-    def bool_advance(self):
-        if DatabaseHandler.findAnyAdvancedUserCode(self.login_):
+    def user_advance(self):
+        instance = DatabaseHandler()
+        instance.createConnection()
+        bool_Advance_User = instance.findUserPrivilegesByLogin(self.login_)
+        instance.closeConnection()
+        print("bool: "+str(bool_Advance_User))
+        if bool_Advance_User:
             return 'userprowidget'
         else:
             return 'userwidget'

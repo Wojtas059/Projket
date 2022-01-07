@@ -1,5 +1,5 @@
-<PauzeExpWidget>
-    name: 'pauzeexpwidget'
+<AReferenceInstWidget>
+    name: 'a_referenceinstwidget'
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -32,33 +32,16 @@
         
 
         
-        Label:
-            text: "Wstrzymano badanie"
-            color: 0,0,0,1
-
         TextInput:
-            text: "Twoje wyniki pomiarowe"
+            text: "Tu pojawi się instrukcja zapoznająca\n z cwiczeniem referencyjnym"
             multiline: False
             id: com
             color: 0,0,1,1
 
+        
         UButton:
-            text: "Wznów badanie"
+            text: "Rozpocznij ćwiczenie"
             on_press:
-                root.parent.add_screen('pauzeexpwidget')
-                root.manager.current = ''
-                root.manager.transition.direction = 'left'
-
-        UButton:
-            text: "Analiza pomiarowa"
-            on_press:
-                root.parent.add_screen('pauzeexpwidget')
-                root.manager.current = ''
-                root.manager.transition.direction = 'left'
-
-        UButton:
-            text: "Zakończ badanie"
-            on_press:
-                root.parent.add_screen('pauzeexpwidget')
-                root.manager.current = 'homewidget'
+                root.parent.add_screen('referenceinstwidget')
+                root.manager.current = 'observationrefwidget'
                 root.manager.transition.direction = 'left'

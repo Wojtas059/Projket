@@ -1,5 +1,5 @@
-<ObservationRefWidget>
-    name: 'observationrefwidget'
+<AChooseUserWidget>
+    name: 'a_chooseuserwidget'
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -31,18 +31,20 @@
         padding: 100
         
 
-        
-        Label:
-            text: "Wykonuj ćwiczenie\nktóre zostało pokazane wcześniej"
-            color: 0,0,0,1
+        UButton:
+            text: "Wybierz użytkownika"
 
-        Label:
-            text: "Zakończ ćwiczenie"
-            color: 0,0,0,1
+        UButton:
+            text: "Nowy użytkownik"
         
         UButton:
-            text: "Przejdz do nastepnego ćwiczenia"
-            on_press:
-                root.parent.add_screen('observationrefwidget')
-                root.manager.current = 'finishrefwidget'
-                root.manager.transition.direction = 'left'
+            text: "Dalej"
+
+
+
+
+<UButton@Button>
+    size_hint: (0.4, 0.1)
+    width: 200
+    height: 50
+    pos_hint: {'center_x': 0.5}

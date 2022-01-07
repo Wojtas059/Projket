@@ -1,5 +1,6 @@
-<ReferenceInstWidget>
-    name: 'referenceinstwidget'
+<AChooseLotsMusclesWidget>
+    name: 'a_chooselotsmuscleswidget'
+
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -28,20 +29,25 @@
         size: root.width, root.height
         
         spacing: 20
-        padding: 100
+        padding: 250
         
+        Spinner:
+            size_hint: (0.5, 0.1)
+            width: 200
+            height: 50
+            pos_hint: {'center_x': 0.5}
 
-        
-        TextInput:
-            text: "Tu pojawi się instrukcja zapoznająca\n z cwiczeniem referencyjnym"
-            multiline: False
-            id: com
-            color: 0,0,1,1
+            id: spinner_port
+            text: 'Wybierz partii mięśni'
+            values: 'Czterogłowy', 'Trzygłowy','Dwugłowy', 'Brzuch','Biceps','Triceps','przedramię','Barki'
+            on_text: #root.choose_clicked(spinner_port.text)
 
         
         UButton:
-            text: "Rozpocznij ćwiczenie"
+            text: "Dalej"
+            
             on_press:
-                root.parent.add_screen('referenceinstwidget')
-                root.manager.current = 'observationrefwidget'
+                root.parent.add_screen('chooselotsmuscleswidget')
+                root.manager.current = 'managmentsensorsidget'
                 root.manager.transition.direction = 'left'
+

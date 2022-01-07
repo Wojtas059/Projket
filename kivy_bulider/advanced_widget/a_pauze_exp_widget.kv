@@ -1,5 +1,5 @@
-<FinishRefWidget>
-    name: 'finishrefwidget'
+<APauzeExpWidget>
+    name: 'a_pauzeexpwidget'
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -33,17 +33,32 @@
 
         
         Label:
-            text: "Pomiar referencyjny się zakończył"
+            text: "Wstrzymano badanie"
             color: 0,0,0,1
 
+        TextInput:
+            text: "Twoje wyniki pomiarowe"
+            multiline: False
+            id: com
+            color: 0,0,1,1
+
         UButton:
-            text: "Zapisz wyniki"
+            text: "Wznów badanie"
             on_press:
-                
-        
+                root.parent.add_screen('pauzeexpwidget')
+                root.manager.current = ''
+                root.manager.transition.direction = 'left'
+
         UButton:
-            text: "Rozpocznij pomiar badania"
+            text: "Analiza pomiarowa"
             on_press:
-                root.parent.add_screen('finishrefwidget')
-                root.manager.current = 'observationexpwidget'
+                root.parent.add_screen('pauzeexpwidget')
+                root.manager.current = ''
+                root.manager.transition.direction = 'left'
+
+        UButton:
+            text: "Zakończ badanie"
+            on_press:
+                root.parent.add_screen('pauzeexpwidget')
+                root.manager.current = 'homewidget'
                 root.manager.transition.direction = 'left'

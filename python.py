@@ -2,17 +2,17 @@
 import queue
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
-import python_class.Pauze_exp_widget as PauzeExp
-import python_class.Observation_exp_widget as ObserExp
-import python_class.Finish_ref_widget as FinishRef
-import python_class.Observation_ref_widget as ObserRef
-import python_class.Reference_inst_widget as RefInstr
-import python_class.Start_reference_widget as StartRef
-import python_class.Managment_s_widget as ManagmentS
-import python_class.Choose_lots_muscles_widget as ChooseLots
-import python_class.Start_guest_widget as StartGuest
-import python_class.Choose_method_widget as ChooseMeth
-import python_class.Choose_user_widget as ChooseUser
+import python_class.auto_class.Pauze_exp_widget as PauzeExp
+import python_class.auto_class.Observation_exp_widget as ObserExp
+import python_class.auto_class.Finish_ref_widget as FinishRef
+import python_class.auto_class.Observation_ref_widget as ObserRef
+import python_class.auto_class.Reference_inst_widget as RefInstr
+import python_class.auto_class.Start_reference_widget as StartRef
+import python_class.auto_class.Managment_s_widget as ManagmentS
+import python_class.auto_class.Choose_lots_muscles_widget as ChooseLots
+import python_class.auto_class.Start_guest_widget as StartGuest
+import python_class.auto_class.Choose_method_widget as ChooseMeth
+import python_class.auto_class.Choose_user_widget as ChooseUser
 import python_class.SingUp_widget as SingUp
 import python_class.Users_see as USee
 import python_class.User_pro_w as UserPro
@@ -35,7 +35,7 @@ kivy.require('1.0.6')  # replace with your current kivy version !
 
 class ScreenManagement(ScreenManager):
     q1 = queue.LifoQueue()
-
+    home_widget = 'homewidget'
     def __init__(self, **kwargs):
         # self.q1.put('homewidget')
         super(ScreenManagement, self).__init__(**kwargs)
@@ -64,6 +64,12 @@ class ScreenManagement(ScreenManager):
         self.add_widget(ObserExp.ObservationExpWidget(
             name="observationexpwidget"))
         self.add_widget(PauzeExp.PauzeExpWidget(name="pauzeexpwidget"))
+
+    def set_home_widget(self, name_widget):
+        self.home_widget = name_widget
+    
+    def get_home_widget(self):
+        return self.home_widget
 
     def add_screen(self, name):
         self.q1.put(name)

@@ -60,5 +60,5 @@
             text: "Zakończ badanie"
             on_press:
                 root.parent.add_screen('pauzeexpwidget')
-                root.manager.current = 'homewidget'
+                root.manager.current = root.parent.get_home_widget()
                 root.manager.transition.direction = 'left'

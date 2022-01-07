@@ -59,10 +59,11 @@
             text: "Zaloguj się"
             on_press: 
                 if root.on_press():\
-                #login.text = "";\
-                #password.text = "";\
+                login.text = "";\
+                password.text = "";\
                 root.parent.clear_screen();\
-                root.manager.current = 'userwidget'
+                root.parent.set_home_widget(root.user_advance());\
+                root.manager.current = root.user_advance()
         
         HButton:
             text: " Zarejestruj się"

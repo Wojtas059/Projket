@@ -157,7 +157,7 @@ class DatabaseHandler():
             '''select advanced from users where login=?''', (login,)
         )
         row = self.cursor.fetchone()
-        if not row[0]:
+        if row[0]:
             return True
         return False
 

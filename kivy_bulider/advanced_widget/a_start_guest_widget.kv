@@ -1,5 +1,5 @@
-<StartReferenceWidget>
-    name: 'startreferencewidget'
+<AStartGuestWidget>
+    name: 'a_startguestwidget'
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -33,14 +33,23 @@
 
         
         Label:
-            text: "Rozpoczęcie pomiaru referencyjnego\npostępuj zgonie z instrukcją"
+            text: "Jesteś w trybie gość\nJeśli chcesz aby Twoje wyniki były zapisane\na także abyś mógł korzystać z większej ilości usług,\nzaloguj się lub zarejestruj się"
             color: 0,0,0,1
 
+        UButton:
+            text: "Zaloguj się lub Zarejestruj się"
+            on_press:
+                root.parent.add_screen('startguestwidget')
+                root.manager.current = 'singinwidget'
+                root.manager.transition.direction = 'left'
         
         UButton:
-            text: "Rozpocznij"
+            text: "Dalej"
             on_press:
-                root.parent.add_screen('startreferencewidget')
-                root.manager.current = 'referenceinstwidget'
+                root.parent.add_screen('startguestwidget')
+                root.manager.current = 'choosemethodwidget'
                 root.manager.transition.direction = 'left'
+
+
+
 
