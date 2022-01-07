@@ -32,7 +32,7 @@ class SingInWidget(Screen):
                 return False
 
     def bool_advance(self):
-        if :
+        if DatabaseHandler.findAnyAdvancedUserCode(self.login_):
             return 'userprowidget'
         else:
             return 'userwidget'
