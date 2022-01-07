@@ -47,10 +47,18 @@ class DatabaseHandler():
     def dropTablePassword(self):
         try:
             self.cursor.execute(
-                '''DROP TABLE Password''')
+                '''DROP TABLE Passwords''')
             self.connection.commit()
         except sqlite3.Error as database_error:
             print(database_error)
+
+    def dropAndCreateTables(self):
+        self.createConnection()
+        self.dropTablePassword()
+        self.dropTableUsers()
+        self.createTableUsers()
+        self.createTablePasswords()
+        self.closeConnection()
 
     # Creating user section
     def createUser(self, user: User):
