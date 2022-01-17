@@ -233,7 +233,13 @@ class DatabaseHandler():
         usersList=self.findUserByIdList(usersList)
         for user in listOfUser:
             print(user)
-    
+
+    def getUserCredentials(self,login:str):
+        self.cursor.execute(
+            "select id_user,name,surname,email from users where login=?", (login,))
+        row = self.cursor.fetchone()
+        return row
+        
     # Validators
     def ValideUserPasswordByLogin(self, user: User):
         self.createConnection()

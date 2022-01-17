@@ -31,7 +31,7 @@ class UserListButton(RecycleView):
             print(i)
         self.data = [{'text':x} for x in range(100)]
 
-class BattonLabel(GridLayout):
+class BattonLabel(RecycleDataViewBehavior,GridLayout):
     nazwa=ObjectProperty(None)
     nazwa_ = ''
     def __init__(self, **kwargs):
