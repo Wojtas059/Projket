@@ -1,6 +1,5 @@
-<AChooseLotsMusclesWidget>
-    name: 'a_chooselotsmuscleswidget'
-
+<AFinishRefWidget>
+    name: 'a_finishrefwidget'
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -29,25 +28,22 @@
         size: root.width, root.height
         
         spacing: 20
-        padding: 250
+        padding: 100
         
-        Spinner:
-            size_hint: (0.5, 0.1)
-            width: 200
-            height: 50
-            pos_hint: {'center_x': 0.5}
 
-            id: spinner_port
-            text: 'Wybierz partii mięśni'
-            values: 'Czterogłowy', 'Trzygłowy','Dwugłowy', 'Brzuch','Biceps','Triceps','przedramię','Barki'
-            on_text: #root.choose_clicked(spinner_port.text)
+        
+        Label:
+            text: "Pomiar referencyjny się zakończył"
+            color: 0,0,0,1
 
+        UButton:
+            text: "Zapisz wyniki"
+            on_press:
+                
         
         UButton:
-            text: "Dalej"
-            
+            text: "Rozpocznij pomiar badania"
             on_press:
-                root.parent.add_screen('chooselotsmuscleswidget')
-                root.manager.current = 'managmentsensorsidget'
+                root.parent.add_screen('a_finishrefwidget')
+                root.manager.current = 'a_observationexpwidget'
                 root.manager.transition.direction = 'left'
-

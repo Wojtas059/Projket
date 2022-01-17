@@ -1,5 +1,5 @@
-<AObservationRefWidget>
-    name: 'a_observationrefwidget'
+<AObservationExpWidget>
+    name: 'a_observationexpwidget'
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -33,16 +33,18 @@
 
         
         Label:
-            text: "Wykonuj ćwiczenie\nktóre zostało pokazane wcześniej"
+            text: "Wykonuj Ćwiczenia wybranych mięśni"
             color: 0,0,0,1
 
-        Label:
-            text: "Zakończ ćwiczenie"
-            color: 0,0,0,1
-        
+        TextInput:
+            text: "Twoje wyniki pomiarowe"
+            multiline: False
+            id: com
+            color: 0,0,1,1
+
         UButton:
-            text: "Przejdz do nastepnego ćwiczenia"
+            text: "Wstrzymaj badanie"
             on_press:
-                root.parent.add_screen('observationrefwidget')
-                root.manager.current = 'finishrefwidget'
+                root.parent.add_screen('a_observationexpwidget')
+                root.manager.current = 'a_pauzeexpwidget'
                 root.manager.transition.direction = 'left'

@@ -1,5 +1,5 @@
-<APauzeExpWidget>
-    name: 'a_pauzeexpwidget'
+<AStartGuestWidget>
+    name: 'a_startguestwidget'
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -33,32 +33,23 @@
 
         
         Label:
-            text: "Wstrzymano badanie"
+            text: "Jesteś w trybie gość\nJeśli chcesz aby Twoje wyniki były zapisane\na także abyś mógł korzystać z większej ilości usług,\nzaloguj się lub zarejestruj się"
             color: 0,0,0,1
 
-        TextInput:
-            text: "Twoje wyniki pomiarowe"
-            multiline: False
-            id: com
-            color: 0,0,1,1
-
         UButton:
-            text: "Wznów badanie"
+            text: "Zaloguj się lub Zarejestruj się"
             on_press:
-                root.parent.add_screen('pauzeexpwidget')
-                root.manager.current = ''
+                root.parent.add_screen('a_startguestwidget')
+                root.manager.current = 'a_singinwidget'
+                root.manager.transition.direction = 'left'
+        
+        UButton:
+            text: "Dalej"
+            on_press:
+                root.parent.add_screen('a_startguestwidget')
+                root.manager.current = 'a_choosemethodwidget'
                 root.manager.transition.direction = 'left'
 
-        UButton:
-            text: "Analiza pomiarowa"
-            on_press:
-                root.parent.add_screen('pauzeexpwidget')
-                root.manager.current = ''
-                root.manager.transition.direction = 'left'
 
-        UButton:
-            text: "Zakończ badanie"
-            on_press:
-                root.parent.add_screen('pauzeexpwidget')
-                root.manager.current = 'homewidget'
-                root.manager.transition.direction = 'left'
+
+

@@ -39,9 +39,9 @@ class SingInWidget(Screen):
         instance.closeConnection()
         print("bool: "+str(bool_Advance_User))
         if bool_Advance_User:
-            return 'userprowidget'
-        else:
             return 'userwidget'
+        else:
+            return 'userprowidget'
 
     def error_pop(self, name, text):
         pop = Popup(title='Invalid Form',

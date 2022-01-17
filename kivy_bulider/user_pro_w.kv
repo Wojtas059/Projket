@@ -37,10 +37,17 @@
 
         HButton:
             text: "Rozpocznij tryb Manual"
+            on_press:
+                root.parent.add_screen("userprowidget") 
+                root.manager.current = 'a_choosemethodwidget'
+                root.manager.transition.direction = 'left'
 
         HButton:
             text: "Pomoc"
-            on_press: root.manager.current = 'helpwidget'
+            on_press: 
+                root.parent.add_screen("userprowidget") 
+                root.manager.current = 'helpwidget'
+                root.manager.transition.direction = 'left'
 
 
 
