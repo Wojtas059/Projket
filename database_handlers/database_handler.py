@@ -168,8 +168,10 @@ class DatabaseHandler():
         self.cursor.execute(
             '''select advanced from users where login=?''', (login,)
         )
+        
         row = self.cursor.fetchone()
-        if row[0]:
+        print(row)
+        if not row[0]:
             return True
         return False
 

@@ -1,5 +1,6 @@
-<AStartReferenceWidget>
-    name: 'a_startreferencewidget'
+<AChooseLotsMusclesWidget>
+    name: 'a_chooselotsmuscleswidget'
+
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -28,19 +29,25 @@
         size: root.width, root.height
         
         spacing: 20
-        padding: 100
+        padding: 250
         
+        Spinner:
+            size_hint: (0.5, 0.1)
+            width: 200
+            height: 50
+            pos_hint: {'center_x': 0.5}
 
-        
-        Label:
-            text: "Rozpoczęcie pomiaru referencyjnego\npostępuj zgonie z instrukcją"
-            color: 0,0,0,1
+            id: spinner_port
+            text: 'Wybierz partii mięśni'
+            values: 'Czterogłowy', 'Trzygłowy','Dwugłowy', 'Brzuch','Biceps','Triceps','przedramię','Barki'
+            on_text: #root.choose_clicked(spinner_port.text)
 
         
         UButton:
-            text: "Rozpocznij"
+            text: "Dalej"
+            
             on_press:
-                root.parent.add_screen('startreferencewidget')
-                root.manager.current = 'referenceinstwidget'
+                root.parent.add_screen('a_chooselotsmuscleswidget')
+                root.manager.current = 'a_managmentsensorsidget'
                 root.manager.transition.direction = 'left'
 

@@ -42,7 +42,7 @@ class SingUpWidget(Screen):
             if not( self.password.text == self.c_password.text ):
                 self.error_pop('', 'Wpisane hasła nie są takie same')
             else:
-                self.user = User( self.login.text,self.password.text,self.imie.text,self.nazwisko.text,  self.email.text, u_pro_)
+                self.user = User( self.login.text,self.password.text,self.imie.text,self.nazwisko.text,  self.email.text, advanced=u_pro_)
                 self.uvalid = UserValidator(self.user)
                 data_error = {}
                 data_error = self.uvalid.validateRegistration()
