@@ -1,5 +1,8 @@
+from cgitb import text
+from re import U
 import sqlite3
 from tokenize import String
+from typing import List
 from User.user import User
 from crypto.securityCreator import SecurityCreator
 
@@ -206,18 +209,36 @@ class DatabaseHandler():
         if not row[0]:
             return True
         return False
-
-    def findUsersForAdvanced(self, advanced: User):
+    #TODO Popraw na usera/advanced
+    def findUsersForAdvanced(self,advanced:User ):
         self.cursor.execute(
             "select id_user from UserAndAdvanced where id_advanced=?", (advanced.id_user,))
         listOfUsers = self.cursor.fetchall()
         if(listOfUsers == None):
             return False
         return listOfUsers
-        
+
+    def findUserByIdList(self, ids:List):
+         query=f"select * from users where id_user in ({','.join(['?']*len(ids))})"
+         self.cursor.execute(
+            query,ids
+        )
+         usersList=self.cursor.fetchall()
+         return usersList
+
+    def findUsersNamesforAdvance(self,listOfUser:List):
+        usersList=[]
+        for user in listOfUser:
+            usersList.append(self.findUserById(user[0]))
+        usersList=self.findUserByIdList(usersList)
+        for user in listOfUser:
+            print(user)
+    
     # Validators
     def ValideUserPasswordByLogin(self, user: User):
         self.createConnection()
         hashed = self.findUserPassword(self.findUserByLogin(user))
         self.closeConnection()
         return SecurityCreator.verifyPassword(hashed, user.password)
+
+
