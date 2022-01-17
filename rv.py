@@ -1,7 +1,9 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.recycleview import RecycleView
+import queue
 
+csvQueue=queue.Queue()
 
 Builder.load_string('''
 <RV>:

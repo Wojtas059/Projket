@@ -33,7 +33,10 @@
 
         HButton:
             text: "Twoi Użytkownicy"
-            on_press: root.manager.current = 'usersseewidget'
+            on_press: 
+                root.parent.add_screen("userprowidget") 
+                root.manager.current = 'usersseewidget'
+                root.manager.transition.direction = 'left'
 
         HButton:
             text: "Rozpocznij tryb Manual"

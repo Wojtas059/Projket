@@ -26,18 +26,11 @@ class UserListButton(RecycleView):
     def __init__(self, **kwargs):
         super(UserListButton, self).__init__(**kwargs)
         content = ["Wojciech Maj 1", "Piotr Łach 2 ","Wojciech Maj 3","Wojciech Maj 4","Wojciech Maj 5 ","Wojciech Maj 6", "Piotr Łach 7", "Dupa 8"]
-        for i in content:
-            csvQueue.put(i)
-            print(i)
-        self.data = [{'text':x} for x in range(100)]
+        self.data = [{'text':x} for x in content]
 
 class BattonLabel(GridLayout):
     nazwa=ObjectProperty(None)
-    nazwa_ = ''
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.nazwa.text = csvQueue.get()
-        print(self.nazwa.text)
+    label_text = ObjectProperty(None)
 
 
         

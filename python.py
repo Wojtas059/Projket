@@ -34,6 +34,7 @@ import python_class.Help_widget as Help
 import python_class.SingIn_widget as SingIn
 import python_class.Home_widget as Home
 import python_class.kivy_build as kivy_build
+import User.UserLogIn as UserLogIn
 from kivy.uix.screenmanager import ScreenManager
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
@@ -86,8 +87,20 @@ class ScreenManagement(ScreenManager):
         self.add_widget(APauzeExp.APauzeExpWidget(name="a_pauzeexpwidget"))
 
 
+    def log_in(self, id, email, name):
+        self.userLogIn = UserLogIn.UserLogIn(id,email, name)
 
+    def log_out(self):
+        self.userLogIn = None
 
+    def get_id(self):
+        return self.userLogIn.get_id
+
+    def get_name(self):
+        return self.userLogIn.get_email
+
+    def get_name(self):
+        return self.userLogIn.get_name
 
     def set_home_widget(self, name_widget):
         self.home_widget = name_widget

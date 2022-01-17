@@ -26,6 +26,7 @@ class SingInWidget(Screen):
             data_error = self.uvaild.validateLogin()
             if data_error.get("USERLOGIN") == UserValidator.Flags.CORRECTFIELD and data_error.get("USERPASSWORD") == UserValidator.Flags.CORRECTFIELD :
                 self.login_ = self.login.text
+                self.parent.
                 return True
 
             else:
