@@ -1,4 +1,5 @@
 import sqlite3
+from tokenize import String
 from User.user import User
 from crypto.securityCreator import SecurityCreator
 
@@ -21,7 +22,7 @@ class DatabaseHandler():
         try:
             self.cursor.execute(
                 '''CREATE TABLE Users(id_user integer PRIMARY KEY AUTOINCREMENT, name varchar(255),
-                surname varchar(255),login varchar(255) UNIQUE,email varchar(255) UNIQUE,trainer_key varchar(255),advanced integer(1))''')
+                surname varchar(255),login varchar(255) UNIQUE,email varchar(255) UNIQUE,advanced integer(1))''')
             self.connection.commit()
         except sqlite3.Error as database_error:
             print(database_error)
@@ -44,10 +45,19 @@ class DatabaseHandler():
         except sqlite3.Error as database_error:
             print(database_error)
 
+    def createTableUserAndAdvanced(self):
+        try:
+            self.cursor.execute(
+                '''CREATE TABLE UserAndAdvanced(id_user integer(11) not null,
+                id_userAdvanced integer(11) not null)''')
+            self.connection.commit()
+        except sqlite3.Error as database_error:
+            print(database_error)
+
     def dropTablePassword(self):
         try:
             self.cursor.execute(
-                '''DROP TABLE Passwords''')
+                '''DROP TABLE UserAndAdvanced''')
             self.connection.commit()
         except sqlite3.Error as database_error:
             print(database_error)
@@ -72,13 +82,25 @@ class DatabaseHandler():
     def insertUser(self, user: User):
         try:
             self.cursor.execute(
-                '''insert into Users values (null,?,?,?,?,null,?)''', (user.name, user.surname, user.login, user.email, user.advanced,))
+                '''insert into Users values (null,?,?,?,?,?)''', (user.name, user.surname, user.login, user.email, user.advanced,))
             self.connection.commit()
             return self.findUserByLogin(user)
         except sqlite3.Error as database_error:
             print(database_error)
             self.closeConnection()
         return user
+
+    def insertUserAndAdvanced(self, user: User, email: String):
+
+        try:
+            self.cursor.execute(
+                '''insert into UserAndAdvanced values (?,?)''', (user.id_user, self.findUserIDByEmail(email)))
+            self.connection.commit()
+            return True
+        except sqlite3.Error as database_error:
+            print(database_error)
+            self.closeConnection()
+            return False
 
     def insertPassword(self, user: User):
         try:
@@ -156,6 +178,16 @@ class DatabaseHandler():
             return True
         return False
 
+    def findUserIDByEmail(self, email: str):
+        id_user = -1
+        self.cursor.execute(
+            "select id_user from users where email=?", (email,))
+        row = self.cursor.fetchone()
+        if(row == None):
+            return id_user
+        id_user = row[0]
+        return id_user
+
     def findUsersByTrainerKey(self, trainer_key: str):
         self.cursor.execute(
             '''select id_user,name,surname,login from users where trainer_key=? ''', (
@@ -173,6 +205,14 @@ class DatabaseHandler():
             return True
         return False
 
+    def findUsersForAdvanced(self, advanced: User):
+        self.cursor.execute(
+            "select id_user from UserAndAdvanced where id_advanced=?", (advanced.id_user,))
+        listOfUsers = self.cursor.fetchall()
+        if(listOfUsers == None):
+            return False
+        return listOfUsers
+        
     # Validators
     def ValideUserPasswordByLogin(self, user: User):
         self.createConnection()
