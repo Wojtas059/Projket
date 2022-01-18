@@ -1,4 +1,12 @@
 <UsersSeeWidget>
+    name: 'usersseewidget'
+    email_add_user: email_add_user
+    canvas.before:
+        Color:
+            rgba: (240/255,240/255,240/255,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
     
     FloatLayout:
         size: root.width, root.height
@@ -15,14 +23,12 @@
     
     GridLayout:
         size: root.width, root.height
-        cols: 1
-
-        
-        
+        cols: 1    
         GridLayout:
             cols: 3
             size_hint: (0.1, 0.06)
             Label:
+                color: 0,0,0,1
                 text: "Email"
             TextInput:
                 id: email_add_user
@@ -30,6 +36,8 @@
             Button:
 
                 text: "Dodaj"
+                on_press:
+                    root.on_press()
             
 
         UserListButton:
@@ -43,22 +51,26 @@
     text: ''
     # Draw a background to indicate selection
     Label:
+        color: 0,0,0,1
         id: label_text
         text: nazwa.text
     Button:
         text: "Zobacz Profil"
+        on_press:
+            
 
     Button:
         text: "Historię pomiarową "
     
 
-        
+    
 
 
     
 <UserListButton>
     viewclass: 'BattonLabel'
     color: 0,0,0,1
+    data: root.parent.parent.get_data()
     RecycleBoxLayout:
         orientation: 'vertical'
         default_size: root.width, None

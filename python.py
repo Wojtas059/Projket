@@ -34,7 +34,7 @@ import python_class.Help_widget as Help
 import python_class.SingIn_widget as SingIn
 import python_class.Home_widget as Home
 import python_class.kivy_build as kivy_build
-import User.UserLogIn as UserLogIn
+from User.UserLogIn import UserLogIn
 from kivy.uix.screenmanager import ScreenManager
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
@@ -50,6 +50,9 @@ kivy.require('1.0.6')  # replace with your current kivy version !
 class ScreenManagement(ScreenManager):
     q1 = queue.LifoQueue()
     home_widget = 'homewidget'
+    userLogIn = None
+    noneLogIn = True
+
     def __init__(self, **kwargs):
         # self.q1.put('homewidget')
         super(ScreenManagement, self).__init__(**kwargs)
@@ -61,7 +64,9 @@ class ScreenManagement(ScreenManager):
         self.add_widget(USee.UsersSeeWidget(name="usersseewidget"))
         self.add_widget(SingUp.SingUpWidget(name="singupwidget"))
 
-
+        
+        
+        
         self.add_widget(ChooseUser.ChooseUserWidget(name="chooseuserwidget"))
         self.add_widget(ChooseMeth.ChooseMethodWidget(name="choosemethodwidget"))
         self.add_widget(StartGuest.StartGuestWidget(name="startguestwidget"))
@@ -87,20 +92,31 @@ class ScreenManagement(ScreenManager):
         self.add_widget(APauzeExp.APauzeExpWidget(name="a_pauzeexpwidget"))
 
 
-    def log_in(self, id, email, name):
-        self.userLogIn = UserLogIn.UserLogIn(id,email, name)
+    def log_in(self, id, name, surname, email):
+        self.noneLogIn = False
+        self.userLogIn = UserLogIn(id, name, surname, email)
+
+    def get_bool_LogIn(self):
+        return self.noneLogIn
 
     def log_out(self):
+        self.noneLogIn = True
         self.userLogIn = None
 
     def get_id(self):
-        return self.userLogIn.get_id
+        return self.userLogIn.get_id()
+
+    def get_email(self):
+        return self.userLogIn.get_email()
 
     def get_name(self):
-        return self.userLogIn.get_email
-
-    def get_name(self):
-        return self.userLogIn.get_name
+        return self.userLogIn.get_name()
+    
+    def get_surname(self):
+        return self.userLogIn.get_surname()
+    
+    def get_userLogIn(self):
+        return self.userLogIn
 
     def set_home_widget(self, name_widget):
         self.home_widget = name_widget

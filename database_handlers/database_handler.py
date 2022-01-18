@@ -93,11 +93,11 @@ class DatabaseHandler():
             self.closeConnection()
         return user
 
-    def insertUserAndAdvanced(self, user: User, email: String):
+    def insertUserAndAdvanced(self, id_user:str, email: str):
 
         try:
             self.cursor.execute(
-                '''insert into UserAndAdvanced values (?,?)''', (user.id_user, self.findUserIDByEmail(email)))
+                '''insert into UserAndAdvanced values (?,?)''', (self.findUserIDByEmail(email), id_user))
             self.connection.commit()
             return True
         except sqlite3.Error as database_error:
@@ -209,16 +209,39 @@ class DatabaseHandler():
         if not row[0]:
             return True
         return False
-    #TODO Popraw na usera/advanced
-    def findUsersForAdvanced(self,advanced:User ):
+
+    def findUserPrivilegesById(self, id_user: int):
         self.cursor.execute(
-            "select id_user from UserAndAdvanced where id_advanced=?", (advanced.id_user,))
+            '''select advanced from users where id_user=?''', (id_user,)
+        )
+        
+        row = self.cursor.fetchone()
+        print(row)
+        if not row[0]:
+            return True
+        return False
+
+
+
+    #TODO Popraw na usera/advanced
+    def findUsersForAdvanced(self,id_user:str ):
+        self.cursor.execute(
+            "select id_user from UserAndAdvanced where id_userAdvanced=?", (id_user,))
         listOfUsers = self.cursor.fetchall()
         if(listOfUsers == None):
             return False
         return listOfUsers
 
     def findUserByIdList(self, ids:List):
+         query="select * from users where id_user in ({seq})".format(seq=','.join(['?']*len(ids))) 
+         self.cursor.execute(
+            query,ids
+        )
+         usersList=self.cursor.fetchall()
+         return usersList
+
+
+    def findUserById(self, ids:str):
          query=f"select * from users where id_user in ({','.join(['?']*len(ids))})"
          self.cursor.execute(
             query,ids
@@ -233,7 +256,13 @@ class DatabaseHandler():
         usersList=self.findUserByIdList(usersList)
         for user in listOfUser:
             print(user)
-    
+
+    def getUserCredentials(self,login:str):
+        self.cursor.execute(
+            "select id_user,name,surname,email from users where login=?", (login,))
+        row = self.cursor.fetchone()
+        return row
+        
     # Validators
     def ValideUserPasswordByLogin(self, user: User):
         self.createConnection()

@@ -7,7 +7,7 @@ csvQueue=queue.Queue()
 
 Builder.load_string('''
 <RV>:
-    viewclass: 'Label'
+    viewclass: 'Button'
     RecycleBoxLayout:
         default_size: None, dp(56)
         default_size_hint: 1, None

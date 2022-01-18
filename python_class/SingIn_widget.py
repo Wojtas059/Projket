@@ -26,7 +26,7 @@ class SingInWidget(Screen):
             data_error = self.uvaild.validateLogin()
             if data_error.get("USERLOGIN") == UserValidator.Flags.CORRECTFIELD and data_error.get("USERPASSWORD") == UserValidator.Flags.CORRECTFIELD :
                 self.login_ = self.login.text
-                self.parent.
+                
                 return True
 
             else:
@@ -37,8 +37,10 @@ class SingInWidget(Screen):
         instance = DatabaseHandler()
         instance.createConnection()
         bool_Advance_User = instance.findUserPrivilegesByLogin(self.login_)
+        row = instance.getUserCredentials(self.login_)
+        self.parent.log_in(row[0], row[1], row[2], row[3])
+        print(self.parent.get_name())
         instance.closeConnection()
-        print("bool: "+str(bool_Advance_User))
         if bool_Advance_User:
             return 'userwidget'
         else:
