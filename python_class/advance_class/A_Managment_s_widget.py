@@ -6,5 +6,10 @@ from kivy.uix.screenmanager import  Screen
 
 
 class AManagmentSensorsWidget(Screen):
-    pass
+    def on_load(self):
+        self.sensor_1.disabled = False
+        if self.parent.get_many() > 1:
+            self.sensor_2.disabled = False
+        else:
+           self.sensor_2.disabled = True 
     

@@ -4,19 +4,40 @@ from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import  Screen
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
+from database_handlers.database_handler import DatabaseHandler
+from kivy.uix.recycleview import RecycleView
+from kivy.uix.recycleview.views import RecycleDataViewBehavior
+from kivy.uix.gridlayout import GridLayout
 
+class AUserListButton(RecycleView):
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.data = []
+    def get_data(self):
+        self.data = ["Maj"]
+
+    #def refresh_from_data(self):
+    #    return super(UserListButton, self).refresh_from_data( self.data)
+        
+
+class BattonLabelSpinner(RecycleDataViewBehavior,GridLayout):
+    nazwa=ObjectProperty(None)
+    label_text = ObjectProperty(None)
 
 
 class AChooseLotsMusclesWidget(Screen):
-    _mouscular_2 = ObjectProperty(None)
-    _mouscular_1 = ObjectProperty(None)
+    many_ = ObjectProperty(None)
+    recyView = ObjectProperty(None)
 
     def choose_clicked( self, many):
-        if int(many) > 1:
-            self._mouscular_2.disabled =False
-        else:
-            self._mouscular_2.disabled =True
-        self._mouscular_1.disabled =False
+        self.recyView.disabled = False
+        self.recyView.data = [{'text': str(x)} for x in range(int(many))]    
+
+    def on_load(self):
+        self.recyView.disabled = True
+        listData = []
+        self.many_.values = [str(x) for x in range(20)]
 
     def on_save(self, many):
         self.parent.get_parametrs(int(many))

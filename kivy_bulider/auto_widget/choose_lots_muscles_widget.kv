@@ -2,6 +2,7 @@
     name: 'chooselotsmuscleswidget'
     _mouscular_1:_mouscular_1
     _mouscular_2:_mouscular_2
+    on_pre_enter: root.on_load()
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -47,11 +48,12 @@
 
 
         Spinner:
-            size_hint: (0.5, 0.1)
+            size_hint: (1, 0.1)
             width: 200
             height: 50
             pos_hint: {'center_x': 0.5}
             disabled: True
+            sync_height: True
             id: _mouscular_1
             text: 'Wybierz partii mięśni'
             values: ''
@@ -59,11 +61,13 @@
 
 
         Spinner:
-            size_hint: (0.5, 0.1)
+            size_hint: (1, 0.1)
             width: 200
             height: 50
             pos_hint: {'center_x': 0.5}
             disabled: True
+            sync_height: True
+            multiline: True
             id: _mouscular_2
             text: 'Wybierz partii mięśni'
             values: ''

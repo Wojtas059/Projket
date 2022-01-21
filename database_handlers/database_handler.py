@@ -48,6 +48,14 @@ class DatabaseHandler():
         except sqlite3.Error as database_error:
             print(database_error)
 
+    def dropTablePasswords(self):
+        try:
+            self.cursor.execute(
+                '''DROP TABLE Passwords''')
+            self.connection.commit()
+        except sqlite3.Error as database_error:
+            print(database_error)
+
     def createTableUserAndAdvanced(self):
         try:
             self.cursor.execute(
@@ -57,7 +65,7 @@ class DatabaseHandler():
         except sqlite3.Error as database_error:
             print(database_error)
 
-    def dropTablePassword(self):
+    def dropTableUserAndAdvanced(self):
         try:
             self.cursor.execute(
                 '''DROP TABLE UserAndAdvanced''')
@@ -65,12 +73,33 @@ class DatabaseHandler():
         except sqlite3.Error as database_error:
             print(database_error)
 
+    def createTableMuscles(self):
+        try:
+            self.cursor.execute(
+                '''CREATE TABLE Muscles(id_muscle integer PRIMARY KEY AUTOINCREMENT, name varchar(500))''')
+            self.connection.commit()
+        except sqlite3.Error as database_error:
+            print(database_error)
+    
+    def dropTableMuscles(self):
+        try:
+            self.cursor.execute(
+                '''DROP TABLE Muscles''')
+            self.connection.commit()
+        except sqlite3.Error as database_error:
+            print(database_error)
+
     def dropAndCreateTables(self):
         self.createConnection()
-        self.dropTablePassword()
+        self.dropTablePasswords()
         self.dropTableUsers()
+        self.dropTableUserAndAdvanced()
+        self.dropTableMuscles()
         self.createTableUsers()
         self.createTablePasswords()
+        self.createTableUserAndAdvanced()
+        self.createTableMuscles()
+        self.fillTablesMuscles()
         self.closeConnection()
 
     # Creating user section
@@ -121,6 +150,28 @@ class DatabaseHandler():
         except sqlite3.Error as database_error:
             print(str(database_error)+"Password")
             self.closeConnection()
+ 
+    #TODO move this method to other class in future
+    def generateMusclesNames(self):
+        musclesFile=open("Muscles informations/Muscles.txt",'r',encoding="utf-8")
+        musclesNames = musclesFile.readlines() 
+        clearMusclesNames = []
+        
+        for name in musclesNames:
+            clearMusclesNames.append(name.rstrip())
+        for name in clearMusclesNames:
+            yield tuple([name])
+    
+    #Please use this method in other thread than GUI, for better performance, specially with growing number of muscles 
+    def fillTablesMuscles(self):
+        try:
+            self.cursor.executemany(
+                ''' insert into Muscles (name) values (?) ''',  self.generateMusclesNames())
+            self.connection.commit()
+        except sqlite3.Error as database_error:
+            print(str(database_error)+" Muscles")
+            self.closeConnection()
+        
 
     def updateTrainerKeyForUser(self, user: User, trainer_key: str):
         try:
@@ -223,7 +274,7 @@ class DatabaseHandler():
 
 
 
-    #TODO Popraw na usera/advanced
+    
     def findUsersForAdvanced(self,id_user:str ):
         self.cursor.execute(
             "select id_user from UserAndAdvanced where id_userAdvanced=?", (id_user,))
@@ -263,6 +314,12 @@ class DatabaseHandler():
         row = self.cursor.fetchone()
         return row
         
+    def getAllMuscles(self):
+        query = "select * from Muscles"
+        self.cursor.execute(query)
+        musclesList=self.cursor.fetchall()
+        return musclesList
+
     # Validators
     def ValideUserPasswordByLogin(self, user: User):
         self.createConnection()

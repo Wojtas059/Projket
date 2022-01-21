@@ -1,7 +1,8 @@
 <AChooseLotsMusclesWidget>
     name: 'a_chooselotsmuscleswidget'
-    _mouscular_1:_mouscular_1
-    _mouscular_2:_mouscular_2
+    many_: many_
+    recyView: recyView
+    on_pre_enter: root.on_load()
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -30,7 +31,7 @@
         size: root.width, root.height
         
         spacing: 20
-        padding: 250
+        padding: 100
         
         Spinner:
             size_hint: (0.5, 0.1)
@@ -40,38 +41,22 @@
 
             id: many_
             text: 'Wybierz ilość badanych mięśni'
-            values: '1', '2'
+            values: '' 
             on_text: root.choose_clicked( many_.text)
 
+        GridLayout:
+            cols: 1
+            size: root.width, root.height
+            AUserListButton:
+                id: recyView
 
-
-
-        Spinner:
-            size_hint: (0.5, 0.1)
-            width: 200
-            height: 50
-            pos_hint: {'center_x': 0.5}
-            disabled: True
-            id: _mouscular_1
-            text: 'Wybierz partii mięśni'
-            values: ''
-            on_text: #root.choose_clicked(spinner_port.text)
-
-
-        Spinner:
-            size_hint: (0.5, 0.1)
-            width: 200
-            height: 50
-            pos_hint: {'center_x': 0.5}
-            disabled: True
-            id: _mouscular_2
-            text: 'Wybierz partii mięśni'
-            values: ''
-            on_text: #root.choose_clicked(spinner_port.text)
 
         
-        UButton:
+
+        
+        HButton:
             text: "Dalej"
+            size_hint: (0.5, 0.1)
             
             on_press:
                 if(root.on_click(many_.text)):\
@@ -79,3 +64,42 @@
                 root.manager.current = 'a_managmentsensorsidget';\
                 root.manager.transition.direction = 'left'
 
+
+
+
+<BattonLabelSpinner>:
+    nazwa: "battonLabelSpinner"
+    label_text: label_text
+    cols: 3
+    padding: 20
+    id: nazwa
+    text: ''
+    # Draw a background to indicate selection
+    TextInput:
+        color: 0,0,0,1
+        id: label_text
+
+    Button:
+        text: "Znajdz Użytkownika"
+    
+    Button:
+        text: "Wybierz mieśnie"
+        
+    
+
+    
+
+
+<AUserListButton>
+    name: "recyView"
+    viewclass: 'BattonLabelSpinner'
+    color: 0,0,0,1
+    #data: root.parent.get_data()
+    RecycleBoxLayout:
+        orientation: 'vertical'
+        default_size: root.width, None
+        size_hint_y: None
+        height: self.minimum_height
+        width: self.minimum_width
+        multiselect: True
+        touch_multiselect: True

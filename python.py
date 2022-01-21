@@ -41,6 +41,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from kivy.app import App
+from kivy.core.window import Window
 import kivy
 
 from database_handlers.database_handler import DatabaseHandler
@@ -149,7 +150,10 @@ class ScreenManagement(ScreenManager):
 
 
 class MyApp(App):
+    def on_start(self):
+        Window.size = (1000, 800)
     def build(self):
+        
         kivy_build.Upload()
         
         return ScreenManagement()
