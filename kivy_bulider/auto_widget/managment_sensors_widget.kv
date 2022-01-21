@@ -1,6 +1,8 @@
 <ManagmentSensorsWidget>
     name: 'managmentsensorsidget'
-
+    sensor_1: sensor_1
+    sensor_2: sensor_2
+    on_pre_enter: root.on_load()
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -31,35 +33,43 @@
         spacing: 20
         padding: 200
         
-        TextInput:
-            hint_text: "Wprowadź address do taśmy 1"
-            mulitiline: False
-            pos_hint: {'center_x': 0.5}
-            size_hint: (0.5, 0.35)
-            width: 100
-            line_height: 1
-        
-        UButton:
-            text: "Połącz"
-            on_press:
-                #root.parent.add_screen('chooselotsmuscleswidget')
-                #root.manager.current = ''
-                #root.manager.transition.direction = 'left'
 
-        TextInput:
-            hint_text: "Wprowadź address do taśmy 2"
-            mulitiline: False
-            pos_hint: {'center_x': 0.5}
-            size_hint: (0.5, 0.35)
-            width: 100
-            line_height: 1
-        
-        UButton:
-            text: "Połącz"
-            on_press:
-                #root.parent.add_screen('chooselotsmuscleswidget')
-                #root.manager.current = ''
-                #root.manager.transition.direction = 'left'
+        BoxLayout:
+            id: sensor_1
+            disabled: True
+            orientation: "horizontal"
+            TextInput:
+                hint_text: "Wprowadź address do taśmy 1"
+                mulitiline: False
+                size_hint: (0.7, 0.5)
+                width: 100
+                line_height: 1
+            
+            HButton:
+                text: "Połącz"
+                size_hint: (0.5, 0.5)
+                on_press:
+                    #root.parent.add_screen('chooselotsmuscleswidget')
+                    #root.manager.current = ''
+                    #root.manager.transition.direction = 'left'
+        BoxLayout:
+            id: sensor_2
+            disabled: True
+            orientation: "horizontal"
+            TextInput:
+                hint_text: "Wprowadź address do taśmy 2"
+                mulitiline: False
+                size_hint: (0.7, 0.5)
+                width: 100
+                line_height: 1
+            
+            HButton:
+                text: "Połącz"
+                size_hint: (0.5, 0.5)
+                on_press:
+                    #root.parent.add_screen('chooselotsmuscleswidget')
+                    #root.manager.current = ''
+                    #root.manager.transition.direction = 'left'
         
         HButton:
             text: "Dalej"

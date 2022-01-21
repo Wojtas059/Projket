@@ -42,8 +42,10 @@ class SingInWidget(Screen):
         print(self.parent.get_name())
         instance.closeConnection()
         if bool_Advance_User:
+            self.parent.set_type("Auto")
             return 'userwidget'
         else:
+            self.parent.set_type("Manual")
             return 'userprowidget'
 
     def error_pop(self, name, text):

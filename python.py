@@ -36,6 +36,7 @@ import python_class.SingIn_widget as SingIn
 import python_class.Home_widget as Home
 import python_class.kivy_build as kivy_build
 from User.UserLogIn import UserLogIn
+from User.measurement import Measurement
 from kivy.uix.screenmanager import ScreenManager
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
@@ -62,14 +63,8 @@ class ScreenManagement(ScreenManager):
         self.add_widget(Help.HelpWidget(name="helpwidget"))
         self.add_widget(User.UserWidget(name="userwidget"))
         self.add_widget(UserPro.UserProWidget(name="userprowidget"))
-
-        
         self.add_widget(USee.UsersSeeWidget(name="usersseewidget"))#, index =(True, 0)))
         self.add_widget(SingUp.SingUpWidget(name="singupwidget"))
-
-        
-        
-        
         self.add_widget(ChooseUser.ChooseUserWidget(name="chooseuserwidget"))
         self.add_widget(ChooseMeth.ChooseMethodWidget(name="choosemethodwidget"))
         self.add_widget(StartGuest.StartGuestWidget(name="startguestwidget"))
@@ -81,7 +76,6 @@ class ScreenManagement(ScreenManager):
         self.add_widget(FinishRef.FinishRefWidget(name="finishrefwidget"))
         self.add_widget(ObserExp.ObservationExpWidget(name="observationexpwidget"))
         self.add_widget(PauzeExp.PauzeExpWidget(name="pauzeexpwidget"))
-
         self.add_widget(AChooseUser.AChooseUserWidget(name="a_chooseuserwidget"))
         self.add_widget(AChooseMeth.AChooseMethodWidget(name="a_choosemethodwidget"))
         self.add_widget(AStartGuest.AStartGuestWidget(name="a_startguestwidget"))
@@ -93,7 +87,18 @@ class ScreenManagement(ScreenManager):
         self.add_widget(AFinishRef.AFinishRefWidget(name="a_finishrefwidget"))
         self.add_widget(AObserExp.AObservationExpWidget(name="a_observationexpwidget"))
         self.add_widget(APauzeExp.APauzeExpWidget(name="a_pauzeexpwidget"))
+        self.userMean = Measurement()
+        self.userMean.set_type("Auto_guest")
+
+    def set_type(self, name):
+        self.userMean.set_type(name)
+
+    def set_many(self, many):
+        self.userMean.set_many_sensor(many)
     
+    def get_many(self):
+        return self.userMean.get_many_sensor()
+
     def auto_refresh(self):
         self.clear_widgets(screens=[self.get_screen("usersseewidget")])
         self.add_widget(USee.UsersSeeWidget(name="usersseewidget"))#, index =(self.get_bool_LogIn(),self.get_id())))
@@ -101,6 +106,8 @@ class ScreenManagement(ScreenManager):
     def log_in(self, id, name, surname, email):
         self.noneLogIn = False
         self.userLogIn = UserLogIn(id, name, surname, email)
+        
+        
 
     def get_bool_LogIn(self):
         return self.noneLogIn

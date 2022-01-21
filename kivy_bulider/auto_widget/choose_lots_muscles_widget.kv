@@ -1,6 +1,7 @@
 <ChooseLotsMusclesWidget>
     name: 'chooselotsmuscleswidget'
-
+    _mouscular_1:_mouscular_1
+    _mouscular_2:_mouscular_2
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -29,26 +30,53 @@
         size: root.width, root.height
         
         spacing: 20
-        padding: 250
+        padding: 100
         
         Spinner:
-            size_hint: (0.5, 0.5)
+            size_hint: (0.5, 0.1)
             width: 200
             height: 50
             pos_hint: {'center_x': 0.5}
-            
 
-            id: spinner_port
+            id: many_
+            text: 'Wybierz ilość badanych mięśni'
+            values: '1', '2'
+            on_text: root.choose_clicked( many_.text)
+
+
+
+
+        Spinner:
+            size_hint: (0.5, 0.1)
+            width: 200
+            height: 50
+            pos_hint: {'center_x': 0.5}
+            disabled: True
+            id: _mouscular_1
             text: 'Wybierz partii mięśni'
-            values: 'Czterogłowy', 'Trzygłowy','Dwugłowy', 'Brzuch','Biceps','Triceps','przedramię','Barki'
+            values: ''
+            on_text: #root.choose_clicked(spinner_port.text)
+
+
+        Spinner:
+            size_hint: (0.5, 0.1)
+            width: 200
+            height: 50
+            pos_hint: {'center_x': 0.5}
+            disabled: True
+            id: _mouscular_2
+            text: 'Wybierz partii mięśni'
+            values: ''
             on_text: #root.choose_clicked(spinner_port.text)
 
         
         HButton:
             text: "Dalej"
+            size_hint: (0.5, 0.1)
             
             on_press:
-                root.parent.add_screen('chooselotsmuscleswidget')
-                root.manager.current = 'managmentsensorsidget'
+                if(root.on_click(many_.text)):\
+                root.parent.add_screen('chooselotsmuscleswidget');\
+                root.manager.current = 'managmentsensorsidget';\
                 root.manager.transition.direction = 'left'
 
