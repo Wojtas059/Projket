@@ -1,4 +1,5 @@
 # kivy_venv\Scripts\activate
+from operator import index
 import queue
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
@@ -61,7 +62,9 @@ class ScreenManagement(ScreenManager):
         self.add_widget(Help.HelpWidget(name="helpwidget"))
         self.add_widget(User.UserWidget(name="userwidget"))
         self.add_widget(UserPro.UserProWidget(name="userprowidget"))
-        self.add_widget(USee.UsersSeeWidget(name="usersseewidget"))
+
+        
+        self.add_widget(USee.UsersSeeWidget(name="usersseewidget"))#, index =(True, 0)))
         self.add_widget(SingUp.SingUpWidget(name="singupwidget"))
 
         
@@ -90,7 +93,10 @@ class ScreenManagement(ScreenManager):
         self.add_widget(AFinishRef.AFinishRefWidget(name="a_finishrefwidget"))
         self.add_widget(AObserExp.AObservationExpWidget(name="a_observationexpwidget"))
         self.add_widget(APauzeExp.APauzeExpWidget(name="a_pauzeexpwidget"))
-
+    
+    def auto_refresh(self):
+        self.clear_widgets(screens=[self.get_screen("usersseewidget")])
+        self.add_widget(USee.UsersSeeWidget(name="usersseewidget"))#, index =(self.get_bool_LogIn(),self.get_id())))
 
     def log_in(self, id, name, surname, email):
         self.noneLogIn = False

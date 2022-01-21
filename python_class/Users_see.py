@@ -1,3 +1,4 @@
+from pkgutil import get_data
 import kivy
 kivy.require('1.0.6') # replace with your current kivy version !
 from kivy.properties import BooleanProperty, ListProperty, NumericProperty, ObjectProperty
@@ -19,30 +20,15 @@ csvQueue=queue.Queue()
 
 
 class UserListButton(RecycleView):
-    def get_data(self):
-        
-        datalist = []
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.data = []
-        if not (False):
-            next_list = []
-            instance = DatabaseHandler()
-            instance.createConnection()
-            content = instance.findUsersForAdvanced(str(6))
-            for con in content:
-                next_list.append(con[0])
-            #"Wojciech Maj 1", "Piotr Łach 2 ","Wojciech Maj 3","Wojciech Maj 4","Wojciech Maj 5 ","Wojciech Maj 6", "Piotr Łach 7", "Dupa 8"]
-            if not content:
-                content = []
-            else:
-                
-                datalist = instance.findUserByIdList(next_list)
-                for i in datalist:
-                    print(i)
-                self.data = [{'text':str(x[1])+" "+str(x[2])} for x in datalist]
-            instance.closeConnection()
+    def get_data(self):
+        self.data = ["Maj"]
 
-        
-        return self.data
+    #def refresh_from_data(self):
+    #    return super(UserListButton, self).refresh_from_data( self.data)
         
 
 class BattonLabel(RecycleDataViewBehavior,GridLayout):
@@ -55,18 +41,31 @@ class BattonLabel(RecycleDataViewBehavior,GridLayout):
 
 
 class UsersSeeWidget(Screen):
+    log_in =True
+    du = ObjectProperty(None)
+    
+    def on_load(self):
+        self.log_in = self.parent.get_bool_LogIn()
+        print("Jestem zalogowany: "+str(self.log_in))
+        if not self.log_in:
+            self.id_ = self.parent.get_id()
+            print("O id: "+str(self.id_))
+        self.du.data = self.get_data()
+        
     
     email_add_user = ObjectProperty(None)
     
     def get_data(self):
-        
         datalist = []
         self.data = []
-        if not (False):
+        print("Jestem tu")
+        if not (self.log_in):
+            
             next_list = []
             instance = DatabaseHandler()
             instance.createConnection()
-            content = instance.findUsersForAdvanced(str(6))
+            content = instance.findUsersForAdvanced(self.id_)
+            print(content)
             for con in content:
                 next_list.append(con[0])
             #"Wojciech Maj 1", "Piotr Łach 2 ","Wojciech Maj 3","Wojciech Maj 4","Wojciech Maj 5 ","Wojciech Maj 6", "Piotr Łach 7", "Dupa 8"]
@@ -86,9 +85,7 @@ class UsersSeeWidget(Screen):
 
 
     def on_press(self):
-        dupa = self.parent.get_bool_LogIn()
-        if dupa:
-            print("DUPAAAAAAAAAAAAAAAAAAAAAAA")
+        
         if  self.email_add_user.text == '':
             self.error_pop('', 'Uzupełnij pole email')
 
@@ -100,6 +97,7 @@ class UsersSeeWidget(Screen):
                     if instance.insertUserAndAdvanced( self.parent.get_id(), self.email_add_user.text):
                         self.error_pop('', 'Pomyślnie dodałeś użytkownika')
                         instance.closeConnection()
+                        self.on_load()
                         return True
                     else:
                         self.error_pop('', 'Nie powiodło się dodanie użytkownika')  

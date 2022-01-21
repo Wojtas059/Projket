@@ -1,5 +1,9 @@
 <UsersSeeWidget>
     name: 'usersseewidget'
+    du:du
+    id: see_
+    on_pre_enter: root.on_load()
+    #on_load: root.get_data()
     email_add_user: email_add_user
     canvas.before:
         Color:
@@ -34,13 +38,14 @@
                 id: email_add_user
                 hint_text: "Podaj email użytkownika"
             Button:
-
                 text: "Dodaj"
                 on_press:
-                    root.on_press()
+                    if root.on_press():\
+                    email_add_user.text = ""
             
 
         UserListButton:
+            id: du
 
 <BattonLabel>:
     nazwa: nazwa
@@ -68,6 +73,7 @@
 
     
 <UserListButton>
+    name: "recycleV"
     viewclass: 'BattonLabel'
     color: 0,0,0,1
     data: root.parent.parent.get_data()
