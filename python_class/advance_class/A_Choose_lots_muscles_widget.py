@@ -90,6 +90,8 @@ class BattonLabelSpinner(RecycleDataViewBehavior,GridLayout):
     def create_popup(self):
         self.pup = CustomPopup(self.id_user.values)
         self.pup.open()
+
+        breakpoint()
         #Thread(target=self.new).start()
         #self.label_text.text = str(self.pup.get_name())
 
