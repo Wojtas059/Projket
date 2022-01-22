@@ -1,4 +1,5 @@
 from pkgutil import get_data
+from tkinter import Button
 import kivy
 kivy.require('1.0.6') # replace with your current kivy version !
 from kivy.properties import BooleanProperty, ListProperty, NumericProperty, ObjectProperty
@@ -7,6 +8,7 @@ from kivy.metrics import dp
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.label import Label
+
 from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.clock import Clock
@@ -35,8 +37,7 @@ class BattonLabel(RecycleDataViewBehavior,GridLayout):
     nazwa=ObjectProperty(None)
     label_text = ObjectProperty(None)
 
-   
-
+    
   
 
 
@@ -74,8 +75,6 @@ class UsersSeeWidget(Screen):
             else:
                 
                 datalist = instance.findUserByIdList(next_list)
-                for i in datalist:
-                    print(i)
                 self.data = [{'text':str(x[1])+" "+str(x[2])} for x in datalist]
             instance.closeConnection()
 

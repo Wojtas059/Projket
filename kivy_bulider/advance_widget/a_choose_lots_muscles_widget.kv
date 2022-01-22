@@ -1,3 +1,4 @@
+
 <AChooseLotsMusclesWidget>
     name: 'a_chooselotsmuscleswidget'
     many_: many_
@@ -64,26 +65,66 @@
                 root.manager.current = 'a_managmentsensorsidget';\
                 root.manager.transition.direction = 'left'
 
+<CustomPopup@Popup>:
+    popup:popup
+    id: popup
+    email_add_user: email_add_user
+    title: 'Test popup'
+    
+    size_hint: (None, None)
+    size: (500, 200)
+    auto_dismiss: True
+    BoxLayout:
+        size_hint: (0.5, 0.3)
+        spacing: 140
+        #$padding: 100
+        orientation: "vertical"
+        GridLayout:
+            cols: 2
+            TextInput:
+                color: 0,0,0,1
+                hint_text: "Podaj email użytkownika"
+                id: email_add_user
+            Button:
+                text: "Dodaj użytkownika"
+                on_press:
+                    root.add_new_user()
+
+
+
+
+
 
 
 
 <BattonLabelSpinner>:
     nazwa: "battonLabelSpinner"
     label_text: label_text
+    id_user: id_user
+    spinner_musc: spinner_musc
     cols: 3
     padding: 20
-    id: nazwa
+    id: id_user
     text: ''
+    values: ''
     # Draw a background to indicate selection
-    TextInput:
-        color: 0,0,0,1
+    Spinner:
+        sync_height: True
         id: label_text
+        values: root.get_values()
+        text: 'Wybierz Użytkownika'
 
     Button:
-        text: "Znajdz Użytkownika"
-    
-    Button:
-        text: "Wybierz mieśnie"
+        text: "Dodaj użytkownika"
+        on_press:
+            root.create_popup()
+    Spinner:
+        sync_height: True
+        id: spinner_musc
+        values: root.on_load()
+        text: 'Wybierz partii mięśni'
+            
+            #Factory.CustomPopup().open()
         
     
 
