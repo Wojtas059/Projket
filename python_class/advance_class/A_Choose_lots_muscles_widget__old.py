@@ -86,9 +86,14 @@ class BattonLabelSpinner(RecycleDataViewBehavior,GridLayout):
                   size_hint=(None, None), size=(400, 400))
         pop.open()
 
+    #TODO Tutaj ma byc obsluga uzyskanych danych, return ma byc nie zmieniany
+    #W razie omówię PŁ
+    def callbackPop(self,instance):
+        return True
 
     def create_popup(self):
         self.pup = CustomPopup(self.id_user.values)
+        self.pup.bind(on_dismiss=self.callbackPop)
         self.pup.open()
 
         breakpoint()
