@@ -1,4 +1,5 @@
 # kivy_venv\Scripts\activate
+from itertools import count
 from operator import index
 import queue
 from kivy.uix.popup import Popup
@@ -55,6 +56,7 @@ class ScreenManagement(ScreenManager):
     home_widget = 'homewidget'
     userLogIn = None
     noneLogIn = True
+    count_ = 0
 
     def __init__(self, **kwargs):
         # self.q1.put('homewidget')
@@ -96,6 +98,7 @@ class ScreenManagement(ScreenManager):
 
     def set_many(self, many):
         self.userMean.set_many_sensor(many)
+        self.count_ = 0
     
     def get_many(self):
         return self.userMean.get_many_sensor()
@@ -107,8 +110,28 @@ class ScreenManagement(ScreenManager):
     def log_in(self, id, name, surname, email):
         self.noneLogIn = False
         self.userLogIn = UserLogIn(id, name, surname, email)
+
+    
         
+    def how_meny(self, a:str):
+        self.count_ += 1
+        print("jestem "+str(self.count_))
+        if self.count_ < self.get_many() :
+            return a+'referenceinstwidget'
         
+        else:
+            return a+'finishrefwidget'
+
+    def restart_widget(self):
+        self.clear_widgets(screens=[self.get_screen("observationrefwidget")])
+        self.add_widget(ObserRef.ObservationRefWidget(name="observationrefwidget"))
+
+    def A_restart_widget(self):
+        self.clear_widgets(screens=[self.get_screen("a_observationrefwidget")])
+        self.add_widget(AObserRef.AObservationRefWidget(name="a_observationrefwidget"))
+
+    def get_count(self):
+        return self.count_
 
     def get_bool_LogIn(self):
         return self.noneLogIn

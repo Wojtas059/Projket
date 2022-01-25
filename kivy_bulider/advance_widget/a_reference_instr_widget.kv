@@ -1,5 +1,6 @@
 <AReferenceInstWidget>
     name: 'a_referenceinstwidget'
+    on_pre_enter: root.on_load()
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -32,14 +33,13 @@
         
 
         
-        TextInput:
-            text: "Tu pojawi się instrukcja zapoznająca\n z cwiczeniem referencyjnym"
-            multiline: False
-            id: com
-            color: 0,0,1,1
+        VideoPlayer:
+            source: "play.mkv"
+            state: 'stop'
+            loaded: 'True'
 
         
-        UButton:
+        HButton:
             text: "Rozpocznij ćwiczenie"
             on_press:
                 root.parent.add_screen('a_referenceinstwidget')

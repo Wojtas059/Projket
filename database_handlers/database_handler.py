@@ -202,6 +202,7 @@ class DatabaseHandler():
         return user
 
     def findUserPassword(self, id_user: int):
+        print("id "+str(id_user))
         self.cursor.execute(
             "select hash from passwords where id_user=?", (id_user,))
         row = self.cursor.fetchone()
@@ -323,7 +324,7 @@ class DatabaseHandler():
     # Validators
     def ValideUserPasswordByLogin(self, user: User):
         self.createConnection()
-        hashed = self.findUserPassword(self.findUserByLogin(user))
+        hashed = self.findUserPassword(self.findUserByLogin(user).id_user)
         self.closeConnection()
         return SecurityCreator.verifyPassword(hashed, user.password)
 

@@ -6,4 +6,5 @@ from kivy.uix.screenmanager import  Screen
 
 
 class ReferenceInstWidget(Screen):
-    pass
+    def on_load(self):
+        self.parent.restart_widget()

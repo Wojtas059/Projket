@@ -104,7 +104,7 @@ class UserValidator():
         validationResults = {}
         validationResults["USERLOGIN"] = self.validateUserLogin()
         if validationResults["USERLOGIN"] == self.Flags.CORRECTFIELD:
-            validationResults["USERPASSWORD"] = self.validatePassword()
+            validationResults["USERPASSWORD"] = self.validateUserPassword()
         else:
             validationResults["USERPASSWORD"] = self.Flags.INCORRECTUSERPASSWORD
         return validationResults

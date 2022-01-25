@@ -1,5 +1,9 @@
 <ObservationRefWidget>
     name: 'observationrefwidget'
+    #on_pre_enter: root.on_load()
+    timeer_: timeer_
+    start: start
+    next: next
     canvas.before: 
         Color:
             rgba: (240/255,240/255,240/255,1)
@@ -23,7 +27,7 @@
 
         
 
-    BoxLayout:
+    BoxLayout_:
         orientation: "vertical"
         size: root.width, root.height
         
@@ -36,13 +40,29 @@
             text: "Wykonuj ćwiczenie\nktóre zostało pokazane wcześniej"
             color: 0,0,0,1
 
-        Label:
-            text: "Zakończ ćwiczenie"
+        IncrediblyCrudeClock:
+            id: timeer_
             color: 0,0,0,1
+            font_size: 100
+
+
+
+        HButton:
+            id: start
+            text: "Start"
+            on_press:
+                root.on_load()
         
         HButton:
+            id: next
             text: "Przejdz do nastepnego ćwiczenia"
+            disabled: True
             on_press:
-                root.parent.add_screen('observationrefwidget')
-                root.manager.current = 'finishrefwidget'
-                root.manager.transition.direction = 'left'
+                root.manager.current =root.parent.how_meny('')
+                #root.manager.transition.direction = 'left'
+                #root.parent.add_screen('observationrefwidget')
+
+<BoxLayout_>
+
+<IncrediblyCrudeClock>
+    text: str(round(self.a, 1))
