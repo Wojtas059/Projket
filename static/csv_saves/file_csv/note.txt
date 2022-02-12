@@ -1,0 +1,1 @@
+to ma być w staticu albo w tmp
