@@ -1,3 +1,12 @@
+# IMPORTANT
+## REQUIREMENTS:
+flake8  4.0.1 (mccabe: 0.6.1, pycodestyle: 2.8.0, pyflakes: 2.4.0) CPython 3.9.4 on Windows
+isort   VERSION 5.10.1
+black 22.1.0 (compiled: yes)
+bcrypt             3.2.0
+Kivy               2.0.0
+kivy-garden.graph  0.4.0
+
 # STM32 <-> PC communication example - Python project
 
 This project contains example code that can be used to communicate with STM32 via Protobuf API.
@@ -16,4 +25,3 @@ If you've configured different baudrate, pass it as optional argument `--baud`, 
 
 Install the dependencies manually, via `pip`, or other package manager. This script requires only `pyserial` and `protobuf` to run.
 
-okok
