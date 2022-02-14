@@ -1,10 +1,4 @@
-from logging import error
-
 import kivy
-
-kivy.require("1.0.6")  # replace with your current kivy version !
-from threading import Thread
-
 from kivy.clock import Clock
 from kivy.compat import string_types
 from kivy.core.window import Window
@@ -15,10 +9,11 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
 from kivy.uix.textinput import TextInput
-
+# isort: split
 from src.database_handlers.database_handler import DatabaseHandler
 from src.user.user import User
-from src.user.userValidator import UserValidator
+from src.user.user_validator import UserValidator
+kivy.require("1.0.6")  # replace with your current kivy version !
 
 
 class Tooltip(Label):

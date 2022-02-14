@@ -1,7 +1,7 @@
 import re
 from enum import Enum
 
-from src.crypto.securityCreator import SecurityCreator
+from src.crypto.security_creator import SecurityCreator
 from src.database_handlers.database_handler import DatabaseHandler
 from src.user.user import User
 
@@ -9,7 +9,7 @@ from src.user.user import User
 class UserValidator:
 
     # TODO fix name for email regex
-    regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+    _email_regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
     class Flags(Enum):
         INCORRECTNAME = 1
@@ -39,7 +39,7 @@ class UserValidator:
             return self.Flags.INCORRECTSURNAME
 
     def validateEmail(self):
-        if re.fullmatch(self.regex, self.user.email):
+        if re.fullmatch(self._email_regex, self.user.email):
             return self.Flags.CORRECTFIELD
         else:
             return self.Flags.INCORRECTEMAIL

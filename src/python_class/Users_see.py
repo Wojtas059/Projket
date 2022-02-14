@@ -1,19 +1,8 @@
-from pkgutil import get_data
-from tkinter import Button
-
-import kivy
-
-kivy.require("1.0.6")  # replace with your current kivy version !
-import getpass
 import queue
-
-from kivy.clock import Clock
-from kivy.core.window import Window
-from kivy.metrics import dp
+# isort: split
+import kivy
 from kivy.properties import (
-    BooleanProperty,
-    ListProperty,
-    NumericProperty,
+
     ObjectProperty,
 )
 from kivy.uix.gridlayout import GridLayout
@@ -22,8 +11,9 @@ from kivy.uix.popup import Popup
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.screenmanager import Screen
-
+# isort: split
 from src.database_handlers.database_handler import DatabaseHandler
+kivy.require("1.0.6")  # replace with your current kivy version !
 
 csvQueue = queue.Queue()
 
@@ -35,9 +25,6 @@ class UserListButton(RecycleView):
 
     def get_data(self):
         self.data = ["Maj"]
-
-    # def refresh_from_data(self):
-    #    return super(UserListButton, self).refresh_from_data( self.data)
 
 
 class BattonLabel(RecycleDataViewBehavior, GridLayout):
@@ -78,7 +65,8 @@ class UsersSeeWidget(Screen):
             else:
 
                 datalist = instance.findUserByIdList(next_list)
-                self.data = [{"text": str(x[1]) + " " + str(x[2])} for x in datalist]
+                self.data = [{"text": str(x[1]) + " " + str(x[2])}
+                             for x in datalist]
             instance.closeConnection()
 
         return self.data
@@ -103,7 +91,8 @@ class UsersSeeWidget(Screen):
                         self.on_load()
                         return True
                     else:
-                        self.error_pop("", "Nie powiodło się dodanie użytkownika")
+                        self.error_pop(
+                            "", "Nie powiodło się dodanie użytkownika")
                 else:
                     self.error_pop(
                         "",

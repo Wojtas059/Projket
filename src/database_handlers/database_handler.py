@@ -1,11 +1,7 @@
-import pathlib
 import sqlite3
-from cgitb import text
-from re import U
-from tokenize import String
 from typing import List
-
-from src.crypto.securityCreator import SecurityCreator
+# isort: split
+from src.crypto.security_creator import SecurityCreator
 from src.user.user import User
 from static.static_config import DATABASE_FILE, MUSCLES_FILE
 
@@ -28,8 +24,10 @@ class DatabaseHandler:
     def createTableUsers(self):
         try:
             self.cursor.execute(
-                """CREATE TABLE Users(id_user integer PRIMARY KEY AUTOINCREMENT, name varchar(255),
-                surname varchar(255),login varchar(255) UNIQUE,email varchar(255) UNIQUE,advanced integer(1))"""
+                """CREATE TABLE Users(id_user integer PRIMARY KEY AUTOINCREMENT,
+                                     name varchar(255),surname varchar(255),
+                                     login varchar(255) UNIQUE,email varchar(255) UNIQUE,
+                                     advanced integer(1))"""
             )
             self.connection.commit()
         except sqlite3.Error as database_error:
@@ -233,14 +231,16 @@ class DatabaseHandler:
 
     # Section of finding functions
     def findUserByLogin(self, user: User):
-        self.cursor.execute("select id_user from users where login=?", (user.login,))
+        self.cursor.execute(
+            "select id_user from users where login=?", (user.login,))
         row = self.cursor.fetchone()
         user.id_user = row[0]
         return user
 
     def findUserPassword(self, id_user: int):
         print("id " + str(id_user))
-        self.cursor.execute("select hash from passwords where id_user=?", (id_user,))
+        self.cursor.execute(
+            "select hash from passwords where id_user=?", (id_user,))
         row = self.cursor.fetchone()
         hash = row[0]
         return hash
@@ -251,29 +251,30 @@ class DatabaseHandler:
             (advanced_user_key,),
         )
         row = self.cursor.fetchone()
-        if row == None:
+        if row is None:
             return True
         return False
 
     def findAnyLogin(self, login: str):
         self.cursor.execute("select login from users where login=?", (login,))
         row = self.cursor.fetchone()
-        if row == None:
+        if row is None:
             return True
         return False
 
     def findAnyEmail(self, email: str):
         self.cursor.execute("select login from users where email=?", (email,))
         row = self.cursor.fetchone()
-        if row == None:
+        if row is None:
             return True
         return False
 
     def findUserIDByEmail(self, email: str):
         id_user = -1
-        self.cursor.execute("select id_user from users where email=?", (email,))
+        self.cursor.execute(
+            "select id_user from users where email=?", (email,))
         row = self.cursor.fetchone()
-        if row == None:
+        if row is None:
             return id_user
         id_user = row[0]
         return id_user
@@ -287,7 +288,8 @@ class DatabaseHandler:
         return users
 
     def findUserPrivilegesByLogin(self, login: str):
-        self.cursor.execute("""select advanced from users where login=?""", (login,))
+        self.cursor.execute(
+            """select advanced from users where login=?""", (login,))
 
         row = self.cursor.fetchone()
         print(row)
@@ -308,10 +310,11 @@ class DatabaseHandler:
 
     def findUsersForAdvanced(self, id_user: str):
         self.cursor.execute(
-            "select id_user from UserAndAdvanced where id_userAdvanced=?", (id_user,)
+            "select id_user from UserAndAdvanced where id_userAdvanced=?", (
+                id_user,)
         )
         listOfUsers = self.cursor.fetchall()
-        if listOfUsers == None:
+        if listOfUsers is None:
             return False
         return listOfUsers
 
@@ -339,7 +342,8 @@ class DatabaseHandler:
 
     def getUserCredentials(self, login: str):
         self.cursor.execute(
-            "select id_user,name,surname,email from users where login=?", (login,)
+            "select id_user,name,surname,email from users where login=?", (
+                login,)
         )
         row = self.cursor.fetchone()
         return row

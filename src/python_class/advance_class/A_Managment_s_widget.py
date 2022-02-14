@@ -1,11 +1,11 @@
 import kivy
 
-kivy.require("1.0.6")  # replace with your current kivy version !
 from kivy.properties import ObjectProperty
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.screenmanager import Screen
+kivy.require("1.0.6")  # replace with your current kivy version !
 
 
 class AUserListManagment(RecycleView):

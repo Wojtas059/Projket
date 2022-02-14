@@ -6,6 +6,7 @@
 - bcrypt             3.2.0
 - Kivy               2.0.0
 - kivy-garden.graph  0.4.0
+- serial serial-0.0.97
 
 # STM32 <-> PC communication example - Python project
 

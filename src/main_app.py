@@ -1,56 +1,51 @@
-# kivy_venv\Scripts\activate
 import queue
-from itertools import count
-from operator import index
-
+# isort: split
 import kivy
-
-import src.python_class.advance_class.A_Choose_lots_muscles_widget as AChooseLots
-import src.python_class.advance_class.A_Choose_method_widget as AChooseMeth
-import src.python_class.advance_class.A_Choose_user_widget as AChooseUser
-import src.python_class.advance_class.A_Finish_ref_widget as AFinishRef
-import src.python_class.advance_class.A_Managment_s_widget as AManagmentS
-import src.python_class.advance_class.A_Observation_exp_widget as AObserExp
-import src.python_class.advance_class.A_Observation_ref_widget as AObserRef
-import src.python_class.advance_class.A_Pauze_exp_widget as APauzeExp
-import src.python_class.advance_class.A_Reference_inst_widget as ARefInstr
-import src.python_class.advance_class.A_Start_guest_widget as AStartGuest
-import src.python_class.advance_class.A_Start_reference_widget as AStartRef
-
-# isort: split
-import src.python_class.auto_class.Choose_lots_muscles_widget as ChooseLots
-import src.python_class.auto_class.Choose_method_widget as ChooseMeth
-import src.python_class.auto_class.Choose_user_widget as ChooseUser
-import src.python_class.auto_class.Finish_ref_widget as FinishRef
-import src.python_class.auto_class.Managment_s_widget as ManagmentS
-import src.python_class.auto_class.Observation_exp_widget as ObserExp
-import src.python_class.auto_class.Observation_ref_widget as ObserRef
-import src.python_class.auto_class.Pauze_exp_widget as PauzeExp
-import src.python_class.auto_class.Reference_inst_widget as RefInstr
-import src.python_class.auto_class.Start_guest_widget as StartGuest
-import src.python_class.auto_class.Start_reference_widget as StartRef
-
-# isort: split
 from kivy.app import App
 from kivy.core.window import Window
-from kivy.properties import ObjectProperty
-from kivy.uix.label import Label
-from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager
+# isort: split
+# spytać sie przemka jak obejść coś takiego czy to zostawić
+import src.python_class.advance_class.a_choose_lots_muscles_widget as AChooseLots
+import src.python_class.advance_class.a_choose_method_widget as AChooseMeth
+import src.python_class.advance_class.a_choose_user_widget as AChooseUser
+import src.python_class.advance_class.a_finish_ref_widget as AFinishRef
+import src.python_class.advance_class.a_managment_s_widget as AManagmentS
+import src.python_class.advance_class.a_observation_exp_widget as AObserExp
+import src.python_class.advance_class.a_observation_ref_widget as AObserRef
+import src.python_class.advance_class.a_pauze_exp_widget as APauzeExp
+import src.python_class.advance_class.a_reference_inst_widget as ARefInstr
+import src.python_class.advance_class.a_start_guest_widget as AStartGuest
+import src.python_class.advance_class.a_start_reference_widget as AStartRef
 
-import src.python_class.Help_widget as Help
-import src.python_class.Home_widget as Home
+# isort: split
+import src.python_class.auto_class.choose_lots_muscles_widget as ChooseLots
+import src.python_class.auto_class.choose_method_widget as ChooseMeth
+import src.python_class.auto_class.choose_user_widget as ChooseUser
+import src.python_class.auto_class.finish_ref_widget as FinishRef
+import src.python_class.auto_class.managment_s_widget as ManagmentS
+import src.python_class.auto_class.observation_exp_widget as ObserExp
+import src.python_class.auto_class.observation_ref_widget as ObserRef
+import src.python_class.auto_class.pauze_exp_widget as PauzeExp
+import src.python_class.auto_class.reference_inst_widget as RefInstr
+import src.python_class.auto_class.start_guest_widget as StartGuest
+import src.python_class.auto_class.start_reference_widget as StartRef
+
+
+import src.python_class.help_widget as Help
+import src.python_class.home_widget as Home
 import src.python_class.kivy_build as kivy_build
-import src.python_class.SingIn_widget as SingIn
-import src.python_class.SingUp_widget as SingUp
-import src.python_class.User_pro_w as UserPro
-import src.python_class.User_widget as User
-import src.python_class.Users_see as USee
-from src.database_handlers.database_handler import DatabaseHandler
+import src.python_class.sing_in_widget as SingIn
+import src.python_class.sing_up_widget as SingUp
+import src.python_class.user_pro_w as UserPro
+import src.python_class.user_widget as User
+import src.python_class.users_see as USee
+# isort: split
 from src.user.measurement import Measurement
-from src.user.UserLogIn import UserLogIn
+from src.user.user_logIn import UserLogIn
 
-kivy.require("1.0.6")  # replace with your current kivy version !
+# replace with your current kivy version!
+kivy.require("1.0.6")
 
 
 class ScreenManagement(ScreenManager):
@@ -72,32 +67,46 @@ class ScreenManagement(ScreenManager):
         self.add_widget(USee.UsersSeeWidget(name="usersseewidget"))
         self.add_widget(SingUp.SingUpWidget(name="singupwidget"))
         self.add_widget(ChooseUser.ChooseUserWidget(name="chooseuserwidget"))
-        self.add_widget(ChooseMeth.ChooseMethodWidget(name="choosemethodwidget"))
+        self.add_widget(ChooseMeth.ChooseMethodWidget(
+            name="choosemethodwidget"))
         self.add_widget(StartGuest.StartGuestWidget(name="startguestwidget"))
         self.add_widget(
             ChooseLots.ChooseLotsMusclesWidget(name="chooselotsmuscleswidget")
         )
-        self.add_widget(ManagmentS.ManagmentSensorsWidget(name="managmentsensorsidget"))
-        self.add_widget(StartRef.StartReferenceWidget(name="startreferencewidget"))
-        self.add_widget(RefInstr.ReferenceInstWidget(name="referenceinstwidget"))
-        self.add_widget(ObserRef.ObservationRefWidget(name="observationrefwidget"))
+        self.add_widget(ManagmentS.ManagmentSensorsWidget(
+            name="managmentsensorsidget"))
+        self.add_widget(StartRef.StartReferenceWidget(
+            name="startreferencewidget"))
+        self.add_widget(RefInstr.ReferenceInstWidget(
+            name="referenceinstwidget"))
+        self.add_widget(ObserRef.ObservationRefWidget(
+            name="observationrefwidget"))
         self.add_widget(FinishRef.FinishRefWidget(name="finishrefwidget"))
-        self.add_widget(ObserExp.ObservationExpWidget(name="observationexpwidget"))
+        self.add_widget(ObserExp.ObservationExpWidget(
+            name="observationexpwidget"))
         self.add_widget(PauzeExp.PauzeExpWidget(name="pauzeexpwidget"))
-        self.add_widget(AChooseUser.AChooseUserWidget(name="a_chooseuserwidget"))
-        self.add_widget(AChooseMeth.AChooseMethodWidget(name="a_choosemethodwidget"))
-        self.add_widget(AStartGuest.AStartGuestWidget(name="a_startguestwidget"))
+        self.add_widget(AChooseUser.AChooseUserWidget(
+            name="a_chooseuserwidget"))
+        self.add_widget(AChooseMeth.AChooseMethodWidget(
+            name="a_choosemethodwidget"))
+        self.add_widget(AStartGuest.AStartGuestWidget(
+            name="a_startguestwidget"))
         self.add_widget(
-            AChooseLots.AChooseLotsMusclesWidget(name="a_chooselotsmuscleswidget")
+            AChooseLots.AChooseLotsMusclesWidget(
+                name="a_chooselotsmuscleswidget")
         )
         self.add_widget(
             AManagmentS.AManagmentSensorsWidget(name="a_managmentsensorsidget")
         )
-        self.add_widget(AStartRef.AStartReferenceWidget(name="a_startreferencewidget"))
-        self.add_widget(ARefInstr.AReferenceInstWidget(name="a_referenceinstwidget"))
-        self.add_widget(AObserRef.AObservationRefWidget(name="a_observationrefwidget"))
+        self.add_widget(AStartRef.AStartReferenceWidget(
+            name="a_startreferencewidget"))
+        self.add_widget(ARefInstr.AReferenceInstWidget(
+            name="a_referenceinstwidget"))
+        self.add_widget(AObserRef.AObservationRefWidget(
+            name="a_observationrefwidget"))
         self.add_widget(AFinishRef.AFinishRefWidget(name="a_finishrefwidget"))
-        self.add_widget(AObserExp.AObservationExpWidget(name="a_observationexpwidget"))
+        self.add_widget(AObserExp.AObservationExpWidget(
+            name="a_observationexpwidget"))
         self.add_widget(APauzeExp.APauzeExpWidget(name="a_pauzeexpwidget"))
         self.userMean = Measurement()
         self.userMean.set_type("Auto_guest")
@@ -132,11 +141,13 @@ class ScreenManagement(ScreenManager):
 
     def restart_widget(self):
         self.clear_widgets(screens=[self.get_screen("observationrefwidget")])
-        self.add_widget(ObserRef.ObservationRefWidget(name="observationrefwidget"))
+        self.add_widget(ObserRef.ObservationRefWidget(
+            name="observationrefwidget"))
 
     def A_restart_widget(self):
         self.clear_widgets(screens=[self.get_screen("a_observationrefwidget")])
-        self.add_widget(AObserRef.AObservationRefWidget(name="a_observationrefwidget"))
+        self.add_widget(AObserRef.AObservationRefWidget(
+            name="a_observationrefwidget"))
 
     def get_count(self):
         return self.count_

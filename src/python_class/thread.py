@@ -1,16 +1,12 @@
+
 import threading
 import time
-
+# isort: split
 from kivy.app import App
-from kivy.clock import Clock, mainthread
-from kivy.core.window import Window
+from kivy.clock import mainthread
 from kivy.lang import Builder
-from kivy.properties import *
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.screenmanager import FadeTransition, Screen, ScreenManager
-from kivy.uix.togglebutton import ToggleButton
-from kivy.uix.widget import Widget
+from kivy.uix.screenmanager import  Screen, ScreenManager
+# Plik od Olecha
 
 
 ########################################################################

@@ -1,13 +1,8 @@
-import glob
-from logging import log
-from pathlib import Path
-
 import kivy
 from kivy.lang import Builder
-from kivy.resources import resource_add_path
-
+from pathlib import Path
+# isort: split
 from static.static_config import KIVY_ADMIN_DIR
-
 kivy.require("1.0.6")  # replace with your current kivy version !
 
 

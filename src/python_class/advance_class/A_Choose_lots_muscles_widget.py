@@ -1,10 +1,4 @@
-from logging import root
-
 import kivy
-
-kivy.require("1.0.6")  # replace with your current kivy version !
-from threading import Thread
-
 from kivy.properties import ObjectProperty
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
@@ -13,8 +7,9 @@ from kivy.uix.popup import Popup
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.screenmanager import Screen
-
+# isort: split
 from src.database_handlers.database_handler import DatabaseHandler
+kivy.require("1.0.6")  # replace with your current kivy version !
 
 
 class AUserListButton(RecycleView):
@@ -186,7 +181,6 @@ class AChooseLotsMusclesWidget(Screen):
 
     def on_load(self):
         # self.recyView.disabled = True
-        listData = []
         self.id_ = self.parent.get_id()
         self.many_.values = [str(x) for x in range(1, 21)]
 

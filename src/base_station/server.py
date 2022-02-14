@@ -1,6 +1,5 @@
 import enum
 import queue
-
 import serial
 
 
