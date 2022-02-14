@@ -1,5 +1,4 @@
 import kivy
-from kivy.properties import ObjectProperty
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
@@ -7,8 +6,12 @@ from kivy.uix.popup import Popup
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.screenmanager import Screen
+from kivy.properties import ObjectProperty
+
+
 # isort: split
 from src.database_handlers.database_handler import DatabaseHandler
+
 kivy.require("1.0.6")  # replace with your current kivy version !
 
 

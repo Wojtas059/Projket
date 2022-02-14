@@ -1,18 +1,18 @@
 import queue
+
 # isort: split
 import kivy
-from kivy.properties import (
-
-    ObjectProperty,
-)
+from kivy.properties import ObjectProperty
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.screenmanager import Screen
+
 # isort: split
 from src.database_handlers.database_handler import DatabaseHandler
+
 kivy.require("1.0.6")  # replace with your current kivy version !
 
 csvQueue = queue.Queue()
@@ -65,8 +65,7 @@ class UsersSeeWidget(Screen):
             else:
 
                 datalist = instance.findUserByIdList(next_list)
-                self.data = [{"text": str(x[1]) + " " + str(x[2])}
-                             for x in datalist]
+                self.data = [{"text": str(x[1]) + " " + str(x[2])} for x in datalist]
             instance.closeConnection()
 
         return self.data
@@ -91,8 +90,7 @@ class UsersSeeWidget(Screen):
                         self.on_load()
                         return True
                     else:
-                        self.error_pop(
-                            "", "Nie powiodło się dodanie użytkownika")
+                        self.error_pop("", "Nie powiodło się dodanie użytkownika")
                 else:
                     self.error_pop(
                         "",

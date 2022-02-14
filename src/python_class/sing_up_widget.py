@@ -9,10 +9,12 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
 from kivy.uix.textinput import TextInput
+
 # isort: split
 from src.database_handlers.database_handler import DatabaseHandler
 from src.user.user import User
 from src.user.user_validator import UserValidator
+
 kivy.require("1.0.6")  # replace with your current kivy version !
 
 

@@ -5,8 +5,10 @@ from kivy.properties import ObjectProperty
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
+
 # isort: split
 from src.database_handlers.database_handler import DatabaseHandler
+
 kivy.require("1.0.6")  # replace with your current kivy version !
 
 

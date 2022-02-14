@@ -1,4 +1,9 @@
-from src.proto_file.ExampleProto_pb2 import LED, DataPacket, DeviceRequest, DeviceResponse
+from src.proto_file.ExampleProto_pb2 import (
+    LED,
+    DataPacket,
+    DeviceRequest,
+    DeviceResponse,
+)
 
 
 class ProtobufCommParser:

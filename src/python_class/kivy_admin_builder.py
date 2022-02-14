@@ -1,8 +1,11 @@
+from pathlib import Path
+
 import kivy
 from kivy.lang import Builder
-from pathlib import Path
+
 # isort: split
 from static.static_config import KIVY_ADMIN_DIR
+
 kivy.require("1.0.6")  # replace with your current kivy version !
 
 

@@ -1,5 +1,6 @@
 import kivy
 from kivy.uix.screenmanager import Screen
+
 # isort: split
 from src.database_handlers.database_handler import DatabaseHandler
 

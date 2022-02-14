@@ -4,6 +4,7 @@ from kivy.properties import NumericProperty, ObjectProperty, StringProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import Screen
+
 kivy.require("1.0.6")  # replace with your current kivy version !
 
 

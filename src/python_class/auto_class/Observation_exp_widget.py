@@ -1,11 +1,11 @@
-
-
 from math import sin
+
 # isort: split
 import kivy
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import Screen
-from kivy_garden.graph import  MeshLinePlot
+from kivy_garden.graph import MeshLinePlot
+
 kivy.require("1.0.6")  # replace with your current kivy version !
 
 # from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
@@ -33,4 +33,3 @@ class ObservationExpWidget(Screen):
         plot = MeshLinePlot(color=[1, 0, 0, 1])
         plot.points = [(x, sin(x / 10.0)) for x in range(0, 101)]
         self.graph_test.add_plot(plot)
-        

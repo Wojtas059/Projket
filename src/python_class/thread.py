@@ -1,11 +1,12 @@
-
 import threading
 import time
+
 # isort: split
 from kivy.app import App
 from kivy.clock import mainthread
 from kivy.lang import Builder
-from kivy.uix.screenmanager import  Screen, ScreenManager
+from kivy.uix.screenmanager import Screen, ScreenManager
+
 # Plik od Olecha
 
 
