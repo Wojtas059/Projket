@@ -1,0 +1,60 @@
+<HomeConnectionWidget>
+    name: 'home_connection_widget'
+    canvas.before: 
+        Color:
+            rgba: (240/255,240/255,240/255,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        
+        spacing: 20
+        padding: 100
+        
+
+        HButton:
+            on_press:root.message_connect_with_stm()
+            text: "Połącz się z stacją bazową"
+         
+        
+        HButton:
+            text: "Rozłącz się z stacją bazową"
+        
+    
+        HButton:
+            text: "Połącz się z płytką"
+        
+        
+        HButton:
+            text: "Rozłącz się z płytką"
+   
+        
+        HButton:
+            text: "Rozpocznij zbieranie danych"
+          
+        HButton:
+            text: "Zakończ zbieranie danych"
+        HLabel:
+            id: status_field
+            color: "black"
+            text: "Tutaj będą komunikaty o stanie systemu"
+
+               
+
+
+
+<HButton@Button>
+    size_hint: (0.5, 0.3)
+    width: 200
+    height: 50
+    pos_hint: {'center_x': 0.5}
+
+<HLabel@Label>
+    size_hint: 1, None
+    width: 100
+    height: 20
+    pos_hint: {'center_x': 0.5}

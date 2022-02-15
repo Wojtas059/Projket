@@ -1,12 +1,13 @@
 # IMPORTANT
 ## REQUIREMENTS:
+- python version>=3.9 && version<3.10
 - flake8  4.0.1 (mccabe: 0.6.1, pycodestyle: 2.8.0, pyflakes: 2.4.0) CPython 3.9.4 on Windows
 - isort   VERSION 5.10.1
 - black 22.1.0 (compiled: yes)
 - bcrypt             3.2.0
 - Kivy               2.0.0
 - kivy-garden.graph  0.4.0
-- serial serial-0.0.97
+- serial pyserial-3.5
 
 # STM32 <-> PC communication example - Python project
 

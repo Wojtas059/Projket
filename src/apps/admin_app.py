@@ -3,7 +3,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 
 import src.python_class.home_admin_widget as Home
-import src.python_class.kivy_admin_builder as kivy_build
+import src.python_class.kivy_builders.kivy_admin_builder as kivy_build
 
 kivy.require("1.0.6")  # replace with your current kivy version !
 

@@ -8,9 +8,8 @@ from src.user.user import User
 
 class UserValidator:
 
-    # TODO fix name for email regex
     _email_regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
-
+    #TODO Move to separeted class
     class Flags(Enum):
         INCORRECTNAME = 1
         INCORRECTSURNAME = 2
