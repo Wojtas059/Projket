@@ -34,7 +34,7 @@ import src.python_class.auto_class.start_guest_widget as StartGuest
 import src.python_class.auto_class.start_reference_widget as StartRef
 import src.python_class.help_widget as Help
 import src.python_class.home_widget as Home
-import src.python_class.kivy_build as kivy_build
+import src.python_class.kivy_builders.kivy_main_app_build as kivy_build
 import src.python_class.sing_in_widget as SingIn
 import src.python_class.sing_up_widget as SingUp
 import src.python_class.user_pro_w as UserPro
