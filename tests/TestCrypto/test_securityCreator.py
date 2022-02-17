@@ -1,6 +1,6 @@
 import pytest
 
-from src.crypto.securityCreator import SecurityCreator
+from src.crypto.security_creator import SecurityCreator
 
 # IMPORTANT NAME CONVENTION: test_METHODNAME_EXPECTEDOUTCOME_WHATISTESTED
 

@@ -8,6 +8,7 @@
 - Kivy               2.0.0
 - kivy-garden.graph  0.4.0
 - serial pyserial-3.5
+- pytest             7.0.1
 
 # STM32 <-> PC communication example - Python project
 

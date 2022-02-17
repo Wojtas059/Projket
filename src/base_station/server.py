@@ -1,8 +1,14 @@
 import queue
+
 import serial
+
 # isort: split
 
-from src.base_station.flags import notifications_flags, pending_actions_flags, work_flags
+from src.base_station.flags import (
+    notifications_flags,
+    pending_actions_flags,
+    work_flags,
+)
 
 
 class server:
