@@ -6,241 +6,290 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
+
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
 DESCRIPTOR = _descriptor.FileDescriptor(
-  name='client_base_station.proto',
-  package='',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x19\x63lient_base_station.proto\"\x19\n\x08OrderSTM\x12\r\n\x05start\x18\x01 \x01(\t\"\x17\n\x07STMData\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\" \n\x0f\x43heckConnection\x12\r\n\x05stats\x18\x01 \x01(\t\" \n\x0f\x43onnectionStats\x12\r\n\x05stats\x18\x01 \x01(\t2\xe7\x01\n\x11\x43lientBaseStation\x12\x37\n\x0f\x63heckConnection\x12\x10.CheckConnection\x1a\x10.ConnectionStats\"\x00\x12:\n\x12\x63heckSTMConnection\x12\x10.CheckConnection\x1a\x10.ConnectionStats\"\x00\x12+\n\x10startSTMSampling\x12\t.OrderSTM\x1a\x08.STMData\"\x00\x30\x01\x12\x30\n\x0fstopSTMSampling\x12\t.OrderSTM\x1a\x10.ConnectionStats\"\x00\x62\x06proto3'
+    name="client_base_station.proto",
+    package="",
+    syntax="proto3",
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+    serialized_pb=b'\n\x19\x63lient_base_station.proto"\x19\n\x08OrderSTM\x12\r\n\x05start\x18\x01 \x01(\t"\x17\n\x07STMData\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t" \n\x0f\x43heckConnection\x12\r\n\x05stats\x18\x01 \x01(\t" \n\x0f\x43onnectionStats\x12\r\n\x05stats\x18\x01 \x01(\t2\xe7\x01\n\x11\x43lientBaseStation\x12\x37\n\x0f\x63heckConnection\x12\x10.CheckConnection\x1a\x10.ConnectionStats"\x00\x12:\n\x12\x63heckSTMConnection\x12\x10.CheckConnection\x1a\x10.ConnectionStats"\x00\x12+\n\x10startSTMSampling\x12\t.OrderSTM\x1a\x08.STMData"\x00\x30\x01\x12\x30\n\x0fstopSTMSampling\x12\t.OrderSTM\x1a\x10.ConnectionStats"\x00\x62\x06proto3',
 )
 
 
-
-
 _ORDERSTM = _descriptor.Descriptor(
-  name='OrderSTM',
-  full_name='OrderSTM',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='start', full_name='OrderSTM.start', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=29,
-  serialized_end=54,
+    name="OrderSTM",
+    full_name="OrderSTM",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="start",
+            full_name="OrderSTM.start",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=29,
+    serialized_end=54,
 )
 
 
 _STMDATA = _descriptor.Descriptor(
-  name='STMData',
-  full_name='STMData',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='data', full_name='STMData.data', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=56,
-  serialized_end=79,
+    name="STMData",
+    full_name="STMData",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="data",
+            full_name="STMData.data",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=56,
+    serialized_end=79,
 )
 
 
 _CHECKCONNECTION = _descriptor.Descriptor(
-  name='CheckConnection',
-  full_name='CheckConnection',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='stats', full_name='CheckConnection.stats', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=81,
-  serialized_end=113,
+    name="CheckConnection",
+    full_name="CheckConnection",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="stats",
+            full_name="CheckConnection.stats",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=81,
+    serialized_end=113,
 )
 
 
 _CONNECTIONSTATS = _descriptor.Descriptor(
-  name='ConnectionStats',
-  full_name='ConnectionStats',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='stats', full_name='ConnectionStats.stats', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=115,
-  serialized_end=147,
+    name="ConnectionStats",
+    full_name="ConnectionStats",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="stats",
+            full_name="ConnectionStats.stats",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=115,
+    serialized_end=147,
 )
 
-DESCRIPTOR.message_types_by_name['OrderSTM'] = _ORDERSTM
-DESCRIPTOR.message_types_by_name['STMData'] = _STMDATA
-DESCRIPTOR.message_types_by_name['CheckConnection'] = _CHECKCONNECTION
-DESCRIPTOR.message_types_by_name['ConnectionStats'] = _CONNECTIONSTATS
+DESCRIPTOR.message_types_by_name["OrderSTM"] = _ORDERSTM
+DESCRIPTOR.message_types_by_name["STMData"] = _STMDATA
+DESCRIPTOR.message_types_by_name["CheckConnection"] = _CHECKCONNECTION
+DESCRIPTOR.message_types_by_name["ConnectionStats"] = _CONNECTIONSTATS
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-OrderSTM = _reflection.GeneratedProtocolMessageType('OrderSTM', (_message.Message,), {
-  'DESCRIPTOR' : _ORDERSTM,
-  '__module__' : 'client_base_station_pb2'
-  # @@protoc_insertion_point(class_scope:OrderSTM)
-  })
+OrderSTM = _reflection.GeneratedProtocolMessageType(
+    "OrderSTM",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _ORDERSTM,
+        "__module__": "client_base_station_pb2"
+        # @@protoc_insertion_point(class_scope:OrderSTM)
+    },
+)
 _sym_db.RegisterMessage(OrderSTM)
 
-STMData = _reflection.GeneratedProtocolMessageType('STMData', (_message.Message,), {
-  'DESCRIPTOR' : _STMDATA,
-  '__module__' : 'client_base_station_pb2'
-  # @@protoc_insertion_point(class_scope:STMData)
-  })
+STMData = _reflection.GeneratedProtocolMessageType(
+    "STMData",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _STMDATA,
+        "__module__": "client_base_station_pb2"
+        # @@protoc_insertion_point(class_scope:STMData)
+    },
+)
 _sym_db.RegisterMessage(STMData)
 
-CheckConnection = _reflection.GeneratedProtocolMessageType('CheckConnection', (_message.Message,), {
-  'DESCRIPTOR' : _CHECKCONNECTION,
-  '__module__' : 'client_base_station_pb2'
-  # @@protoc_insertion_point(class_scope:CheckConnection)
-  })
+CheckConnection = _reflection.GeneratedProtocolMessageType(
+    "CheckConnection",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _CHECKCONNECTION,
+        "__module__": "client_base_station_pb2"
+        # @@protoc_insertion_point(class_scope:CheckConnection)
+    },
+)
 _sym_db.RegisterMessage(CheckConnection)
 
-ConnectionStats = _reflection.GeneratedProtocolMessageType('ConnectionStats', (_message.Message,), {
-  'DESCRIPTOR' : _CONNECTIONSTATS,
-  '__module__' : 'client_base_station_pb2'
-  # @@protoc_insertion_point(class_scope:ConnectionStats)
-  })
+ConnectionStats = _reflection.GeneratedProtocolMessageType(
+    "ConnectionStats",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _CONNECTIONSTATS,
+        "__module__": "client_base_station_pb2"
+        # @@protoc_insertion_point(class_scope:ConnectionStats)
+    },
+)
 _sym_db.RegisterMessage(ConnectionStats)
 
 
-
 _CLIENTBASESTATION = _descriptor.ServiceDescriptor(
-  name='ClientBaseStation',
-  full_name='ClientBaseStation',
-  file=DESCRIPTOR,
-  index=0,
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_start=150,
-  serialized_end=381,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='checkConnection',
-    full_name='ClientBaseStation.checkConnection',
+    name="ClientBaseStation",
+    full_name="ClientBaseStation",
+    file=DESCRIPTOR,
     index=0,
-    containing_service=None,
-    input_type=_CHECKCONNECTION,
-    output_type=_CONNECTIONSTATS,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='checkSTMConnection',
-    full_name='ClientBaseStation.checkSTMConnection',
-    index=1,
-    containing_service=None,
-    input_type=_CHECKCONNECTION,
-    output_type=_CONNECTIONSTATS,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='startSTMSampling',
-    full_name='ClientBaseStation.startSTMSampling',
-    index=2,
-    containing_service=None,
-    input_type=_ORDERSTM,
-    output_type=_STMDATA,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='stopSTMSampling',
-    full_name='ClientBaseStation.stopSTMSampling',
-    index=3,
-    containing_service=None,
-    input_type=_ORDERSTM,
-    output_type=_CONNECTIONSTATS,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-])
+    serialized_start=150,
+    serialized_end=381,
+    methods=[
+        _descriptor.MethodDescriptor(
+            name="checkConnection",
+            full_name="ClientBaseStation.checkConnection",
+            index=0,
+            containing_service=None,
+            input_type=_CHECKCONNECTION,
+            output_type=_CONNECTIONSTATS,
+            serialized_options=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.MethodDescriptor(
+            name="checkSTMConnection",
+            full_name="ClientBaseStation.checkSTMConnection",
+            index=1,
+            containing_service=None,
+            input_type=_CHECKCONNECTION,
+            output_type=_CONNECTIONSTATS,
+            serialized_options=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.MethodDescriptor(
+            name="startSTMSampling",
+            full_name="ClientBaseStation.startSTMSampling",
+            index=2,
+            containing_service=None,
+            input_type=_ORDERSTM,
+            output_type=_STMDATA,
+            serialized_options=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.MethodDescriptor(
+            name="stopSTMSampling",
+            full_name="ClientBaseStation.stopSTMSampling",
+            index=3,
+            containing_service=None,
+            input_type=_ORDERSTM,
+            output_type=_CONNECTIONSTATS,
+            serialized_options=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+)
 _sym_db.RegisterServiceDescriptor(_CLIENTBASESTATION)
 
-DESCRIPTOR.services_by_name['ClientBaseStation'] = _CLIENTBASESTATION
+DESCRIPTOR.services_by_name["ClientBaseStation"] = _CLIENTBASESTATION
 
 # @@protoc_insertion_point(module_scope)

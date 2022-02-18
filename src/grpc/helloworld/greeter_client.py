@@ -17,31 +17,34 @@ from __future__ import print_function
 
 import logging
 
-import grpc
 import helloworld_pb2
 import helloworld_pb2_grpc
 
+import grpc
+
 
 def run():
-  channel = grpc.insecure_channel('192.168.1.107:50051')
-  stub = helloworld_pb2_grpc.GreeterStub(channel)
-  response = stub.SayHello(helloworld_pb2.HelloRequest(name='you'))
-  print("Greeter client received: " + response.message)
+    channel = grpc.insecure_channel("192.168.1.107:50051")
+    stub = helloworld_pb2_grpc.GreeterStub(channel)
+    response = stub.SayHello(helloworld_pb2.HelloRequest(name="you"))
+    print("Greeter client received: " + response.message)
+
+
 def run_1():
-  channel = grpc.insecure_channel('192.168.1.107:50051')
-  stub = helloworld_pb2_grpc.GreeterStub(channel)
-  response = stub.SayHelloAgain(helloworld_pb2.HelloRequest(name='you'))
-  print("Greeter client received: " + response.message)
+    channel = grpc.insecure_channel("192.168.1.107:50051")
+    stub = helloworld_pb2_grpc.GreeterStub(channel)
+    response = stub.SayHelloAgain(helloworld_pb2.HelloRequest(name="you"))
+    print("Greeter client received: " + response.message)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig()
     while True:
-      print("Wybierz opcje:")
-      print("1 - SayHello")
-      print("2 - SayHelloAgain")
-      i = input()
-      if i ==  '1':
-        run()
-      else:
-        run_1()
+        print("Wybierz opcje:")
+        print("1 - SayHello")
+        print("2 - SayHelloAgain")
+        i = input()
+        if i == "1":
+            run()
+        else:
+            run_1()
