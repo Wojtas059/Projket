@@ -1,6 +1,8 @@
 import socket
 import threading
+
 import file.mygrid as my
+
 HEADER = 64
 PORT = 5000
 dis = "!disconnect"

@@ -27,14 +27,14 @@ class BaseStation(Servicer.ClientBaseStationServicer):
     def startSTMSampling(self, request, context):
         self._stm_manager.start()
         self._stm_status = request.order
-        print(self._stm_status )
-        return ServicerMethods.ConnectionStats(stats= self._stm_status)
+        print(self._stm_status)
+        return ServicerMethods.ConnectionStats(stats=self._stm_status)
 
     def sendSTMData(self, request, context):
         while self._stm_status == "Sampling":
             if self._stm_manager.queue.qsize() > 0:
-                
-                yield ServicerMethods.STMData(data=self._stm_manager.queue.get()) 
+
+                yield ServicerMethods.STMData(data=self._stm_manager.queue.get())
         while self._stm_manager.queue.qsize() > 0:
             yield str(self._stm_manager.queue.get())
 

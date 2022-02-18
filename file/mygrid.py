@@ -1,13 +1,16 @@
 
 import logging
 import struct
+from queue import Queue
 from threading import Thread
+
 import serial
-import  serial.tools.list_ports
+import serial.tools.list_ports
 import serial.tools.list_ports as list_ports
 from serial.tools.list_ports_common import ListPortInfo
-from queue import Queue
+
 import file.proto_comm as proto_comm
+
 
 class Connect:
     queue = Queue()
