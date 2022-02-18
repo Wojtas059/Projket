@@ -5,8 +5,9 @@ service ClientBaseStation {
     
     rpc checkConnection (CheckConnection) returns (ConnectionStats){}
     rpc checkSTMConnection (CheckConnection) returns (ConnectionStats){}
-    rpc startSTMSampling (OrderSTM) returns (stream STMData) {}
+    rpc startSTMSampling (OrderSTM) returns (ConnectionStats) {}
     rpc stopSTMSampling (OrderSTM) returns (ConnectionStats) {}
+    rpc sendSTMData (Void) returns (stream STMData) {}
   }
   
   message OrderSTM{
@@ -22,4 +23,8 @@ service ClientBaseStation {
   
   message ConnectionStats{
     string stats = 1;
+  }
+
+  message Void{
+
   }
