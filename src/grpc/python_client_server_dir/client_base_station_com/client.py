@@ -17,7 +17,7 @@ def main():
     stub = Servicer.ClientBaseStationStub(channel)
     response = stub.checkConnection(ServicerMethods.CheckConnection(stats="client"))
     print("Greeter client received: "+ response.stats)
-    response = stub.checkConnection(ServicerMethods.OrderSTM(stats="Sampling"))
+    response = stub.checkConnection(ServicerMethods.OrderSTM(order="Sampling"))
     if response=="Sampling":
         print(response)
     
