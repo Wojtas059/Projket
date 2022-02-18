@@ -22,6 +22,7 @@ class BaseStation(Servicer.ClientBaseStationServicer):
 
     def stopSTMSampling(self, request, context):
         self._stm_manager.stop()
+        self._stm_status=request.stats
         return ServicerMethods.ConnectionStats(stats=self._stm_status)
 
     def startSTMSampling(self, request, context):

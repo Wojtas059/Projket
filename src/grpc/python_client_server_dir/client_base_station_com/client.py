@@ -17,9 +17,12 @@ def main():
     stub = Servicer.ClientBaseStationStub(channel)
     response = stub.checkConnection(ServicerMethods.CheckConnection(stats="client"))
     print("Greeter client received: "+ response.stats)
-    for  response in stub.checkConnection(ServicerMethods.CheckConnection(stats="Sampling")):
-
-
+    response = stub.checkConnection(ServicerMethods.OrderSTM(stats="Sampling"))
+    if response=="Sampling":
+        print(response)
+    
+def empty():
+    pass
 
 if __name__ == "__main__":
     logging.basicConfig()
