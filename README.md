@@ -9,6 +9,11 @@
 - kivy-garden.graph  0.4.0
 - serial pyserial-3.5
 - pytest             7.0.1
+##  How to generate/update python files from proton:
+Go in terminal to protos_dir then use for example:
+python -m grpc_tools.protoc -I./protos_base_station_com --python_out=./protos_base_station_com/ --grpc_python_out=./protos_base_station_com/ ./protos_base_station_com/client_base_station.proto
+if your protos is in diffrent dir then:
+python -m grpc_tools.protoc -I./your_dir --python_out=./your_dir/ --grpc_python_out=./your_dir/ ./your_dir/your_protos.proto
 
 # STM32 <-> PC communication example - Python project
 

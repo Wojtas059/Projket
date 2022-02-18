@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+
+service ClientBaseStation {
+    
+    rpc checkConnection (CheckConnection) returns (ConnectionStats){}
+    rpc checkSTMConnection (CheckConnection) returns (ConnectionStats){}
+    rpc startSTMSampling (OrderSTM) returns (stream STMData) {}
+    rpc stopSTMSampling (OrderSTM) returns (ConnectionStats) {}
+  }
+  
+  message OrderSTM{
+    string start= 1;
+
+  }
+  message STMData {
+    string data=1;
+  }
+  message CheckConnection{
+    string stats = 1;
+  }
+  
+  message ConnectionStats{
+    string stats = 1;
+  }
