@@ -1,0 +1,5 @@
+Base station commend
+~/Project/Projket $ python -m src.grpc.python_client_server_dir.client_base_station_com.base_station
+
+Client commend
+(kivy_venv) PS C:\Studia\Projekt> python -m src.grpc.python_client_server_dir.client_base_station_com.client
