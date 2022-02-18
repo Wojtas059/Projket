@@ -13,7 +13,6 @@ class BaseStation(Servicer.ClientBaseStationServicer):
     _stm_status = ""
     _stm_manager = ConnectSTM32()
 
-
     def checkConnection(self, request, context):
         return ServicerMethods.ConnectionStats(stats=self._my_status)
 
@@ -22,20 +21,21 @@ class BaseStation(Servicer.ClientBaseStationServicer):
 
     def stopSTMSampling(self, request, context):
         self._stm_manager.stop()
-        self._stm_status=request.stats
+        self._stm_status = request.order
         return ServicerMethods.ConnectionStats(stats=self._stm_status)
 
     def startSTMSampling(self, request, context):
         self._stm_manager.start()
-        self._stm_status=request.stats
-        return  self._stm_status
-       
+        self._stm_status = request.order
+        return ServicerMethods.ConnectionStats(stats= self._stm_status)
+
     def sendSTMData(self, request, context):
-         while self._stm_status == "Sampling":
+        while self._stm_status == "Sampling":
             if self._stm_manager.queue.qsize > 0:
                 yield self._stm_manager.queue.get()
-         while self._stm_manager.queue.qsize > 0:
+        while self._stm_manager.queue.qsize > 0:
             yield self._stm_manager.queue.get()
+
 
 def start_server():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
