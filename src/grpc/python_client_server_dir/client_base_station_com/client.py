@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-import grp
+
 import logging
 from queue import Queue
 from unicodedata import name
