@@ -30,8 +30,11 @@ class Connect:
                 comm.stm.flushInput()
                 comm.stm.flushOutput()
                 comm.start_data_output()
-                while self.trump:
+                while True:
                     self.queue.put(comm.handle_data() )
+                    if not(self.trump):
+                        break
+                self.queue.put(comm.handle_data() )
                 comm.stm.flush()
                 comm.stm.flushInput()
                 comm.stm.read_all()
@@ -45,5 +48,6 @@ class Connect:
 
     
     def on_stop(self):
+        self.queue.put("Zakończyłem pomiar dupku" )
         self.trump = False
         
