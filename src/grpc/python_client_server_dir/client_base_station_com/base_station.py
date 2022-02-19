@@ -9,9 +9,11 @@ from file.mygrid import Connect as ConnectSTM32
 
 
 class BaseStation(Servicer.ClientBaseStationServicer):
-    _my_status = "Active"
-    _stm_status = ""
-    _stm_manager = ConnectSTM32()
+    def __init__(self) -> None:
+        super().__init__()
+        self._my_status = "Active"
+        self._stm_status = ""
+        self._stm_manager = ConnectSTM32()
 
     def checkConnection(self, request, context):
         return ServicerMethods.ConnectionStats(stats=self._my_status)
@@ -31,13 +33,13 @@ class BaseStation(Servicer.ClientBaseStationServicer):
         return ServicerMethods.ConnectionStats(stats=self._stm_status)
 
     def sendSTMData(self, request, context):
-        while self._stm_status == "Sampling":
-            if self._stm_manager.queue.qsize() > 0:
-
-                yield ServicerMethods.STMData(data=self._stm_manager.queue.get())
-        while self._stm_manager.queue.qsize() > 0:
-            yield str(self._stm_manager.queue.get())
-
+        while True:
+            if self._stm_status == "Sampling":
+                if self._stm_manager.queue.qsize() > 0:
+                    dupa = self._stm_manager.queue.get()
+                    print("Wysłane:"+dupa)
+                    yield ServicerMethods.STMData(data=dupa)
+    #TODO: Function returning the rest of the queue, update proto...
 
 def start_server():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
