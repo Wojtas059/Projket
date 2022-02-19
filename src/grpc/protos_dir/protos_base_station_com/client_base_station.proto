@@ -12,7 +12,6 @@ service ClientBaseStation {
   
   message OrderSTM{
     string order= 1;
-
   }
   message STMData {
     string data=1;
