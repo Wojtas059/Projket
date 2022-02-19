@@ -1,4 +1,5 @@
 from enum import _auto_null, auto
+import threading
 
 import kivy
 
@@ -28,7 +29,7 @@ from kivy.uix.widget import Widget
 from serial.tools.list_ports_common import ListPortInfo
 
 import src.proto_file.proto_comm as proto_comm
-
+from src.grpc.python_client_server_dir.client_base_station_com.client import Client as ClientPi
 
 class MyGrid(Widget):
     com = ObjectProperty(None)
@@ -36,6 +37,9 @@ class MyGrid(Widget):
     port = ""
     name_csv = ObjectProperty(None)
     csvQueue = queue.Queue()
+
+    # Zmienna odpowiedzilana za połączenie z raspberrypi
+    client_connect =None
 
     def __init__(self, **var_args):
         super(MyGrid, self).__init__(**var_args)
@@ -47,22 +51,32 @@ class MyGrid(Widget):
     trump = False
 
     def auto_connect(self):
-        portData = serial.tools.list_ports.comports()
-        commPport = "None"
-        dataport = []
-        for j in portData:
-            dataport = str(j).split()
-            for i in dataport:
-                if i == "STMicroelectronics":
-                    self.port = dataport[0]
-                    commPport = "Start"
-                    Thread(
-                        target=self.error_win("Urządzenie zostało podłączone")
-                    ).start()
-                    break
+        #portData = serial.tools.list_ports.comports()
+        #commPport = "None"
+        #dataport = []
+        #for j in portData:
+        #    dataport = str(j).split()
+        #    for i in dataport:
+        #        if i == "STMicroelectronics":
+        #            self.port = dataport[0]
+        #            commPport = "Start"
+        #            Thread(
+        #                target=self.error_win("Urządzenie zostało podłączone")
+        #            ).start()
+        #            break
 
-        if commPport == "Start":
-            self.start_thread()
+        #if commPport == "Start":
+        #    self.start_thread()
+
+        self.client_connect = ClientPi()
+        if self.client_connect.connect() and self.client_connect.startSTM() :
+            threading.Thread(target = self.client_connect.getDataSTM).start()
+        else:
+            self.error_win("Błąd połączenia się z portem ")
+
+            
+        
+
 
     def on_press(self):
         self.trump = True
