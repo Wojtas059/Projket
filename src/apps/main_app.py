@@ -8,7 +8,7 @@ from kivy.uix.screenmanager import ScreenManager
 
 # isort: split
 # spytać sie przemka jak obejść coś takiego czy to zostawić
-import src.python_class.advance_class.a_choose_lots_muscles_widget as AChooseLots
+import src.python_class.advance_class.a_Choose_lots_muscles_widget as AChooseLots
 import src.python_class.advance_class.a_choose_method_widget as AChooseMeth
 import src.python_class.advance_class.a_choose_user_widget as AChooseUser
 import src.python_class.advance_class.a_finish_ref_widget as AFinishRef
