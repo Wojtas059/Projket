@@ -1,7 +1,7 @@
 #:import MeshLinePlot kivy_garden.graph.MeshLinePlot
 <ObservationExpWidget>
     name: 'observationexpwidget'
-    graph_test: graph_test
+    box: box
     on_pre_enter: root.on_load()
     canvas.before: 
         Color:
@@ -28,6 +28,7 @@
 
     BoxLayout:
         orientation: "vertical"
+        id: box
         size: root.width, root.height
         
         spacing: 20
@@ -40,28 +41,8 @@
             color: 0,0,0,1
 
         
-        Graph:
-            id: graph_test
-            label_options: {'color': (0,0,0,1)}
-            background: (0,0,0,1)
-            tick_color: 0,0,0,1
-            plot: MeshLinePlot
-            xlabel:'X'
-            ylabel:'Y'
-            x_ticks_minor:5
-            x_tics_major:25
-            y_ticks_major:1
-            y_grid_label:True
-            x_grid_label:True
-            padding:5
-            x_grid:True
-            y_grid:True
-            xmin:-0
-            xmax:100
-            ymin:-1
-            ymax:1
-            pos: 0, root.height / 6
-            size: root.width * 2 / 3 , root.height * 18 / 24
+        
+            
             
 
 

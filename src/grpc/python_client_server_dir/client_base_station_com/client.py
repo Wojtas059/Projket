@@ -7,11 +7,12 @@ import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2_grpc 
 import queue
 
 class Client:
-    channel = None
-    stub = None
-    transfer_status = False
+    
 
     def __init__(self):
+        self.channel = None
+        self.stub = None
+        self.transfer_status = False
         self.channel = grpc.insecure_channel("192.168.1.107:50051")
         self.stub = Servicer.ClientBaseStationStub(self.channel)
 

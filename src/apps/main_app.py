@@ -2,7 +2,7 @@ import queue
 
 # isort: split
 import kivy
-from kivy.app import App
+from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager
 
@@ -40,6 +40,9 @@ import src.python_class.sing_up_widget as SingUp
 import src.python_class.user_pro_w as UserPro
 import src.python_class.user_widget as User
 import src.python_class.users_see as USee
+from src.grpc.python_client_server_dir.client_base_station_com.client import Client as ClientPi
+import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2 as ServicerMethods
+import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2_grpc as Servicer
 
 # isort: split
 from src.user.measurement import Measurement
@@ -50,15 +53,18 @@ kivy.require("1.0.6")
 
 
 class ScreenManagement(ScreenManager):
-    q1 = queue.LifoQueue()
-    home_widget = "homewidget"
-    userLogIn = None
-    noneLogIn = True
-    count_ = 0
+    
 
     def __init__(self, **kwargs):
         # self.q1.put('homewidget')
         super(ScreenManagement, self).__init__(**kwargs)
+        self.q1 = queue.LifoQueue()
+        self.home_widget = "homewidget"
+        self.userLogIn = None
+        self.noneLogIn = True
+        self.count_ = 0
+        self.client_connect = ClientPi()
+        self.connect_stats = False
         self.add_widget(Home.HomeWidget(name="homewidget"))
         self.add_widget(SingIn.SingInWidget(name="singinwidget"))
         self.add_widget(Help.HelpWidget(name="helpwidget"))
@@ -175,8 +181,14 @@ class ScreenManagement(ScreenManager):
         while not self.q1.empty():
             self.q1.get()
 
+    def connect_rasp(self):
+        if self.client_connect.connect():
+            self.connect_stats = True
 
-class MyApp(App):
+    def status_connection(self):
+        return self.connect_stats
+
+class MyApp(MDApp):
     def on_start(self):
         Window.size = (1000, 800)
 
