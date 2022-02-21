@@ -9,6 +9,9 @@
 - kivy-garden.graph  0.4.0
 - serial pyserial-3.5
 - pytest             7.0.1
+- google-api-python-client 2.37
+- grpcio             1.44.0
+- grpcio-tools       1.44.0
 ##  How to generate/update python files from proton:
 Go in terminal to protos_dir then use for example:
 python -m grpc_tools.protoc -I./protos_base_station_com --python_out=./protos_base_station_com/ --grpc_python_out=./protos_base_station_com/ ./protos_base_station_com/client_base_station.proto

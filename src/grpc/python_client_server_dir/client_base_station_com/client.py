@@ -4,7 +4,7 @@ import grpc
 import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2 as ServicerMethods
 import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2_grpc as Servicer
 
-
+import queue
 
 class Client:
     channel = None
@@ -42,13 +42,22 @@ class Client:
 
 
     def getDataSTM(self):
-        file = open("data_stm_sampling.csv", "w")
+        file = open("data_stm_sampling.csv","w")
         file.write("Value A, Value B, Value C, Constant value\n")
+        print("Dupa")
+        file.close()
+        queue_data = queue.Queue()
         while(self.transfer_status):
             results = self.stub.sendSTMData(ServicerMethods.Void())
+            print("Dupax1")
+            print()
             for result in results:
-                file.write(result.data)
-    
+                print(result.data)
+                queue_data.put(result.data)
+                #file.write(result.data)
+        file = open("data_stm_sampling.csv","a")
+        while queue_data.qsize() > 0:
+            file.write(queue_data.get())
         file.close()
     # for x in results:
     # print(x.data)

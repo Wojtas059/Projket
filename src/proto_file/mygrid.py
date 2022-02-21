@@ -16,10 +16,7 @@ import time
 from datetime import datetime
 from threading import Thread
 from tkinter import filedialog
-
-import asynckivy as ak
 import serial
-import serial.tools.list_ports
 import serial.tools.list_ports as list_ports
 from kivy.clock import Clock, mainthread
 from kivy.loader import Loader
@@ -31,6 +28,9 @@ from serial.tools.list_ports_common import ListPortInfo
 import src.proto_file.proto_comm as proto_comm
 from src.grpc.python_client_server_dir.client_base_station_com.client import Client as ClientPi
 
+
+import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2 as ServicerMethods
+import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2_grpc as Servicer
 class MyGrid(Widget):
     com = ObjectProperty(None)
     comm = None
@@ -70,17 +70,45 @@ class MyGrid(Widget):
 
         self.client_connect = ClientPi()
         if self.client_connect.connect() and self.client_connect.startSTM() :
-            threading.Thread(target = self.client_connect.getDataSTM).start()
+            Thread(target=self.getDataSTM).start()
         else:
             self.error_win("Błąd połączenia się z portem ")
 
+    def getDataSTM(self):
+        #file = open("data_stm_sampling.csv","w")
+        #file.write("Value A, Value B, Value C, Constant value\n")
+        #print("Dupa")
+        #file.close
+        #queue_data = queue.Queue()
+        self.com.text += "\nRozpozęto pomiar\n\n"
+        self.csvQueue.put_nowait("Value A, Value B, Value C, Constant value")
+        if(self.client_connect.transfer_status):
+            results = self.client_connect.stub.sendSTMData(ServicerMethods.Void())
             
+            print(results)
+            for result in results:
+                print(result.data)
+                self.com.text += result.data
+                self.csvQueue.put_nowait(result.data)
+                #queue_data.put(result.data)
+                #file.write(result.data)
+       
+        print(results)
+        for result in results:
+            print(result.data)
+            self.com.text += result.data
+            self.csvQueue.put_nowait(result.data)
+        #ile = open("data_stm_sampling.csv","a")
+        #hile queue_data.qsize() > 0:
+        #   file.write(queue_data.get())
+        #ile.close  
         
 
 
     def on_press(self):
         self.trump = True
         try:
+            
             self.comm = proto_comm.ProtobufComm(self.port, 115200)
             self.comm.stm.flush()
             self.comm.stm.read_all()
@@ -118,7 +146,7 @@ class MyGrid(Widget):
         self.trump = True
         now = datetime.now()
         f = open(
-            "pomiary/zapis_"
+            "static/csv_saves/pomiary/zapis_"
             + now.strftime("%d_%m_%Y")
             + "_"
             + now.strftime("%H_%M_%S")
@@ -147,13 +175,13 @@ class MyGrid(Widget):
         ctypes.windll.user32.MessageBoxW(None, error_txt, "Error", 0)
 
     def on_press_false(self):
-        if self.trump:
-            self.trump = False
-            time.sleep(0.2)
-            self.com.text += "Pomiar Zastopowano"
+        self.client_connect.stopSTM()
+        #if self.trump:
+        #    self.trump = False
+        #    time.sleep(0.2)
+        #    self.com.text += "Pomiar Zastopowano"
 
     def stop(self):
-        time.sleep(0.3)
         Thread(target=self.on_press_false).start()
 
     def save_file_(self):
