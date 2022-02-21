@@ -40,7 +40,6 @@ import src.python_class.sing_up_widget as SingUp
 import src.python_class.user_pro_w as UserPro
 import src.python_class.user_widget as User
 import src.python_class.users_see as USee
-#for git
 
 # isort: split
 from src.user.measurement import Measurement
