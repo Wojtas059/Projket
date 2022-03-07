@@ -44,7 +44,7 @@
         HButton:
             text: "Rozpocznij pomiar badania"
             on_press:
-                root.parent.connect_rasp()
+                #root.parent.connect_rasp()
                 root.parent.add_screen('finishrefwidget')
                 root.manager.current = 'observationexpwidget'
                 root.manager.transition.direction = 'left'

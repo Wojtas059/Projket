@@ -35,8 +35,6 @@ class ObservationExpWidget(Screen):
     graph_test = ObjectProperty(None)
     box = ObjectProperty(None)
     def on_load(self):
-        self=[]
-        self.y=[]
         self.update_graph()
         if self.parent.status_connection():
             self.parent.client_connect.startSTM()
@@ -44,17 +42,14 @@ class ObservationExpWidget(Screen):
 
     def update_graph(self):
         index = count()
-        
-        self.x.append(next(index))
-        self.y.append(1.0)
-        plt.plot(self.x,self.y)
-        plt.ylabel("Dupa")
-        plt.xlabel("Twoja stara")
-        self.box.add_widget(FigureCanvasKivyAgg(plt.gcf()))
-
+        plt.plot()
+        self.chart= plt.gcf()
+        self.box.add_widget(FigureCanvasKivyAgg(self.chart))
     def getDataSTM(self):
         index = count()
         points = []
+        x=[]
+        y=[]
         if(self.parent.client_connect.transfer_status):
             results = self.parent.client_connect.stub.sendSTMData(ServicerMethods.Void())
             print(results)
@@ -62,14 +57,9 @@ class ObservationExpWidget(Screen):
                 try:
                     dupa = []
                     dupa = result.data.split(',')
-                    self.x.append(next(index))
-                    self.y.append(float(dupa[0]))
-                    plt.plot(self.x,self.y)
-
-
-
-
-
+                    x.append(next(index))
+                    y.append(dupa[0])
+                    self.chart=plt.plot(x,y)     
                    #points.pop(0)
                 
                    #points_dequeued=deque(points)
