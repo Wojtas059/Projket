@@ -40,6 +40,7 @@ import src.python_class.sing_up_widget as SingUp
 import src.python_class.user_pro_w as UserPro
 import src.python_class.user_widget as User
 import src.python_class.users_see as USee
+import src.python_class.user_account_w as UserAccount
 from src.grpc.python_client_server_dir.client_base_station_com.client import Client as ClientPi
 import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2 as ServicerMethods
 import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2_grpc as Servicer
@@ -63,12 +64,14 @@ class ScreenManagement(ScreenManager):
         self.userLogIn = None
         self.noneLogIn = True
         self.count_ = 0
+        self.see_account = None
         self.client_connect = ClientPi()
         self.connect_stats = False
         self.add_widget(Home.HomeWidget(name="homewidget"))
         self.add_widget(SingIn.SingInWidget(name="singinwidget"))
         self.add_widget(Help.HelpWidget(name="helpwidget"))
         self.add_widget(User.UserWidget(name="userwidget"))
+        self.add_widget(UserAccount.UserAccountWidget(name="useraccountwidget"))
         self.add_widget(UserPro.UserProWidget(name="userprowidget"))
         # , index =(True, 0)))
         self.add_widget(USee.UsersSeeWidget(name="usersseewidget"))
@@ -119,9 +122,9 @@ class ScreenManagement(ScreenManager):
         # , index =(self.get_bool_LogIn(),self.get_id())))
         self.add_widget(USee.UsersSeeWidget(name="usersseewidget"))
 
-    def log_in(self, id, name, surname, email):
+    def log_in(self, id, login, name, surname, email):
         self.noneLogIn = False
-        self.userLogIn = UserLogIn(id, name, surname, email)
+        self.userLogIn = UserLogIn(id,login, name, surname, email)
 
     def how_meny(self, a: str):
         self.count_ += 1
@@ -158,6 +161,10 @@ class ScreenManagement(ScreenManager):
 
     def get_name(self):
         return self.userLogIn.get_name()
+    
+    def get_login(self):
+        return self.userLogIn.get_login()
+
 
     def get_surname(self):
         return self.userLogIn.get_surname()
@@ -187,6 +194,12 @@ class ScreenManagement(ScreenManager):
 
     def status_connection(self):
         return self.connect_stats
+
+    def get_see_account(self):
+        return self.see_account
+
+    def set_see_account(self, email):
+        self.see_account = email
 
 class MyApp(MDApp):
     def on_start(self):

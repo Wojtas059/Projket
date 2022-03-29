@@ -1,0 +1,119 @@
+<UserAccountWidget>
+    name: 'useraccountwidget'
+    on_pre_enter: root.on_load()
+    name_text: name_text
+    surname_text: surname_text
+    email_text: email_text
+    canvas.before: 
+        Color:
+            rgba: (240/255,240/255,240/255,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    FloatLayout:
+        size: root.width, root.height
+        spacing: 20
+        padding: 100
+
+        Button:
+            size_hint: (0.1, 0.1)
+            pos_hint: {'x': 0, 'top': 1}
+            text: "Wróć"
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = root.parent.last_screen()
+        
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        
+        spacing: 20
+        padding: 250
+        GridLayout:
+            cols: 3 
+            spacing: 2
+            padding: 2
+
+            Label:
+                
+                text: "Imie i nazwisko:"
+                width: 10
+                size_hint: (0.5, 0.5)
+                color: 0,0,0,1
+            
+            Label:
+                id: name_text
+                text: ""
+                font_size: 32
+                size_hint: (0.5, 0.5)
+                color: 0,0,0,1
+            Label:
+                id: surname_text
+                text: ""
+                font_size: 32
+                size_hint: (0.5, 0.5)
+                color: 0,0,0,1
+
+        GridLayout:
+            cols: 2  
+            spacing: 2
+            padding: 2
+            Label:
+                text: "Email:"
+                width: 10
+                size_hint: (0.5, 0.5)
+                color: 0,0,0,1
+            
+            Label:
+                id: email_text
+                text: ""
+                font_size: 32
+                size_hint: (0.5, 0.5)
+                color: 0,0,0,1
+
+
+        GridLayout:
+            cols: 2  
+            spacing: 2
+            padding: 2
+
+            Label:
+                text: "Stare hasło:"
+                size_hint: (0.5, 0.5)
+                color: 0,0,0,1
+
+
+            TextInput:
+                password: True
+                mulitiline: False
+                pos_hint: {'center_x': 0.5}
+                size_hint: (0.5, 0.5)
+                width:100
+                line_height: 1
+
+        GridLayout:
+            cols: 2  
+            spacing: 2
+            padding: 2
+
+            Label:
+                text: "Nowe hasło:"
+                size_hint: (0.5, 0.5)
+                color: 0,0,0,1
+
+
+            TextInput:
+                password: True
+                mulitiline: False
+                pos_hint: {'center_x': 0.5}
+                size_hint: (0.5, 0.5)
+                width:100
+                line_height: 1
+
+        HButton:
+            text: " Zmień hasło"
+            on_press:
+                #root.parent.add_screen('singinwidget')
+                #root.manager.current = 'singupwidget'

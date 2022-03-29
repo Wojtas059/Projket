@@ -59,6 +59,7 @@
         HButton:
             text: "Zakończ badanie"
             on_press:
+                root.cancle_connection()
                 root.parent.clear_screen()
                 root.manager.current = root.parent.get_home_widget()
                 root.manager.transition.direction = 'left'

@@ -2,6 +2,8 @@
 <ObservationExpWidget>
     name: 'observationexpwidget'
     box: box
+    sensor_1: sensor_1
+    sensor_2: sensor_2
     on_pre_enter: root.on_load()
     canvas.before: 
         Color:
@@ -41,6 +43,42 @@
             color: 0,0,0,1
 
         
+        BoxLayout:
+            id: sensor_1
+            disabled: True
+            orientation: "horizontal"
+            Label:
+                text: "Tasma -  1"
+                width: 10
+                size_hint: (0.5, 0.5)
+                color: 0,0,0,1
+            
+            HButton:
+                text: "Zobacz wwykres"
+                size_hint: (0.5, 0.5)
+                on_press:
+                    root.see_plot()
+                    #root.parent.add_screen('chooselotsmuscleswidget')
+                    #root.manager.current = ''
+                    #root.manager.transition.direction = 'left'
+        BoxLayout:
+            id: sensor_2
+            disabled: True
+            orientation: "horizontal"
+            Label:
+                text: "Tasma -  2"
+                width: 10
+                size_hint: (0.5, 0.5)
+                color: 0,0,0,1
+            
+            HButton:
+                text: "Zobacz wykres"
+                size_hint: (0.5, 0.5)
+                on_press:
+                    root.see_plot()
+                    #root.parent.add_screen('chooselotsmuscleswidget')
+                    #root.manager.current = ''
+                    #root.manager.transition.direction = 'left'
         
             
             
@@ -49,6 +87,7 @@
         HButton:
             text: "Wstrzymaj badanie"
             on_press:
+                root.stop_stream_data()
                 root.parent.add_screen('observationexpwidget')
                 root.manager.current = 'pauzeexpwidget'
                 root.manager.transition.direction = 'left'

@@ -29,7 +29,16 @@ class UserListButton(RecycleView):
 
 class BattonLabel(RecycleDataViewBehavior, GridLayout):
     nazwa = ObjectProperty(None)
-    label_text = ObjectProperty(None)
+
+
+    def see_user_pop(self, name, emial):
+        pop = Popup(
+            title="Dane użytkownika",
+            content=Label(text="Imie i nazwisko: " + name + "\n" + "Email: " + emial),
+            size_hint=(None, None),
+            size=(400, 400),
+        )
+        pop.open()
 
 
 class UsersSeeWidget(Screen):
@@ -65,7 +74,7 @@ class UsersSeeWidget(Screen):
             else:
 
                 datalist = instance.findUserByIdList(next_list)
-                self.data = [{"text": str(x[1]) + " " + str(x[2])} for x in datalist]
+                self.data = [{"text": str(x[1]) + " " + str(x[2]), "hint_text": str(x[4]) } for x in datalist]
             instance.closeConnection()
 
         return self.data
@@ -109,3 +118,6 @@ class UsersSeeWidget(Screen):
             size=(400, 400),
         )
         pop.open()
+    
+
+    

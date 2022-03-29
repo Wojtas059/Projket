@@ -7,8 +7,9 @@ from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import Screen
 from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 from threading import Thread
-from collections import deque
-import numpy
+from itertools import count
+from matplotlib.animation import FuncAnimation
+import queue
 from itertools import count
 from src.grpc.python_client_server_dir.client_base_station_com.client import Client as ClientPi
 import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2_grpc as Servicer
@@ -34,22 +35,65 @@ class ObservationExpWidget(Screen):
     #       None
     graph_test = ObjectProperty(None)
     box = ObjectProperty(None)
+    sensor_1 = ObjectProperty(None)
+    sensor_2 = ObjectProperty(None)
+    index = count()
+    x_vals = []
+    y_vals = []
+    x_vals_1 = []
+    y_vals_1 = []
+    dataQueue_1 = queue.Queue()
+    dataQueue_2 = queue.Queue()
+
+
+
     def on_load(self):
-        self.update_graph()
+        self.sensor_1.disabled = False
+        if self.parent.get_many() > 1:
+            self.sensor_2.disabled = False
+        else:
+            self.sensor_2.disabled = True
+        #Thread(target=self.update_graph).start()
         if self.parent.status_connection():
             self.parent.client_connect.startSTM()
             Thread(target=self.getDataSTM).start()
 
+    def animate(self, i):
+        self.x_vals.append(next(self.index))
+        if self.dataQueue_1.qsize() > 0 :
+            self.y_vals.append(self.dataQueue_1.get())
+            
+        else:
+            self.y_vals.append(5.0)
+
+        if self.dataQueue_2.qsize() > 0 :
+            self.y_vals_1.append(self.dataQueue_2.get())
+            
+        else:
+            self.y_vals_1.append(5.0)
+       
+        
+        plt.cla()
+        plt.subplot(211)
+        plt.plot(self.x_vals, self.y_vals)
+        plt.xlim(i-49, i)
+        plt.subplot(212)
+        plt.cla()
+        plt.plot(self.x_vals, self.y_vals_1)
+        plt.xlim(i-49, i)
+
     def update_graph(self):
-        index = count()
+        plt.figure(1)
+        plt.style.use('fivethirtyeight')
         plt.plot()
-        self.chart= plt.gcf()
-        self.box.add_widget(FigureCanvasKivyAgg(self.chart))
+        
+        #self.box.add_widget(FigureCanvasKivyAgg(plt.gcf()))
+        self.ani = FuncAnimation(plt.gcf(), self.animate,  interval = 200)
+        plt.tight_layout()
+        plt.show()
+
+
     def getDataSTM(self):
-        index = count()
-        points = []
-        x=[]
-        y=[]
         if(self.parent.client_connect.transfer_status):
             results = self.parent.client_connect.stub.sendSTMData(ServicerMethods.Void())
             print(results)
@@ -57,9 +101,9 @@ class ObservationExpWidget(Screen):
                 try:
                     dupa = []
                     dupa = result.data.split(',')
-                    x.append(next(index))
-                    y.append(dupa[0])
-                    self.chart=plt.plot(x,y)     
+                    self.dataQueue_1.put(float(dupa[0]))
+                    self.dataQueue_2.put(float(dupa[1]))
+                   
                    #points.pop(0)
                 
                    #points_dequeued=deque(points)
@@ -74,3 +118,17 @@ class ObservationExpWidget(Screen):
                    #self.graph_test.add_plot(self.plot.points)
                 except IndexError:
                     pass
+                except ValueError:
+                    pass
+        
+    def stop_stream_data(self):
+        self.parent.client_connect.stopSTM()
+        #self.ani.event_source.stop()
+        #del self.ani
+        plt.close()
+        
+    
+    def see_plot(self):
+        Thread(target=self.update_graph).start()
+
+        

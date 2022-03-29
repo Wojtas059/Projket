@@ -31,8 +31,12 @@
         
 
         HButton:
-            text: "Historia "
-            on_press: 
+            text: "Wyświetl profil"
+            on_press:
+                root.parent.set_see_account(root.parent.get_email)
+                root.parent.add_screen("userwidget") 
+                root.manager.current = 'useraccountwidget'
+                root.manager.transition.direction = 'left'
                 #root.manager.current = ''
                 #root.manager.current = root.parent.add_screen("userwidget")
         HButton:

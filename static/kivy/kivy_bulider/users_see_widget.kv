@@ -54,15 +54,16 @@
     padding: 20
     id: nazwa
     text: ''
+    hint_text: ''
     # Draw a background to indicate selection
     Label:
         color: 0,0,0,1
         id: label_text
         text: nazwa.text
     Button:
-        text: "Zobacz Profil"
+        text: 'Zobacz profil'
         on_press:
-            
+            root.see_user_pop(nazwa.text,nazwa.hint_text)
 
     Button:
         text: "Historię pomiarową "

@@ -50,7 +50,6 @@ class Client:
         queue_data = queue.Queue()
         while(self.transfer_status):
             results = self.stub.sendSTMData(ServicerMethods.Void())
-            print("Dupax1")
             print()
             for result in results:
                 print(result.data)
