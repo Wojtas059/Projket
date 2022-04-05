@@ -37,12 +37,11 @@ def stop_test_measurements() -> bool:
 #             print("Invalid message received!")
 
 
-def read_next_packet(get_next: bool = True) -> ECGData | None:
+def read_next_packet(get_next: bool = True):
     # Send request packet
     request = ECGDataRequest()
     request.nextPacketRequested = get_next
     send_message(request)
-
     data = read_message(wait_time=0.2, print_bytes=False)
     return data
 
