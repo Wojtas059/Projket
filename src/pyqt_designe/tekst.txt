@@ -1,0 +1,1 @@
+self.scrollArea.setStyleSheet("border : 0px;")

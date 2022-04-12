@@ -5,7 +5,7 @@ from math import sin
 import kivy
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import Screen
-from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
+
 from threading import Thread
 from itertools import count
 from matplotlib.animation import FuncAnimation
@@ -88,7 +88,7 @@ class ObservationExpWidget(Screen):
         plt.plot()
         
         #self.box.add_widget(FigureCanvasKivyAgg(plt.gcf()))
-        self.ani = FuncAnimation(plt.gcf(), self.animate,  interval = 200)
+        self.ani = FuncAnimation(plt.gcf(), self.animate,  interval = 100)
         plt.tight_layout()
         plt.show()
 
@@ -102,7 +102,7 @@ class ObservationExpWidget(Screen):
                     dupa = []
                     dupa = result.data.split(',')
                     self.dataQueue_1.put(float(dupa[0]))
-                    self.dataQueue_2.put(float(dupa[1]))
+                    #self.dataQueue_2.put(float(dupa[1]))
                    
                    #points.pop(0)
                 

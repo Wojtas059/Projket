@@ -80,7 +80,7 @@ class MyGrid(Widget):
         #print("Dupa")
         #file.close
         #queue_data = queue.Queue()
-        self.com.text += "\nRozpozęto pomiar\n\n"
+        self.com.text += "\nRozpoczęto pomiar\n\n"
         self.csvQueue.put_nowait("Value A, Value B, Value C, Constant value")
         if(self.client_connect.transfer_status):
             results = self.client_connect.stub.sendSTMData(ServicerMethods.Void())
@@ -88,16 +88,16 @@ class MyGrid(Widget):
             print(results)
             for result in results:
                 print(result.data)
-                self.com.text += result.data
+                self.com.text += str(result.data)+"\n"
                 self.csvQueue.put_nowait(result.data)
-                #queue_data.put(result.data)
-                #file.write(result.data)
+
+            #    #file.write(result.data)
        
         print(results)
-        for result in results:
-            print(result.data)
-            self.com.text += result.data
-            self.csvQueue.put_nowait(result.data)
+        #for result in results:
+        #    print(result.data)
+        #    self.com.text += result.data
+        #    self.csvQueue.put_nowait(result.data)
         #ile = open("data_stm_sampling.csv","a")
         #hile queue_data.qsize() > 0:
         #   file.write(queue_data.get())
