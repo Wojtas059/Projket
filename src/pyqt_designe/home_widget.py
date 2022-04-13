@@ -119,6 +119,9 @@ class HomeWidget(QWidget):
         self.sing_up.clicked.connect(lambda:self.show_screen())
         self.sing_in.clicked.connect(lambda:self.parent().sing_in_show())
         self.auto_start.clicked.connect(lambda:self.show_screen())
+       
 
     def show_screen(self):
         print("dupa")
+
+    
