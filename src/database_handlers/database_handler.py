@@ -234,7 +234,10 @@ class DatabaseHandler:
     def findUserByLogin(self, user: User):
         self.cursor.execute("select id_user from users where login=?", (user.login,))
         row = self.cursor.fetchone()
-        user.id_user = row[0]
+        if row is not None:
+            user.id_user = row[0]
+        else :
+            user.id_user = 0
         return user
 
     def findUserPassword(self, id_user: int):
