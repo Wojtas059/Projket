@@ -6,9 +6,9 @@ import sys
 import queue
 
 # Import class of type QWidget from file
-from src.pyqt_designe.home_widget import HomeWidget
-from src.pyqt_designe.sing_in_widget import SingIn
-from src.pyqt_designe.sing_up_widget import SingUp
+from src.pyqt_design.home_widget import HomeWidget
+from src.pyqt_design.sing_in_widget import SingIn
+from src.pyqt_design.sing_up_widget import SingUp
 
 
 
