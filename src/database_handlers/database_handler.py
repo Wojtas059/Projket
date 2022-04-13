@@ -232,19 +232,22 @@ class DatabaseHandler:
 
     # Section of finding functions
     def findUserByLogin(self, user: User):
-        self.cursor.execute("select id_user from users where login=?", (user.login,))
+        self.cursor.execute(
+            "select id_user from users where login=?", (user.login,))
         row = self.cursor.fetchone()
         if row is not None:
             user.id_user = row[0]
-        else :
+        else:
             user.id_user = 0
         return user
 
     def findUserPassword(self, id_user: int):
         print("id " + str(id_user))
-        self.cursor.execute("select hash from passwords where id_user=?", (id_user,))
+        self.cursor.execute(
+            "select hash from passwords where id_user=?", (id_user,))
         row = self.cursor.fetchone()
         hash = row[0]
+        print(hash)
         return hash
 
     def findAnyAdvancedUserCode(self, advanced_user_key: str):
@@ -273,7 +276,8 @@ class DatabaseHandler:
 
     def findUserIDByEmail(self, email: str):
         id_user = -1
-        self.cursor.execute("select id_user from users where email=?", (email,))
+        self.cursor.execute(
+            "select id_user from users where email=?", (email,))
         row = self.cursor.fetchone()
         if row is None:
             return id_user
@@ -289,7 +293,8 @@ class DatabaseHandler:
         return users
 
     def findUserPrivilegesByLogin(self, login: str):
-        self.cursor.execute("""select advanced from users where login=?""", (login,))
+        self.cursor.execute(
+            """select advanced from users where login=?""", (login,))
 
         row = self.cursor.fetchone()
         print(row)
@@ -310,7 +315,8 @@ class DatabaseHandler:
 
     def findUsersForAdvanced(self, id_user: str):
         self.cursor.execute(
-            "select id_user from UserAndAdvanced where id_userAdvanced=?", (id_user,)
+            "select id_user from UserAndAdvanced where id_userAdvanced=?", (
+                id_user,)
         )
         listOfUsers = self.cursor.fetchall()
         if listOfUsers is None:
@@ -341,7 +347,8 @@ class DatabaseHandler:
 
     def getUserCredentials(self, login: str):
         self.cursor.execute(
-            "select id_user,name,surname,email from users where login=?", (login,)
+            "select id_user,name,surname,email from users where login=?", (
+                login,)
         )
         row = self.cursor.fetchone()
         return row

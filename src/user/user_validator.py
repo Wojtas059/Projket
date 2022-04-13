@@ -75,7 +75,7 @@ class UserValidator:
     def validateLoginExistence(self):
         databaseHandler = DatabaseHandler()
         databaseHandler.createConnection()
-        if databaseHandler.findAnyLogin(self.user.login):
+        if not databaseHandler.findAnyLogin(self.user.login):
             databaseHandler.closeConnection()
             return self.Flags.CORRECTFIELD
         else:
@@ -116,7 +116,7 @@ class UserValidator:
         if validationResults["LOGINEXISTENCE"] == self.Flags.CORRECTFIELD:
             databaseHandler = DatabaseHandler()
             databaseHandler.createConnection()
-            databaseHandler.findUserByLogin(self.user.login)
+            databaseHandler.findUserByLogin(self.user)
             hash = databaseHandler.findUserPassword(self.user.id_user)
             if SecurityCreator.verifyPassword(hashed=hash, password=self.user.password):
                 validationResults["PASSWORDCORRECTNESS"] = self.Flags.CORRECTFIELD
