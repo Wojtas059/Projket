@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file '.\sing_in_widget.ui'
+# Form implementation generated from reading ui file 'sing_in_widget.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -9,16 +9,105 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import (QWidget)
 
-
-
 class SingIn(QWidget):
-    def __init__(self, parent, form_widget):
+    def __init__(self, parent ):
         super(SingIn, self).__init__(parent)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.scrollArea = QtWidgets.QScrollArea(self)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 534, 124))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        self.label.setObjectName("label")
+        self.horizontalLayout.addWidget(self.label)
+        self.login = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
+        self.login.setObjectName("login")
+        self.horizontalLayout.addWidget(self.login)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout.addItem(spacerItem1)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem2)
+        self.label_2 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_2.addWidget(self.label_2)
+        self.password = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
+        self.password.setObjectName("password")
+        self.horizontalLayout_2.addWidget(self.password)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem3)
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem4)
+        self.log_in = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        self.log_in.setObjectName("log_in")
+        self.horizontalLayout_3.addWidget(self.log_in)
 
-        self.from_widget = form_widget
-        
-        self.from_widget.setObjectName("Form")
-        self.from_widget.resize(400, 300)
-        QtCore.QMetaObject.connectSlotsByName(self.from_widget)
+        self.back = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        self.back.setObjectName("back")
+        self.horizontalLayout_3.addWidget(self.back)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem5)
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout_2.addWidget(self.scrollArea)
+        self.scrollArea_2 = QtWidgets.QScrollArea(self)
+        self.scrollArea_2.setWidgetResizable(True)
+        self.scrollArea_2.setObjectName("scrollArea_2")
+        self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 534, 124))
+        self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
+        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
+        self.verticalLayout_2.addWidget(self.scrollArea_2)
+        self.scrollArea_3 = QtWidgets.QScrollArea(self)
+        self.scrollArea_3.setWidgetResizable(True)
+        self.scrollArea_3.setObjectName("scrollArea_3")
+        self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 534, 124))
+        self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
+        self.scrollArea_3.setWidget(self.scrollAreaWidgetContents_3)
+        self.verticalLayout_2.addWidget(self.scrollArea_3)
+        self.addActionBattons()
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.setWindowTitle(_translate("Form", "Form"))
+        self.label.setText(_translate("Form", "Login"))
+        self.label_2.setText(_translate("Form", "Hasło"))
+        self.log_in.setText(_translate("Form", "Zaloguj się"))
+        self.back.setText(_translate("Form", "Wróć"))
+
+    def addActionBattons(self):
+        self.log_in.clicked.connect(lambda:self.showScreen())
+        self.back.clicked.connect(lambda:self.backScreen())
+
+    def backScreen(self):
+        self.parent().openLastWidget()
+
+    # Function add name widget to lifo in the parent class and go to chosen widget
+    def showScreen(self):
+        objectName: str = str(self.sender().objectName())
+        self.parent().addScreen(self.getWidget())
+        if objectName.__eq__("sing_in"):
+            self.parent().singInShow() 
+
+    # Function return name object used widget
+    def getWidget(self):
+        return str(self.objectName())
 
 

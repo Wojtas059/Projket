@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'home_widget.ui'
+# Form implementation generated from reading ui file 'home_widget_qt.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -8,117 +8,113 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import (QWidget)
-from PyQt6.QtWidgets import QMainWindow 
 
-
-
+### Class type QWidget, responsible for set widget
 class HomeWidget(QWidget):
-    def __init__(self, parent, main_window):
+    def __init__(self, parent ):
         super(HomeWidget, self).__init__(parent)
-        self.main_window = main_window
-        self.main_window.setObjectName("MainWindow")
-        self.main_window.resize(701, 596)
-        self.main_window.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
-        self.centralwidget = QtWidgets.QWidget(self.main_window)
-        self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.centralwidget)
+
+      
+        self.setObjectName("Home Widget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.scrollArea_2 = QtWidgets.QScrollArea(self.centralwidget)
-        self.scrollArea_2.setLineWidth(0)
-        self.scrollArea_2.setWidgetResizable(True)
-        self.scrollArea_2.setObjectName("scrollArea_2")
-        
-        self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 679, 122))
-        self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents_4)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
-        self.label.setObjectName("label")
-        self.horizontalLayout.addWidget(self.label)
-        self.sing_up = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
+        self.scrollArea_4 = QtWidgets.QScrollArea(self)
+        self.scrollArea_4.setLineWidth(0)
+        self.scrollArea_4.setWidgetResizable(True)
+        self.scrollArea_4.setObjectName("scrollArea_4")
+        self.scrollAreaWidgetContents_6 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_6.setGeometry(QtCore.QRect(0, 0, 675, 125))
+        self.scrollAreaWidgetContents_6.setObjectName("scrollAreaWidgetContents_6")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents_6)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.label_2 = QtWidgets.QLabel(self.scrollAreaWidgetContents_6)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_3.addWidget(self.label_2)
+        self.sing_up = QtWidgets.QPushButton(self.scrollAreaWidgetContents_6)
         self.sing_up.setObjectName("sing_up")
-        self.horizontalLayout.addWidget(self.sing_up)
-        self.sing_in = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
+        self.horizontalLayout_3.addWidget(self.sing_up)
+        self.sing_in = QtWidgets.QPushButton(self.scrollAreaWidgetContents_6)
         self.sing_in.setObjectName("sing_in")
-        self.horizontalLayout.addWidget(self.sing_in)
-        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_4)
-        self.verticalLayout_2.addWidget(self.scrollArea_2)
-        self.line = QtWidgets.QFrame(self.centralwidget)
-        self.line.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line.setObjectName("line")
-        self.verticalLayout_2.addWidget(self.line)
-        self.scrollArea_3 = QtWidgets.QScrollArea(self.centralwidget)
-        self.scrollArea_3.setLineWidth(0)
-        self.scrollArea_3.setWidgetResizable(True)
-        self.scrollArea_3.setObjectName("scrollArea_3")
-        
-        self.scrollAreaWidgetContents_5 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, 0, 679, 122))
-        self.scrollAreaWidgetContents_5.setObjectName("scrollAreaWidgetContents_5")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents_5)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.horizontalLayout_3.addWidget(self.sing_in)
+        self.scrollArea_4.setWidget(self.scrollAreaWidgetContents_6)
+        self.verticalLayout_3.addWidget(self.scrollArea_4)
+        self.line_2 = QtWidgets.QFrame(self)
+        self.line_2.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_2.setObjectName("line_2")
+        self.verticalLayout_3.addWidget(self.line_2)
+        self.scrollArea_5 = QtWidgets.QScrollArea(self)
+        self.scrollArea_5.setLineWidth(0)
+        self.scrollArea_5.setWidgetResizable(True)
+        self.scrollArea_5.setObjectName("scrollArea_5")
+        self.scrollAreaWidgetContents_7 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_7.setGeometry(QtCore.QRect(0, 0, 675, 125))
+        self.scrollAreaWidgetContents_7.setObjectName("scrollAreaWidgetContents_7")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents_7)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         spacerItem = QtWidgets.QSpacerItem(245, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem)
-        self.auto_start = QtWidgets.QPushButton(self.scrollAreaWidgetContents_5)
+        self.horizontalLayout_4.addItem(spacerItem)
+        self.auto_start = QtWidgets.QPushButton(self.scrollAreaWidgetContents_7)
         self.auto_start.setMinimumSize(QtCore.QSize(122, 24))
         self.auto_start.setMaximumSize(QtCore.QSize(122, 24))
         self.auto_start.setObjectName("auto_start")
-        self.horizontalLayout_2.addWidget(self.auto_start)
+        self.horizontalLayout_4.addWidget(self.auto_start)
         spacerItem1 = QtWidgets.QSpacerItem(260, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem1)
-        self.scrollArea_3.setWidget(self.scrollAreaWidgetContents_5)
-        self.verticalLayout_2.addWidget(self.scrollArea_3)
-        self.verticalLayout_3.addLayout(self.verticalLayout_2)
-        self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
-        self.scrollArea.setLineWidth(0)
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName("scrollArea")
-        self.scrollArea.setStyleSheet("border : 0px;")
-        self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 681, 262))
-        self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
-        self.verticalLayout_3.addWidget(self.scrollArea)
-        self.scrollArea.raise_()
-        self.scrollArea.raise_()
-        self.scrollArea_3.raise_()
-        self.scrollArea_2.raise_()
-        self.line.raise_()
-        self.main_window.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(self.main_window)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 701, 22))
-        self.menubar.setObjectName("menubar")
-        self.menuPomoc = QtWidgets.QMenu(self.menubar)
-        self.menuPomoc.setObjectName("menuPomoc")
-        self.main_window.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(self.main_window)
-        self.statusbar.setObjectName("statusbar")
-        self.main_window.setStatusBar(self.statusbar)
-        self.menubar.addAction(self.menuPomoc.menuAction())
+        self.horizontalLayout_4.addItem(spacerItem1)
+        self.scrollArea_5.setWidget(self.scrollAreaWidgetContents_7)
+        self.verticalLayout_3.addWidget(self.scrollArea_5)
+        self.verticalLayout.addLayout(self.verticalLayout_3)
+        self.scrollArea_6 = QtWidgets.QScrollArea(self)
+        self.scrollArea_6.setWidgetResizable(True)
+        self.scrollArea_6.setObjectName("scrollArea_6")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 677, 268))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.scrollArea_6.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout.addWidget(self.scrollArea_6)
 
         self.retranslateUi()
         self.addActionBattons()
-        QtCore.QMetaObject.connectSlotsByName(self.main_window)
-        self.show()
-        
-
+        QtCore.QMetaObject.connectSlotsByName(self)
+    
+    
+    # Function set text label and button 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        self.main_window.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Używasz aplikacji w trybie gość, zaloguj się albo zarejestruj!"))
-        self.sing_up.setText(_translate("MainWindow", "Zarejestruj się"))
-        self.sing_in.setText(_translate("MainWindow", "Zaloguj się "))
-        self.auto_start.setText(_translate("MainWindow", "Rozpocznij tryb AUTO"))
-        self.menuPomoc.setTitle(_translate("MainWindow", "Pomoc"))
+        self.setWindowTitle(_translate("Home Widget", "Home Widget"))
+        self.label_2.setText(_translate("Home Widget", "Używasz aplikacji w trybie gość, zaloguj się albo zarejestruj!"))
+        self.sing_up.setText(_translate("Home Widget", "Zarejestruj się"))
+        self.sing_in.setText(_translate("Home Widget", "Zaloguj się "))
+        self.auto_start.setText(_translate("Home Widget", "Rozpocznij tryb AUTO"))
+    
 
+    def retranslateSuccesLogIn(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.setWindowTitle(_translate("Home Widget", "Home Widget"))
+        self.label_2.setText(_translate("Home Widget", "Witaj "))
+        self.sing_up.setText(_translate("Home Widget", "Profil"))
+        self.sing_in.setText(_translate("Home Widget", "Historia pomiarowa"))
+        self.auto_start.setText(_translate("Home Widget", "Rozpocznij tryb AUTO"))
+
+
+
+    # Function declare action(other function) after pushing the button
     def addActionBattons(self):
-        self.sing_up.clicked.connect(lambda:self.show_screen())
-        self.sing_in.clicked.connect(lambda:self.parent().sing_in_show())
-        self.auto_start.clicked.connect(lambda:self.show_screen())
+        self.sing_up.clicked.connect(lambda:self.showScreen())
+        self.sing_in.clicked.connect(lambda:self.showScreen())
+        self.auto_start.clicked.connect(lambda:self.showScreen())
 
-    def show_screen(self):
-        print("dupa")
+    # Function add name widget to lifo in the parent class and go to chosen widget
+    def showScreen(self):
+        objectName: str = str(self.sender().objectName())
+        self.parent().addScreen(self.getWidget())
+        if objectName.__eq__("sing_in"):
+            self.parent().singInShow() 
+        elif objectName.__eq__("sing_up"):
+            self.parent().singUpShow() 
+
+    # Function return name object used widget
+    def getWidget(self):
+        return str(self.objectName())
