@@ -141,7 +141,8 @@ class SingIn(QWidget):
             self.uvaild = UserValidator(self.user)
             data_error = {}
             data_error = self.uvaild.validateLoginOperation()
-            print("W celech commitu")
+            print(data_error.get("LOGINEXISTENCE"))
+            print(data_error.get("PASSWORDCORRECTNESS"))
             if (
                 data_error.get("LOGINEXISTENCE") == UserValidator.Flags.CORRECTFIELD
                 and data_error.get("PASSWORDCORRECTNESS") == UserValidator.Flags.CORRECTFIELD

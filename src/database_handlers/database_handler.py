@@ -264,8 +264,8 @@ class DatabaseHandler:
         self.cursor.execute("select login from users where login=?", (login,))
         row = self.cursor.fetchone()
         if row is None:
-            return True
-        return False
+            return False
+        return True
 
     def findAnyEmail(self, email: str):
         self.cursor.execute("select login from users where email=?", (email,))

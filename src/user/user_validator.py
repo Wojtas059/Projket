@@ -75,7 +75,7 @@ class UserValidator:
     def validateLoginExistence(self):
         databaseHandler = DatabaseHandler()
         databaseHandler.createConnection()
-        if not databaseHandler.findAnyLogin(self.user.login):
+        if  databaseHandler.findAnyLogin(self.user.login):
             databaseHandler.closeConnection()
             return self.Flags.CORRECTFIELD
         else:
