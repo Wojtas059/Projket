@@ -128,10 +128,9 @@ class SingIn(QWidget):
 
     def logIn(self):
         if self.checkCredentials():
-            if self.getUserPrivileges():
-                self.createMessageBox("Zmiana na odpowiedni widok auto")
-            else:
-                self.createMessageBox("Zmiana na odpowiedni widok manual")
+            bool_advanced = self.getUserPrivileges()
+            self.parent().homeShowSuccesLogIn(bool_advanced)
+            self.getUserCredentials(bool_advanced)
     def checkCredentials(self):
         if self.login.text() == "" or self.password.text() == "":
             self.createMessageBox("Uzupełnij wszytskie pola")
@@ -151,17 +150,21 @@ class SingIn(QWidget):
             else:
                 self.createMessageBox("Nie poprawy email lub haslo")
                 return False
-        
+    def getUserCredentials(self, bool_advanced):
+        instance = DatabaseHandler()
+        instance.createConnection()
+        row = instance.getUserCredentials(self.login_)
+        self.parent().setUserCredentials(row,self.login_, bool_advanced )
+        instance.closeConnection()
 
     def getUserPrivileges(self):
         instance = DatabaseHandler()
         instance.createConnection()
         bool_Advance_User = instance.findUserPrivilegesByLogin(self.login_)
-        row = instance.getUserCredentials(self.login_)
-        #self.parent.log_in(row[0],self.login_, row[1], row[2], row[3])
         instance.closeConnection()
         return bool_Advance_User
     
+   
 
     def createMessageBox(self, message: str):
         msg = QMessageBox()

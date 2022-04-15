@@ -11,6 +11,9 @@ from src.pyqt_design.sing_in_widget import SingIn
 from src.pyqt_design.sing_up_widget import SingUp
 
 
+# Import class 
+from src.user.user_logIn import UserLogIn
+
 
 class MyApp(QMainWindow):
     def __init__(self):
@@ -42,13 +45,12 @@ class MyApp(QMainWindow):
         fileMenu.addAction(self.meas_procedure)
         fileMenu.addAction(self.chatbot)
 
-        
-
     ### Create global virable ###
         # Add lifo queqe, responsible for stack/lifo last used widgets
         self.lifo_use_widget = queue.LifoQueue()
 
-
+        # Create object UserLogIn
+        self.user_login = UserLogIn()
 
 
      # Function add last used widget
@@ -59,6 +61,9 @@ class MyApp(QMainWindow):
     def lastScreen(self):
         return self.lifo_use_widget.get()
 
+    # Function set data user after succes log in 
+    def setUserCredentials(self, user_row: tuple, login:str, bool_advanced):
+        self.user_login = UserLogIn(login=login,advanced=bool_advanced, id = user_row[0], name = user_row[1] ,surname= user_row[2] , email = user_row[3])
 
 
 ### Function set central widget ! ###
@@ -68,6 +73,19 @@ class MyApp(QMainWindow):
         self.ui = HomeWidget(self)
         self.setCentralWidget(self.ui )
         self.show()
+
+
+    # Function set center widget - home widget for succes log in user
+    def homeShowSuccesLogIn(self, user_advanced: bool):
+        self.ui = HomeWidget(self)
+        if not user_advanced:
+            self.ui.addButtonHistoryUserSee()
+        self.ui.retranslateSuccesLogIn()
+        
+        self.setCentralWidget(self.ui )
+        self.show()
+
+
 
     # Function set center widget - sing in widget 
     def singInShow(self):

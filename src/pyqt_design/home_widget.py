@@ -76,7 +76,7 @@ class HomeWidget(QWidget):
         self.verticalLayout.addWidget(self.scrollArea_6)
 
         self.retranslateUi()
-        self.addActionBattons()
+        self.addActionButtons()
         QtCore.QMetaObject.connectSlotsByName(self)
     
     
@@ -96,15 +96,27 @@ class HomeWidget(QWidget):
         self.label_2.setText(_translate("Home Widget", "Witaj "))
         self.sing_up.setText(_translate("Home Widget", "Profil"))
         self.sing_in.setText(_translate("Home Widget", "Historia pomiarowa"))
-        self.auto_start.setText(_translate("Home Widget", "Rozpocznij tryb AUTO"))
+        self.log_out = QtWidgets.QPushButton(self.scrollAreaWidgetContents_6)
+        self.log_out.setObjectName("see_history")
+        self.horizontalLayout_3.addWidget(self.log_out)
+        self.log_out.setText(_translate("Home Widget", "Wyloguj się"))
+        self.log_out.clicked.connect(lambda:self.addActionButtonLogOut())
 
-
-
+    def addActionButtonLogOut(self):
+        self.parent().homeShow()
     # Function declare action(other function) after pushing the button
-    def addActionBattons(self):
+    def addActionButtons(self):
         self.sing_up.clicked.connect(lambda:self.showScreen())
         self.sing_in.clicked.connect(lambda:self.showScreen())
         self.auto_start.clicked.connect(lambda:self.showScreen())
+
+    def addButtonHistoryUserSee(self):
+        self.see_history = QtWidgets.QPushButton(self.scrollAreaWidgetContents_6)
+        self.see_history.setObjectName("see_history")
+        self.horizontalLayout_3.addWidget(self.see_history)
+        _translate = QtCore.QCoreApplication.translate
+        self.see_history.setText(_translate("Home Widget", "Historia użytkowników"))
+
 
     # Function add name widget to lifo in the parent class and go to chosen widget
     def showScreen(self):
