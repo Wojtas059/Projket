@@ -65,24 +65,23 @@ class MyApp(QMainWindow):
     def setUserCredentials(self, user_row: tuple, login:str, bool_advanced):
         self.user_login = UserLogIn(login=login,advanced=bool_advanced, id = user_row[0], name = user_row[1] ,surname= user_row[2] , email = user_row[3])
 
-
 ### Function set central widget ! ###
     
     # Function set center widget - home widget
     def homeShow(self):
-        self.ui = HomeWidget(self)
-        self.setCentralWidget(self.ui )
+        self.home_widget = HomeWidget(self)
+        self.setCentralWidget(self.home_widget)
         self.show()
 
 
     # Function set center widget - home widget for succes log in user
     def homeShowSuccesLogIn(self, user_advanced: bool):
-        self.ui = HomeWidget(self)
+        self.home_widget = HomeWidget(self)
         if not user_advanced:
-            self.ui.addButtonHistoryUserSee()
-        self.ui.retranslateSuccesLogIn()
-        
-        self.setCentralWidget(self.ui )
+            self.home_widget.addButtonHistoryUserSee()
+        self.home_widget.retranslateSuccesLogIn()
+        self.home_widget.retranslateHomeWidgetName(self.user_login.get_name())
+        self.setCentralWidget(self.home_widget)
         self.show()
 
 

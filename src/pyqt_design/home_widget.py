@@ -57,8 +57,8 @@ class HomeWidget(QWidget):
         spacerItem = QtWidgets.QSpacerItem(245, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem)
         self.auto_start = QtWidgets.QPushButton(self.scrollAreaWidgetContents_7)
-        self.auto_start.setMinimumSize(QtCore.QSize(122, 24))
-        self.auto_start.setMaximumSize(QtCore.QSize(122, 24))
+        self.auto_start.setMinimumSize(QtCore.QSize(200, 48))
+        self.auto_start.setMaximumSize(QtCore.QSize(200, 48))
         self.auto_start.setObjectName("auto_start")
         self.horizontalLayout_4.addWidget(self.auto_start)
         spacerItem1 = QtWidgets.QSpacerItem(260, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -87,7 +87,7 @@ class HomeWidget(QWidget):
         self.label_2.setText(_translate("Home Widget", "Używasz aplikacji w trybie gość, zaloguj się albo zarejestruj!"))
         self.sing_up.setText(_translate("Home Widget", "Zarejestruj się"))
         self.sing_in.setText(_translate("Home Widget", "Zaloguj się "))
-        self.auto_start.setText(_translate("Home Widget", "Rozpocznij tryb AUTO"))
+        self.auto_start.setText(_translate("Home Widget", "Rozpocznij badanie"))
     
 
     def retranslateSuccesLogIn(self):
@@ -101,6 +101,11 @@ class HomeWidget(QWidget):
         self.horizontalLayout_3.addWidget(self.log_out)
         self.log_out.setText(_translate("Home Widget", "Wyloguj się"))
         self.log_out.clicked.connect(lambda:self.addActionButtonLogOut())
+
+    def retranslateHomeWidgetName(self, name):
+        _translate = QtCore.QCoreApplication.translate 
+        self.label_2.setText(_translate("Home Widget", "Witaj "+name))
+
 
     def addActionButtonLogOut(self):
         self.parent().homeShow()
@@ -116,7 +121,6 @@ class HomeWidget(QWidget):
         self.horizontalLayout_3.addWidget(self.see_history)
         _translate = QtCore.QCoreApplication.translate
         self.see_history.setText(_translate("Home Widget", "Historia użytkowników"))
-
 
     # Function add name widget to lifo in the parent class and go to chosen widget
     def showScreen(self):

@@ -129,8 +129,9 @@ class SingIn(QWidget):
     def logIn(self):
         if self.checkCredentials():
             bool_advanced = self.getUserPrivileges()
-            self.parent().homeShowSuccesLogIn(bool_advanced)
             self.getUserCredentials(bool_advanced)
+            self.parent().homeShowSuccesLogIn(bool_advanced)
+            
     def checkCredentials(self):
         if self.login.text() == "" or self.password.text() == "":
             self.createMessageBox("Uzupełnij wszytskie pola")
@@ -164,7 +165,6 @@ class SingIn(QWidget):
         instance.closeConnection()
         return bool_Advance_User
     
-   
 
     def createMessageBox(self, message: str):
         msg = QMessageBox()
