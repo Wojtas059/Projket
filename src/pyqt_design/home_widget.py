@@ -130,6 +130,8 @@ class HomeWidget(QWidget):
             self.parent().singInShow() 
         elif objectName.__eq__("sing_up"):
             self.parent().singUpShow() 
+        elif objectName.__eq__("auto_start"):
+            self.parent().chooseMethodShow() 
 
     # Function return name object used widget
     def getWidget(self):

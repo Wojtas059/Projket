@@ -9,6 +9,8 @@ import queue
 from src.pyqt_design.home_widget import HomeWidget
 from src.pyqt_design.sing_in_widget import SingIn
 from src.pyqt_design.sing_up_widget import SingUp
+from src.pyqt_design.choose_method_widget import ChooseMethod
+from src.pyqt_design.video_referenec_widget import VideoPlayer
 
 
 # Import class 
@@ -24,6 +26,7 @@ class MyApp(QMainWindow):
 
     ### Create central widget ### 
         self.homeShow()
+        #self.videoPlayerShow()
         self.resize(800, 600)
         self.setMinimumSize(500,200)
         self.setStyleSheet("QScrollArea { border: 0px;}")
@@ -34,16 +37,17 @@ class MyApp(QMainWindow):
     def _createMenuBar(self):
         menubar = self.menuBar()
         ## Add help for users
-        fileMenu = menubar.addMenu('Pomoc')
-        exit = menubar.addMenu('Zakmknij')
+        self.fileMenu = menubar.addMenu('Pomoc')
+        self.exit = menubar.addMenu('Zamknij')
+
 
         self.user_manual= QAction('Instrukcja obsługi', self)
         self.meas_procedure = QAction('Procedura pomiarowa', self)
         self.chatbot = QAction('Chatbot', self)
 
-        fileMenu.addAction(self.user_manual)
-        fileMenu.addAction(self.meas_procedure)
-        fileMenu.addAction(self.chatbot)
+        self.fileMenu.addAction(self.user_manual)
+        self.fileMenu.addAction(self.meas_procedure)
+        self.fileMenu.addAction(self.chatbot)
 
     ### Create global virable ###
         # Add lifo queqe, responsible for stack/lifo last used widgets
@@ -84,7 +88,10 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.home_widget)
         self.show()
 
-
+    def chooseMethodShow(self):
+        self.choose_method = ChooseMethod(self)
+        self.setCentralWidget(self.choose_method)
+        self.show()
 
     # Function set center widget - sing in widget 
     def singInShow(self):
@@ -98,7 +105,10 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.sing_up)
         self.show()
 
-
+    def videoPlayerShow(self):
+        self.viode_player = VideoPlayer(self)
+        self.setCentralWidget(self.viode_player)
+        self.show()
     # Function set center widget
     def openWidget(self, widget: QWidget):
         self.setCentralWidget(widget)
