@@ -1,10 +1,10 @@
 from struct import pack
 import serial
 import time
-from src.test_scripts.messages import serialize_message, parse_message
+from messages import serialize_message, parse_message
 
-STM_COM_PORT = "/dev/ttyACM0"
-# STM_COM_PORT = "COM7"
+# STM_COM_PORT = "COM3"
+STM_COM_PORT = "COM11"
 STM_BAUDRATE = 921600
 
 stm = serial.Serial(STM_COM_PORT, STM_BAUDRATE, timeout=None)
@@ -12,7 +12,7 @@ stm = serial.Serial(STM_COM_PORT, STM_BAUDRATE, timeout=None)
 
 def send_message_until_response_or_timeout(
     message: object, timeout_s: float, time_step_s: float = 0.5
-):
+) -> object | None:
     stm.write(serialize_message(message))
     stm.flush()
     time.sleep(time_step_s)
@@ -37,8 +37,8 @@ def send_message(message: object) -> None:
 
 
 def read_message(
-    wait_time: float = 0.1, wait_precision: float = 0.01, print_bytes: bool = False
-):
+    wait_time: float = 0.1, wait_precision: float = 0.01, print_bytes: bool = False, print_size: bool = True
+) -> object | None:
     total_wait_time: float = 0
 
     while stm.in_waiting == 0 and total_wait_time < wait_time:
@@ -53,6 +53,8 @@ def read_message(
     if print_bytes:
         print(f"Received packet length: {packet_length}, data:")
         print(data)
+    if print_size:
+        print(f"Received packet length: {packet_length}")
     return parse_message(data)
 
 

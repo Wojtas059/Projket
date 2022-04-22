@@ -11,7 +11,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-import src.test_scripts.nanopb_pb2 as nanopb__pb2
+import nanopb_pb2 as nanopb__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\x12measurements.proto\x1a\x0cnanopb.proto\"M\n\x07\x45\x43GData\x12\x10\n\x08sampleID\x18\x01 \x01(\r\x12\x19\n\necgVoltage\x18\x02 \x03(\x02\x42\x05\x92?\x02\x10\x19\x12\x15\n\risValidPacket\x18\x03 \x01(\x08\"-\n\x0e\x45\x43GDataRequest\x12\x1b\n\x13nextPacketRequested\x18\x01 \x01(\x08\x62\x06proto3'
+  serialized_pb=b'\n\x12measurements.proto\x1a\x0cnanopb.proto\"M\n\x07\x45\x43GData\x12\x10\n\x08sampleID\x18\x01 \x01(\r\x12\x19\n\necgVoltage\x18\x02 \x03(\x02\x42\x05\x92?\x02\x10\x19\x12\x15\n\risValidPacket\x18\x03 \x01(\x08\"-\n\x0e\x45\x43GDataRequest\x12\x1b\n\x13nextPacketRequested\x18\x01 \x01(\x08\"E\n\x11\x42\x61ndwidthTestData\x12\x10\n\x08sampleID\x18\x01 \x01(\r\x12\x1e\n\ntestValues\x18\x02 \x01(\x0c\x42\n\x92?\x02\x08\x32\x92?\x02x\x01\"7\n\x18\x42\x61ndwidthTestDataRequest\x12\x1b\n\x13nextPacketRequested\x18\x01 \x01(\x08\"Q\n\x08\x42ioZData\x12\x10\n\x08sampleID\x18\x01 \x01(\r\x12\x1c\n\rbiozImpedance\x18\x02 \x03(\x02\x42\x05\x92?\x02\x10\x19\x12\x15\n\risValidPacket\x18\x03 \x01(\x08\".\n\x0f\x42ioZDataRequest\x12\x1b\n\x13nextPacketRequested\x18\x01 \x01(\x08\x62\x06proto3'
   ,
   dependencies=[nanopb__pb2.DESCRIPTOR,])
 
@@ -101,8 +101,157 @@ _ECGDATAREQUEST = _descriptor.Descriptor(
   serialized_end=160,
 )
 
+
+_BANDWIDTHTESTDATA = _descriptor.Descriptor(
+  name='BandwidthTestData',
+  full_name='BandwidthTestData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='sampleID', full_name='BandwidthTestData.sampleID', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='testValues', full_name='BandwidthTestData.testValues', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\222?\002\0102\222?\002x\001', file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=162,
+  serialized_end=231,
+)
+
+
+_BANDWIDTHTESTDATAREQUEST = _descriptor.Descriptor(
+  name='BandwidthTestDataRequest',
+  full_name='BandwidthTestDataRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='nextPacketRequested', full_name='BandwidthTestDataRequest.nextPacketRequested', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=233,
+  serialized_end=288,
+)
+
+
+_BIOZDATA = _descriptor.Descriptor(
+  name='BioZData',
+  full_name='BioZData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='sampleID', full_name='BioZData.sampleID', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='biozImpedance', full_name='BioZData.biozImpedance', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\222?\002\020\031', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='isValidPacket', full_name='BioZData.isValidPacket', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=290,
+  serialized_end=371,
+)
+
+
+_BIOZDATAREQUEST = _descriptor.Descriptor(
+  name='BioZDataRequest',
+  full_name='BioZDataRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='nextPacketRequested', full_name='BioZDataRequest.nextPacketRequested', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=373,
+  serialized_end=419,
+)
+
 DESCRIPTOR.message_types_by_name['ECGData'] = _ECGDATA
 DESCRIPTOR.message_types_by_name['ECGDataRequest'] = _ECGDATAREQUEST
+DESCRIPTOR.message_types_by_name['BandwidthTestData'] = _BANDWIDTHTESTDATA
+DESCRIPTOR.message_types_by_name['BandwidthTestDataRequest'] = _BANDWIDTHTESTDATAREQUEST
+DESCRIPTOR.message_types_by_name['BioZData'] = _BIOZDATA
+DESCRIPTOR.message_types_by_name['BioZDataRequest'] = _BIOZDATAREQUEST
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ECGData = _reflection.GeneratedProtocolMessageType('ECGData', (_message.Message,), {
@@ -119,6 +268,36 @@ ECGDataRequest = _reflection.GeneratedProtocolMessageType('ECGDataRequest', (_me
   })
 _sym_db.RegisterMessage(ECGDataRequest)
 
+BandwidthTestData = _reflection.GeneratedProtocolMessageType('BandwidthTestData', (_message.Message,), {
+  'DESCRIPTOR' : _BANDWIDTHTESTDATA,
+  '__module__' : 'measurements_pb2'
+  # @@protoc_insertion_point(class_scope:BandwidthTestData)
+  })
+_sym_db.RegisterMessage(BandwidthTestData)
+
+BandwidthTestDataRequest = _reflection.GeneratedProtocolMessageType('BandwidthTestDataRequest', (_message.Message,), {
+  'DESCRIPTOR' : _BANDWIDTHTESTDATAREQUEST,
+  '__module__' : 'measurements_pb2'
+  # @@protoc_insertion_point(class_scope:BandwidthTestDataRequest)
+  })
+_sym_db.RegisterMessage(BandwidthTestDataRequest)
+
+BioZData = _reflection.GeneratedProtocolMessageType('BioZData', (_message.Message,), {
+  'DESCRIPTOR' : _BIOZDATA,
+  '__module__' : 'measurements_pb2'
+  # @@protoc_insertion_point(class_scope:BioZData)
+  })
+_sym_db.RegisterMessage(BioZData)
+
+BioZDataRequest = _reflection.GeneratedProtocolMessageType('BioZDataRequest', (_message.Message,), {
+  'DESCRIPTOR' : _BIOZDATAREQUEST,
+  '__module__' : 'measurements_pb2'
+  # @@protoc_insertion_point(class_scope:BioZDataRequest)
+  })
+_sym_db.RegisterMessage(BioZDataRequest)
+
 
 _ECGDATA.fields_by_name['ecgVoltage']._options = None
+_BANDWIDTHTESTDATA.fields_by_name['testValues']._options = None
+_BIOZDATA.fields_by_name['biozImpedance']._options = None
 # @@protoc_insertion_point(module_scope)

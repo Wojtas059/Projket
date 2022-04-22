@@ -1,5 +1,6 @@
-import src.test_scripts.management_pb2 as management
-import src.test_scripts.measurements_pb2 as measurements
+from email.message import Message
+import management_pb2 as management
+import measurements_pb2 as measurements
 from enum import IntEnum
 from google.protobuf.message import DecodeError
 
@@ -13,15 +14,18 @@ class MessageID(IntEnum):
     STOP_MEASUREMENTS_RESPONSE = 0x06
     START_ECG_MEASUREMENTS_REQUEST = 0x20
     START_ECG_MEASUREMENTS_RESPONSE = 0x21
+    START_BIOZ_MEASUREMENTS_REQUEST = 0x22
+    START_BIOZ_MEASUREMENTS_RESPONSE = 0x23
     ECG_DATA = 0x60
     ECG_DATA_REQUEST = 0x61
+    BIOZ_DATA = 0x62
+    BIOZ_DATA_REQUEST = 0x63
     TEST_DATA = 0x90
     TEST_DATA_REQUEST = 0x91
-
     ERROR_RESPONSE = 0xFF
 
 
-_MESSAGE_IDS_LIST = set(item.value for item in MessageID)
+_MESSAGE_IDS_LIST: set[int] = set(item.value for item in MessageID)
 
 
 def get_message_id(message_data: bytes):
@@ -30,7 +34,7 @@ def get_message_id(message_data: bytes):
         return None
 
     messageIDByte = int(message_data[0])
-    print(f"Message ID byte: {messageIDByte}")
+    # print(f"Message ID byte: {messageIDByte}")
     if messageIDByte not in _MESSAGE_IDS_LIST:
         return None
     return MessageID(messageIDByte)
@@ -45,10 +49,7 @@ def parse_message(message_data: bytes):
 
     message = None
 
-    
-
-
-       # match message_id:
+    # match message_id:
     #     case MessageID.PONG:
     #         message = management.Pong()
     #     case MessageID.DIAGNOSTICS_RESPONSE:
@@ -72,8 +73,12 @@ def parse_message(message_data: bytes):
         message = management.StopMeasurementsResponse()
     if message_id is MessageID.START_ECG_MEASUREMENTS_RESPONSE:
        message = management.StartECGMeasurementsResponse()
+    if message_id is MessageID.START_BIOZ_MEASUREMENTS_RESPONSE:
+        message = management.StartBioZMeasurementsResponse()
     if message_id is MessageID.ECG_DATA:
         message = measurements.ECGData()
+    if message_id is MessageID.BIOZ_DATA:
+        message = measurements.BioZData()
     if message_id is MessageID.ERROR_RESPONSE:
         message = management.ErrorResponse()
     if message_id is MessageID.TEST_DATA:
@@ -100,7 +105,13 @@ def serialize_message(message: object):
         message_id = MessageID.STOP_MEASUREMENTS_REQUEST
     elif isinstance(message, management.StartECGMeasurementsRequest):
         message_id = MessageID.START_ECG_MEASUREMENTS_REQUEST
+    elif isinstance(message, management.StartBioZMeasurementsRequest):
+        message_id = MessageID.START_BIOZ_MEASUREMENTS_REQUEST
     elif isinstance(message, measurements.ECGDataRequest):
         message_id = MessageID.ECG_DATA_REQUEST
+    elif isinstance(message, measurements.BioZDataRequest):
+        message_id = MessageID.BIOZ_DATA_REQUEST
+    elif isinstance(message, measurements.BandwidthTestDataRequest):
+        message_id = MessageID.TEST_DATA_REQUEST
 
     return bytes([message_id]) + message.SerializeToString()
