@@ -109,11 +109,24 @@
         <height>220</height>
        </rect>
       </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QMediaPlayer" name="widget" native="true"/>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QMediaPlayer</class>
+   <extends>QWidget</extends>
+   <header>PyQt6.QtMultimedia</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
