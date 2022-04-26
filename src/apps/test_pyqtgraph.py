@@ -4,6 +4,7 @@ from pyqtgraph import PlotWidget, plot
 import pyqtgraph as pg
 import sys  # We need sys so that we can pass argv to QApplication
 import os
+import grpc
 from datetime import datetime
 import queue
 from random import randint
@@ -23,8 +24,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dataQueue_20_value = queue.Queue()
         self.dataQueue_aa = queue.Queue()
         self.x = list(range(300))  # 100 time points
-        self.y = [randint(0,100) for _ in range(300)]  # 100 data points
-        Thread(target=self.saveFileValue).start()
+        self.y = [0 for _ in range(300)]  # 100 data points
+        #Thread(target=self.saveFileValue).start()
 
         self.client_connect = ClientPi()
         if self.client_connect.connect() and self.client_connect.startSTM() :
@@ -39,46 +40,59 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def update_plot_data(self):
 
-        self.x = self.x[1:]  # Remove the first y element.
+        
+
+
+
+        if self.dataQueue_1.qsize() > 0 :
+            self.x = self.x[1:]  # Remove the first y element.
           # Add a new value 1 higher than the last.
         
-        self.y = self.y[1:]  # Remove the first
-
-
-
-        if self.dataQueue_aa.qsize() > 0 :
+            self.y = self.y[1:]  # Remove the first
             self.x.append(self.x[-1] + 1)
-            self.y.append(self.dataQueue_aa.get()) # Add a new random value.
+            self.y.append(self.dataQueue_1.get()) # Add a new random value.
 
         self.data_line.setData(self.x, self.y)
     
     def getDataSTM(self):
         self.licznik = 0 
-        
+        #try:
         if(self.client_connect.transfer_status):
-            results = self.client_connect.stub.sendSTMData(ServicerMethods.Void())
-            print(results)
-            self.licznik += 1
-            for result in results:
-                try:
-                    print(result.data)
-                    self.dataQueue_1.put(float(result.data))
-                    self.dataQueue_20_value.put(float(result.data))
-                except IndexError:
-                    pass
-                except ValueError:
-                    pass
+                results = self.client_connect.stub.sendSTMData(ServicerMethods.Void())
+                print(results)
+                self.licznik += 1
+                for result in results:
+                    
+                    try:
+
+                        print(result.data)
+                        self.dataQueue_1.put(float(result.data))
+                        self.dataQueue_20_value.put(float(result.data))
+                    except IndexError:
+                        pass
+                    except ValueError:
+                        pass
 
 
 
 
-            if self.licznik >= 20:
-                sum=0
-                while self.dataQueue_20_value.qsize() > 0 :
-                    sum += self.dataQueue_20_value.get()
-                self.licznik=0 
-                self.dataQueue_aa.put(float(sum/20))
-
+            #if self.licznik >= 20:
+            #    sum=0
+            #    while self.dataQueue_20_value.qsize() > 0 :
+            #        sum += self.dataQueue_20_value.get()
+            #    self.licznik=0 
+            #    self.dataQueue_aa.put(float(sum/20))
+        #except _MultiThreadedRendezvous as e:
+        #    if e.code() == grpc.StatusCode.CANCELLED:
+        #        pass 
+        #        # process cancelled status
+#
+        #    elif e.code() == grpc.StatusCode.UNAVAILABLE and 'Connection reset by peer' in e.details():
+        #        pass 
+        #        # process unavailable status
+#
+        #    else:
+        #        raise
     def average(self):                  
         if self.licznik >= 20:
             sum=0

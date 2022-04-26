@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file '.\choose_lots_muscles_widget.ui'
+# self implementation generated from reading ui file '.\choose_lots_muscles_widget.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -7,22 +7,24 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import (QWidget,QMessageBox)
+from src.database_handlers.database_handler import DatabaseHandler
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(400, 300)
-        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+class ChooseLotsMuscles(QWidget):
+    def __init__(self, parent):
+        super(ChooseLotsMuscles, self).__init__(parent)
+        self.setObjectName("Choose Lots Muscles")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.label = QtWidgets.QLabel(Form)
+        self.label = QtWidgets.QLabel(self)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
-        self.many_muscles = QtWidgets.QComboBox(Form)
+        self.many_muscles = QtWidgets.QComboBox(self)
         self.many_muscles.setObjectName("many_muscles")
         self.many_muscles.addItem("1")
         self.many_muscles.addItem("2")
@@ -34,8 +36,9 @@ class Ui_Form(object):
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem2)
-        self.choose_1 = QtWidgets.QComboBox(Form)
+        self.choose_1 = QtWidgets.QComboBox(self)
         self.choose_1.setObjectName("choose_1")
+        self.choose_1.setEnabled(False)
         self.horizontalLayout_3.addWidget(self.choose_1)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem3)
@@ -44,8 +47,9 @@ class Ui_Form(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem4)
-        self.choose_2 = QtWidgets.QComboBox(Form)
+        self.choose_2 = QtWidgets.QComboBox(self)
         self.choose_2.setObjectName("choose_2")
+        self.choose_2.setEnabled(False)
         self.horizontalLayout_2.addWidget(self.choose_2)
         spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem5)
@@ -54,17 +58,17 @@ class Ui_Form(object):
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem6)
-        self.back = QtWidgets.QPushButton(Form)
+        self.back = QtWidgets.QPushButton(self)
         self.back.setObjectName("back")
         self.horizontalLayout_5.addWidget(self.back)
-        self.next = QtWidgets.QPushButton(Form)
+        self.next = QtWidgets.QPushButton(self)
         self.next.setObjectName("next")
         self.next.setEnabled(False)
         self.horizontalLayout_5.addWidget(self.next)
         spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem7)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
-        self.scrollArea = QtWidgets.QScrollArea(Form)
+        self.scrollArea = QtWidgets.QScrollArea(self)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
@@ -73,22 +77,52 @@ class Ui_Form(object):
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi()
+        self.addActionButtons()
+        self.addItemMuscules()
+        QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        self.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Wybierz liczbę taśm"))
         self.back.setText(_translate("Form", "Wróć"))
         self.next.setText(_translate("Form", "Dalej"))
 
+    def addActionButtons(self):
+        self.next.clicked.connect(lambda: self.showScreen())
+        self.many_muscles.view().pressed.connect(self.selectItemActivity)
+        self.back.clicked.connect(lambda: self.backScreen())
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec())
+    def addItemMuscules(self):
+        
+        instance = DatabaseHandler()
+        instance.createConnection()
+        for i in instance.getAllMuscles():
+            self.choose_1.addItem(i[-1])
+            self.choose_2.addItem(i[-1])
+        instance.closeConnection()
+
+
+    def selectItemActivity(self, index):
+        self.many_muscles.setEnabled(True)
+        self.next.setEnabled(True)
+        item = self.many_muscles.model().itemFromIndex(index)
+        if str(item.text()).__eq__("1"):
+            self.choose_1.setEnabled(True)
+            self.choose_2.setEnabled(False)
+        elif str(item.text()).__eq__("2"):
+            self.choose_1.setEnabled(True)
+            self.choose_2.setEnabled(True)
+        self.next.setEnabled(True)
+
+
+    def backScreen(self):
+        self.parent().openLastWidget()
+
+    def showScreen(self):
+        self.parent().addScreen(self.getWidget())
+        self.parent().managmentSensorShow()
+    
+    def getWidget(self):
+        return str(self.objectName())

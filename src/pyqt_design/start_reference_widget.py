@@ -7,19 +7,20 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import (QWidget)
 
+class StartReference(QWidget):
+    def __init__(self, parent ):
+        super(StartReference, self).__init__(parent)
+        self.setObjectName("Start Reference")
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(400, 300)
-        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.label = QtWidgets.QLabel(Form)
+        self.label = QtWidgets.QLabel(self)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -29,16 +30,16 @@ class Ui_Form(object):
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem2)
-        self.back = QtWidgets.QPushButton(Form)
+        self.back = QtWidgets.QPushButton(self)
         self.back.setObjectName("back")
         self.horizontalLayout_5.addWidget(self.back)
-        self.next = QtWidgets.QPushButton(Form)
+        self.next = QtWidgets.QPushButton(self)
         self.next.setObjectName("next")
         self.horizontalLayout_5.addWidget(self.next)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem3)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
-        self.scrollArea = QtWidgets.QScrollArea(Form)
+        self.scrollArea = QtWidgets.QScrollArea(self)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
@@ -47,22 +48,27 @@ class Ui_Form(object):
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi()
+        self.addActionButtons()
+        QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        self.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Rozpoczęcie pomiaru referencyjnego"))
         self.back.setText(_translate("Form", "Wróć"))
         self.next.setText(_translate("Form", "Dalej"))
 
+    def addActionButtons(self):
+        self.next.clicked.connect(lambda: self.showScreen())
+        self.back.clicked.connect(lambda: self.backScreen())
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec())
+    def backScreen(self):
+        self.parent().openLastWidget()
+
+    def showScreen(self):
+        self.parent().addScreen(self.getWidget())
+        self.parent().managmentSensorShow()
+
+    def getWidget(self):
+        return str(self.objectName())

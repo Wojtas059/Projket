@@ -5,7 +5,7 @@ from measurements_pb2 import ECGData, ECGDataRequest
 
 def start_test_measurements() -> bool:
     request = StartECGMeasurementsRequest()
-    request.type = StartECGMeasurementsRequest.EMG
+    request.type = StartECGMeasurementsRequest.TEST
     request.rate = StartECGMeasurementsRequest.RATE_128HZ
     request.gain = StartECGMeasurementsRequest.GAIN_20VV
     request.lowPassFilterCutoff = StartECGMeasurementsRequest.CUTOFF_DISABLED

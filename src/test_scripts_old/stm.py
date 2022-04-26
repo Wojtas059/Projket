@@ -1,9 +1,9 @@
 from struct import pack
 import serial
 import time
-from src.test_scripts_old.messages import serialize_message, parse_message
+from messages import serialize_message, parse_message
 
-STM_COM_PORT = "/dev/ttyACM0"
+STM_COM_PORT = "COM3"
 # STM_COM_PORT = "COM7"
 STM_BAUDRATE = 921600
 

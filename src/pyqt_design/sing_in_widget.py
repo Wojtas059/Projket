@@ -96,7 +96,7 @@ class SingIn(QWidget):
             "scrollAreaWidgetContents_3")
         self.scrollArea_3.setWidget(self.scrollAreaWidgetContents_3)
         self.verticalLayout_2.addWidget(self.scrollArea_3)
-        self.addActionBattons()
+        self.addActionButtons()
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self)
 
@@ -108,7 +108,7 @@ class SingIn(QWidget):
         self.log_in.setText(_translate("Form", "Zaloguj się"))
         self.back.setText(_translate("Form", "Wróć"))
 
-    def addActionBattons(self):
+    def addActionButtons(self):
         self.log_in.clicked.connect(lambda: self.logIn())
         self.back.clicked.connect(lambda: self.backScreen())
 

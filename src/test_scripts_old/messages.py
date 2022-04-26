@@ -1,5 +1,5 @@
-import src.test_scripts.management_pb2 as management
-import src.test_scripts.measurements_pb2 as measurements
+import management_pb2 as management
+import measurements_pb2 as measurements
 from enum import IntEnum
 from google.protobuf.message import DecodeError
 

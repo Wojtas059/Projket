@@ -1,4 +1,4 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import (QWidget)
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMainWindow 
@@ -10,7 +10,10 @@ from src.pyqt_design.home_widget import HomeWidget
 from src.pyqt_design.sing_in_widget import SingIn
 from src.pyqt_design.sing_up_widget import SingUp
 from src.pyqt_design.choose_method_widget import ChooseMethod
+from src.pyqt_design.managment_sensor_widget import ManagmentSensor
 from src.pyqt_design.video_referenec_widget import VideoPlayer
+from src.pyqt_design.choose_lots_muscles_widget import ChooseLotsMuscles
+from src.pyqt_design.start_reference_widget import StartReference
 
 
 # Import class 
@@ -109,6 +112,22 @@ class MyApp(QMainWindow):
         self.viode_player = VideoPlayer(self)
         self.setCentralWidget(self.viode_player)
         self.show()
+
+    def managmentSensorShow(self):
+        self.managment_sensor = ManagmentSensor(self)
+        self.setCentralWidget(self.managment_sensor)
+        self.show()
+
+    def chooseLotsMusclesShow(self):
+        self.choose_lots_muscles = ChooseLotsMuscles(self)
+        self.setCentralWidget(self.choose_lots_muscles)
+        self.show()
+
+    def startReferenceShow(self):
+        self.start_reference = StartReference(self)
+        self.setCentralWidget(self.start_reference)
+        self.show()
+    
     # Function set center widget
     def openWidget(self, widget: QWidget):
         self.setCentralWidget(widget)
@@ -118,7 +137,10 @@ class MyApp(QMainWindow):
         widget_name = self.lastScreen()
         if widget_name.__eq__("Home Widget"):
             self.homeShow()
-        
+        if widget_name.__eq__("Choose Method"):
+            self.chooseMethodShow()
+        if widget_name.__eq__("Choose Lots Muscles"):
+            self.chooseLotsMusclesShow()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

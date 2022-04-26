@@ -13,7 +13,7 @@ from PyQt6.QtWidgets import (QWidget,QMessageBox)
 class ChooseMethod(QWidget):
     def __init__(self, parent):
         super(ChooseMethod, self).__init__(parent)
-        self.setObjectName("Form")
+        self.setObjectName("Choose Method")
         self.resize(406, 422)
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -110,8 +110,12 @@ class ChooseMethod(QWidget):
         self.next.setText(_translate("Form", "Dalej"))
         self.back.setText(_translate("Form", "Wróć"))
 
+    def showScreen(self):
+        self.parent().addScreen(self.getWidget())
+        self.parent().chooseLotsMusclesShow()
 
     def addActionButtons(self):
+        self.next.clicked.connect(lambda: self.showScreen())
         self.type_activity.view().pressed.connect(self.selectItemActivity)
         self.back.clicked.connect(lambda: self.backScreen())
         
@@ -132,3 +136,6 @@ class ChooseMethod(QWidget):
 
     def backScreen(self):
         self.parent().openLastWidget()
+
+    def getWidget(self):
+        return str(self.objectName())
