@@ -8,10 +8,13 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import (QWidget,QMessageBox)
+import ipaddress
 
 class ManagmentSensor(QWidget):
     def __init__(self, parent):
         super(ManagmentSensor, self).__init__(parent)
+
+        self.setObjectName("Managment Sensor")
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
@@ -107,7 +110,22 @@ class ManagmentSensor(QWidget):
         self.parent().startReferenceShow()
 
     def connectSensor(self):
-        self.createMessageBox("Połączenie nie nastąpiło")
+        
+        objectName: str = str(self.sender().objectName())
+        try:
+            if objectName.__eq__("connect_1"):
+                ipaddress.IPv4Address(str(self.humidity_2.text()))
+                self.parent().addIpAddressManageSensor=self.humidity_2.text()
+                
+            elif objectName.__eq__("connect_2"):
+                ipaddress.IPv4Address(str(self.humidity_3.text()))
+                self.parent().addIpAddressManageSensor=self.humidity_3.text()
+            self.createMessageBox("Nie udało się połączyć")
+                
+        except ipaddress.AddressValueError:
+            self.createMessageBox("Połączenie nie nastąpiło, podałęś nieprawidłowy addres ip")
+
+        
 
     def createMessageBox(self, message: str):
         msg = QMessageBox()

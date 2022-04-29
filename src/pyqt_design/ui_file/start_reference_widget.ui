@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>668</width>
+    <height>419</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Rozpoczęcie pomiaru referencyjnego</string>
+        <string>Wykonuj ćwiczenie pokazane ćwiczenie </string>
        </property>
       </widget>
      </item>
@@ -76,7 +76,7 @@
      <item>
       <widget class="QPushButton" name="next">
        <property name="text">
-        <string>Dalej</string>
+        <string>START</string>
        </property>
       </widget>
      </item>
@@ -105,8 +105,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>380</width>
-        <height>220</height>
+        <width>648</width>
+        <height>339</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
