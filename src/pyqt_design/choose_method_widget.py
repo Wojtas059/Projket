@@ -111,8 +111,13 @@ class ChooseMethod(QWidget):
         self.back.setText(_translate("Form", "Wróć"))
 
     def showScreen(self):
-        self.parent().addScreen(self.getWidget())
-        self.parent().chooseLotsMusclesShow()
+        if not self.humidity.__eq__(""):
+
+            self.parent().setActivityExperience(self.type_activity.currentText(), self.type_exercise.currentText(), self.type_physique.currentText(),  self.humidity.text())
+
+            self.parent().addScreen(self.getWidget())
+            self.parent().chooseLotsMusclesShow()
+        
 
     def addActionButtons(self):
         self.next.clicked.connect(lambda: self.showScreen())

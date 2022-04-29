@@ -9,10 +9,10 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import (QWidget)
 
-class StartReference(QWidget):
+class StartExperience(QWidget):
     def __init__(self, parent ):
-        super(StartReference, self).__init__(parent)
-        self.setObjectName("Start Reference")
+        super(StartExperience, self).__init__(parent)
+        self.setObjectName("Start Experience")
 
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -56,9 +56,9 @@ class StartReference(QWidget):
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Rozpoczęcie pomiaru referencyjnego"))
+        self.label.setText(_translate("Form", "Rozpoczęcie Badania"))
         self.back.setText(_translate("Form", "Wróć"))
-        self.next.setText(_translate("Form", "Dalej"))
+        self.next.setText(_translate("Form", "START"))
 
     def addActionButtons(self):
         self.next.clicked.connect(lambda: self.showScreen())
@@ -69,7 +69,7 @@ class StartReference(QWidget):
 
     def showScreen(self):
         self.parent().addScreen(self.getWidget())
-        self.parent().videoPlayerShow()
+        self.parent().startExperienceShow()
 
 
     def getWidget(self):

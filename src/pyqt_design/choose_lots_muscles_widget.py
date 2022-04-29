@@ -37,7 +37,7 @@ class ChooseLotsMuscles(QWidget):
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem2)
         self.choose_1 = QtWidgets.QComboBox(self)
-        self.choose_1.setObjectName("choose_1")
+        self.choose_1.setObjectName("sensor_1")
         self.choose_1.setEnabled(False)
         self.horizontalLayout_3.addWidget(self.choose_1)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -48,7 +48,7 @@ class ChooseLotsMuscles(QWidget):
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem4)
         self.choose_2 = QtWidgets.QComboBox(self)
-        self.choose_2.setObjectName("choose_2")
+        self.choose_2.setObjectName("sensor_2")
         self.choose_2.setEnabled(False)
         self.horizontalLayout_2.addWidget(self.choose_2)
         spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -94,8 +94,10 @@ class ChooseLotsMuscles(QWidget):
         self.many_muscles.view().pressed.connect(self.selectItemActivity)
         self.back.clicked.connect(lambda: self.backScreen())
 
+        self.choose_1.currentTextChanged.connect(self.selectItemChooseMuscules)
+        self.choose_2.currentTextChanged.connect(self.selectItemChooseMuscules)
+
     def addItemMuscules(self):
-        
         instance = DatabaseHandler()
         instance.createConnection()
         for i in instance.getAllMuscles():
@@ -103,6 +105,10 @@ class ChooseLotsMuscles(QWidget):
             self.choose_2.addItem(i[-1])
         instance.closeConnection()
 
+    def selectItemChooseMuscules(self, s):
+        objectName: str = str(self.sender().objectName())
+        self.parent().addKeyValueMangeSensor(objectName, s)
+        
 
     def selectItemActivity(self, index):
         self.many_muscles.setEnabled(True)
@@ -111,16 +117,24 @@ class ChooseLotsMuscles(QWidget):
         if str(item.text()).__eq__("1"):
             self.choose_1.setEnabled(True)
             self.choose_2.setEnabled(False)
+            self.parent().setQuantityMangeSensor(1)
+            
         elif str(item.text()).__eq__("2"):
             self.choose_1.setEnabled(True)
             self.choose_2.setEnabled(True)
+            self.parent().setQuantityMangeSensor(2)
+            
         self.next.setEnabled(True)
+        
 
 
     def backScreen(self):
         self.parent().openLastWidget()
 
     def showScreen(self):
+        if self.many_muscles.currentText().__eq__("1"):
+            self.parent().deleteKeyValueManageSensor("sensor_2")
+
         self.parent().addScreen(self.getWidget())
         self.parent().managmentSensorShow()
     

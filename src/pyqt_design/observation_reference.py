@@ -9,10 +9,10 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import (QWidget)
 
-class StartReference(QWidget):
+class ObservationReference(QWidget):
     def __init__(self, parent ):
-        super(StartReference, self).__init__(parent)
-        self.setObjectName("Start Reference")
+        super(ObservationReference, self).__init__(parent)
+        self.setObjectName("Observation Reference")
 
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -26,6 +26,35 @@ class StartReference(QWidget):
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
+
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_4.setObjectName("horizontalLayout_5")
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem4)
+        self.start = QtWidgets.QPushButton(self)
+        self.start.setObjectName("START")
+        self.start.setMinimumSize(QtCore.QSize(200, 48))
+        self.start.setMaximumSize(QtCore.QSize(200, 48))
+        self.horizontalLayout_4.addWidget(self.start)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem5)
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
+
+
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_5")
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem6)
+        self.save_file = QtWidgets.QPushButton(self)
+        self.save_file.setObjectName("Zapisz wyniki")
+        self.save_file.setEnabled(False)
+        self.horizontalLayout_3.addWidget(self.save_file)
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem7)
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
+
+
+
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -35,6 +64,7 @@ class StartReference(QWidget):
         self.horizontalLayout_5.addWidget(self.back)
         self.next = QtWidgets.QPushButton(self)
         self.next.setObjectName("next")
+        self.next.setEnabled(False)
         self.horizontalLayout_5.addWidget(self.next)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem3)
@@ -56,21 +86,25 @@ class StartReference(QWidget):
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Rozpoczęcie pomiaru referencyjnego"))
+        self.label.setText(_translate("Form", "Naciśnij przycisk START aby wykonać ćwiczenie pokazane wcześniej"))
         self.back.setText(_translate("Form", "Wróć"))
         self.next.setText(_translate("Form", "Dalej"))
+        self.start.setText(_translate("Form", "START"))
+        self.save_file.setText(_translate("From", "Zapisz wyniki"))
 
     def addActionButtons(self):
         self.next.clicked.connect(lambda: self.showScreen())
+        self.start.clicked.connect(lambda:self.startClicked())
         self.back.clicked.connect(lambda: self.backScreen())
-
+    def startClicked(self):
+        self.next.setEnabled(True)
+        self.save_file.setEnabled(True)
     def backScreen(self):
         self.parent().openLastWidget()
 
     def showScreen(self):
         self.parent().addScreen(self.getWidget())
-        self.parent().videoPlayerShow()
-
+        self.parent().startExperienceShow()
 
     def getWidget(self):
         return str(self.objectName())

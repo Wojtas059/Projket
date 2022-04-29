@@ -1,3 +1,4 @@
+from optparse import Values
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import (QWidget)
 from PyQt6.QtGui import QAction
@@ -11,14 +12,16 @@ from src.pyqt_design.sing_in_widget import SingIn
 from src.pyqt_design.sing_up_widget import SingUp
 from src.pyqt_design.choose_method_widget import ChooseMethod
 from src.pyqt_design.managment_sensor_widget import ManagmentSensor
-from src.pyqt_design.video_referenec_widget import VideoPlayer
 from src.pyqt_design.choose_lots_muscles_widget import ChooseLotsMuscles
 from src.pyqt_design.start_reference_widget import StartReference
-
+from src.pyqt_design.video_player import VideoPlayer
+from src.pyqt_design.observation_reference import ObservationReference
+from src.pyqt_design.start_exp_widget import StartExperience
 
 # Import class 
 from src.user.user_logIn import UserLogIn
-
+from src.experience_class.manage_sensor import ManageSensor
+from src.experience_class.activity_exp import ActivityExperience
 
 class MyApp(QMainWindow):
     def __init__(self):
@@ -59,6 +62,11 @@ class MyApp(QMainWindow):
         # Create object UserLogIn
         self.user_login = UserLogIn()
 
+        # Create object ManageSensor
+        self.manage_sensor = ManageSensor()
+
+        # Create object ActivityExperience
+        self.activity_experience = ActivityExperience()
 
      # Function add last used widget
     def addScreen(self, widget_name: str):
@@ -72,6 +80,39 @@ class MyApp(QMainWindow):
     def setUserCredentials(self, user_row: tuple, login:str, bool_advanced):
         self.user_login = UserLogIn(login=login,advanced=bool_advanced, id = user_row[0], name = user_row[1] ,surname= user_row[2] , email = user_row[3])
 
+    # Function set quantity uses sensor
+    def setQuantityMangeSensor(self, quantity: int):
+        self.manage_sensor.setQuantityDataSensor(quantity)
+
+    # Function get quantity uses sensor
+    def getQuantityMangeSensor(self)->int:
+        return self.manage_sensor.getQuantityDataSensor()
+
+    # Function add value to manage sensor object
+    def addKeyValueMangeSensor(self, name: str, muscules: str):
+        
+        if self.user_login.get_name().__eq__(""):
+            name_surname = "gosc gosc"
+        else:
+            name_surname = self.user_login.get_name() +" "+ self.user_login.get_surname()
+
+        value = [name_surname, muscules]
+        self.manage_sensor.addKeyValueDataSensor(name, value)
+
+    # Function adding ip_addres to list manage sensor object
+    def addIpAddressManageSensor(self, ip_addres: str):
+        self.manage_sensor.addIpAddressSensor(ip_addres)
+
+    # Function  delete key and value from data_sensor type of dict , managerSensor object
+    def deleteKeyValueManageSensor(self, key_name: str):
+        self.manage_sensor.deleteKeyValueDataSensor(key_name)
+
+
+    def setActivityExperience(self, type_activity: str, type_exercise: str, type_physique: str,humidity: str):
+        self.activity_experience = ActivityExperience(type_activity=type_activity, type_exercise=type_exercise, type_physique=type_physique, humidity=humidity )
+
+
+
 ### Function set central widget ! ###
     
     # Function set center widget - home widget
@@ -80,7 +121,16 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.home_widget)
         self.show()
 
+    def singInShow(self):
+        self.sing_in = SingIn(self)
+        self.setCentralWidget(self.sing_in)
+        self.show()
 
+    # Function set center widget - sing up widget 
+    def singUpShow(self):
+        self.sing_up = SingUp(self)
+        self.setCentralWidget(self.sing_up)
+        self.show()
     # Function set center widget - home widget for succes log in user
     def homeShowSuccesLogIn(self, user_advanced: bool):
         self.home_widget = HomeWidget(self)
@@ -97,30 +147,19 @@ class MyApp(QMainWindow):
         self.show()
 
     # Function set center widget - sing in widget 
-    def singInShow(self):
-        self.sing_in = SingIn(self)
-        self.setCentralWidget(self.sing_in)
-        self.show()
+    
 
-    # Function set center widget - sing up widget 
-    def singUpShow(self):
-        self.sing_up = SingUp(self)
-        self.setCentralWidget(self.sing_up)
-        self.show()
+    
 
-    def videoPlayerShow(self):
-        self.viode_player = VideoPlayer(self)
-        self.setCentralWidget(self.viode_player)
-        self.show()
-
-    def managmentSensorShow(self):
-        self.managment_sensor = ManagmentSensor(self)
-        self.setCentralWidget(self.managment_sensor)
-        self.show()
-
+    
     def chooseLotsMusclesShow(self):
         self.choose_lots_muscles = ChooseLotsMuscles(self)
         self.setCentralWidget(self.choose_lots_muscles)
+        self.show()
+        
+    def managmentSensorShow(self):
+        self.managment_sensor = ManagmentSensor(self)
+        self.setCentralWidget(self.managment_sensor)
         self.show()
 
     def startReferenceShow(self):
@@ -128,6 +167,21 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.start_reference)
         self.show()
     
+    def videoPlayerShow(self):
+        self.viode_player = VideoPlayer(self)
+        self.setCentralWidget(self.viode_player)
+        self.show()
+    
+    def observationReferenceShow(self):
+        self.start_reference = ObservationReference(self)
+        self.setCentralWidget(self.start_reference)
+        self.show()
+    
+    def startExperienceShow(self):
+        self.start_exp = StartExperience(self)
+        self.setCentralWidget(self.start_exp)
+        self.show()
+
     # Function set center widget
     def openWidget(self, widget: QWidget):
         self.setCentralWidget(widget)
@@ -141,6 +195,14 @@ class MyApp(QMainWindow):
             self.chooseMethodShow()
         if widget_name.__eq__("Choose Lots Muscles"):
             self.chooseLotsMusclesShow()
+        if widget_name.__eq__("Managment Sensor"):
+            self.managmentSensorShow()
+        if widget_name.__eq__("Start Reference"):
+            self.startReferenceShow()
+        if widget_name.__eq__("Video Player"):
+            self.videoPlayerShow()
+        if widget_name.__eq__("Observation Reference"):
+            self.observationReferenceShow()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
