@@ -25,3 +25,8 @@ class SecurityCreator:
             return True
         else:
             return False
+
+    def createPasswordByUserPassword(password: str):
+        password = str.encode(password)
+        hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
+        return hashed_password.decode()

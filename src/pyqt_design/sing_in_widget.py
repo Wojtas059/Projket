@@ -53,6 +53,7 @@ class SingIn(QWidget):
         self.horizontalLayout_2.addWidget(self.label_2)
         self.password = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.password.setObjectName("password")
+        self.password.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
         self.horizontalLayout_2.addWidget(self.password)
         spacerItem3 = QtWidgets.QSpacerItem(
             40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)

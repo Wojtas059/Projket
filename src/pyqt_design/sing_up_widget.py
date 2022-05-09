@@ -69,10 +69,12 @@ class SingUp(QWidget):
             3, QtWidgets.QFormLayout.ItemRole.FieldRole, self.email)
         self.password = QtWidgets.QLineEdit(self)
         self.password.setObjectName("password")
+        self.password.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
         self.formLayout_2.setWidget(
             4, QtWidgets.QFormLayout.ItemRole.FieldRole, self.password)
         self.confirm_password = QtWidgets.QLineEdit(self)
         self.confirm_password.setObjectName("confirm_password")
+        self.confirm_password.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
         self.formLayout_2.setWidget(
             5, QtWidgets.QFormLayout.ItemRole.FieldRole, self.confirm_password)
         self.horizontalLayout.addLayout(self.formLayout_2)

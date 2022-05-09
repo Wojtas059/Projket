@@ -17,6 +17,7 @@ from src.pyqt_design.start_reference_widget import StartReference
 from src.pyqt_design.video_player import VideoPlayer
 from src.pyqt_design.observation_reference import ObservationReference
 from src.pyqt_design.start_exp_widget import StartExperience
+from src.pyqt_design.user_profil_widget import UserProfilSee
 
 # Import class 
 from src.user.user_logIn import UserLogIn
@@ -117,6 +118,7 @@ class MyApp(QMainWindow):
     
     # Function set center widget - home widget
     def homeShow(self):
+        self.user_login = UserLogIn()
         self.home_widget = HomeWidget(self)
         self.setCentralWidget(self.home_widget)
         self.show()
@@ -139,6 +141,11 @@ class MyApp(QMainWindow):
         self.home_widget.retranslateSuccesLogIn()
         self.home_widget.retranslateHomeWidgetName(self.user_login.get_name())
         self.setCentralWidget(self.home_widget)
+        self.show()
+
+    def userProfilSeeShow(self):
+        self.userprofilsee = UserProfilSee(self)
+        self.setCentralWidget(self.userprofilsee)
         self.show()
 
     def chooseMethodShow(self):
@@ -191,6 +198,8 @@ class MyApp(QMainWindow):
         widget_name = self.lastScreen()
         if widget_name.__eq__("Home Widget"):
             self.homeShow()
+        if widget_name.__eq__("Home Widget Succes Login"):
+            self.homeShowSuccesLogIn(self.user_login.get_advanced())
         if widget_name.__eq__("Choose Method"):
             self.chooseMethodShow()
         if widget_name.__eq__("Choose Lots Muscles"):

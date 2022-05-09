@@ -13,7 +13,7 @@ class Client:
         self.channel = None
         self.stub = None
         self.transfer_status = False
-        self.channel = grpc.insecure_channel("192.168.1.104:50051")
+        self.channel = grpc.insecure_channel("169.254.163.114:50051")
         self.stub = Servicer.ClientBaseStationStub(self.channel)
 
     def connect(self):

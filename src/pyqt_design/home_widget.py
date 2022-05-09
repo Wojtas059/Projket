@@ -92,9 +92,11 @@ class HomeWidget(QWidget):
 
     def retranslateSuccesLogIn(self):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("Home Widget", "Home Widget"))
+        self.setObjectName("Home Widget Succes Login")
+        self.setWindowTitle(_translate("Home Widget", "Home Widget Succes Login"))
         self.label_2.setText(_translate("Home Widget", "Witaj "))
         self.sing_up.setText(_translate("Home Widget", "Profil"))
+        self.sing_up.clicked.connect(lambda:self.userProfilShow())
         self.sing_in.setText(_translate("Home Widget", "Historia pomiarowa"))
         self.log_out = QtWidgets.QPushButton(self.scrollAreaWidgetContents_6)
         self.log_out.setObjectName("see_history")
@@ -115,6 +117,8 @@ class HomeWidget(QWidget):
         self.sing_in.clicked.connect(lambda:self.showScreen())
         self.auto_start.clicked.connect(lambda:self.showScreen())
 
+    def userProfilShow(self):
+        self.parent().userProfilSeeShow()
     def addButtonHistoryUserSee(self):
         self.see_history = QtWidgets.QPushButton(self.scrollAreaWidgetContents_6)
         self.see_history.setObjectName("see_history")

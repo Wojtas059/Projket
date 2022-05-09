@@ -230,6 +230,23 @@ class DatabaseHandler:
             print(str(database_error) + "Password")
             self.closeConnection()
 
+    def updatePasswordByUserPassword(self,id_user:str, password: str):
+        try:
+            hashed_password = SecurityCreator.createPasswordByUserPassword(password)
+
+            self.cursor.execute(
+                """update passwords set hash= ? where id_user= ? """,
+                (
+                    hashed_password,
+                    id_user,
+                ),
+            )
+
+            self.connection.commit()
+        except sqlite3.Error as database_error:
+            print(str(database_error) + "Password")
+            self.closeConnection()
+
     # Section of finding functions
     def findUserByLogin(self, user: User):
         self.cursor.execute(
