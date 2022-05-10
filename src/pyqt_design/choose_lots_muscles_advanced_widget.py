@@ -7,14 +7,35 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import (QWidget,QMessageBox)
+from PyQt6.QtWidgets import (QWidget,QMessageBox, QHBoxLayout)
 from src.database_handlers.database_handler import DatabaseHandler
 
+class ChooseMuscles(QHBoxLayout):
+    def __init__(self,  **kwargs):
+        super(ChooseMuscles, self).__init__()
 
-class ChooseLotsMuscles(QWidget):
-    def __init__(self, parent):
-        super(ChooseLotsMuscles, self).__init__(parent)
-        self.setObjectName("Choose Lots Muscles")
+        self.number = kwargs.get('id', '')
+        list_muscles:list = kwargs.get('list_muscles', [])
+        list_users:list = kwargs.get('list_users', [])
+
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.addItem(spacerItem)
+        self.choose_users = QtWidgets.QComboBox()
+        self.choose_users.setObjectName("choose_users")
+        self.addWidget(self.choose_users)
+        self.choose_muscles = QtWidgets.QComboBox()
+        self.choose_muscles.setObjectName("choose_muscles")
+        self.addWidget(self.choose_muscles)
+        for i in list_muscles:
+            self.choose_muscles.addItem(i[-1])
+        for i in list_users:
+            self.choose_users.addItem(i)
+
+class ChooseLotsMusclesAdvanced(QWidget):
+    def __init__(self, parent, **kwargs):
+        super(ChooseLotsMusclesAdvanced, self).__init__(parent)
+
+        self.setObjectName("Choose Lots Muscles Advanced")
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -26,9 +47,11 @@ class ChooseLotsMuscles(QWidget):
         self.horizontalLayout.addWidget(self.label)
         self.many_muscles = QtWidgets.QComboBox(self)
         self.many_muscles.setObjectName("many_muscles")
-        
-        self.many_muscles.addItem("1")
-        self.many_muscles.addItem("2")
+
+        for i in range(20):
+            
+            self.many_muscles.addItem(str(i+1))
+
         self.horizontalLayout.addWidget(self.many_muscles)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
@@ -37,24 +60,22 @@ class ChooseLotsMuscles(QWidget):
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem2)
-        self.choose_1 = QtWidgets.QComboBox(self)
-        self.choose_1.setObjectName("sensor_1")
-        self.choose_1.setEnabled(False)
-        self.horizontalLayout_3.addWidget(self.choose_1)
+        
+        self.scrollArea_2 = QtWidgets.QScrollArea()
+        self.scrollArea_2.setWidgetResizable(True)
+        self.scrollArea_2.setObjectName("scrollArea_2")
+        self.scrollAreaWidgetContents_8 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_8.setObjectName("scrollAreaWidgetContents_8")
+        self.verticalLayout_1 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_8)
+        self.verticalLayout_1.setObjectName("verticalLayout_1")
+        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_8)
+        self.verticalLayout.addWidget(self.scrollArea_2)
+
+
+        self.horizontalLayout_3.addLayout(self.verticalLayout_1)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem3)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem4)
-        self.choose_2 = QtWidgets.QComboBox(self)
-        self.choose_2.setObjectName("sensor_2")
-        self.choose_2.setEnabled(False)
-        self.horizontalLayout_2.addWidget(self.choose_2)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem5)
-        self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -77,7 +98,8 @@ class ChooseLotsMuscles(QWidget):
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
-
+        self.lot_of_muscles = kwargs.get("number", 0)
+        self.list_class_choose_muscles:list = []
         self.retranslateUi()
         self.addActionButtons()
         self.addItemMuscules()
@@ -95,16 +117,49 @@ class ChooseLotsMuscles(QWidget):
         self.many_muscles.view().pressed.connect(self.selectItemActivity)
         self.back.clicked.connect(lambda: self.backScreen())
 
-        self.choose_1.currentTextChanged.connect(self.selectItemChooseMuscules)
-        self.choose_2.currentTextChanged.connect(self.selectItemChooseMuscules)
-
+        
     def addItemMuscules(self):
+        if self.lot_of_muscles > 0:
+            self.list_class_choose_muscles =[]
+            list_muscles:list =  self.getAllMuscles()
+            list_users:list = self.getAllUsers()
+            self.next.setEnabled(True)
+            for j in range(self.lot_of_muscles):
+                self.list_class_choose_muscles.append(ChooseMuscles(id=j,list_users=list_users, list_muscles=list_muscles))
+                self.verticalLayout_1.addLayout(self.list_class_choose_muscles[-1])
+            
+
+    def getAllMuscles(self)->list:
+        dataList = []
         instance = DatabaseHandler()
         instance.createConnection()
-        for i in instance.getAllMuscles():
-            self.choose_1.addItem(i[-1])
-            self.choose_2.addItem(i[-1])
+        dataList = instance.getAllMuscles()
         instance.closeConnection()
+        return dataList
+
+    def getAllUsers(self)->list:
+        datalist = []
+        next_list = []
+        users = []
+        instance = DatabaseHandler()
+        instance.createConnection()
+        content = instance.findUsersForAdvanced(self.parent().user_login.get_id())
+        if not content:
+            content = []
+        else:
+            for con in content:
+                next_list.append(con[0])
+            datalist = instance.findUserByIdList(next_list)
+        instance.closeConnection()
+
+
+
+        for  x in datalist:
+            print(str(x[1])+" "+str(x[2]))
+            users.append(str(x[1])+" "+str(x[2])+" "+str(x[4]))
+        
+        return users
+
 
     def selectItemChooseMuscules(self, s):
         objectName: str = str(self.sender().objectName())
@@ -113,22 +168,12 @@ class ChooseLotsMuscles(QWidget):
 
     def selectItemActivity(self, index):
         self.many_muscles.setEnabled(True)
-        self.next.setEnabled(True)
         item = self.many_muscles.model().itemFromIndex(index)
-        if str(item.text()).__eq__("1"):
-            self.choose_1.setEnabled(True)
-            self.choose_2.setEnabled(False)
-            self.parent().setQuantityMangeSensor(1)
-            
-        elif str(item.text()).__eq__("2"):
-            self.choose_1.setEnabled(True)
-            self.choose_2.setEnabled(True)
-            self.parent().setQuantityMangeSensor(2)
-            
-        self.next.setEnabled(True)
-        
-
-
+        self.lot_of_muscles =  int(item.text())
+        if self.verticalLayout_1 is not None:
+            self.parent().chooseLotsMusclesAdvancedShow(self.lot_of_muscles)
+        self.addItemMuscules()   
+    
     def backScreen(self):
         self.parent().openLastWidget()
 

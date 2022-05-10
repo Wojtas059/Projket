@@ -111,13 +111,19 @@ class ChooseMethod(QWidget):
         self.back.setText(_translate("Form", "Wróć"))
 
     def showScreen(self):
-        if not self.humidity.__eq__(""):
+        if not self.humidity.text().__eq__(""):
 
             self.parent().setActivityExperience(self.type_activity.currentText(), self.type_exercise.currentText(), self.type_physique.currentText(),  self.humidity.text())
 
             self.parent().addScreen(self.getWidget())
-            self.parent().chooseLotsMusclesShow()
-        
+            
+            if not self.parent().user_login.get_advanced():
+                self.parent().chooseLotsMusclesAdvancedShow()
+            else:
+                self.parent().chooseLotsMusclesShow()
+                
+        else:
+            self.createMessageBox("Wprowadz wilgotność")
 
     def addActionButtons(self):
         self.next.clicked.connect(lambda: self.showScreen())
@@ -144,3 +150,9 @@ class ChooseMethod(QWidget):
 
     def getWidget(self):
         return str(self.objectName())
+
+    def createMessageBox(self, message: str):
+        msg = QMessageBox()
+        msg.setWindowTitle("Błąd")
+        msg.setText(message)
+        msg.exec()

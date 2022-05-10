@@ -39,7 +39,7 @@ class UserLogIn:
     def set_email(self, email_user):
         self.email_user = email_user
     
-    def get_advanced(self):
+    def get_advanced(self)->bool:
         return self.advanced_user
     
     def set_advanced(self, advanced_user):

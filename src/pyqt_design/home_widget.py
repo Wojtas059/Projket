@@ -120,11 +120,12 @@ class HomeWidget(QWidget):
     def userProfilShow(self):
         self.parent().userProfilSeeShow()
     def addButtonHistoryUserSee(self):
-        self.see_history = QtWidgets.QPushButton(self.scrollAreaWidgetContents_6)
-        self.see_history.setObjectName("see_history")
-        self.horizontalLayout_3.addWidget(self.see_history)
+        self.see_users = QtWidgets.QPushButton(self.scrollAreaWidgetContents_6)
+        self.see_users.setObjectName("see_users")
+        self.horizontalLayout_3.addWidget(self.see_users)
         _translate = QtCore.QCoreApplication.translate
-        self.see_history.setText(_translate("Home Widget", "Historia użytkowników"))
+        self.see_users.setText(_translate("Home Widget", "Twoi użytkownicy"))
+        self.see_users.clicked.connect(lambda:self.seeUsers())
 
     # Function add name widget to lifo in the parent class and go to chosen widget
     def showScreen(self):
@@ -136,6 +137,10 @@ class HomeWidget(QWidget):
             self.parent().singUpShow() 
         elif objectName.__eq__("auto_start"):
             self.parent().chooseMethodShow() 
+
+    def seeUsers(self):
+        self.parent().addScreen(self.getWidget())
+        self.parent().listUsersShow()
 
     # Function return name object used widget
     def getWidget(self):

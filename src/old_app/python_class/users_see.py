@@ -88,12 +88,8 @@ class UsersSeeWidget(Screen):
             instance = DatabaseHandler()
             instance.createConnection()
             if not instance.findAnyEmail(self.email_add_user.text):
-                if instance.findUserPrivilegesById(
-                    int(instance.findUserIDByEmail(self.email_add_user.text))
-                ):
-                    if instance.insertUserAndAdvanced(
-                        self.parent.get_id(), self.email_add_user.text
-                    ):
+                if instance.findUserPrivilegesById(int(instance.findUserIDByEmail(self.email_add_user.text))):
+                    if instance.insertUserAndAdvanced(self.parent.get_id(), self.email_add_user.text):
                         self.error_pop("", "Pomyślnie dodałeś użytkownika")
                         instance.closeConnection()
                         self.on_load()

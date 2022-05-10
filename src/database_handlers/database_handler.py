@@ -340,6 +340,20 @@ class DatabaseHandler:
             return False
         return listOfUsers
 
+
+
+    def findUserExistForAdvanced(self,id_userAdvanced:str, id_user: str):
+        self.cursor.execute(
+            "select id_user from UserAndAdvanced where id_userAdvanced=? and id_user=?", (
+                id_userAdvanced,id_user,)
+        )
+        row = self.cursor.fetchone()
+        if row is None:
+            return True
+        return False
+
+
+
     def findUserByIdList(self, ids: List):
         query = "select * from users where id_user in ({seq})".format(
             seq=",".join(["?"] * len(ids))

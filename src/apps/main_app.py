@@ -18,7 +18,8 @@ from src.pyqt_design.video_player import VideoPlayer
 from src.pyqt_design.observation_reference import ObservationReference
 from src.pyqt_design.start_exp_widget import StartExperience
 from src.pyqt_design.user_profil_widget import UserProfilSee
-
+from src.pyqt_design.list_users_widget import ListUsers
+from src.pyqt_design.choose_lots_muscles_advanced_widget import ChooseLotsMusclesAdvanced
 # Import class 
 from src.user.user_logIn import UserLogIn
 from src.experience_class.manage_sensor import ManageSensor
@@ -153,6 +154,10 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.choose_method)
         self.show()
 
+    def listUsersShow(self):
+        self.list_users = ListUsers(self)
+        self.setCentralWidget(self.list_users)
+        self.show()
     # Function set center widget - sing in widget 
     
 
@@ -163,7 +168,12 @@ class MyApp(QMainWindow):
         self.choose_lots_muscles = ChooseLotsMuscles(self)
         self.setCentralWidget(self.choose_lots_muscles)
         self.show()
-        
+    
+    def chooseLotsMusclesAdvancedShow(self, number:int=0):
+        self.choose_lots_muscles_advanced = ChooseLotsMusclesAdvanced(self, number = number)
+        self.setCentralWidget(self.choose_lots_muscles_advanced)
+        self.show()
+
     def managmentSensorShow(self):
         self.managment_sensor = ManagmentSensor(self)
         self.setCentralWidget(self.managment_sensor)
