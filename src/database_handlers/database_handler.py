@@ -1,3 +1,5 @@
+from datetime import datetime
+import queue
 import sqlite3
 from typing import List
 
@@ -13,6 +15,7 @@ class DatabaseHandler:
     def __init__(self):
         # TODO po przeniesieniu bazy poprawić ścieżkę
         self.databasePath = DATABASE_FILE
+        self.DataQueue=queue.Queue()
 
     def createConnection(self):
         self.connection = sqlite3.connect(self.databasePath)
@@ -104,6 +107,22 @@ class DatabaseHandler:
         self.createTableMuscles()
         self.fillTablesMuscles()
         self.closeConnection()
+    # Create table for results
+    def createResultTable(self):
+    
+        now = datetime.now()
+        day = '{:02d}'.format(now.day)
+        hour = '{:02d}'.format(now.hour)
+        minute = '{:02d}'.format(now.minute)
+        second = '{:02d}'.format(now.second)
+        day_month_year = 'R{}_{}_{}_{}'.format(day, hour,minute,second)
+        print(day_month_year)
+        sql_cmd = '''CREATE TABLE {}(c1)'''.format(
+                day_month_year)
+        print(sql_cmd)
+        self.connection.execute(sql_cmd)
+        self.connection.commit()
+        return day_month_year
 
     # Creating user section
     # TODO to poprawić zbyteczne zagniżdzenie funkcji w funkcji
@@ -396,3 +415,24 @@ class DatabaseHandler:
         hashed = self.findUserPassword(self.findUserByLogin(user).id_user)
         self.closeConnection()
         return SecurityCreator.verifyPassword(hashed, user.password)
+    # Generators
+    def generate100RecordToInsert(self):
+        for my_iter in range(100):
+            value= self.DataQueue.get()
+            yield(value,)
+
+    def generateAllRecordToInsert(self):
+        while  self.DataQueue.qsize()>0:
+            value= self.DataQueue.get()
+            yield(value,)
+    # Insertion of generated Data
+
+    #Probably to little refactor aka method, maybe as enum
+    def insertDataToDB(self,tableName:str,method:int=1):
+        sql_command="insert into {} values (?)".format(tableName)
+        if method==1:
+            self.connection.executemany(sql_command, self.generate100RecordToInsert())
+            self.connection.commit()
+        else:
+            self.connection.executemany(sql_command, self.generateAllRecordToInsert())
+            self.connection.commit()
