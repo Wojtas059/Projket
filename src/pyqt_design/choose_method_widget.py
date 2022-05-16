@@ -116,7 +116,7 @@ class ChooseMethod(QWidget):
             self.parent().setActivityExperience(self.type_activity.currentText(), self.type_exercise.currentText(), self.type_physique.currentText(),  self.humidity.text())
 
             self.parent().addScreen(self.getWidget())
-            
+            print(self.parent().user_login.get_advanced())
             if not self.parent().user_login.get_advanced():
                 self.parent().chooseLotsMusclesAdvancedShow()
             else:

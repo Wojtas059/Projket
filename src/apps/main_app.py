@@ -20,6 +20,8 @@ from src.pyqt_design.start_exp_widget import StartExperience
 from src.pyqt_design.user_profil_widget import UserProfilSee
 from src.pyqt_design.list_users_widget import ListUsers
 from src.pyqt_design.choose_lots_muscles_advanced_widget import ChooseLotsMusclesAdvanced
+from src.pyqt_design.experience_observation_widget import ExperienceObservationWidget
+
 # Import class 
 from src.user.user_logIn import UserLogIn
 from src.experience_class.manage_sensor import ManageSensor
@@ -101,6 +103,11 @@ class MyApp(QMainWindow):
         value = [name_surname, muscules]
         self.manage_sensor.addKeyValueDataSensor(name, value)
 
+
+    def addKeyValueMangeSensorUsers(self, name: str,name_surname:str, muscules: str):
+        value = [name_surname, muscules]
+        self.manage_sensor.addKeyValueDataSensor(name, value)
+
     # Function adding ip_addres to list manage sensor object
     def addIpAddressManageSensor(self, ip_addres: str):
         self.manage_sensor.addIpAddressSensor(ip_addres)
@@ -169,8 +176,8 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.choose_lots_muscles)
         self.show()
     
-    def chooseLotsMusclesAdvancedShow(self, number:int=0):
-        self.choose_lots_muscles_advanced = ChooseLotsMusclesAdvanced(self, number = number)
+    def chooseLotsMusclesAdvancedShow(self):
+        self.choose_lots_muscles_advanced = ChooseLotsMusclesAdvanced(self)
         self.setCentralWidget(self.choose_lots_muscles_advanced)
         self.show()
 
@@ -197,6 +204,11 @@ class MyApp(QMainWindow):
     def startExperienceShow(self):
         self.start_exp = StartExperience(self)
         self.setCentralWidget(self.start_exp)
+        self.show()
+    
+    def experienceObservationShow(self):
+        self.exp_observation = ExperienceObservationWidget(self, number = self.manage_sensor.getQuantityDataSensor())
+        self.setCentralWidget(self.exp_observation)
         self.show()
 
     # Function set center widget

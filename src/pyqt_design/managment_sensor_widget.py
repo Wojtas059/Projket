@@ -7,58 +7,74 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import (QWidget,QMessageBox)
+from PyQt6.QtWidgets import (QWidget,QMessageBox, QHBoxLayout)
 import ipaddress
+
+class ConnectionSensor(QHBoxLayout):
+    def __init__(self, parent,**kwargs):
+        super(ConnectionSensor, self).__init__(parent)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.addItem(spacerItem)
+        self.label = QtWidgets.QLabel()
+        self.label.setObjectName("label")
+        self.addWidget(self.label)
+        self.humidity = QtWidgets.QLineEdit()
+        self.humidity.setPlaceholderText("")
+        self.humidity.setObjectName("humidity_2")
+        self.addWidget(self.humidity)
+        self.connect = QtWidgets.QPushButton()
+        self.connect.setObjectName("connect")
+        self.addWidget(self.connect)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.addItem(spacerItem1)
+        self.number = kwargs.get("number", 1)
+        self.retranslateUi()
+        self.addActionBattons()
+    
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.label.setText(_translate("ManagmentSensor", "Wprowadz adres taśmy: "+'{:02d}'.format(self.number)))
+        self.connect.setText(_translate("ManagmentSensor", "Połącz"))
+
+    def addActionBattons(self):
+        self.connect.clicked.connect(lambda: self.connectSensor())
+
+    def connectSensor(self):
+        
+        objectName: str = str(self.sender().objectName())
+        try:
+            if objectName.__eq__("connect_1"):
+                ipaddress.IPv4Address(str(self.humidity_2.text()))
+                self.parent().addIpAddressManageSensor=self.humidity_2.text()
+                
+            elif objectName.__eq__("connect_2"):
+                ipaddress.IPv4Address(str(self.humidity_3.text()))
+                self.parent().addIpAddressManageSensor=self.humidity_3.text()
+            self.createMessageBox("Nie udało się połączyć")
+                
+        except ipaddress.AddressValueError:
+            self.createMessageBox("Połączenie nie nastąpiło, podałeś nieprawidłowy addres ip")
+
+        
+
+    def createMessageBox(self, message: str):
+        msg = QMessageBox()
+        msg.setWindowTitle("Błąd")
+        msg.setText(message)
+        msg.exec()
 
 class ManagmentSensor(QWidget):
     def __init__(self, parent):
         super(ManagmentSensor, self).__init__(parent)
-
+        self.lot_of_muscles: int = self.parent().getQuantityMangeSensor()
         self.setObjectName("Managment Sensor")
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_6.addItem(spacerItem)
-        self.label_3 = QtWidgets.QLabel(self)
-        self.label_3.setObjectName("label_3")
-        self.horizontalLayout_6.addWidget(self.label_3)
-        self.humidity_2 = QtWidgets.QLineEdit(self)
-        self.humidity_2.setPlaceholderText("")
-        self.humidity_2.setObjectName("humidity_2")
-        self.horizontalLayout_6.addWidget(self.humidity_2)
-        self.connect_1 = QtWidgets.QPushButton(self)
-        self.connect_1.setObjectName("connect_1")
-        self.horizontalLayout_6.addWidget(self.connect_1)
-        self.label_4 = QtWidgets.QLabel(self)
-        self.label_4.setText("")
-        self.label_4.setObjectName("label_4")
-        self.horizontalLayout_6.addWidget(self.label_4)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_6.addItem(spacerItem1)
-        self.verticalLayout.addLayout(self.horizontalLayout_6)
-        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_7.addItem(spacerItem2)
-        self.label_5 = QtWidgets.QLabel(self)
-        self.label_5.setObjectName("label_5")
-        self.horizontalLayout_7.addWidget(self.label_5)
-        self.humidity_3 = QtWidgets.QLineEdit(self)
-        self.humidity_3.setPlaceholderText("")
-        self.humidity_3.setObjectName("humidity_3")
-        self.horizontalLayout_7.addWidget(self.humidity_3)
-        self.connect_2 = QtWidgets.QPushButton(self)
-        self.connect_2.setObjectName("connect_2")
-        self.horizontalLayout_7.addWidget(self.connect_2)
-        self.label_6 = QtWidgets.QLabel(self)
-        self.label_6.setText("")
-        self.label_6.setObjectName("label_6")
-        self.horizontalLayout_7.addWidget(self.label_6)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_7.addItem(spacerItem3)
-        self.verticalLayout.addLayout(self.horizontalLayout_7)
+
+        for i in range(self.lot_of_muscles):
+            self.verticalLayout.addLayout(ConnectionSensor(self, number = i+1))
+
+
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -88,18 +104,13 @@ class ManagmentSensor(QWidget):
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("ManagmentSensor", "Form"))
-        self.label_3.setText(_translate("ManagmentSensor", "Wprowadz adres taśmy"))
-        self.connect_1.setText(_translate("ManagmentSensor", "Połącz"))
-        self.label_5.setText(_translate("ManagmentSensor", "Wprowadz adres taśmy"))
-        self.connect_2.setText(_translate("ManagmentSensor", "Połącz"))
+       
         self.back.setText(_translate("ManagmentSensor", "Wróć"))
         self.next.setText(_translate("ManagmentSensor", "Rozpocznij"))
 
 
     def addActionBattons(self):
         self.next.clicked.connect(lambda: self.showScreen())
-        self.connect_1.clicked.connect(lambda: self.connectSensor())
-        self.connect_2.clicked.connect(lambda: self.connectSensor())
         self.back.clicked.connect(lambda: self.backScreen())  
     
     def backScreen(self):
@@ -108,24 +119,6 @@ class ManagmentSensor(QWidget):
     def showScreen(self):
         self.parent().addScreen(self.getWidget())
         self.parent().startReferenceShow()
-
-    def connectSensor(self):
-        
-        objectName: str = str(self.sender().objectName())
-        try:
-            if objectName.__eq__("connect_1"):
-                ipaddress.IPv4Address(str(self.humidity_2.text()))
-                self.parent().addIpAddressManageSensor=self.humidity_2.text()
-                
-            elif objectName.__eq__("connect_2"):
-                ipaddress.IPv4Address(str(self.humidity_3.text()))
-                self.parent().addIpAddressManageSensor=self.humidity_3.text()
-            self.createMessageBox("Nie udało się połączyć")
-                
-        except ipaddress.AddressValueError:
-            self.createMessageBox("Połączenie nie nastąpiło, podałęś nieprawidłowy addres ip")
-
-        
 
     def createMessageBox(self, message: str):
         msg = QMessageBox()

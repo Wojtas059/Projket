@@ -69,7 +69,7 @@ class StartExperience(QWidget):
 
     def showScreen(self):
         self.parent().addScreen(self.getWidget())
-        self.parent().startExperienceShow()
+        self.parent().experienceObservationShow()
 
 
     def getWidget(self):

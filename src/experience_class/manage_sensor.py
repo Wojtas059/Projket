@@ -3,9 +3,10 @@
 
 class ManageSensor:
     def __init__(self) -> None:
-        self.quantity_sensor: int = None
+        self.quantity_sensor: int = 0
         self.data_sensor: dict = {}
         self.list_sensor_ip: list = []
+        self.id_user: list = []
 
     def getQuantityDataSensor(self)-> int:
         return self.quantity_sensor
@@ -30,3 +31,9 @@ class ManageSensor:
 
     def deleteKeyValueDataSensor(self, key_name: str):
         del self.data_sensor[key_name]
+
+    def setIdUsers(self, id_user:list):
+        self.id_user = id_user
+
+    def getIdUsers(self)-> list:
+        return self.id_user

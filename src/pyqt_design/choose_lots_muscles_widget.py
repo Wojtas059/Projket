@@ -26,7 +26,7 @@ class ChooseLotsMuscles(QWidget):
         self.horizontalLayout.addWidget(self.label)
         self.many_muscles = QtWidgets.QComboBox(self)
         self.many_muscles.setObjectName("many_muscles")
-        
+        self.number:int = 1
         self.many_muscles.addItem("1")
         self.many_muscles.addItem("2")
         self.horizontalLayout.addWidget(self.many_muscles)
@@ -118,11 +118,13 @@ class ChooseLotsMuscles(QWidget):
         if str(item.text()).__eq__("1"):
             self.choose_1.setEnabled(True)
             self.choose_2.setEnabled(False)
+            self.number: int = 1
             self.parent().setQuantityMangeSensor(1)
             
         elif str(item.text()).__eq__("2"):
             self.choose_1.setEnabled(True)
             self.choose_2.setEnabled(True)
+            self.number: int = 2
             self.parent().setQuantityMangeSensor(2)
             
         self.next.setEnabled(True)
@@ -137,7 +139,7 @@ class ChooseLotsMuscles(QWidget):
             self.parent().deleteKeyValueManageSensor("sensor_2")
 
         self.parent().addScreen(self.getWidget())
-        self.parent().managmentSensorShow()
+        self.parent().managmentSensorShow(self.number)
     
     def getWidget(self):
         return str(self.objectName())

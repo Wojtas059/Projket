@@ -7,7 +7,7 @@ class UserLogIn:
         self.surname_user: str =  kwargs.get('surname', "")
         self.login_user =  kwargs.get('login', "")
         self.email_user =  kwargs.get('email', "")
-        self.advanced_user = kwargs.get('advanced', False)
+        self.advanced_user = kwargs.get('advanced', True)
 
     def get_id(self):
         return self.id_user
