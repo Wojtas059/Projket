@@ -29,7 +29,6 @@ class ChooseMuscles(QHBoxLayout):
         for i in list_muscles:
             self.choose_muscles.addItem(i[-1])
         for i in list_users:
-            print(i)
             self.choose_users.addItem(i)
     def getNumberBlocks(self)->int:
         return self.number
@@ -80,8 +79,6 @@ class ChooseLotsMusclesAdvanced(QWidget):
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_8)
         self.verticalLayout.addWidget(self.scrollArea_2)
 
-
-        self.horizontalLayout_3.addLayout(self.verticalLayout_1)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem3)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
@@ -96,6 +93,9 @@ class ChooseLotsMusclesAdvanced(QWidget):
         self.next.setObjectName("next")
         self.next.setEnabled(False)
         self.horizontalLayout_5.addWidget(self.next)
+
+
+        
         spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem7)
         self.verticalLayout.addLayout(self.horizontalLayout_5)

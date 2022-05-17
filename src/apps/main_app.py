@@ -21,6 +21,7 @@ from src.pyqt_design.user_profil_widget import UserProfilSee
 from src.pyqt_design.list_users_widget import ListUsers
 from src.pyqt_design.choose_lots_muscles_advanced_widget import ChooseLotsMusclesAdvanced
 from src.pyqt_design.experience_observation_widget import ExperienceObservationWidget
+from src.pyqt_design.graph_observation_widget import GraphObservationWidget
 
 # Import class 
 from src.user.user_logIn import UserLogIn
@@ -207,8 +208,15 @@ class MyApp(QMainWindow):
         self.show()
     
     def experienceObservationShow(self):
-        self.exp_observation = ExperienceObservationWidget(self, number = self.manage_sensor.getQuantityDataSensor())
+        self.exp_observation = ExperienceObservationWidget(self)
         self.setCentralWidget(self.exp_observation)
+        self.show()
+
+    def graphObservationShow(self):
+        self.graph_observation = GraphObservationWidget(self)
+        print("pizda")
+        self.setCentralWidget(self.graph_observation)
+        print("pizda")
         self.show()
 
     # Function set center widget

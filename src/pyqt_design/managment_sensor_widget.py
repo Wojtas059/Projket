@@ -120,11 +120,6 @@ class ManagmentSensor(QWidget):
         self.parent().addScreen(self.getWidget())
         self.parent().startReferenceShow()
 
-    def createMessageBox(self, message: str):
-        msg = QMessageBox()
-        msg.setWindowTitle("Błąd")
-        msg.setText(message)
-        msg.exec()
-    
+
     def getWidget(self):
         return str(self.objectName())
