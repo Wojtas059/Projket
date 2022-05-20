@@ -7,9 +7,6 @@ from PyQt6.QtWidgets import (QWidget, QHBoxLayout)
 class ChooseMuscles(QHBoxLayout):
     def __init__(self, **kwargs):
         super(ChooseMuscles, self).__init__()
-
-
-
         self.number = kwargs.get('number', 1)
         self.id = kwargs.get('id', '')
         self.muscles:str = kwargs.get('choose_muscles', 'Wybrane partie mięśni')
@@ -26,19 +23,17 @@ class ChooseMuscles(QHBoxLayout):
         self.choose_muscles = QtWidgets.QLabel()
         self.choose_muscles.setObjectName("choose_muscles")
         self.addWidget(self.choose_muscles)
-
-        self.addItem(spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.addItem(spacerItem1)
         self.retranslateUi()
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        self.name_users.setText(_translate("Form", self.name))
-        self.choose_muscles.setText(_translate("Form", self.muscles))
-
-
+        self.name_users.setText(_translate("Form", str(self.name)))
+        self.choose_muscles.setText(_translate("Form", str(self.muscles)))
     
-    def dupa(self):
-        print(self.button.isChecked())
+    def getRadioChecked(self)->bool:
+        return self.button.isChecked()
 
 
 
@@ -46,16 +41,9 @@ class ExperienceObservationWidget(QWidget):
     def __init__(self, parent):
         super(ExperienceObservationWidget, self).__init__(parent)
         self.list_class_choose_muscles:list =[]
-        self.setObjectName("Choose Lots Muscles Advanced")
+        self.setObjectName("Experience")
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
-
-        
-
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem2)
         
         self.scrollArea_2 = QtWidgets.QScrollArea()
         self.scrollArea_2.setWidgetResizable(True)
@@ -69,15 +57,11 @@ class ExperienceObservationWidget(QWidget):
         
         
         self.data_sensor:dict = self.parent().manage_sensor.getDataSensor()
-        for i in range(self.parent().getQuantityMangeSensor()):
+        number:int = self.parent().getQuantityMangeSensor()
+        for i in range(number):
             self.list_class_choose_muscles.append(ChooseMuscles( name_users=self.data_sensor['sensor_'+str(i+1)][0],choose_muscles=self.data_sensor['sensor_'+str(i+1)][1] ))
             self.verticalLayout_1.addLayout(self.list_class_choose_muscles[-1])
 
-            
-     
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem3)
-        self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -127,13 +111,13 @@ class ExperienceObservationWidget(QWidget):
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("Form", "Form"))
-        self.back.setText(_translate("Form", "Wróć do menu"))
-        self.stop.setText(_translate("Form", "Zatrzymaj"))
-        self.next.setText(_translate("Form", "Zakończ"))
-        self.analitik.setText(_translate("Form", "Analiza pomiarowa"))
-        self.start.setText(_translate("Form", "Wznów"))
-        self.see_graph.setText(_translate("Form", "Zobacz wykres"))
+        self.setWindowTitle(_translate("Experience", "Experience"))
+        self.back.setText(_translate("Experience", "Wróć do menu"))
+        self.stop.setText(_translate("Experience", "Zatrzymaj"))
+        self.next.setText(_translate("Experience", "Zakończ"))
+        self.analitik.setText(_translate("Experience", "Analiza pomiarowa"))
+        self.start.setText(_translate("Experience", "Wznów"))
+        self.see_graph.setText(_translate("Experience", "Zobacz wykres"))
 
         
     def addActionButtons(self):
@@ -153,6 +137,10 @@ class ExperienceObservationWidget(QWidget):
 
     def graphShow(self):
         self.parent().addScreen(self.getWidget())
-        self.parent().graphObservationShow()
+        for i in range(len(self.list_class_choose_muscles)):
+            if self.list_class_choose_muscles[i].getRadioChecked() :
+                self.parent().graphObservationShow(id = i+1)
+                break
+
 
   

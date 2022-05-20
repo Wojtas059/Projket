@@ -11,11 +11,12 @@ from PyQt6.QtWidgets import (QWidget,QMessageBox, QHBoxLayout)
 import ipaddress
 
 class ConnectionSensor(QHBoxLayout):
-    def __init__(self, parent,**kwargs):
-        super(ConnectionSensor, self).__init__(parent)
+    def __init__(self, **kwargs):
+        super(ConnectionSensor, self).__init__()
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.addItem(spacerItem)
         self.label = QtWidgets.QLabel()
+        
         self.label.setObjectName("label")
         self.addWidget(self.label)
         self.humidity = QtWidgets.QLineEdit()
@@ -25,6 +26,7 @@ class ConnectionSensor(QHBoxLayout):
         self.connect = QtWidgets.QPushButton()
         self.connect.setObjectName("connect")
         self.addWidget(self.connect)
+        
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.addItem(spacerItem1)
         self.number = kwargs.get("number", 1)
@@ -71,9 +73,21 @@ class ManagmentSensor(QWidget):
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
 
-        for i in range(self.lot_of_muscles):
-            self.verticalLayout.addLayout(ConnectionSensor(self, number = i+1))
+        self.scrollArea_2 = QtWidgets.QScrollArea()
+        self.scrollArea_2.setWidgetResizable(True)
+        self.scrollArea_2.setObjectName("scrollArea_2")
+        self.scrollAreaWidgetContents_8 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_8.setObjectName("scrollAreaWidgetContents_8")
+        self.verticalLayout_1 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_8)
+        self.verticalLayout_1.setObjectName("verticalLayout_1")
+        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_8)
+        self.verticalLayout.addWidget(self.scrollArea_2)
 
+        self.list_connect_sennsor:list = []
+        for i in range(self.lot_of_muscles):
+            
+            self.list_connect_sennsor.append(ConnectionSensor( number = i+1))
+            self.verticalLayout_1.addLayout(self.list_connect_sennsor[-1])
 
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")

@@ -139,7 +139,7 @@ class ChooseLotsMuscles(QWidget):
             self.parent().deleteKeyValueManageSensor("sensor_2")
 
         self.parent().addScreen(self.getWidget())
-        self.parent().managmentSensorShow(self.number)
+        self.parent().managmentSensorShow()
     
     def getWidget(self):
         return str(self.objectName())

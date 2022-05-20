@@ -14,10 +14,12 @@ class ChooseMuscles(QHBoxLayout):
     def __init__(self,  **kwargs):
         super(ChooseMuscles, self).__init__()
 
-        self.number = kwargs.get('id', '')
+        self.number:int = kwargs.get('id', 0)
         list_muscles:list = kwargs.get('list_muscles', [])
         list_users:list = kwargs.get('list_users', [])
-
+        self.label = QtWidgets.QLabel()
+        self.label.setObjectName("label")
+        self.addWidget(self.label)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.addItem(spacerItem)
         self.choose_users = QtWidgets.QComboBox()
@@ -30,6 +32,12 @@ class ChooseMuscles(QHBoxLayout):
             self.choose_muscles.addItem(i[-1])
         for i in list_users:
             self.choose_users.addItem(i)
+        self.retranslateUi()
+
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.label.setText(_translate("ManagmentSensor", '{:02d}'.format(self.number+1)))
+
     def getNumberBlocks(self)->int:
         return self.number
 

@@ -212,11 +212,9 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.exp_observation)
         self.show()
 
-    def graphObservationShow(self):
-        self.graph_observation = GraphObservationWidget(self)
-        print("pizda")
+    def graphObservationShow(self, id:int=0):
+        self.graph_observation = GraphObservationWidget(self, id = id)
         self.setCentralWidget(self.graph_observation)
-        print("pizda")
         self.show()
 
     # Function set center widget
@@ -242,6 +240,10 @@ class MyApp(QMainWindow):
             self.videoPlayerShow()
         if widget_name.__eq__("Observation Reference"):
             self.observationReferenceShow()
+        if widget_name.__eq__("Start Experience"):
+            self.startExperienceShow()
+        if widget_name.__eq__("Experience"):
+            self.experienceObservationShow()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

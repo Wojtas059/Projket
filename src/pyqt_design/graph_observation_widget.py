@@ -8,28 +8,33 @@ import pyqtgraph as pg
 
 
 class GraphObservationWidget(QWidget):
-    def __init__(self, parent):
+    def __init__(self, parent, **kwargs):
         super(GraphObservationWidget, self).__init__(parent)
-
+        self.id = kwargs.get('id', 0)
+        print("wybrano: "+str(self.id))
         self.setObjectName("Visualisation Graph observation experience")
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
-
-
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem2)
         
+        self.scrollArea_2 = QtWidgets.QScrollArea()
+        self.scrollArea_2.setWidgetResizable(True)
+        self.scrollArea_2.setObjectName("scrollArea_2")
+        self.scrollAreaWidgetContents_8 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_8.setObjectName("scrollAreaWidgetContents_8")
+        self.verticalLayout_1 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_8)
+        self.verticalLayout_1.setObjectName("verticalLayout_1")
+        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_8)
+        self.verticalLayout.addWidget(self.scrollArea_2)
+
+
         hour = [1,2,3,4,5,6,7,8,9,10]
         temperature = [30,32,34,32,33,31,29,32,35,45]
         self.graphWidget = pg.PlotWidget()
-        self.horizontalLayout_3.addWidget(self.graphWidget)
+        self.verticalLayout_1.addWidget(self.graphWidget)
         self.graphWidget.plot(hour, temperature)
 
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem3)
-        self.verticalLayout.addLayout(self.horizontalLayout_3)
+        
+        
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -42,6 +47,15 @@ class GraphObservationWidget(QWidget):
         spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem7)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
+        self.scrollArea = QtWidgets.QScrollArea(self)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 380, 220))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout.addWidget(self.scrollArea)
         
         self.retranslateUi()
         self.addActionButtons()
@@ -56,6 +70,7 @@ class GraphObservationWidget(QWidget):
         self.back.clicked.connect(lambda: self.backScreen())
 
     def backScreen(self):
+        print("dupa")
         self.parent().openLastWidget()
 
 

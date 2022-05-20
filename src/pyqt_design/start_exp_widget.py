@@ -13,7 +13,6 @@ class StartExperience(QWidget):
     def __init__(self, parent ):
         super(StartExperience, self).__init__(parent)
         self.setObjectName("Start Experience")
-
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -55,10 +54,10 @@ class StartExperience(QWidget):
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Rozpoczęcie Badania"))
-        self.back.setText(_translate("Form", "Wróć"))
-        self.next.setText(_translate("Form", "START"))
+        self.setWindowTitle(_translate("Start Experience", "Start Experience"))
+        self.label.setText(_translate("Start Experience", "Rozpoczęcie Badania"))
+        self.back.setText(_translate("Start Experience", "Wróć"))
+        self.next.setText(_translate("Start Experience", "START"))
 
     def addActionButtons(self):
         self.next.clicked.connect(lambda: self.showScreen())
