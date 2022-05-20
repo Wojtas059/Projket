@@ -212,8 +212,8 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.exp_observation)
         self.show()
 
-    def graphObservationShow(self, id:int=0):
-        self.graph_observation = GraphObservationWidget(self, id = id)
+    def graphObservationShow(self, id:int=0, name_users:str = "",choose_muscles:str="" ):
+        self.graph_observation = GraphObservationWidget(self, id = id, name_users=name_users, choose_muscles=choose_muscles)
         self.setCentralWidget(self.graph_observation)
         self.show()
 

@@ -11,11 +11,25 @@ class GraphObservationWidget(QWidget):
     def __init__(self, parent, **kwargs):
         super(GraphObservationWidget, self).__init__(parent)
         self.id = kwargs.get('id', 0)
-        print("wybrano: "+str(self.id))
+        self.muscles:str = kwargs.get('choose_muscles', 'Wybrane partie mięśni')
+        self.name:str= kwargs.get('name_users', 'Gość Gość')
         self.setObjectName("Visualisation Graph observation experience")
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
-        
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_6.setObjectName("horizontalLayout_5")
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem)
+        self.name_users = QtWidgets.QLabel()
+        self.name_users.setObjectName("choose_users")
+        self.horizontalLayout_6.addWidget(self.name_users)
+        self.choose_muscles = QtWidgets.QLabel()
+        self.choose_muscles.setObjectName("choose_muscles")
+        self.horizontalLayout_6.addWidget(self.choose_muscles)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem1)
+        self.horizontalLayout_6
+
         self.scrollArea_2 = QtWidgets.QScrollArea()
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
@@ -25,7 +39,7 @@ class GraphObservationWidget(QWidget):
         self.verticalLayout_1.setObjectName("verticalLayout_1")
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_8)
         self.verticalLayout.addWidget(self.scrollArea_2)
-
+        self.verticalLayout.addLayout(self.horizontalLayout_6)
 
         hour = [1,2,3,4,5,6,7,8,9,10]
         temperature = [30,32,34,32,33,31,29,32,35,45]
@@ -65,6 +79,8 @@ class GraphObservationWidget(QWidget):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("Form", "Form"))
         self.back.setText(_translate("Form", "Wróć"))
+        self.name_users.setText(_translate("Form", str(self.name)))
+        self.choose_muscles.setText(_translate("Form", str(self.muscles)))
         
     def addActionButtons(self):
         self.back.clicked.connect(lambda: self.backScreen())

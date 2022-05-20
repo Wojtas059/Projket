@@ -139,7 +139,7 @@ class ExperienceObservationWidget(QWidget):
         self.parent().addScreen(self.getWidget())
         for i in range(len(self.list_class_choose_muscles)):
             if self.list_class_choose_muscles[i].getRadioChecked() :
-                self.parent().graphObservationShow(id = i+1)
+                self.parent().graphObservationShow(id = i+1, name_users=self.data_sensor['sensor_'+str(i+1)][0],choose_muscles=self.data_sensor['sensor_'+str(i+1)][1] )
                 break
 
 
