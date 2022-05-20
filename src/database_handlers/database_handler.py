@@ -95,18 +95,31 @@ class DatabaseHandler:
         except sqlite3.Error as database_error:
             print(database_error)
 
+    def createMeasurementTable(self):
+        sql_cmd='''CREATE TABLE IF NOT EXISTS Measurement(id_advanced_user integer,id_user integer,table_name varchar(30))'''
+        self.cursor.execute(sql_cmd)
+        self.connection.commit()
+
+    def deleteMeasurementTable(self):
+        sql_cmd='''DROP TABLE Measurement'''
+        self.cursor.execute(sql_cmd)
+        self.connection.commit()
+
     def dropAndCreateTables(self):
         self.createConnection()
         self.dropTablePasswords()
         self.dropTableUsers()
         self.dropTableUserAndAdvanced()
         self.dropTableMuscles()
+        self.deleteMeasurementTable()
         self.createTableUsers()
         self.createTablePasswords()
         self.createTableUserAndAdvanced()
+        self.createMeasurementTable()
         self.createTableMuscles()
         self.fillTablesMuscles()
         self.closeConnection()
+
     # Create table for results
     def createResultTable(self):
     
@@ -194,6 +207,11 @@ class DatabaseHandler:
         except sqlite3.Error as database_error:
             print(str(database_error) + "Password")
             self.closeConnection()
+    
+    def insertMeasurement(self,trainer_id,user_id,table_name):
+        sql_command="insert into Measurement values (?,?,?)"
+        self.cursor.execute(sql_command,[trainer_id,user_id,table_name])
+        self.connection.commit()
 
     # TODO move this method to other class in future
     def generateMusclesNames(self):
