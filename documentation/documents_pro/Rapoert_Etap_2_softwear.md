@@ -116,6 +116,7 @@ Klasa stacji bazowej(serverowa)
 
 Klasa klienta(komputer diagnosty)
 <img src='img/20.png'>
+<div style="page-break-after: always;"></div>
 
 Protobuf wynikowy
 <img src='img/21.png'>
