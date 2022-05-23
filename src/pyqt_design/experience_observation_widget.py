@@ -123,7 +123,19 @@ class ExperienceObservationWidget(QWidget):
     def addActionButtons(self):
         self.next.clicked.connect(lambda: self.showScreen())
         self.back.clicked.connect(lambda: self.backScreen())
+        self.stop.clicked.connect(lambda: self.stopSTMdata())
+        self.start.clicked.connect(lambda: self.startSTM())
         self.see_graph.clicked.connect(lambda: self.graphShow())
+
+    def stopSTMdata(self):
+        self.parent().stopSTMdata()
+        self.start.setEnabled(True)
+        self.stop.setEnabled(False)
+        
+    def startSTM(self):
+        self.start.setEnabled(False)
+        self.stop.setEnabled(True)
+        self.parent().startSTM()
 
 
     def backScreen(self):
@@ -139,6 +151,7 @@ class ExperienceObservationWidget(QWidget):
         self.parent().addScreen(self.getWidget())
         for i in range(len(self.list_class_choose_muscles)):
             if self.list_class_choose_muscles[i].getRadioChecked() :
+                self.parent().setSeeNumberGraph(i)
                 self.parent().graphObservationShow(id = i+1, name_users=self.data_sensor['sensor_'+str(i+1)][0],choose_muscles=self.data_sensor['sensor_'+str(i+1)][1] )
                 break
 

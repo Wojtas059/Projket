@@ -7,7 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import (QWidget)
+from PyQt6.QtWidgets import (QWidget, QMessageBox)
 
 class StartExperience(QWidget):
     def __init__(self, parent ):
@@ -67,8 +67,17 @@ class StartExperience(QWidget):
         self.parent().openLastWidget()
 
     def showScreen(self):
-        self.parent().addScreen(self.getWidget())
-        self.parent().experienceObservationShow()
+        if self.parent().connectBaseStation():
+            self.parent().addScreen(self.getWidget())
+            self.parent().experienceObservationShow()
+        else:
+            self.createMessageBox("Nie udało się połączyć ze stacją bazową")
+            
+    def createMessageBox(self, message: str):
+        msg = QMessageBox()
+        msg.setWindowTitle("Błąd")
+        msg.setText(message)
+        msg.exec()
 
 
     def getWidget(self):

@@ -5,6 +5,10 @@ from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMainWindow 
 import sys
 import queue
+from src.grpc.python_client_server_dir.client_base_station_com.client import Client as ClientPi
+import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2_grpc as Servicer
+import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2 as ServicerMethods
+from threading import Thread
 
 # Import class of type QWidget from file
 from src.pyqt_design.home_widget import HomeWidget
@@ -34,6 +38,9 @@ class MyApp(QMainWindow):
         super(MyApp, self).__init__()
         title = "Application"
         self.setWindowTitle(title)
+        self.see_grpah:bool = False
+        self.see_number: int = None
+        self.dataQueue_1 = queue.Queue()
         
 
     ### Create central widget ### 
@@ -122,8 +129,42 @@ class MyApp(QMainWindow):
     def setActivityExperience(self, type_activity: str, type_exercise: str, type_physique: str,humidity: str):
         self.activity_experience = ActivityExperience(type_activity=type_activity, type_exercise=type_exercise, type_physique=type_physique, humidity=humidity )
 
+    
+
+    def connectBaseStation(self)->bool:
+        self.client_connect = ClientPi()
+        if self.client_connect.connect() and self.client_connect.startSTM() :
+            Thread(target=self.getDataSTM).start()
+            return True
+        else:
+            return False
+
+    def stopSTMdata(self):
+        if self.client_connect.stopSTM():
+            print("Udało się ")
+        else:
+            print("Nie udało się")
+
+    def startSTM(self):
+        if self.client_connect.startSTM():
+            Thread(target=self.getDataSTM).start()
+        else:
+            print("Nie udało się")
 
 
+    def setSeeNumberGraph(self, number:int):
+        self.see_number = number
+        self.see_grpah = True
+        self.dataQueue_1 = None
+        self.dataQueue_1 = queue.Queue()
+    def getDataSTM(self):
+        if(self.client_connect.transfer_status):
+            results = self.client_connect.stub.sendSTMData(ServicerMethods.Void())
+            for result in results:
+                print(result.data)
+                dataarray = result.data.split(',')
+                if self.see_grpah:
+                    self.dataQueue_1.put(float(dataarray[self.see_number]))
 ### Function set central widget ! ###
     
     # Function set center widget - home widget

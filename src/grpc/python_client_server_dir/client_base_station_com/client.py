@@ -13,17 +13,18 @@ class Client:
         self.channel = None
         self.stub = None
         self.transfer_status = False
-        self.channel = grpc.insecure_channel("169.254.163.114:50051")
+        self.channel = grpc.insecure_channel("raspberrypi:50051")
         self.stub = Servicer.ClientBaseStationStub(self.channel)
 
     def connect(self):
-        response = self.stub.checkConnection(ServicerMethods.CheckConnection(stats="client"))
-        if response.stats == "Active":
-        
-            return True
-        else:
+        try:
+            response = self.stub.checkConnection(ServicerMethods.CheckConnection(stats="client"))
+            if response.stats == "Active":
+                return True
+            else:
+                return False
+        except grpc._channel._InactiveRpcError:
             return False
-        
 
     def startSTM(self):
         response = self.stub.startSTMSampling(ServicerMethods.OrderSTM(order="Sampling"))

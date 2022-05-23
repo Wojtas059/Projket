@@ -55,7 +55,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.data_line.setData(self.x, self.y)
     
     def getDataSTM(self):
-        self.licznik = 0 
+        self.licznik = 0
+        dataarray:list = []
         #try:
         if(self.client_connect.transfer_status):
                 results = self.client_connect.stub.sendSTMData(ServicerMethods.Void())
@@ -66,8 +67,9 @@ class MainWindow(QtWidgets.QMainWindow):
                     try:
 
                         print(result.data)
-                        self.dataQueue_1.put(float(result.data))
-                        self.dataQueue_20_value.put(float(result.data))
+                        dataarray = result.data.split(',')
+                        self.dataQueue_1.put(float(dataarray[0]))
+                        #self.dataQueue_20_value.put(float(result.data))
                     except IndexError:
                         pass
                     except ValueError:

@@ -2,9 +2,6 @@
 #### Niniejszy raport dotyczy podsumowania zrealizowanych zadań z Etapu 2 (Trello-Aplikacja-Etap 2)
 > #### Wojciech Maj, Piotr Łach
 
-#### Założenia
-
-Głównych założeń aplikacji jest prowadzenie akwizycji danych podczas sesji treningowych lub rehabilitacyjnych. Dodatkowo aplikacja ma zadanie umożliwić wyświetlenie historii pomiarowej użytkownika lub użytkowników (w przypadku użytkownika zaawansowanego).
 
 #### Realizacja
 
@@ -17,13 +14,13 @@ Etap 2 miał zostać ukończony do 17 stycznia ( Znaczne przesunięcie), który 
 *  Implementacja modułu pomiarowego
 *  Implementacja modułu pomocy
 
-Wszytskie zadania udało się zrealizować
+Wszystkie zadania udało się zrealizować
 
 #### Problemy
 
 Ten etap był bardzo obfity w pojawianie się problemów, począwszy od tego że długi czas oczekiwania na otrzymanie stacji bazowej i modułu akwizycji danych.
 Dodatkowo pojawił się znaczny problem w doborze biblioteki `Kivy`, która nie dość że mocno dołożyła nam pracy to całkowicie się nie sprawdziła na etapie wizualizacji sygnału. 
-Dlatego ten czas zostal wydłużony o ponową implementację całego widoku z wykorzystaniem innej bibliteki `PyQt6`, gdzie musieliśmy ponownie przeprowadzić etap 1, co skutkowało dodatkowym nakładem pracy.
+Dlatego ten czas został wydłużony o ponową implementację całego widoku z wykorzystaniem innej biblioteki `PyQt6`, gdzie musieliśmy ponownie przeprowadzić etap 1, co skutkowało dodatkowym nakładem pracy.
 
 <div style="page-break-after: always;"></div>
 
@@ -109,7 +106,7 @@ POMOC
 
 #### Komunikacja
 
-Do komunikacji wykorzystaliśmy protokół `GRPC`, gdzie łączymy się po sieci lan z stacją bazową i przesyłanie wyników następuje za pomocą biblioteki `Protobuf`
+Do komunikacji wykorzystaliśmy protokół `GRPC`, gdzie łączymy się po sieci `LAN` z stacją bazową i przesyłanie wyników następuje za pomocą biblioteki `Protobuf`
 
 Klasa stacji bazowej(serverowa)
 <img src='img/19.png'>
@@ -124,6 +121,6 @@ Protobuf wynikowy
 
 #### Baza danych
 
-Dodatno strukturę tabeli, która bęzie osobna do każego badania pomiarowego
+Dodano strukturę tabeli, która będzie tworzona do każdego badania pomiarowego
 <img src='img/24.png'>
 <img src='img/25.png'>

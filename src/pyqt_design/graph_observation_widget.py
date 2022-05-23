@@ -41,13 +41,16 @@ class GraphObservationWidget(QWidget):
         self.verticalLayout.addWidget(self.scrollArea_2)
         self.verticalLayout.addLayout(self.horizontalLayout_6)
 
-        hour = [1,2,3,4,5,6,7,8,9,10]
-        temperature = [30,32,34,32,33,31,29,32,35,45]
+        self.x = [1,2,3,4,5,6,7,8,9,10]
+        self.y = [30,32,34,32,33,31,29,32,35,45]
         self.graphWidget = pg.PlotWidget()
         self.verticalLayout_1.addWidget(self.graphWidget)
-        self.graphWidget.plot(hour, temperature)
+        self.data_line = self.graphWidget.plot(self.x, self.y)
 
-        
+        self.timer = QtCore.QTimer()
+        self.timer.setInterval(10)
+        self.timer.timeout.connect(self.update_plot_data)
+        self.timer.start()
         
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
@@ -86,9 +89,19 @@ class GraphObservationWidget(QWidget):
         self.back.clicked.connect(lambda: self.backScreen())
 
     def backScreen(self):
-        print("dupa")
         self.parent().openLastWidget()
 
 
     def getWidget(self):
         return str(self.objectName())
+
+    def update_plot_data(self):
+        if self.parent().dataQueue_1.qsize() > 0 :
+            self.x = self.x[1:]  # Remove the first y element.
+          # Add a new value 1 higher than the last.
+        
+            self.y = self.y[1:]  # Remove the first
+            self.x.append(self.x[-1] + 1)
+            self.y.append(self.parent().dataQueue_1.get()) # Add a new random value.
+
+        self.data_line.setData(self.x, self.y)

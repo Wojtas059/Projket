@@ -71,8 +71,10 @@ class BaseStation(Servicer.ClientBaseStationServicer):
 
 def start_server():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    
     Servicer.add_ClientBaseStationServicer_to_server(BaseStation(), server)
     server.add_insecure_port("[::]:50051")
+    
     server.start()
     server.wait_for_termination()
 
