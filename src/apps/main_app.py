@@ -32,7 +32,7 @@ from src.user.user_logIn import UserLogIn
 from src.experience_class.manage_sensor import ManageSensor
 from src.experience_class.activity_exp import ActivityExperience
 
-
+from src.database_handlers.database_handler import DatabaseHandler
 class MyApp(QMainWindow):
     def __init__(self):
         super(MyApp, self).__init__()

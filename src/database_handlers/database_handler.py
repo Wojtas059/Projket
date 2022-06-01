@@ -96,7 +96,7 @@ class DatabaseHandler:
             print(database_error)
 
     def createMeasurementTable(self):
-        sql_cmd='''CREATE TABLE IF NOT EXISTS Measurement(id_advanced_user integer,id_user integer,table_name varchar(30))'''
+        sql_cmd='''CREATE TABLE IF NOT EXISTS Measurement(id_advanced_user integer,id_user integer,table_name varchar(30), muscle_name varchar(500))'''
         self.cursor.execute(sql_cmd)
         self.connection.commit()
 
@@ -208,9 +208,9 @@ class DatabaseHandler:
             print(str(database_error) + "Password")
             self.closeConnection()
     
-    def insertMeasurement(self,trainer_id,user_id,table_name):
-        sql_command="insert into Measurement values (?,?,?)"
-        self.cursor.execute(sql_command,[trainer_id,user_id,table_name])
+    def insertMeasurement(self,trainer_id,user_id,table_name,muscle_name):
+        sql_command="insert into Measurement values (?,?,?,?)"
+        self.cursor.execute(sql_command,[trainer_id,user_id,table_name,muscle_name])
         self.connection.commit()
 
     # TODO move this method to other class in future
