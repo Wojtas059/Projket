@@ -7,7 +7,8 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import (QWidget,QMessageBox)
+from PyQt6.QtWidgets import QMessageBox, QWidget
+
 from src.database_handlers.database_handler import DatabaseHandler
 
 
@@ -19,45 +20,80 @@ class ChooseLotsMuscles(QWidget):
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout.addItem(spacerItem)
         self.label = QtWidgets.QLabel(self)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
         self.many_muscles = QtWidgets.QComboBox(self)
         self.many_muscles.setObjectName("many_muscles")
-        self.number:int = 1
+        self.number: int = 1
         self.many_muscles.addItem("1")
         self.many_muscles.addItem("2")
         self.horizontalLayout.addWidget(self.many_muscles)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_3.addItem(spacerItem2)
         self.choose_1 = QtWidgets.QComboBox(self)
         self.choose_1.setObjectName("sensor_1")
         self.choose_1.setEnabled(False)
         self.horizontalLayout_3.addWidget(self.choose_1)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem3 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_3.addItem(spacerItem3)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem4 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_2.addItem(spacerItem4)
         self.choose_2 = QtWidgets.QComboBox(self)
         self.choose_2.setObjectName("sensor_2")
         self.choose_2.setEnabled(False)
         self.horizontalLayout_2.addWidget(self.choose_2)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem5 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_2.addItem(spacerItem5)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem6 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_5.addItem(spacerItem6)
         self.back = QtWidgets.QPushButton(self)
         self.back.setObjectName("back")
@@ -66,7 +102,12 @@ class ChooseLotsMuscles(QWidget):
         self.next.setObjectName("next")
         self.next.setEnabled(False)
         self.horizontalLayout_5.addWidget(self.next)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem7 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_5.addItem(spacerItem7)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
         self.scrollArea = QtWidgets.QScrollArea(self)
@@ -109,7 +150,6 @@ class ChooseLotsMuscles(QWidget):
     def selectItemChooseMuscules(self, s):
         objectName: str = str(self.sender().objectName())
         self.parent().addKeyValueMangeSensor(objectName, s)
-        
 
     def selectItemActivity(self, index):
         self.many_muscles.setEnabled(True)
@@ -120,16 +160,14 @@ class ChooseLotsMuscles(QWidget):
             self.choose_2.setEnabled(False)
             self.number: int = 1
             self.parent().setQuantityMangeSensor(1)
-            
+
         elif str(item.text()).__eq__("2"):
             self.choose_1.setEnabled(True)
             self.choose_2.setEnabled(True)
             self.number: int = 2
             self.parent().setQuantityMangeSensor(2)
-            
-        self.next.setEnabled(True)
-        
 
+        self.next.setEnabled(True)
 
     def backScreen(self):
         self.parent().openLastWidget()
@@ -140,6 +178,6 @@ class ChooseLotsMuscles(QWidget):
 
         self.parent().addScreen(self.getWidget())
         self.parent().managmentSensorShow()
-    
+
     def getWidget(self):
         return str(self.objectName())

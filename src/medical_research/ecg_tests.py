@@ -1,7 +1,11 @@
-from src.test_scripts.stm import send_message, read_message
-from src.test_scripts.management_pb2 import StartECGMeasurementsRequest, StopMeasurementsRequest
-from src.test_scripts.measurements_pb2 import ECGData, ECGDataRequest
 import queue
+
+from src.test_scripts.management_pb2 import (
+    StartECGMeasurementsRequest,
+    StopMeasurementsRequest,
+)
+from src.test_scripts.measurements_pb2 import ECGData, ECGDataRequest
+from src.test_scripts.stm import read_message, send_message
 
 
 class ECGTests:
@@ -31,7 +35,7 @@ class ECGTests:
         print(type(response))
         return True
 
-    def read_next_packet(self, get_next: bool = True, *, wait_time: float =0.2 ):
+    def read_next_packet(self, get_next: bool = True, *, wait_time: float = 0.2):
         # Send request packet
         request = ECGDataRequest()
         request.nextPacketRequested = get_next
@@ -39,15 +43,14 @@ class ECGTests:
         data = read_message(wait_time=wait_time, print_bytes=False)
         return data
 
-
-    def print_ecg_data(self,packet: ECGData, print_data: bool = True) -> None:
+    def print_ecg_data(self, packet: ECGData, print_data: bool = True) -> None:
         print("Received packet no. {} with readings:".format(packet.sampleID))
         if print_data:
             for voltage in self.ecg_data.ecgVoltage:
                 print("\t{}V".format(voltage))
                 self.queqe_data.put(voltage)
 
-    def process_packet(self,packet: ECGData) -> bool:
+    def process_packet(self, packet: ECGData) -> bool:
         self.received_packets, self.last_received_packet_id
         if isinstance(packet, ECGData):
             if packet.sampleID != 0 and packet.isValidPacket == True:

@@ -1,6 +1,7 @@
 from distutils.command.clean import clean
-from stm import send_message_until_response_or_timeout, cleanup
+
 from management_pb2 import DiagnosticsRequest
+from stm import cleanup, send_message_until_response_or_timeout
 
 
 def send_diagnostics_message(checkMAX: bool) -> object | None:

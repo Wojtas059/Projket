@@ -30,7 +30,6 @@ class UserListButton(RecycleView):
 class BattonLabel(RecycleDataViewBehavior, GridLayout):
     nazwa = ObjectProperty(None)
 
-
     def see_user_pop(self, name, emial):
         pop = Popup(
             title="Dane użytkownika",
@@ -74,7 +73,10 @@ class UsersSeeWidget(Screen):
             else:
 
                 datalist = instance.findUserByIdList(next_list)
-                self.data = [{"text": str(x[1]) + " " + str(x[2]), "hint_text": str(x[4]) } for x in datalist]
+                self.data = [
+                    {"text": str(x[1]) + " " + str(x[2]), "hint_text": str(x[4])}
+                    for x in datalist
+                ]
             instance.closeConnection()
 
         return self.data
@@ -88,8 +90,12 @@ class UsersSeeWidget(Screen):
             instance = DatabaseHandler()
             instance.createConnection()
             if not instance.findAnyEmail(self.email_add_user.text):
-                if instance.findUserPrivilegesById(int(instance.findUserIDByEmail(self.email_add_user.text))):
-                    if instance.insertUserAndAdvanced(self.parent.get_id(), self.email_add_user.text):
+                if instance.findUserPrivilegesById(
+                    int(instance.findUserIDByEmail(self.email_add_user.text))
+                ):
+                    if instance.insertUserAndAdvanced(
+                        self.parent.get_id(), self.email_add_user.text
+                    ):
                         self.error_pop("", "Pomyślnie dodałeś użytkownika")
                         instance.closeConnection()
                         self.on_load()
@@ -114,6 +120,3 @@ class UsersSeeWidget(Screen):
             size=(400, 400),
         )
         pop.open()
-    
-
-    

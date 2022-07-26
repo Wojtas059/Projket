@@ -6,6 +6,7 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
+
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -13,112 +14,157 @@ _sym_db = _symbol_database.Default()
 
 import nanopb_pb2 as nanopb__pb2
 
-
 DESCRIPTOR = _descriptor.FileDescriptor(
-  name='measurements.proto',
-  package='',
-  syntax='proto3',
-  serialized_options=None,
-  serialized_pb=b'\n\x12measurements.proto\x1a\x0cnanopb.proto\"M\n\x07\x45\x43GData\x12\x10\n\x08sampleID\x18\x01 \x01(\r\x12\x19\n\necgVoltage\x18\x02 \x03(\x02\x42\x05\x92?\x02\x10\x19\x12\x15\n\risValidPacket\x18\x03 \x01(\x08\"-\n\x0e\x45\x43GDataRequest\x12\x1b\n\x13nextPacketRequested\x18\x01 \x01(\x08\x62\x06proto3'
-  ,
-  dependencies=[nanopb__pb2.DESCRIPTOR,])
-
-
+    name="measurements.proto",
+    package="",
+    syntax="proto3",
+    serialized_options=None,
+    serialized_pb=b'\n\x12measurements.proto\x1a\x0cnanopb.proto"M\n\x07\x45\x43GData\x12\x10\n\x08sampleID\x18\x01 \x01(\r\x12\x19\n\necgVoltage\x18\x02 \x03(\x02\x42\x05\x92?\x02\x10\x19\x12\x15\n\risValidPacket\x18\x03 \x01(\x08"-\n\x0e\x45\x43GDataRequest\x12\x1b\n\x13nextPacketRequested\x18\x01 \x01(\x08\x62\x06proto3',
+    dependencies=[
+        nanopb__pb2.DESCRIPTOR,
+    ],
+)
 
 
 _ECGDATA = _descriptor.Descriptor(
-  name='ECGData',
-  full_name='ECGData',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='sampleID', full_name='ECGData.sampleID', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ecgVoltage', full_name='ECGData.ecgVoltage', index=1,
-      number=2, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\222?\002\020\031', file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='isValidPacket', full_name='ECGData.isValidPacket', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=36,
-  serialized_end=113,
+    name="ECGData",
+    full_name="ECGData",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="sampleID",
+            full_name="ECGData.sampleID",
+            index=0,
+            number=1,
+            type=13,
+            cpp_type=3,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="ecgVoltage",
+            full_name="ECGData.ecgVoltage",
+            index=1,
+            number=2,
+            type=2,
+            cpp_type=6,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\222?\002\020\031",
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="isValidPacket",
+            full_name="ECGData.isValidPacket",
+            index=2,
+            number=3,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=36,
+    serialized_end=113,
 )
 
 
 _ECGDATAREQUEST = _descriptor.Descriptor(
-  name='ECGDataRequest',
-  full_name='ECGDataRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='nextPacketRequested', full_name='ECGDataRequest.nextPacketRequested', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=115,
-  serialized_end=160,
+    name="ECGDataRequest",
+    full_name="ECGDataRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="nextPacketRequested",
+            full_name="ECGDataRequest.nextPacketRequested",
+            index=0,
+            number=1,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=115,
+    serialized_end=160,
 )
 
-DESCRIPTOR.message_types_by_name['ECGData'] = _ECGDATA
-DESCRIPTOR.message_types_by_name['ECGDataRequest'] = _ECGDATAREQUEST
+DESCRIPTOR.message_types_by_name["ECGData"] = _ECGDATA
+DESCRIPTOR.message_types_by_name["ECGDataRequest"] = _ECGDATAREQUEST
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-ECGData = _reflection.GeneratedProtocolMessageType('ECGData', (_message.Message,), {
-  'DESCRIPTOR' : _ECGDATA,
-  '__module__' : 'measurements_pb2'
-  # @@protoc_insertion_point(class_scope:ECGData)
-  })
+ECGData = _reflection.GeneratedProtocolMessageType(
+    "ECGData",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _ECGDATA,
+        "__module__": "measurements_pb2"
+        # @@protoc_insertion_point(class_scope:ECGData)
+    },
+)
 _sym_db.RegisterMessage(ECGData)
 
-ECGDataRequest = _reflection.GeneratedProtocolMessageType('ECGDataRequest', (_message.Message,), {
-  'DESCRIPTOR' : _ECGDATAREQUEST,
-  '__module__' : 'measurements_pb2'
-  # @@protoc_insertion_point(class_scope:ECGDataRequest)
-  })
+ECGDataRequest = _reflection.GeneratedProtocolMessageType(
+    "ECGDataRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _ECGDATAREQUEST,
+        "__module__": "measurements_pb2"
+        # @@protoc_insertion_point(class_scope:ECGDataRequest)
+    },
+)
 _sym_db.RegisterMessage(ECGDataRequest)
 
 
-_ECGDATA.fields_by_name['ecgVoltage']._options = None
+_ECGDATA.fields_by_name["ecgVoltage"]._options = None
 # @@protoc_insertion_point(module_scope)

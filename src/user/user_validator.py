@@ -75,7 +75,17 @@ class UserValidator:
     def validateLoginExistence(self):
         databaseHandler = DatabaseHandler()
         databaseHandler.createConnection()
-        if  databaseHandler.findAnyLogin(self.user.login):
+        if databaseHandler.findAnyLogin(self.user.login):
+            databaseHandler.closeConnection()
+            return self.Flags.CORRECTFIELD
+        else:
+            databaseHandler.closeConnection()
+            return self.Flags.INCORRECTELOGINDUPLICATE
+
+    def validateLoginNonExistence(self):
+        databaseHandler = DatabaseHandler()
+        databaseHandler.createConnection()
+        if not databaseHandler.findAnyLogin(self.user.login):
             databaseHandler.closeConnection()
             return self.Flags.CORRECTFIELD
         else:
@@ -95,7 +105,7 @@ class UserValidator:
         validationResults["SURNAME"] = self.validateSurname()
         validationResults["PASSWORD"] = self.validatePassword()
         validationResults["LOGIN"] = self.validateUserLogin()
-        validationResults["LOGINEXISTENCE"] = self.validateLoginExistence()
+        validationResults["LOGINEXISTENCE"] = self.validateLoginNonExistence()
         validationResults["EMAIL"] = self.validateEmail()
         validationResults["EMAILEXISTENCE"] = self.validateEmailExistence()
         return validationResults

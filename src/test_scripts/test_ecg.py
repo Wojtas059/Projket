@@ -1,6 +1,6 @@
-from stm import send_message, read_message
 from management_pb2 import StartECGMeasurementsRequest, StopMeasurementsRequest
 from measurements_pb2 import ECGData, ECGDataRequest
+from stm import read_message, send_message
 
 csv_file = open("ecg_data_received.csv", "w+")
 

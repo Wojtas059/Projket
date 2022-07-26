@@ -1,27 +1,28 @@
 #  The class is responsible for storing the data of log in user
 
+
 class UserLogIn:
     def __init__(self, **kwargs):
-        self.id_user = kwargs.get('id', "")
-        self.name_user: str =  kwargs.get('name', "")
-        self.surname_user: str =  kwargs.get('surname', "")
-        self.login_user =  kwargs.get('login', "")
-        self.email_user =  kwargs.get('email', "")
-        self.advanced_user = kwargs.get('advanced', True)
+        self.id_user = kwargs.get("id", "")
+        self.name_user: str = kwargs.get("name", "")
+        self.surname_user: str = kwargs.get("surname", "")
+        self.login_user = kwargs.get("login", "")
+        self.email_user = kwargs.get("email", "")
+        self.advanced_user = kwargs.get("advanced", True)
 
     def get_id(self):
         return self.id_user
-    
+
     def set_id(self, id_user):
         self.id_user = id_user
 
-    def get_name(self)-> str:
+    def get_name(self) -> str:
         return self.name_user
 
     def set_name(self, name_user):
         self.name_user = name_user
 
-    def get_surname(self)-> str:
+    def get_surname(self) -> str:
         return self.surname_user
 
     def set_surname(self, surname_user):
@@ -35,16 +36,12 @@ class UserLogIn:
 
     def get_email(self):
         return self.email_user
-        
+
     def set_email(self, email_user):
         self.email_user = email_user
-    
-    def get_advanced(self)->bool:
+
+    def get_advanced(self) -> bool:
         return self.advanced_user
-    
+
     def set_advanced(self, advanced_user):
         self.advanced_user = advanced_user
-    
-
-
-

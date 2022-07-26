@@ -1,4 +1,4 @@
-'''This file automatically rebuilds the proto definitions for Python.'''
+"""This file automatically rebuilds the proto definitions for Python."""
 from __future__ import absolute_import
 
 import os.path
@@ -26,11 +26,13 @@ if os.path.isfile(protosrc):
         if has_grpcio_protoc():
             # grpcio-tools has an extra CLI argument
             # from grpc.tools.protoc __main__ invocation.
-            _builtin_proto_include = pkg_resources.resource_filename('grpc_tools', '_proto')
+            _builtin_proto_include = pkg_resources.resource_filename(
+                "grpc_tools", "_proto"
+            )
 
             cmd.append("-I={}".format(_builtin_proto_include))
         try:
             invoke_protoc(argv=cmd)
         except:
-            sys.stderr.write("Failed to build nanopb_pb2.py: " + ' '.join(cmd) + "\n")
+            sys.stderr.write("Failed to build nanopb_pb2.py: " + " ".join(cmd) + "\n")
             raise

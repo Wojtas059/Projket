@@ -1,5 +1,5 @@
-from stm import send_message, cleanup, read_message
 from management_pb2 import Ping
+from stm import cleanup, read_message, send_message
 
 
 def test_connection_bidirectional(amount_of_pings: int, ping_delay: int = 0) -> int:

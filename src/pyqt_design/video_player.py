@@ -7,43 +7,47 @@
 
 
 from ast import Sub
-from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtCore import   QUrl, Qt
-from PyQt6.QtWidgets import (QWidget,  QSlider, QFileDialog) 
 
-from PyQt6.QtMultimedia import  QMediaPlayer
+from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtCore import Qt, QUrl
+from PyQt6.QtMultimedia import QMediaPlayer
 from PyQt6.QtMultimediaWidgets import QVideoWidget
+from PyQt6.QtWidgets import QFileDialog, QSlider, QWidget
+
 
 class VideoPlayer(QWidget):
-    def __init__(self, parent ):
+    def __init__(self, parent):
         super(VideoPlayer, self).__init__(parent)
-        self.setGeometry(400,400, 700, 500)
+        self.setGeometry(400, 400, 700, 500)
         self.setObjectName("Video Player")
         self.create_player()
-        
+
     def create_player(self):
         self.mediaPlayer = QMediaPlayer(None)
         vidowidget = QVideoWidget()
-        
+
         self.play_btn = QtWidgets.QPushButton()
-        self.play_btn.clicked.connect(lambda:self.play_video())
-        self.play_btn.setIcon(QtGui.QIcon('static/icons/play.png'))
+        self.play_btn.clicked.connect(lambda: self.play_video())
+        self.play_btn.setIcon(QtGui.QIcon("static/icons/play.png"))
         self.slider = QSlider(Qt.Orientation.Horizontal, self)
-        self.slider.setRange(0,0)
+        self.slider.setRange(0, 0)
         self.slider.sliderMoved.connect(self.set_position)
 
-        filename = 'static/movies/play.mkv'
+        filename = "static/movies/play.mkv"
         self.mediaPlayer.setSource(QUrl.fromLocalFile(filename))
-        hbox= QtWidgets.QHBoxLayout()
-        hbox.setContentsMargins(0,0,0,0)
+        hbox = QtWidgets.QHBoxLayout()
+        hbox.setContentsMargins(0, 0, 0, 0)
         hbox.addWidget(self.play_btn)
         hbox.addWidget(self.slider)
-        
-
 
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem4 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_5.addItem(spacerItem4)
         self.back = QtWidgets.QPushButton(self)
         self.back.setObjectName("back")
@@ -51,15 +55,19 @@ class VideoPlayer(QWidget):
         self.next = QtWidgets.QPushButton(self)
         self.next.setObjectName("next")
         self.horizontalLayout_5.addWidget(self.next)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem5 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_5.addItem(spacerItem5)
-
 
         vbox = QtWidgets.QVBoxLayout()
         vbox.addWidget(vidowidget)
         vbox.addLayout(hbox)
         vbox.addLayout(self.horizontalLayout_5)
-        self.mediaPlayer.setVideoOutput(vidowidget) 
+        self.mediaPlayer.setVideoOutput(vidowidget)
         self.setLayout(vbox)
         self.mediaPlayer.playbackStateChanged.connect(self.mediastate_changed)
         self.mediaPlayer.positionChanged.connect(self.position_changed)
@@ -69,16 +77,17 @@ class VideoPlayer(QWidget):
         self.addActionBattons()
         QtCore.QMetaObject.connectSlotsByName(self)
 
-
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.back.setText(_translate("ManagmentSensor", "Wróć"))
-        self.next.setText(_translate("ManagmentSensor", "Rozpocznij pomiar referencyjny"))
-    
+        self.next.setText(
+            _translate("ManagmentSensor", "Rozpocznij pomiar referencyjny")
+        )
+
     def addActionBattons(self):
         self.next.clicked.connect(lambda: self.showScreen())
-        self.back.clicked.connect(lambda: self.backScreen())  
-    
+        self.back.clicked.connect(lambda: self.backScreen())
+
     def backScreen(self):
         self.parent().openLastWidget()
 
@@ -86,19 +95,25 @@ class VideoPlayer(QWidget):
         self.parent().addScreen(self.getWidget())
         self.parent().observationReferenceShow()
 
-
     def play_video(self):
-        if self.mediaPlayer.playbackState() == QMediaPlayer.PlaybackState.StoppedState or self.mediaPlayer.playbackState() == QMediaPlayer.PlaybackState.PausedState  :
+        if (
+            self.mediaPlayer.playbackState() == QMediaPlayer.PlaybackState.StoppedState
+            or self.mediaPlayer.playbackState()
+            == QMediaPlayer.PlaybackState.PausedState
+        ):
             self.mediaPlayer.play()
         else:
             self.mediaPlayer.pause()
-        
-    def mediastate_changed(self, state):
-        if self.mediaPlayer.playbackState() == QMediaPlayer.PlaybackState.StoppedState or self.mediaPlayer.playbackState() == QMediaPlayer.PlaybackState.PausedState  :
-            self.play_btn.setIcon(QtGui.QIcon('static/icons/play.png'))
-        else:
-            self.play_btn.setIcon(QtGui.QIcon('static/icons/pause-button.png'))
 
+    def mediastate_changed(self, state):
+        if (
+            self.mediaPlayer.playbackState() == QMediaPlayer.PlaybackState.StoppedState
+            or self.mediaPlayer.playbackState()
+            == QMediaPlayer.PlaybackState.PausedState
+        ):
+            self.play_btn.setIcon(QtGui.QIcon("static/icons/play.png"))
+        else:
+            self.play_btn.setIcon(QtGui.QIcon("static/icons/pause-button.png"))
 
     def position_changed(self, position):
         self.slider.setValue(position)
@@ -111,4 +126,3 @@ class VideoPlayer(QWidget):
 
     def getWidget(self):
         return str(self.objectName())
-

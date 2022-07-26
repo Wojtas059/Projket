@@ -1,9 +1,11 @@
 import kivy
 
 kivy.require("1.0.6")  # replace with your current kivy version !
-from kivy.uix.screenmanager import Screen
-from src.database_handlers.database_handler import DatabaseHandler
 from kivy.properties import ObjectProperty
+from kivy.uix.screenmanager import Screen
+
+from src.database_handlers.database_handler import DatabaseHandler
+
 
 class UserAccountWidget(Screen):
     name_text = ObjectProperty(None)
@@ -17,7 +19,3 @@ class UserAccountWidget(Screen):
         self.name_text.text = row[1]
         self.surname_text.text = row[2]
         self.email_text.text = row[3]
-
-    
-
-
