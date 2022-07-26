@@ -131,7 +131,7 @@ class SingIn(QWidget):
         if self.checkCredentials():
             bool_advanced = self.getUserPrivileges()
             self.getUserCredentials(bool_advanced)
-            self.parent().homeShowSuccesLogIn(bool_advanced)
+            self.parent().homeShowSuccesLogIn()
             
     def checkCredentials(self):
         if self.login.text() == "" or self.password.text() == "":

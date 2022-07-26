@@ -377,6 +377,15 @@ class DatabaseHandler:
             return False
         return listOfUsers
 
+    def findMeansurment(self, id_user: str):
+        self.cursor.execute(
+            "select * from Measurement where id_user=?", (
+                id_user,)
+        )
+        listOfUsers = self.cursor.fetchall()
+        if listOfUsers is None:
+            return False
+        return listOfUsers
 
 
     def findUserExistForAdvanced(self,id_userAdvanced:str, id_user: str):

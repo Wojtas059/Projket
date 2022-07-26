@@ -1,5 +1,5 @@
 from optparse import Values
-from PyQt6 import QtWidgets
+from PyQt6 import QtWidgets,QtCore
 from PyQt6.QtWidgets import (QWidget)
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMainWindow 
@@ -26,6 +26,7 @@ from src.pyqt_design.list_users_widget import ListUsers
 from src.pyqt_design.choose_lots_muscles_advanced_widget import ChooseLotsMusclesAdvanced
 from src.pyqt_design.experience_observation_widget import ExperienceObservationWidget
 from src.pyqt_design.graph_observation_widget import GraphObservationWidget
+from src.pyqt_design.history_see import HistorySeeWidget
 
 # Import class 
 from src.user.user_logIn import UserLogIn
@@ -41,6 +42,9 @@ class MyApp(QMainWindow):
         self.see_grpah:bool = False
         self.see_number: int = None
         self.dataQueue_1 = queue.Queue()
+        self.dataQueue_2 = queue.Queue()
+        self.experience:bool = False
+        self.login_in:bool = False
         
 
     ### Create central widget ### 
@@ -132,31 +136,44 @@ class MyApp(QMainWindow):
     
 
     def connectBaseStation(self)->bool:
+        
         self.client_connect = ClientPi()
         if self.client_connect.connect() and self.client_connect.startSTM() :
             Thread(target=self.getDataSTM).start()
+            self.experience = True
+            #if not self.user_login.get_name().__eq__(""):
+                #self.login_in = True
+                #self.dataQueue_2 = queue.Queue()
+                #Thread(target=self.insertDataBase).start()
+                #self.timer = QtCore.QTimer()
+                #self.timer.setInterval(200)
+                #self.timer.timeout.connect(Thread(target=self.insertDataBase).start())
+                #self.timer.start()
             return True
         else:
             return False
 
+    def closeBaseStation(self):
+        self.client_connect.stop_connection()
+        self.experience = False
+        
+
     def stopSTMdata(self):
+        self.experience = False
         if self.client_connect.stopSTM():
             print("Udało się ")
         else:
             print("Nie udało się")
 
-    def startSTM(self):
-        if self.client_connect.startSTM():
-            Thread(target=self.getDataSTM).start()
-        else:
-            print("Nie udało się")
+  
 
 
     def setSeeNumberGraph(self, number:int):
         self.see_number = number
         self.see_grpah = True
-        self.dataQueue_1 = None
         self.dataQueue_1 = queue.Queue()
+        
+
     def getDataSTM(self):
         if(self.client_connect.transfer_status):
             results = self.client_connect.stub.sendSTMData(ServicerMethods.Void())
@@ -164,11 +181,23 @@ class MyApp(QMainWindow):
                 print(result.data)
                 dataarray = result.data.split(',')
                 if self.see_grpah:
-                    self.dataQueue_1.put(float(dataarray[self.see_number]))
+                    try:
+                        self.dataQueue_1.put(float(dataarray[self.see_number]))
+                    except IndexError:
+                        print("Nie ma wynikow dla tego numeru taśmy")
+                if self.login_in:
+                    self.dataQueue_2.put(str(result.data))
+
+    def insertDataBase(self):
+        while self.experience:
+            if not(self.experience):
+                        break
+                
 ### Function set central widget ! ###
     
     # Function set center widget - home widget
     def homeShow(self):
+        self.manage_sensor = ManageSensor()
         self.user_login = UserLogIn()
         self.home_widget = HomeWidget(self)
         self.setCentralWidget(self.home_widget)
@@ -185,9 +214,10 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.sing_up)
         self.show()
     # Function set center widget - home widget for succes log in user
-    def homeShowSuccesLogIn(self, user_advanced: bool):
+    def homeShowSuccesLogIn(self):
+        self.manage_sensor = ManageSensor()
         self.home_widget = HomeWidget(self)
-        if not user_advanced:
+        if not self.user_login.get_advanced():
             self.home_widget.addButtonHistoryUserSee()
         self.home_widget.retranslateSuccesLogIn()
         self.home_widget.retranslateHomeWidgetName(self.user_login.get_name())
@@ -197,6 +227,11 @@ class MyApp(QMainWindow):
     def userProfilSeeShow(self):
         self.userprofilsee = UserProfilSee(self)
         self.setCentralWidget(self.userprofilsee)
+        self.show()
+
+    def histroySeeShow(self):
+        self.history_see = HistorySeeWidget(self)
+        self.setCentralWidget(self.history_see)
         self.show()
 
     def chooseMethodShow(self):
@@ -265,26 +300,28 @@ class MyApp(QMainWindow):
         self.show()
 
     def openLastWidget(self):
-        widget_name = self.lastScreen()
+        widget_name:str = self.lastScreen()
         if widget_name.__eq__("Home Widget"):
             self.homeShow()
-        if widget_name.__eq__("Home Widget Succes Login"):
-            self.homeShowSuccesLogIn(self.user_login.get_advanced())
-        if widget_name.__eq__("Choose Method"):
+        elif widget_name.__eq__("Home Widget Succes Login"):
+            self.homeShowSuccesLogIn()
+        elif  widget_name.__eq__("Choose Method"):
             self.chooseMethodShow()
-        if widget_name.__eq__("Choose Lots Muscles"):
+        elif  widget_name.__eq__("Choose Lots Muscles"):
             self.chooseLotsMusclesShow()
-        if widget_name.__eq__("Managment Sensor"):
+        elif  widget_name.__eq__("Choose Lots Muscles Advanced"):
+            self.chooseLotsMusclesAdvancedShow()
+        elif  widget_name.__eq__("Managment Sensor"):
             self.managmentSensorShow()
-        if widget_name.__eq__("Start Reference"):
+        elif  widget_name.__eq__("Start Reference"):
             self.startReferenceShow()
-        if widget_name.__eq__("Video Player"):
+        elif  widget_name.__eq__("Video Player"):
             self.videoPlayerShow()
-        if widget_name.__eq__("Observation Reference"):
+        elif  widget_name.__eq__("Observation Reference"):
             self.observationReferenceShow()
-        if widget_name.__eq__("Start Experience"):
+        elif  widget_name.__eq__("Start Experience"):
             self.startExperienceShow()
-        if widget_name.__eq__("Experience"):
+        elif  widget_name.__eq__("Experience"):
             self.experienceObservationShow()
 
 if __name__ == "__main__":

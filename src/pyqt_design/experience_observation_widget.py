@@ -73,9 +73,9 @@ class ExperienceObservationWidget(QWidget):
         self.back.setObjectName("back")
         #self.back.setEnabled(False)
         self.horizontalLayout_5.addWidget(self.back)
-        self.next = QtWidgets.QPushButton(self)
-        self.next.setObjectName("next")
-        self.horizontalLayout_5.addWidget(self.next)
+        self.finish_exp = QtWidgets.QPushButton(self)
+        self.finish_exp.setObjectName("finish_exp")
+        self.horizontalLayout_5.addWidget(self.finish_exp)
 
         self.analitik = QtWidgets.QPushButton(self)
         self.analitik.setObjectName("analitic")
@@ -114,14 +114,14 @@ class ExperienceObservationWidget(QWidget):
         self.setWindowTitle(_translate("Experience", "Experience"))
         self.back.setText(_translate("Experience", "Wróć do menu"))
         self.stop.setText(_translate("Experience", "Zatrzymaj"))
-        self.next.setText(_translate("Experience", "Zakończ"))
+        self.finish_exp.setText(_translate("Experience", "Zakończ"))
         self.analitik.setText(_translate("Experience", "Analiza pomiarowa"))
         self.start.setText(_translate("Experience", "Wznów"))
         self.see_graph.setText(_translate("Experience", "Zobacz wykres"))
 
         
     def addActionButtons(self):
-        self.next.clicked.connect(lambda: self.showScreen())
+        self.finish_exp.clicked.connect(lambda: self.showScreen())
         self.back.clicked.connect(lambda: self.backScreen())
         self.stop.clicked.connect(lambda: self.stopSTMdata())
         self.start.clicked.connect(lambda: self.startSTM())
@@ -139,11 +139,20 @@ class ExperienceObservationWidget(QWidget):
 
 
     def backScreen(self):
-        self.parent().openLastWidget()
+        if not self.parent().user_login.get_name().__eq__(""):
+            self.parent().homeShowSuccesLogIn()
+        else:
+            self.parent().homeShow()
 
     def showScreen(self):
-        self.parent().videoPlayerShow()
-    
+        self.parent().stopSTMdata()
+        self.parent().closeBaseStation()
+        self.start.setEnabled(False)
+        self.stop.setEnabled(False)
+        self.see_graph.setEnabled(False)
+        self.finish_exp.setEnabled(False)
+        self.analitik.setEnabled(True)
+
     def getWidget(self):
         return str(self.objectName())
 

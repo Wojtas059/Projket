@@ -26,6 +26,12 @@ class Client:
         except grpc._channel._InactiveRpcError:
             return False
 
+    def stop_connection(self):
+        try:
+            self.channel.close()
+        except grpc._channel._MultiThreadedRendezvous:
+            pass
+
     def startSTM(self):
         response = self.stub.startSTMSampling(ServicerMethods.OrderSTM(order="Sampling"))
         
@@ -51,7 +57,6 @@ class Client:
         queue_data = queue.Queue()
         while(self.transfer_status):
             results = self.stub.sendSTMData(ServicerMethods.Void())
-            print()
             for result in results:
                 print(result.data)
                 queue_data.put(float(result.data))

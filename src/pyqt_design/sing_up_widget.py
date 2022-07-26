@@ -121,13 +121,10 @@ class SingUp(QWidget):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(
-            QtCore.QRect(0, 0, 614, 138))
-        self.scrollAreaWidgetContents_2.setObjectName(
-            "scrollAreaWidgetContents_2")
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 614, 138))
+        self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout.addWidget(self.scrollArea_2)
-
         self.retranslateUi()
         self.addActionBattons()
         QtCore.QMetaObject.connectSlotsByName(self)

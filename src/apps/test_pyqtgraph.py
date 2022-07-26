@@ -23,13 +23,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dataQueue_1 = queue.Queue()
         self.dataQueue_20_value = queue.Queue()
         self.dataQueue_aa = queue.Queue()
-        self.x = list(range(300))  # 100 time points
-        self.y = [0 for _ in range(300)]  # 100 data points
+        self.x = list(range(700))  # 100 time points
+        self.y = [0 for _ in range(700)]  # 100 data points
         #Thread(target=self.saveFileValue).start()
 
-        self.client_connect = ClientPi()
-        if self.client_connect.connect() and self.client_connect.startSTM() :
-            Thread(target=self.getDataSTM).start()
+        Thread(target=self.dupa).start()
 
         pen = pg.mkPen(color=(255, 0, 0))
         self.data_line =  self.graphWidget.plot(self.x, self.y, pen)
@@ -37,6 +35,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.timer.setInterval(10)
         self.timer.timeout.connect(self.update_plot_data)
         self.timer.start()
+
+    def dupa(self):
+        while True:
+            f = open("static/po/test.csv", "r")
+
+            for i in f:
+                self.dataQueue_1.put(float(i))
+
+        
+
 
     def update_plot_data(self):
 
