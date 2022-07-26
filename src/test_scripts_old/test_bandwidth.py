@@ -1,8 +1,10 @@
-from stm import read_message, send_message
-from measurements_pb2 import BandwidthTestData, BandwidthTestDataRequest
 from enum import Enum
 
+from measurements_pb2 import BandwidthTestData, BandwidthTestDataRequest
+from stm import read_message, send_message
+
 PACKET_DATA_LENGTH = 60
+
 
 class ValidationResult(Enum):
     OK = 0
@@ -18,9 +20,7 @@ def send_request_for_test_data(retransmit_last: bool = False):
     send_message(request)
 
 
-def validate_data_packet(
-    packet: BandwidthTestData, expectedID: int
-):
+def validate_data_packet(packet: BandwidthTestData, expectedID: int):
     if not isinstance(packet, BandwidthTestData):
         return (
             ValidationResult.INVALID_PACKET_TYPE,

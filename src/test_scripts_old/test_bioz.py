@@ -1,6 +1,7 @@
-from stm import send_message, read_message
 from management_pb2 import StartBioZMeasurementsRequest, StopMeasurementsRequest
 from measurements_pb2 import BioZData, BioZDataRequest
+from stm import read_message, send_message
+
 
 def start_measurements():
     request = StartBioZMeasurementsRequest()
@@ -8,22 +9,26 @@ def start_measurements():
     request.rate = StartBioZMeasurementsRequest.RATE_64HZ
     request.gain = StartBioZMeasurementsRequest.GAIN_20VV
     request.analogHighPassFilterCutoff = StartBioZMeasurementsRequest.CUTOFF_800HZ
-    request.digitalHighPassFilterCutoff = StartBioZMeasurementsRequest.DHPF_CUTOFF_BYPASS
+    request.digitalHighPassFilterCutoff = (
+        StartBioZMeasurementsRequest.DHPF_CUTOFF_BYPASS
+    )
     request.digitalLowPassFilterCutoff = StartBioZMeasurementsRequest.CUTOFF_4HZ
     request.currentGeneratorFrequency = StartBioZMeasurementsRequest.CURRENT_GEN_80KHZ
     request.currentGeneratorMagnitude = StartBioZMeasurementsRequest.CURRENT_GEN_32UA
 
     send_message(request)
-    
+
     return True
+
 
 def read_next_packet(get_next: bool = True):
     request = BioZDataRequest()
     request.nextPacketRequested = get_next
     send_message(request)
-    
+
     data = read_message(wait_time=0.5, print_bytes=False)
     return data
+
 
 def print_bioz_data(packet: BioZData, print_data: bool = True):
     if print_data:
@@ -33,8 +38,10 @@ def print_bioz_data(packet: BioZData, print_data: bool = True):
     else:
         print(f"{packet.sampleID} ", end="", flush=True)
 
+
 received_packets = 0
 last_received_packet_id = 0
+
 
 def process_packet(packet: BioZData):
     global received_packets, last_received_packet_id
@@ -44,9 +51,10 @@ def process_packet(packet: BioZData):
             last_received_packet_id = packet.sampleID
             print_bioz_data(packet, True)
             return True
-        
+
     print(".", end="")
     return False
+
 
 if __name__ == "__main__":
     start_measurements()

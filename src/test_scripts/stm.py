@@ -1,7 +1,8 @@
-from struct import pack
-import serial
 import time
-from messages import serialize_message, parse_message
+from struct import pack
+
+import serial
+from messages import parse_message, serialize_message
 
 # STM_COM_PORT = "COM3"
 <<<<<<< HEAD

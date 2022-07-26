@@ -7,42 +7,52 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QWidget, QMessageBox, QHBoxLayout
-from src.user.user_validator import UserValidator
-from src.user.user import User
+from PyQt6.QtWidgets import QHBoxLayout, QMessageBox, QWidget
+
 from src.database_handlers.database_handler import DatabaseHandler
 
-class UserSeeList(QHBoxLayout):
-    def __init__(self,  **kwargs):
-        super(UserSeeList, self).__init__()
-        self.id_user = kwargs.get('id', "")
-        self.login_user =  kwargs.get('login', "")
 
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+
+class UserSeeList(QHBoxLayout):
+    def __init__(self, **kwargs):
+        super(UserSeeList, self).__init__()
+        self.id_user = kwargs.get("id", "")
+        self.login_user = kwargs.get("login", "")
+
+        spacerItem = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.addItem(spacerItem)
 
-       # self.number = QtWidgets.QLabel()
-       # self.number.setObjectName("number")
-       # self.number.setText(kwargs.get('number', ""))
-       # self.addWidget(self.number)
-
+        # self.number = QtWidgets.QLabel()
+        # self.number.setObjectName("number")
+        # self.number.setText(kwargs.get('number', ""))
+        # self.addWidget(self.number)
 
         self.name = QtWidgets.QLabel()
         self.name.setObjectName("name")
-        self.name.setText(kwargs.get('name', ""))
+        self.name.setText(kwargs.get("name", ""))
         self.addWidget(self.name)
         self.surname = QtWidgets.QLabel()
         self.surname.setObjectName("surname")
-        self.surname.setText(kwargs.get('surname', ""))
+        self.surname.setText(kwargs.get("surname", ""))
         self.addWidget(self.surname)
         self.email = QtWidgets.QLabel()
         self.email.setObjectName("email")
-        self.email.setText(kwargs.get('email', ""))
+        self.email.setText(kwargs.get("email", ""))
         self.addWidget(self.email)
-        self.see_history=  QtWidgets.QPushButton()
+        self.see_history = QtWidgets.QPushButton()
         self.see_history.setObjectName("see_history")
         self.addWidget(self.see_history)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.addItem(spacerItem1)
         self.retranslateUi()
 
@@ -60,7 +70,12 @@ class ListUsers(QWidget):
 
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_7.addItem(spacerItem2)
         self.label_5 = QtWidgets.QLabel(self)
         self.label_5.setObjectName("label_5")
@@ -72,7 +87,12 @@ class ListUsers(QWidget):
         self.add_user = QtWidgets.QPushButton(self)
         self.add_user.setObjectName("add_user")
         self.horizontalLayout_7.addWidget(self.add_user)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem3 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_7.addItem(spacerItem3)
         self.verticalLayout.addLayout(self.horizontalLayout_7)
 
@@ -80,7 +100,7 @@ class ListUsers(QWidget):
         line_2.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         line_2.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         line_2.setObjectName("line_2")
-        self.verticalLayout.addWidget(line_2) 
+        self.verticalLayout.addWidget(line_2)
 
         self.scrollArea_2 = QtWidgets.QScrollArea()
         self.scrollArea_2.setWidgetResizable(True)
@@ -103,10 +123,10 @@ class ListUsers(QWidget):
             datalist = instance.findUserByIdList(next_list)
         instance.closeConnection()
 
-
-
-        for  x in datalist:
-            self.verticalLayout_1.addLayout(UserSeeList(name=str(x[1]), surname=str(x[2]), email=str(x[4])))
+        for x in datalist:
+            self.verticalLayout_1.addLayout(
+                UserSeeList(name=str(x[1]), surname=str(x[2]), email=str(x[4]))
+            )
 
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_8)
         self.verticalLayout.addWidget(self.scrollArea_2)
@@ -119,12 +139,22 @@ class ListUsers(QWidget):
 
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        spacerItem18 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem18 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_5.addItem(spacerItem18)
         self.back = QtWidgets.QPushButton(self)
         self.back.setObjectName("back")
         self.horizontalLayout_5.addWidget(self.back)
-        spacerItem19 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem19 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_5.addItem(spacerItem19)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
 
@@ -135,14 +165,16 @@ class ListUsers(QWidget):
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("SingUp", "Form"))
-        self.label_5.setText(_translate("ManagmentSensor", "Wprowadź adres email uzytkownika"))
+        self.label_5.setText(
+            _translate("ManagmentSensor", "Wprowadź adres email uzytkownika")
+        )
         self.add_user.setText(_translate("ManagmentSensor", "Dodaj"))
         self.back.setText(_translate("SingUp", "Wróć"))
 
     def addActionBattons(self):
         self.add_user.clicked.connect(lambda: self.addUsers())
         self.back.clicked.connect(lambda: self.backScreen())
-        
+
     def addUsers(self):
         if self.email.text().__eq__(""):
             self.createMessageBox("Uzupełnij pole email!")
@@ -150,18 +182,29 @@ class ListUsers(QWidget):
             instance = DatabaseHandler()
             instance.createConnection()
             if not instance.findAnyEmail(self.email.text()):
-                if instance.findUserPrivilegesById(int(instance.findUserIDByEmail(self.email.text()))):
-                    if instance.findUserExistForAdvanced(self.parent().user_login.get_id(),instance.findUserIDByEmail(self.email.text()) ):
-                        if instance.insertUserAndAdvanced(self.parent().user_login.get_id(), self.email.text()):
-                            self.createMessageBox( "Pomyślnie dodałeś użytkownika")
+                if instance.findUserPrivilegesById(
+                    int(instance.findUserIDByEmail(self.email.text()))
+                ):
+                    if instance.findUserExistForAdvanced(
+                        self.parent().user_login.get_id(),
+                        instance.findUserIDByEmail(self.email.text()),
+                    ):
+                        if instance.insertUserAndAdvanced(
+                            self.parent().user_login.get_id(), self.email.text()
+                        ):
+                            self.createMessageBox("Pomyślnie dodałeś użytkownika")
                             instance.closeConnection()
                             self.parent().listUsersShow()
                     else:
-                        self.createMessageBox( "Użytkonik o podanym emailu już jest dodany")
+                        self.createMessageBox(
+                            "Użytkonik o podanym emailu już jest dodany"
+                        )
                 else:
-                    self.createMessageBox( "Użytkownik jest osobą wykwalifikowana nie możesz jej dodać")
+                    self.createMessageBox(
+                        "Użytkownik jest osobą wykwalifikowana nie możesz jej dodać"
+                    )
             else:
-                self.createMessageBox( "Użytkonik o podanym emailu nie istnije")
+                self.createMessageBox("Użytkonik o podanym emailu nie istnije")
             instance.closeConnection()
 
     def createMessageBox(self, message: str):

@@ -1,7 +1,8 @@
 from email.message import Message
+from enum import IntEnum
+
 import management_pb2 as management
 import measurements_pb2 as measurements
-from enum import IntEnum
 from google.protobuf.message import DecodeError
 
 
@@ -46,7 +47,6 @@ def parse_message(message_data: bytes):
     if message_id is None:
         return None
 
-
     message = None
 
     # match message_id:
@@ -72,7 +72,7 @@ def parse_message(message_data: bytes):
     if message_id is MessageID.STOP_MEASUREMENTS_RESPONSE:
         message = management.StopMeasurementsResponse()
     if message_id is MessageID.START_ECG_MEASUREMENTS_RESPONSE:
-       message = management.StartECGMeasurementsResponse()
+        message = management.StartECGMeasurementsResponse()
     if message_id is MessageID.START_BIOZ_MEASUREMENTS_RESPONSE:
         message = management.StartBioZMeasurementsResponse()
     if message_id is MessageID.ECG_DATA:

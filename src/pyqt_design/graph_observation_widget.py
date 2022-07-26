@@ -1,24 +1,25 @@
-
-
-from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtWidgets import (QWidget)
-from pyqtgraph import PlotWidget, plot
 import pyqtgraph as pg
-
+from PyQt6 import QtCore, QtWidgets
+from PyQt6.QtWidgets import QWidget
 
 
 class GraphObservationWidget(QWidget):
     def __init__(self, parent, **kwargs):
         super(GraphObservationWidget, self).__init__(parent)
-        self.id = kwargs.get('id', 0)
-        self.muscles:str = kwargs.get('choose_muscles', 'Wybrane partie mięśni')
-        self.name:str= kwargs.get('name_users', 'Gość Gość')
+        self.id = kwargs.get("id", 0)
+        self.muscles: str = kwargs.get("choose_muscles", "Wybrane partie mięśni")
+        self.name: str = kwargs.get("name_users", "Gość Gość")
         self.setObjectName("Visualisation Graph observation experience")
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_5")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_6.addItem(spacerItem)
         self.name_users = QtWidgets.QLabel()
         self.name_users.setObjectName("choose_users")
@@ -26,7 +27,12 @@ class GraphObservationWidget(QWidget):
         self.choose_muscles = QtWidgets.QLabel()
         self.choose_muscles.setObjectName("choose_muscles")
         self.horizontalLayout_6.addWidget(self.choose_muscles)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_6.addItem(spacerItem1)
         self.horizontalLayout_6
 
@@ -41,8 +47,13 @@ class GraphObservationWidget(QWidget):
         self.verticalLayout.addWidget(self.scrollArea_2)
         self.verticalLayout.addLayout(self.horizontalLayout_6)
 
+<<<<<<< HEAD
         self.x = list(range(800))  # 100 time points
         self.y = [0 for _ in range(800)]  # 100 data points
+=======
+        self.x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        self.y = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
+>>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
         self.graphWidget = pg.PlotWidget()
         self.verticalLayout_1.addWidget(self.graphWidget)
         self.data_line = self.graphWidget.plot(self.x, self.y)
@@ -51,17 +62,26 @@ class GraphObservationWidget(QWidget):
         self.timer.setInterval(5)
         self.timer.timeout.connect(self.update_plot_data)
         self.timer.start()
-        
+
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem6 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_5.addItem(spacerItem6)
         self.back = QtWidgets.QPushButton(self)
         self.back.setObjectName("back")
         self.horizontalLayout_5.addWidget(self.back)
 
-
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem7 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_5.addItem(spacerItem7)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
         self.scrollArea = QtWidgets.QScrollArea(self)
@@ -73,7 +93,7 @@ class GraphObservationWidget(QWidget):
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
-        
+
         self.retranslateUi()
         self.addActionButtons()
         QtCore.QMetaObject.connectSlotsByName(self)
@@ -84,24 +104,23 @@ class GraphObservationWidget(QWidget):
         self.back.setText(_translate("Form", "Wróć"))
         self.name_users.setText(_translate("Form", str(self.name)))
         self.choose_muscles.setText(_translate("Form", str(self.muscles)))
-        
+
     def addActionButtons(self):
         self.back.clicked.connect(lambda: self.backScreen())
 
     def backScreen(self):
         self.parent().openLastWidget()
 
-
     def getWidget(self):
         return str(self.objectName())
 
     def update_plot_data(self):
-        if self.parent().dataQueue_1.qsize() > 0 :
+        if self.parent().dataQueue_1.qsize() > 0:
             self.x = self.x[1:]  # Remove the first y element.
-          # Add a new value 1 higher than the last.
-        
+            # Add a new value 1 higher than the last.
+
             self.y = self.y[1:]  # Remove the first
             self.x.append(self.x[-1] + 1)
-            self.y.append(self.parent().dataQueue_1.get()) # Add a new random value.
+            self.y.append(self.parent().dataQueue_1.get())  # Add a new random value.
 
         self.data_line.setData(self.x, self.y)

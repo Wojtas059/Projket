@@ -1,18 +1,21 @@
-
-
-from PyQt6 import QtCore , QtWidgets
-from PyQt6.QtWidgets import (QWidget, QHBoxLayout)
+from PyQt6 import QtCore, QtWidgets
+from PyQt6.QtWidgets import QHBoxLayout, QWidget
 
 
 class ChooseMuscles(QHBoxLayout):
     def __init__(self, **kwargs):
         super(ChooseMuscles, self).__init__()
-        self.number = kwargs.get('number', 1)
-        self.id = kwargs.get('id', '')
-        self.muscles:str = kwargs.get('choose_muscles', 'Wybrane partie mięśni')
-        self.name:str= kwargs.get('name_users', 'Gość Gość')
+        self.number = kwargs.get("number", 1)
+        self.id = kwargs.get("id", "")
+        self.muscles: str = kwargs.get("choose_muscles", "Wybrane partie mięśni")
+        self.name: str = kwargs.get("name_users", "Gość Gość")
 
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.addItem(spacerItem)
         self.button = QtWidgets.QRadioButton()
         self.addWidget(self.button)
@@ -23,7 +26,12 @@ class ChooseMuscles(QHBoxLayout):
         self.choose_muscles = QtWidgets.QLabel()
         self.choose_muscles.setObjectName("choose_muscles")
         self.addWidget(self.choose_muscles)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.addItem(spacerItem1)
         self.retranslateUi()
 
@@ -31,20 +39,19 @@ class ChooseMuscles(QHBoxLayout):
         _translate = QtCore.QCoreApplication.translate
         self.name_users.setText(_translate("Form", str(self.name)))
         self.choose_muscles.setText(_translate("Form", str(self.muscles)))
-    
-    def getRadioChecked(self)->bool:
-        return self.button.isChecked()
 
+    def getRadioChecked(self) -> bool:
+        return self.button.isChecked()
 
 
 class ExperienceObservationWidget(QWidget):
     def __init__(self, parent):
         super(ExperienceObservationWidget, self).__init__(parent)
-        self.list_class_choose_muscles:list =[]
+        self.list_class_choose_muscles: list = []
         self.setObjectName("Experience")
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")
-        
+
         self.scrollArea_2 = QtWidgets.QScrollArea()
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
@@ -54,24 +61,33 @@ class ExperienceObservationWidget(QWidget):
         self.verticalLayout_1.setObjectName("verticalLayout_1")
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_8)
         self.verticalLayout.addWidget(self.scrollArea_2)
-        
-        
-        self.data_sensor:dict = self.parent().manage_sensor.getDataSensor()
-        number:int = self.parent().getQuantityMangeSensor()
+
+        self.data_sensor: dict = self.parent().manage_sensor.getDataSensor()
+        number: int = self.parent().getQuantityMangeSensor()
         for i in range(number):
-            self.list_class_choose_muscles.append(ChooseMuscles( name_users=self.data_sensor['sensor_'+str(i+1)][0],choose_muscles=self.data_sensor['sensor_'+str(i+1)][1] ))
+            self.list_class_choose_muscles.append(
+                ChooseMuscles(
+                    name_users=self.data_sensor["sensor_" + str(i + 1)][0],
+                    choose_muscles=self.data_sensor["sensor_" + str(i + 1)][1],
+                )
+            )
             self.verticalLayout_1.addLayout(self.list_class_choose_muscles[-1])
 
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem6 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_5.addItem(spacerItem6)
         self.see_graph = QtWidgets.QPushButton()
         self.see_graph.setObjectName("see_graph")
         self.horizontalLayout_5.addWidget(self.see_graph)
         self.back = QtWidgets.QPushButton(self)
         self.back.setObjectName("back")
-        #self.back.setEnabled(False)
+        # self.back.setEnabled(False)
         self.horizontalLayout_5.addWidget(self.back)
         self.finish_exp = QtWidgets.QPushButton(self)
         self.finish_exp.setObjectName("finish_exp")
@@ -89,10 +105,15 @@ class ExperienceObservationWidget(QWidget):
 
         self.stop = QtWidgets.QPushButton(self)
         self.stop.setObjectName("stop")
-        
+
         self.horizontalLayout_5.addWidget(self.stop)
 
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem7 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_5.addItem(spacerItem7)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
         self.scrollArea = QtWidgets.QScrollArea(self)
@@ -103,8 +124,7 @@ class ExperienceObservationWidget(QWidget):
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
-        
-  
+
         self.retranslateUi()
         self.addActionButtons()
         QtCore.QMetaObject.connectSlotsByName(self)
@@ -119,7 +139,6 @@ class ExperienceObservationWidget(QWidget):
         self.start.setText(_translate("Experience", "Wznów"))
         self.see_graph.setText(_translate("Experience", "Zobacz wykres"))
 
-        
     def addActionButtons(self):
         self.finish_exp.clicked.connect(lambda: self.showScreen())
         self.back.clicked.connect(lambda: self.backScreen())
@@ -131,12 +150,11 @@ class ExperienceObservationWidget(QWidget):
         self.parent().stopSTMdata()
         self.start.setEnabled(True)
         self.stop.setEnabled(False)
-        
+
     def startSTM(self):
         self.start.setEnabled(False)
         self.stop.setEnabled(True)
         self.parent().startSTM()
-
 
     def backScreen(self):
         if not self.parent().user_login.get_name().__eq__(""):
@@ -145,6 +163,7 @@ class ExperienceObservationWidget(QWidget):
             self.parent().homeShow()
 
     def showScreen(self):
+<<<<<<< HEAD
         self.parent().stopSTMdata()
         self.parent().closeBaseStation()
         self.start.setEnabled(False)
@@ -152,6 +171,9 @@ class ExperienceObservationWidget(QWidget):
         self.see_graph.setEnabled(False)
         self.finish_exp.setEnabled(False)
         self.analitik.setEnabled(True)
+=======
+        self.parent().videoPlayerShow()
+>>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
 
     def getWidget(self):
         return str(self.objectName())
@@ -159,10 +181,11 @@ class ExperienceObservationWidget(QWidget):
     def graphShow(self):
         self.parent().addScreen(self.getWidget())
         for i in range(len(self.list_class_choose_muscles)):
-            if self.list_class_choose_muscles[i].getRadioChecked() :
+            if self.list_class_choose_muscles[i].getRadioChecked():
                 self.parent().setSeeNumberGraph(i)
-                self.parent().graphObservationShow(id = i+1, name_users=self.data_sensor['sensor_'+str(i+1)][0],choose_muscles=self.data_sensor['sensor_'+str(i+1)][1] )
+                self.parent().graphObservationShow(
+                    id=i + 1,
+                    name_users=self.data_sensor["sensor_" + str(i + 1)][0],
+                    choose_muscles=self.data_sensor["sensor_" + str(i + 1)][1],
+                )
                 break
-
-
-  

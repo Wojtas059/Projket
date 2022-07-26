@@ -1,5 +1,5 @@
-from enum import _auto_null, auto
 import threading
+from enum import _auto_null, auto
 
 import kivy
 
@@ -16,6 +16,7 @@ import time
 from datetime import datetime
 from threading import Thread
 from tkinter import filedialog
+
 import serial
 import serial.tools.list_ports as list_ports
 from kivy.clock import Clock, mainthread
@@ -25,12 +26,14 @@ from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
 from serial.tools.list_ports_common import ListPortInfo
 
-import src.proto_file.proto_comm as proto_comm
-from src.grpc.python_client_server_dir.client_base_station_com.client import Client as ClientPi
-
-
 import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2 as ServicerMethods
 import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2_grpc as Servicer
+import src.proto_file.proto_comm as proto_comm
+from src.grpc.python_client_server_dir.client_base_station_com.client import (
+    Client as ClientPi,
+)
+
+
 class MyGrid(Widget):
     com = ObjectProperty(None)
     comm = None
@@ -39,7 +42,7 @@ class MyGrid(Widget):
     csvQueue = queue.Queue()
 
     # Zmienna odpowiedzilana za połączenie z raspberrypi
-    client_connect =None
+    client_connect = None
 
     def __init__(self, **var_args):
         super(MyGrid, self).__init__(**var_args)
@@ -51,10 +54,10 @@ class MyGrid(Widget):
     trump = False
 
     def auto_connect(self):
-        #portData = serial.tools.list_ports.comports()
-        #commPport = "None"
-        #dataport = []
-        #for j in portData:
+        # portData = serial.tools.list_ports.comports()
+        # commPport = "None"
+        # dataport = []
+        # for j in portData:
         #    dataport = str(j).split()
         #    for i in dataport:
         #        if i == "STMicroelectronics":
@@ -65,50 +68,48 @@ class MyGrid(Widget):
         #            ).start()
         #            break
 
-        #if commPport == "Start":
+        # if commPport == "Start":
         #    self.start_thread()
 
         self.client_connect = ClientPi()
-        if self.client_connect.connect() and self.client_connect.startSTM() :
+        if self.client_connect.connect() and self.client_connect.startSTM():
             Thread(target=self.getDataSTM).start()
         else:
             self.error_win("Błąd połączenia się z portem ")
 
     def getDataSTM(self):
-        #file = open("data_stm_sampling.csv","w")
-        #file.write("Value A, Value B, Value C, Constant value\n")
-        #print("Dupa")
-        #file.close
-        #queue_data = queue.Queue()
+        # file = open("data_stm_sampling.csv","w")
+        # file.write("Value A, Value B, Value C, Constant value\n")
+        # print("Dupa")
+        # file.close
+        # queue_data = queue.Queue()
         self.com.text += "\nRozpoczęto pomiar\n\n"
         self.csvQueue.put_nowait("Value A, Value B, Value C, Constant value")
-        if(self.client_connect.transfer_status):
+        if self.client_connect.transfer_status:
             results = self.client_connect.stub.sendSTMData(ServicerMethods.Void())
-            
+
             print(results)
             for result in results:
                 print(result.data)
-                self.com.text += str(result.data)+"\n"
+                self.com.text += str(result.data) + "\n"
                 self.csvQueue.put_nowait(result.data)
 
             #    #file.write(result.data)
-       
+
         print(results)
-        #for result in results:
+        # for result in results:
         #    print(result.data)
         #    self.com.text += result.data
         #    self.csvQueue.put_nowait(result.data)
-        #ile = open("data_stm_sampling.csv","a")
-        #hile queue_data.qsize() > 0:
+        # ile = open("data_stm_sampling.csv","a")
+        # hile queue_data.qsize() > 0:
         #   file.write(queue_data.get())
-        #ile.close  
-        
-
+        # ile.close
 
     def on_press(self):
         self.trump = True
         try:
-            
+
             self.comm = proto_comm.ProtobufComm(self.port, 115200)
             self.comm.stm.flush()
             self.comm.stm.read_all()
@@ -176,7 +177,7 @@ class MyGrid(Widget):
 
     def on_press_false(self):
         self.client_connect.stopSTM()
-        #if self.trump:
+        # if self.trump:
         #    self.trump = False
         #    time.sleep(0.2)
         #    self.com.text += "Pomiar Zastopowano"

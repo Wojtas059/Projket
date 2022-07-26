@@ -1,7 +1,10 @@
-from datetime import datetime
+from pathlib import Path
 import queue
 import sqlite3
+from datetime import datetime
 from typing import List
+import os
+
 
 # isort: split
 from src.crypto.security_creator import SecurityCreator
@@ -14,8 +17,8 @@ class DatabaseHandler:
     # Tools for connection administration
     def __init__(self):
         # TODO po przeniesieniu bazy poprawić ścieżkę
-        self.databasePath = DATABASE_FILE
-        self.DataQueue=queue.Queue()
+        self.databasePath = "database.db"
+        self.DataQueue = queue.Queue()
 
     def createConnection(self):
         self.connection = sqlite3.connect(self.databasePath)
@@ -34,16 +37,16 @@ class DatabaseHandler:
                                      advanced integer(1))"""
             )
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(database_error)
+        except sqlite3.Error:
+            pass
 
     def dropTableUsers(self):
 
         try:
             self.cursor.execute("""DROP TABLE Users""")
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(database_error)
+        except sqlite3.Error:
+            pass
 
     def createTablePasswords(self):
         try:
@@ -52,15 +55,15 @@ class DatabaseHandler:
                 hash varchar(255) not null,advanced_user_key varchar(255))"""
             )
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(database_error)
+        except sqlite3.Error:
+            pass
 
     def dropTablePasswords(self):
         try:
             self.cursor.execute("""DROP TABLE Passwords""")
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(database_error)
+        except sqlite3.Error:
+            pass
 
     def createTableUserAndAdvanced(self):
         try:
@@ -69,15 +72,15 @@ class DatabaseHandler:
                 id_userAdvanced integer(11) not null)"""
             )
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(database_error)
+        except sqlite3.Error:
+            pass
 
     def dropTableUserAndAdvanced(self):
         try:
             self.cursor.execute("""DROP TABLE UserAndAdvanced""")
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(database_error)
+        except sqlite3.Error:
+            pass
 
     def createTableMuscles(self):
         try:
@@ -85,23 +88,23 @@ class DatabaseHandler:
                 """CREATE TABLE Muscles(id_muscle integer PRIMARY KEY AUTOINCREMENT, name varchar(500))"""
             )
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(database_error)
+        except sqlite3.Error:
+            pass
 
     def dropTableMuscles(self):
         try:
             self.cursor.execute("""DROP TABLE Muscles""")
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(database_error)
+        except sqlite3.Error:
+            pass
 
     def createMeasurementTable(self):
-        sql_cmd='''CREATE TABLE IF NOT EXISTS Measurement(id_advanced_user integer,id_user integer,table_name varchar(30))'''
+        sql_cmd = """CREATE TABLE IF NOT EXISTS Measurement(id_advanced_user integer,id_user integer,table_name varchar(30), muscle_name varchar(500))"""
         self.cursor.execute(sql_cmd)
         self.connection.commit()
 
     def deleteMeasurementTable(self):
-        sql_cmd='''DROP TABLE Measurement'''
+        sql_cmd = """DROP TABLE Measurement"""
         self.cursor.execute(sql_cmd)
         self.connection.commit()
 
@@ -119,20 +122,28 @@ class DatabaseHandler:
         self.createTableMuscles()
         self.fillTablesMuscles()
         self.closeConnection()
-
+    def CreateTables(self):
+        try:
+            self.createConnection()
+            self.createTableUsers()
+            self.createTablePasswords()
+            self.createTableUserAndAdvanced()
+            self.createMeasurementTable()
+            self.createTableMuscles()
+            self.fillTablesMuscles()
+            self.closeConnection()
+        except:
+            pass
     # Create table for results
     def createResultTable(self):
-    
+
         now = datetime.now()
-        day = '{:02d}'.format(now.day)
-        hour = '{:02d}'.format(now.hour)
-        minute = '{:02d}'.format(now.minute)
-        second = '{:02d}'.format(now.second)
-        day_month_year = 'R{}_{}_{}_{}'.format(day, hour,minute,second)
-        print(day_month_year)
-        sql_cmd = '''CREATE TABLE {}(c1)'''.format(
-                day_month_year)
-        print(sql_cmd)
+        day = "{:02d}".format(now.day)
+        hour = "{:02d}".format(now.hour)
+        minute = "{:02d}".format(now.minute)
+        second = "{:02d}".format(now.second)
+        day_month_year = "R{}_{}_{}_{}".format(day, hour, minute, second)
+        sql_cmd = """CREATE TABLE {}(c1)""".format(day_month_year)
         self.connection.execute(sql_cmd)
         self.connection.commit()
         return day_month_year
@@ -161,8 +172,7 @@ class DatabaseHandler:
             )
             self.connection.commit()
             return self.findUserByLogin(user)
-        except sqlite3.Error as database_error:
-            print(database_error)
+        except sqlite3.Error:
             self.closeConnection()
         return user
 
@@ -175,8 +185,7 @@ class DatabaseHandler:
             )
             self.connection.commit()
             return True
-        except sqlite3.Error as database_error:
-            print(database_error)
+        except sqlite3.Error:
             self.closeConnection()
             return False
 
@@ -204,18 +213,15 @@ class DatabaseHandler:
                     ),
                 )
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(str(database_error) + "Password")
+        except sqlite3.Error:
             self.closeConnection()
-    
-    def insertMeasurement(self,trainer_id,user_id,table_name):
-        sql_command="insert into Measurement values (?,?,?)"
-        self.cursor.execute(sql_command,[trainer_id,user_id,table_name])
+
+    def insertMeasurement(self, trainer_id, user_id, table_name, muscle_name):
+        sql_command = "insert into Measurement values (?,?,?,?)"
+        self.cursor.execute(sql_command, [trainer_id, user_id, table_name, muscle_name])
         self.connection.commit()
 
-    # TODO move this method to other class in future
     def generateMusclesNames(self):
-        # TODO use config with path
         musclesFile = open(MUSCLES_FILE, "r", encoding="utf-8")
         musclesNames = musclesFile.readlines()
         clearMusclesNames = []
@@ -225,7 +231,6 @@ class DatabaseHandler:
         for name in clearMusclesNames:
             yield tuple([name])
 
-    # Please use this method in other thread than GUI, for better performance, specially with growing number of muscles
     def fillTablesMuscles(self):
         try:
             self.cursor.executemany(
@@ -233,8 +238,7 @@ class DatabaseHandler:
                 self.generateMusclesNames(),
             )
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(str(database_error) + " Muscles")
+        except sqlite3.Error:
             self.closeConnection()
 
     def updateTrainerKeyForUser(self, user: User, trainer_key: str):
@@ -246,8 +250,7 @@ class DatabaseHandler:
                     user.id_user,
                 ),
             )
-        except sqlite3.Error as database_error:
-            print(database_error)
+        except sqlite3.Error:
             self.closeConnection()
 
     def updatePassword(self, user: User):
@@ -263,11 +266,10 @@ class DatabaseHandler:
             )
 
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(str(database_error) + "Password")
+        except sqlite3.Error:
             self.closeConnection()
 
-    def updatePasswordByUserPassword(self,id_user:str, password: str):
+    def updatePasswordByUserPassword(self, id_user: str, password: str):
         try:
             hashed_password = SecurityCreator.createPasswordByUserPassword(password)
 
@@ -280,14 +282,12 @@ class DatabaseHandler:
             )
 
             self.connection.commit()
-        except sqlite3.Error as database_error:
-            print(str(database_error) + "Password")
+        except sqlite3.Error:
             self.closeConnection()
 
     # Section of finding functions
     def findUserByLogin(self, user: User):
-        self.cursor.execute(
-            "select id_user from users where login=?", (user.login,))
+        self.cursor.execute("select id_user from users where login=?", (user.login,))
         row = self.cursor.fetchone()
         if row is not None:
             user.id_user = row[0]
@@ -296,12 +296,10 @@ class DatabaseHandler:
         return user
 
     def findUserPassword(self, id_user: int):
-        print("id " + str(id_user))
-        self.cursor.execute(
-            "select hash from passwords where id_user=?", (id_user,))
+        self.cursor.execute("select hash from passwords where id_user=?", (id_user,))
         row = self.cursor.fetchone()
         hash = row[0]
-        print(hash)
+
         return hash
 
     def findAnyAdvancedUserCode(self, advanced_user_key: str):
@@ -324,14 +322,13 @@ class DatabaseHandler:
     def findAnyEmail(self, email: str):
         self.cursor.execute("select login from users where email=?", (email,))
         row = self.cursor.fetchone()
-        if row is None:
+        if row == None:
             return True
         return False
 
     def findUserIDByEmail(self, email: str):
         id_user = -1
-        self.cursor.execute(
-            "select id_user from users where email=?", (email,))
+        self.cursor.execute("select id_user from users where email=?", (email,))
         row = self.cursor.fetchone()
         if row is None:
             return id_user
@@ -347,11 +344,9 @@ class DatabaseHandler:
         return users
 
     def findUserPrivilegesByLogin(self, login: str):
-        self.cursor.execute(
-            """select advanced from users where login=?""", (login,))
+        self.cursor.execute("""select advanced from users where login=?""", (login,))
 
         row = self.cursor.fetchone()
-        print(row)
         if not row[0]:
             return True
         return False
@@ -362,43 +357,31 @@ class DatabaseHandler:
         )
 
         row = self.cursor.fetchone()
-        print(row)
         if not row[0]:
             return True
         return False
 
     def findUsersForAdvanced(self, id_user: str):
         self.cursor.execute(
-            "select id_user from UserAndAdvanced where id_userAdvanced=?", (
-                id_user,)
+            "select id_user from UserAndAdvanced where id_userAdvanced=?", (id_user,)
         )
         listOfUsers = self.cursor.fetchall()
         if listOfUsers is None:
             return False
         return listOfUsers
 
-    def findMeansurment(self, id_user: str):
+    def findUserExistForAdvanced(self, id_userAdvanced: str, id_user: str):
         self.cursor.execute(
-            "select * from Measurement where id_user=?", (
-                id_user,)
-        )
-        listOfUsers = self.cursor.fetchall()
-        if listOfUsers is None:
-            return False
-        return listOfUsers
-
-
-    def findUserExistForAdvanced(self,id_userAdvanced:str, id_user: str):
-        self.cursor.execute(
-            "select id_user from UserAndAdvanced where id_userAdvanced=? and id_user=?", (
-                id_userAdvanced,id_user,)
+            "select id_user from UserAndAdvanced where id_userAdvanced=? and id_user=?",
+            (
+                id_userAdvanced,
+                id_user,
+            ),
         )
         row = self.cursor.fetchone()
         if row is None:
             return True
         return False
-
-
 
     def findUserByIdList(self, ids: List):
         query = "select * from users where id_user in ({seq})".format(
@@ -419,13 +402,10 @@ class DatabaseHandler:
         for user in listOfUser:
             usersList.append(self.findUserById(user[0]))
         usersList = self.findUserByIdList(usersList)
-        for user in listOfUser:
-            print(user)
 
     def getUserCredentials(self, login: str):
         self.cursor.execute(
-            "select id_user,name,surname,email from users where login=?", (
-                login,)
+            "select id_user,name,surname,email from users where login=?", (login,)
         )
         row = self.cursor.fetchone()
         return row
@@ -442,24 +422,32 @@ class DatabaseHandler:
         hashed = self.findUserPassword(self.findUserByLogin(user).id_user)
         self.closeConnection()
         return SecurityCreator.verifyPassword(hashed, user.password)
+
     # Generators
     def generate100RecordToInsert(self):
         for my_iter in range(100):
-            value= self.DataQueue.get()
-            yield(value,)
+            value = self.DataQueue.get_nowait()
+            yield (value,)
 
     def generateAllRecordToInsert(self):
-        while  self.DataQueue.qsize()>0:
-            value= self.DataQueue.get()
-            yield(value,)
+        while self.DataQueue.qsize() > 0:
+            value = self.DataQueue.get_nowait()
+            yield (value,)
+
     # Insertion of generated Data
 
-    #Probably to little refactor aka method, maybe as enum
-    def insertDataToDB(self,tableName:str,method:int=1):
-        sql_command="insert into {} values (?)".format(tableName)
-        if method==1:
+    # Probably to little refactor aka method, maybe as enum
+    def insertDataToDB(self, tableName: str, method: int = 1):
+        sql_command = "insert into {} values (?)".format(tableName)
+        if method == 1:
             self.connection.executemany(sql_command, self.generate100RecordToInsert())
             self.connection.commit()
         else:
             self.connection.executemany(sql_command, self.generateAllRecordToInsert())
             self.connection.commit()
+
+    def createDatabaseFile(self):
+        try:
+            open("database.db")
+        except:
+            pass

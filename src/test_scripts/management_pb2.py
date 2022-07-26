@@ -6,6 +6,7 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
+
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -13,1163 +14,1704 @@ _sym_db = _symbol_database.Default()
 
 import nanopb_pb2 as nanopb__pb2
 
-
 DESCRIPTOR = _descriptor.FileDescriptor(
-  name='management.proto',
-  package='',
-  syntax='proto3',
-  serialized_options=None,
-  serialized_pb=b'\n\x10management.proto\x1a\x0cnanopb.proto\"P\n\x04Ping\x12\x0e\n\x06pingID\x18\x01 \x01(\x05\x12\x1d\n\x15\x65xpectedAmountOfPongs\x18\x02 \x01(\x05\x12\x19\n\x11\x64\x65layBetweenPongs\x18\x03 \x01(\x05\"\x16\n\x04Pong\x12\x0e\n\x06pongID\x18\x01 \x01(\x05\"+\n\x12\x44iagnosticsRequest\x12\x15\n\rcheckMAX30001\x18\x01 \x01(\x08\"\xe0\x01\n\x13\x44iagnosticsResponse\x12\x34\n\x0fmax30001AStatus\x18\x01 \x01(\x0e\x32\x1b.DiagnosticsResponse.Status\x12\x34\n\x0fmax30001BStatus\x18\x02 \x01(\x0e\x32\x1b.DiagnosticsResponse.Status\"]\n\x06Status\x12 \n\x1c\x44IAG_RESPONSE_STATUS_INVALID\x10\x00\x12\x0e\n\nNOT_TESTED\x10\x01\x12\r\n\tTESTED_OK\x10\x02\x12\x12\n\x0eTESTED_FAILURE\x10\x03\"\x19\n\x17StopMeasurementsRequest\"7\n\x18StopMeasurementsResponse\x12\x1b\n\x13measurementsStopped\x18\x01 \x01(\x08\"\xfd\x04\n\x1bStartECGMeasurementsRequest\x12/\n\x04type\x18\x01 \x01(\x0e\x32!.StartECGMeasurementsRequest.Type\x12/\n\x04rate\x18\x02 \x01(\x0e\x32!.StartECGMeasurementsRequest.Rate\x12/\n\x04gain\x18\x03 \x01(\x0e\x32!.StartECGMeasurementsRequest.Gain\x12M\n\x13lowPassFilterCutoff\x18\x04 \x01(\x0e\x32\x30.StartECGMeasurementsRequest.LowPassFilterCutoff\x12\x1d\n\x15highPassFilterEnabled\x18\x05 \x01(\x08\";\n\x04Type\x12 \n\x1c\x45\x43G_MEASUREMENT_TYPE_INVALID\x10\x00\x12\x07\n\x03\x45MG\x10\x01\x12\x08\n\x04TEST\x10\x02\"L\n\x04Rate\x12\x14\n\x10\x45\x43G_RATE_INVALID\x10\x00\x12\x0e\n\nRATE_512HZ\x10\x01\x12\x0e\n\nRATE_256HZ\x10\x02\x12\x0e\n\nRATE_128HZ\x10\x03\"Y\n\x04Gain\x12\x14\n\x10\x45\x43G_GAIN_INVALID\x10\x00\x12\r\n\tGAIN_20VV\x10\x01\x12\r\n\tGAIN_40VV\x10\x02\x12\r\n\tGAIN_80VV\x10\x03\x12\x0e\n\nGAIN_160VV\x10\x04\"w\n\x13LowPassFilterCutoff\x12\x16\n\x12LPF_CUTOFF_INVALID\x10\x00\x12\x0f\n\x0b\x43UTOFF_40HZ\x10\x01\x12\x10\n\x0c\x43UTOFF_100HZ\x10\x02\x12\x10\n\x0c\x43UTOFF_150HZ\x10\x03\x12\x13\n\x0f\x43UTOFF_DISABLED\x10\x04\"\x9e\x01\n\x1cStartECGMeasurementsResponse\x12\x13\n\x0bisTypeValid\x18\x01 \x01(\x08\x12\x13\n\x0bisRateValid\x18\x02 \x01(\x08\x12\x13\n\x0bisGainValid\x18\x03 \x01(\x08\x12\"\n\x1aisLowPassFilterCutoffValid\x18\x04 \x01(\x08\x12\x1b\n\x13measurementsStarted\x18\x05 \x01(\x08\"\xb3\x0e\n\x1cStartBioZMeasurementsRequest\x12\x30\n\x04type\x18\x01 \x01(\x0e\x32\".StartBioZMeasurementsRequest.Type\x12\x30\n\x04rate\x18\x02 \x01(\x0e\x32\".StartBioZMeasurementsRequest.Rate\x12\x30\n\x04gain\x18\x03 \x01(\x0e\x32\".StartBioZMeasurementsRequest.Gain\x12\\\n\x1a\x61nalogHighPassFilterCutoff\x18\x04 \x01(\x0e\x32\x38.StartBioZMeasurementsRequest.AnalogHighPassFilterCutoff\x12^\n\x1b\x64igitalHighPassFilterCutoff\x18\x05 \x01(\x0e\x32\x39.StartBioZMeasurementsRequest.DigitalHighPassFilterCutoff\x12\\\n\x1a\x64igitalLowPassFilterCutoff\x18\x06 \x01(\x0e\x32\x38.StartBioZMeasurementsRequest.DigitalLowPassFilterCutoff\x12Z\n\x19\x63urrentGeneratorFrequency\x18\x07 \x01(\x0e\x32\x37.StartBioZMeasurementsRequest.CurrentGeneratorFrequency\x12Z\n\x19\x63urrentGeneratorMagnitude\x18\x08 \x01(\x0e\x32\x37.StartBioZMeasurementsRequest.CurrentGeneratorMagnitude\"8\n\x04Type\x12\x1c\n\x18MESAUREMENT_TYPE_INVALID\x10\x00\x12\x08\n\x04\x42IOZ\x10\x01\x12\x08\n\x04TEST\x10\x02\"6\n\x04Rate\x12\x10\n\x0cRATE_INVALID\x10\x00\x12\r\n\tRATE_64HZ\x10\x01\x12\r\n\tRATE_32HZ\x10\x02\"T\n\x04Gain\x12\x10\n\x0cGAIN_INVALID\x10\x00\x12\r\n\tGAIN_10VV\x10\x01\x12\r\n\tGAIN_20VV\x10\x02\x12\r\n\tGAIN_40VV\x10\x03\x12\r\n\tGAIN_80VV\x10\x04\"\xbc\x01\n\x1a\x41nalogHighPassFilterCutoff\x12\x17\n\x13\x41HPF_CUTOFF_INVALID\x10\x00\x12\x10\n\x0c\x43UTOFF_125HZ\x10\x01\x12\x10\n\x0c\x43UTOFF_300HZ\x10\x02\x12\x10\n\x0c\x43UTOFF_800HZ\x10\x03\x12\x11\n\rCUTOFF_2000HZ\x10\x04\x12\x11\n\rCUTOFF_3700HZ\x10\x05\x12\x11\n\rCUTOFF_7200HZ\x10\x06\x12\x16\n\x12\x41HPF_CUTOFF_BYPASS\x10\x07\"s\n\x1b\x44igitalHighPassFilterCutoff\x12\x17\n\x13\x44HPF_CUTOFF_INVALID\x10\x00\x12\x11\n\rCUTOFF_0_05HZ\x10\x01\x12\x10\n\x0c\x43UTOFF_0_5HZ\x10\x02\x12\x16\n\x12\x44HPF_CUTOFF_BYPASS\x10\x03\"~\n\x1a\x44igitalLowPassFilterCutoff\x12\x17\n\x13\x44LPF_CUTOFF_INVALID\x10\x00\x12\x0e\n\nCUTOFF_4HZ\x10\x01\x12\x0e\n\nCUTOFF_8HZ\x10\x02\x12\x0f\n\x0b\x43UTOFF_16HZ\x10\x03\x12\x16\n\x12\x44LPF_CUTOFF_BYPASS\x10\x04\"\xb8\x02\n\x19\x43urrentGeneratorFrequency\x12!\n\x1d\x43URRENT_GEN_FREQUENCY_INVALID\x10\x00\x12\x16\n\x12\x43URRENT_GEN_128KHZ\x10\x01\x12\x15\n\x11\x43URRENT_GEN_80KHZ\x10\x02\x12\x15\n\x11\x43URRENT_GEN_40KHZ\x10\x03\x12\x15\n\x11\x43URRENT_GEN_18KHZ\x10\x04\x12\x14\n\x10\x43URRENT_GEN_8KHZ\x10\x05\x12\x14\n\x10\x43URRENT_GEN_4KHZ\x10\x06\x12\x14\n\x10\x43URRENT_GEN_2KHZ\x10\x07\x12\x14\n\x10\x43URRENT_GEN_1KHZ\x10\x08\x12\x15\n\x11\x43URRENT_GEN_500HZ\x10\t\x12\x15\n\x11\x43URRENT_GEN_250HZ\x10\n\x12\x15\n\x11\x43URRENT_GEN_125HZ\x10\x0b\"\xf1\x01\n\x19\x43urrentGeneratorMagnitude\x12!\n\x1d\x43URRENT_GEN_MAGNITUDE_INVALUD\x10\x00\x12\x18\n\x14\x43URRENT_GEN_DISABLED\x10\x01\x12\x13\n\x0f\x43URRENT_GEN_8UA\x10\x02\x12\x14\n\x10\x43URRENT_GEN_16UA\x10\x03\x12\x14\n\x10\x43URRENT_GEN_32UA\x10\x04\x12\x14\n\x10\x43URRENT_GEN_48UA\x10\x05\x12\x14\n\x10\x43URRENT_GEN_64UA\x10\x06\x12\x14\n\x10\x43URRENT_GEN_80UA\x10\x07\x12\x14\n\x10\x43URRENT_GEN_96UA\x10\x08\"\xf7\x01\n\x1dStartBioZMeasurementsResponse\x12\x13\n\x0bisTypeValid\x18\x01 \x01(\x08\x12\x13\n\x0bisRateValid\x18\x02 \x01(\x08\x12\x13\n\x0bisGainValid\x18\x03 \x01(\x08\x12\x19\n\x11isAHPFCutoffValid\x18\x04 \x01(\x08\x12\x19\n\x11isDHPFCutoffValid\x18\x05 \x01(\x08\x12\x19\n\x11isDLPFCutoffValid\x18\x06 \x01(\x08\x12\"\n\x1aisCurrentGenFrequencyValid\x18\x07 \x01(\x08\x12\"\n\x1aisCurrentGenMagnitudeValid\x18\x08 \x01(\x08\"\xcf\x01\n\rErrorResponse\x12!\n\x04type\x18\x01 \x01(\x0e\x32\x13.ErrorResponse.Type\x12\x1a\n\x0b\x64\x65scription\x18\x02 \x01(\tB\x05\x92?\x02pd\"\x7f\n\x04Type\x12\x16\n\x12\x45RROR_TYPE_INVALID\x10\x00\x12\x13\n\x0fUNKNOWN_REQUEST\x10\x01\x12\x19\n\x15\x43OULDNT_PARSE_REQUEST\x10\x02\x12\x18\n\x14INVALID_DEVICE_STATE\x10\x03\x12\x15\n\x11INVALID_ARGUMENTS\x10\x04\x62\x06proto3'
-  ,
-  dependencies=[nanopb__pb2.DESCRIPTOR,])
-
+    name="management.proto",
+    package="",
+    syntax="proto3",
+    serialized_options=None,
+    serialized_pb=b'\n\x10management.proto\x1a\x0cnanopb.proto"P\n\x04Ping\x12\x0e\n\x06pingID\x18\x01 \x01(\x05\x12\x1d\n\x15\x65xpectedAmountOfPongs\x18\x02 \x01(\x05\x12\x19\n\x11\x64\x65layBetweenPongs\x18\x03 \x01(\x05"\x16\n\x04Pong\x12\x0e\n\x06pongID\x18\x01 \x01(\x05"+\n\x12\x44iagnosticsRequest\x12\x15\n\rcheckMAX30001\x18\x01 \x01(\x08"\xe0\x01\n\x13\x44iagnosticsResponse\x12\x34\n\x0fmax30001AStatus\x18\x01 \x01(\x0e\x32\x1b.DiagnosticsResponse.Status\x12\x34\n\x0fmax30001BStatus\x18\x02 \x01(\x0e\x32\x1b.DiagnosticsResponse.Status"]\n\x06Status\x12 \n\x1c\x44IAG_RESPONSE_STATUS_INVALID\x10\x00\x12\x0e\n\nNOT_TESTED\x10\x01\x12\r\n\tTESTED_OK\x10\x02\x12\x12\n\x0eTESTED_FAILURE\x10\x03"\x19\n\x17StopMeasurementsRequest"7\n\x18StopMeasurementsResponse\x12\x1b\n\x13measurementsStopped\x18\x01 \x01(\x08"\xfd\x04\n\x1bStartECGMeasurementsRequest\x12/\n\x04type\x18\x01 \x01(\x0e\x32!.StartECGMeasurementsRequest.Type\x12/\n\x04rate\x18\x02 \x01(\x0e\x32!.StartECGMeasurementsRequest.Rate\x12/\n\x04gain\x18\x03 \x01(\x0e\x32!.StartECGMeasurementsRequest.Gain\x12M\n\x13lowPassFilterCutoff\x18\x04 \x01(\x0e\x32\x30.StartECGMeasurementsRequest.LowPassFilterCutoff\x12\x1d\n\x15highPassFilterEnabled\x18\x05 \x01(\x08";\n\x04Type\x12 \n\x1c\x45\x43G_MEASUREMENT_TYPE_INVALID\x10\x00\x12\x07\n\x03\x45MG\x10\x01\x12\x08\n\x04TEST\x10\x02"L\n\x04Rate\x12\x14\n\x10\x45\x43G_RATE_INVALID\x10\x00\x12\x0e\n\nRATE_512HZ\x10\x01\x12\x0e\n\nRATE_256HZ\x10\x02\x12\x0e\n\nRATE_128HZ\x10\x03"Y\n\x04Gain\x12\x14\n\x10\x45\x43G_GAIN_INVALID\x10\x00\x12\r\n\tGAIN_20VV\x10\x01\x12\r\n\tGAIN_40VV\x10\x02\x12\r\n\tGAIN_80VV\x10\x03\x12\x0e\n\nGAIN_160VV\x10\x04"w\n\x13LowPassFilterCutoff\x12\x16\n\x12LPF_CUTOFF_INVALID\x10\x00\x12\x0f\n\x0b\x43UTOFF_40HZ\x10\x01\x12\x10\n\x0c\x43UTOFF_100HZ\x10\x02\x12\x10\n\x0c\x43UTOFF_150HZ\x10\x03\x12\x13\n\x0f\x43UTOFF_DISABLED\x10\x04"\x9e\x01\n\x1cStartECGMeasurementsResponse\x12\x13\n\x0bisTypeValid\x18\x01 \x01(\x08\x12\x13\n\x0bisRateValid\x18\x02 \x01(\x08\x12\x13\n\x0bisGainValid\x18\x03 \x01(\x08\x12"\n\x1aisLowPassFilterCutoffValid\x18\x04 \x01(\x08\x12\x1b\n\x13measurementsStarted\x18\x05 \x01(\x08"\xb3\x0e\n\x1cStartBioZMeasurementsRequest\x12\x30\n\x04type\x18\x01 \x01(\x0e\x32".StartBioZMeasurementsRequest.Type\x12\x30\n\x04rate\x18\x02 \x01(\x0e\x32".StartBioZMeasurementsRequest.Rate\x12\x30\n\x04gain\x18\x03 \x01(\x0e\x32".StartBioZMeasurementsRequest.Gain\x12\\\n\x1a\x61nalogHighPassFilterCutoff\x18\x04 \x01(\x0e\x32\x38.StartBioZMeasurementsRequest.AnalogHighPassFilterCutoff\x12^\n\x1b\x64igitalHighPassFilterCutoff\x18\x05 \x01(\x0e\x32\x39.StartBioZMeasurementsRequest.DigitalHighPassFilterCutoff\x12\\\n\x1a\x64igitalLowPassFilterCutoff\x18\x06 \x01(\x0e\x32\x38.StartBioZMeasurementsRequest.DigitalLowPassFilterCutoff\x12Z\n\x19\x63urrentGeneratorFrequency\x18\x07 \x01(\x0e\x32\x37.StartBioZMeasurementsRequest.CurrentGeneratorFrequency\x12Z\n\x19\x63urrentGeneratorMagnitude\x18\x08 \x01(\x0e\x32\x37.StartBioZMeasurementsRequest.CurrentGeneratorMagnitude"8\n\x04Type\x12\x1c\n\x18MESAUREMENT_TYPE_INVALID\x10\x00\x12\x08\n\x04\x42IOZ\x10\x01\x12\x08\n\x04TEST\x10\x02"6\n\x04Rate\x12\x10\n\x0cRATE_INVALID\x10\x00\x12\r\n\tRATE_64HZ\x10\x01\x12\r\n\tRATE_32HZ\x10\x02"T\n\x04Gain\x12\x10\n\x0cGAIN_INVALID\x10\x00\x12\r\n\tGAIN_10VV\x10\x01\x12\r\n\tGAIN_20VV\x10\x02\x12\r\n\tGAIN_40VV\x10\x03\x12\r\n\tGAIN_80VV\x10\x04"\xbc\x01\n\x1a\x41nalogHighPassFilterCutoff\x12\x17\n\x13\x41HPF_CUTOFF_INVALID\x10\x00\x12\x10\n\x0c\x43UTOFF_125HZ\x10\x01\x12\x10\n\x0c\x43UTOFF_300HZ\x10\x02\x12\x10\n\x0c\x43UTOFF_800HZ\x10\x03\x12\x11\n\rCUTOFF_2000HZ\x10\x04\x12\x11\n\rCUTOFF_3700HZ\x10\x05\x12\x11\n\rCUTOFF_7200HZ\x10\x06\x12\x16\n\x12\x41HPF_CUTOFF_BYPASS\x10\x07"s\n\x1b\x44igitalHighPassFilterCutoff\x12\x17\n\x13\x44HPF_CUTOFF_INVALID\x10\x00\x12\x11\n\rCUTOFF_0_05HZ\x10\x01\x12\x10\n\x0c\x43UTOFF_0_5HZ\x10\x02\x12\x16\n\x12\x44HPF_CUTOFF_BYPASS\x10\x03"~\n\x1a\x44igitalLowPassFilterCutoff\x12\x17\n\x13\x44LPF_CUTOFF_INVALID\x10\x00\x12\x0e\n\nCUTOFF_4HZ\x10\x01\x12\x0e\n\nCUTOFF_8HZ\x10\x02\x12\x0f\n\x0b\x43UTOFF_16HZ\x10\x03\x12\x16\n\x12\x44LPF_CUTOFF_BYPASS\x10\x04"\xb8\x02\n\x19\x43urrentGeneratorFrequency\x12!\n\x1d\x43URRENT_GEN_FREQUENCY_INVALID\x10\x00\x12\x16\n\x12\x43URRENT_GEN_128KHZ\x10\x01\x12\x15\n\x11\x43URRENT_GEN_80KHZ\x10\x02\x12\x15\n\x11\x43URRENT_GEN_40KHZ\x10\x03\x12\x15\n\x11\x43URRENT_GEN_18KHZ\x10\x04\x12\x14\n\x10\x43URRENT_GEN_8KHZ\x10\x05\x12\x14\n\x10\x43URRENT_GEN_4KHZ\x10\x06\x12\x14\n\x10\x43URRENT_GEN_2KHZ\x10\x07\x12\x14\n\x10\x43URRENT_GEN_1KHZ\x10\x08\x12\x15\n\x11\x43URRENT_GEN_500HZ\x10\t\x12\x15\n\x11\x43URRENT_GEN_250HZ\x10\n\x12\x15\n\x11\x43URRENT_GEN_125HZ\x10\x0b"\xf1\x01\n\x19\x43urrentGeneratorMagnitude\x12!\n\x1d\x43URRENT_GEN_MAGNITUDE_INVALUD\x10\x00\x12\x18\n\x14\x43URRENT_GEN_DISABLED\x10\x01\x12\x13\n\x0f\x43URRENT_GEN_8UA\x10\x02\x12\x14\n\x10\x43URRENT_GEN_16UA\x10\x03\x12\x14\n\x10\x43URRENT_GEN_32UA\x10\x04\x12\x14\n\x10\x43URRENT_GEN_48UA\x10\x05\x12\x14\n\x10\x43URRENT_GEN_64UA\x10\x06\x12\x14\n\x10\x43URRENT_GEN_80UA\x10\x07\x12\x14\n\x10\x43URRENT_GEN_96UA\x10\x08"\xf7\x01\n\x1dStartBioZMeasurementsResponse\x12\x13\n\x0bisTypeValid\x18\x01 \x01(\x08\x12\x13\n\x0bisRateValid\x18\x02 \x01(\x08\x12\x13\n\x0bisGainValid\x18\x03 \x01(\x08\x12\x19\n\x11isAHPFCutoffValid\x18\x04 \x01(\x08\x12\x19\n\x11isDHPFCutoffValid\x18\x05 \x01(\x08\x12\x19\n\x11isDLPFCutoffValid\x18\x06 \x01(\x08\x12"\n\x1aisCurrentGenFrequencyValid\x18\x07 \x01(\x08\x12"\n\x1aisCurrentGenMagnitudeValid\x18\x08 \x01(\x08"\xcf\x01\n\rErrorResponse\x12!\n\x04type\x18\x01 \x01(\x0e\x32\x13.ErrorResponse.Type\x12\x1a\n\x0b\x64\x65scription\x18\x02 \x01(\tB\x05\x92?\x02pd"\x7f\n\x04Type\x12\x16\n\x12\x45RROR_TYPE_INVALID\x10\x00\x12\x13\n\x0fUNKNOWN_REQUEST\x10\x01\x12\x19\n\x15\x43OULDNT_PARSE_REQUEST\x10\x02\x12\x18\n\x14INVALID_DEVICE_STATE\x10\x03\x12\x15\n\x11INVALID_ARGUMENTS\x10\x04\x62\x06proto3',
+    dependencies=[
+        nanopb__pb2.DESCRIPTOR,
+    ],
+)
 
 
 _DIAGNOSTICSRESPONSE_STATUS = _descriptor.EnumDescriptor(
-  name='Status',
-  full_name='DiagnosticsResponse.Status',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='DIAG_RESPONSE_STATUS_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_TESTED', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='TESTED_OK', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='TESTED_FAILURE', index=3, number=3,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=317,
-  serialized_end=410,
+    name="Status",
+    full_name="DiagnosticsResponse.Status",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="DIAG_RESPONSE_STATUS_INVALID",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="NOT_TESTED", index=1, number=1, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="TESTED_OK", index=2, number=2, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="TESTED_FAILURE", index=3, number=3, serialized_options=None, type=None
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=317,
+    serialized_end=410,
 )
 _sym_db.RegisterEnumDescriptor(_DIAGNOSTICSRESPONSE_STATUS)
 
 _STARTECGMEASUREMENTSREQUEST_TYPE = _descriptor.EnumDescriptor(
-  name='Type',
-  full_name='StartECGMeasurementsRequest.Type',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='ECG_MEASUREMENT_TYPE_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EMG', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='TEST', index=2, number=2,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=785,
-  serialized_end=844,
+    name="Type",
+    full_name="StartECGMeasurementsRequest.Type",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="ECG_MEASUREMENT_TYPE_INVALID",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="EMG", index=1, number=1, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="TEST", index=2, number=2, serialized_options=None, type=None
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=785,
+    serialized_end=844,
 )
 _sym_db.RegisterEnumDescriptor(_STARTECGMEASUREMENTSREQUEST_TYPE)
 
 _STARTECGMEASUREMENTSREQUEST_RATE = _descriptor.EnumDescriptor(
-  name='Rate',
-  full_name='StartECGMeasurementsRequest.Rate',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='ECG_RATE_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='RATE_512HZ', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='RATE_256HZ', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='RATE_128HZ', index=3, number=3,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=846,
-  serialized_end=922,
+    name="Rate",
+    full_name="StartECGMeasurementsRequest.Rate",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="ECG_RATE_INVALID",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="RATE_512HZ", index=1, number=1, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="RATE_256HZ", index=2, number=2, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="RATE_128HZ", index=3, number=3, serialized_options=None, type=None
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=846,
+    serialized_end=922,
 )
 _sym_db.RegisterEnumDescriptor(_STARTECGMEASUREMENTSREQUEST_RATE)
 
 _STARTECGMEASUREMENTSREQUEST_GAIN = _descriptor.EnumDescriptor(
-  name='Gain',
-  full_name='StartECGMeasurementsRequest.Gain',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='ECG_GAIN_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='GAIN_20VV', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='GAIN_40VV', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='GAIN_80VV', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='GAIN_160VV', index=4, number=4,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=924,
-  serialized_end=1013,
+    name="Gain",
+    full_name="StartECGMeasurementsRequest.Gain",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="ECG_GAIN_INVALID",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="GAIN_20VV", index=1, number=1, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="GAIN_40VV", index=2, number=2, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="GAIN_80VV", index=3, number=3, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="GAIN_160VV", index=4, number=4, serialized_options=None, type=None
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=924,
+    serialized_end=1013,
 )
 _sym_db.RegisterEnumDescriptor(_STARTECGMEASUREMENTSREQUEST_GAIN)
 
 _STARTECGMEASUREMENTSREQUEST_LOWPASSFILTERCUTOFF = _descriptor.EnumDescriptor(
-  name='LowPassFilterCutoff',
-  full_name='StartECGMeasurementsRequest.LowPassFilterCutoff',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='LPF_CUTOFF_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_40HZ', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_100HZ', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_150HZ', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_DISABLED', index=4, number=4,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=1015,
-  serialized_end=1134,
+    name="LowPassFilterCutoff",
+    full_name="StartECGMeasurementsRequest.LowPassFilterCutoff",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="LPF_CUTOFF_INVALID",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_40HZ", index=1, number=1, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_100HZ", index=2, number=2, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_150HZ", index=3, number=3, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_DISABLED",
+            index=4,
+            number=4,
+            serialized_options=None,
+            type=None,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=1015,
+    serialized_end=1134,
 )
 _sym_db.RegisterEnumDescriptor(_STARTECGMEASUREMENTSREQUEST_LOWPASSFILTERCUTOFF)
 
 _STARTBIOZMEASUREMENTSREQUEST_TYPE = _descriptor.EnumDescriptor(
-  name='Type',
-  full_name='StartBioZMeasurementsRequest.Type',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='MESAUREMENT_TYPE_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='BIOZ', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='TEST', index=2, number=2,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=1948,
-  serialized_end=2004,
+    name="Type",
+    full_name="StartBioZMeasurementsRequest.Type",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="MESAUREMENT_TYPE_INVALID",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="BIOZ", index=1, number=1, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="TEST", index=2, number=2, serialized_options=None, type=None
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=1948,
+    serialized_end=2004,
 )
 _sym_db.RegisterEnumDescriptor(_STARTBIOZMEASUREMENTSREQUEST_TYPE)
 
 _STARTBIOZMEASUREMENTSREQUEST_RATE = _descriptor.EnumDescriptor(
-  name='Rate',
-  full_name='StartBioZMeasurementsRequest.Rate',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='RATE_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='RATE_64HZ', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='RATE_32HZ', index=2, number=2,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=2006,
-  serialized_end=2060,
+    name="Rate",
+    full_name="StartBioZMeasurementsRequest.Rate",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="RATE_INVALID", index=0, number=0, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="RATE_64HZ", index=1, number=1, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="RATE_32HZ", index=2, number=2, serialized_options=None, type=None
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=2006,
+    serialized_end=2060,
 )
 _sym_db.RegisterEnumDescriptor(_STARTBIOZMEASUREMENTSREQUEST_RATE)
 
 _STARTBIOZMEASUREMENTSREQUEST_GAIN = _descriptor.EnumDescriptor(
-  name='Gain',
-  full_name='StartBioZMeasurementsRequest.Gain',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='GAIN_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='GAIN_10VV', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='GAIN_20VV', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='GAIN_40VV', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='GAIN_80VV', index=4, number=4,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=2062,
-  serialized_end=2146,
+    name="Gain",
+    full_name="StartBioZMeasurementsRequest.Gain",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="GAIN_INVALID", index=0, number=0, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="GAIN_10VV", index=1, number=1, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="GAIN_20VV", index=2, number=2, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="GAIN_40VV", index=3, number=3, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="GAIN_80VV", index=4, number=4, serialized_options=None, type=None
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=2062,
+    serialized_end=2146,
 )
 _sym_db.RegisterEnumDescriptor(_STARTBIOZMEASUREMENTSREQUEST_GAIN)
 
 _STARTBIOZMEASUREMENTSREQUEST_ANALOGHIGHPASSFILTERCUTOFF = _descriptor.EnumDescriptor(
-  name='AnalogHighPassFilterCutoff',
-  full_name='StartBioZMeasurementsRequest.AnalogHighPassFilterCutoff',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='AHPF_CUTOFF_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_125HZ', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_300HZ', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_800HZ', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_2000HZ', index=4, number=4,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_3700HZ', index=5, number=5,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_7200HZ', index=6, number=6,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='AHPF_CUTOFF_BYPASS', index=7, number=7,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=2149,
-  serialized_end=2337,
+    name="AnalogHighPassFilterCutoff",
+    full_name="StartBioZMeasurementsRequest.AnalogHighPassFilterCutoff",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="AHPF_CUTOFF_INVALID",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_125HZ", index=1, number=1, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_300HZ", index=2, number=2, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_800HZ", index=3, number=3, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_2000HZ", index=4, number=4, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_3700HZ", index=5, number=5, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_7200HZ", index=6, number=6, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="AHPF_CUTOFF_BYPASS",
+            index=7,
+            number=7,
+            serialized_options=None,
+            type=None,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=2149,
+    serialized_end=2337,
 )
 _sym_db.RegisterEnumDescriptor(_STARTBIOZMEASUREMENTSREQUEST_ANALOGHIGHPASSFILTERCUTOFF)
 
 _STARTBIOZMEASUREMENTSREQUEST_DIGITALHIGHPASSFILTERCUTOFF = _descriptor.EnumDescriptor(
-  name='DigitalHighPassFilterCutoff',
-  full_name='StartBioZMeasurementsRequest.DigitalHighPassFilterCutoff',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='DHPF_CUTOFF_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_0_05HZ', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_0_5HZ', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='DHPF_CUTOFF_BYPASS', index=3, number=3,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=2339,
-  serialized_end=2454,
+    name="DigitalHighPassFilterCutoff",
+    full_name="StartBioZMeasurementsRequest.DigitalHighPassFilterCutoff",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="DHPF_CUTOFF_INVALID",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_0_05HZ", index=1, number=1, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_0_5HZ", index=2, number=2, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="DHPF_CUTOFF_BYPASS",
+            index=3,
+            number=3,
+            serialized_options=None,
+            type=None,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=2339,
+    serialized_end=2454,
 )
-_sym_db.RegisterEnumDescriptor(_STARTBIOZMEASUREMENTSREQUEST_DIGITALHIGHPASSFILTERCUTOFF)
+_sym_db.RegisterEnumDescriptor(
+    _STARTBIOZMEASUREMENTSREQUEST_DIGITALHIGHPASSFILTERCUTOFF
+)
 
 _STARTBIOZMEASUREMENTSREQUEST_DIGITALLOWPASSFILTERCUTOFF = _descriptor.EnumDescriptor(
-  name='DigitalLowPassFilterCutoff',
-  full_name='StartBioZMeasurementsRequest.DigitalLowPassFilterCutoff',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='DLPF_CUTOFF_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_4HZ', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_8HZ', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CUTOFF_16HZ', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='DLPF_CUTOFF_BYPASS', index=4, number=4,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=2456,
-  serialized_end=2582,
+    name="DigitalLowPassFilterCutoff",
+    full_name="StartBioZMeasurementsRequest.DigitalLowPassFilterCutoff",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="DLPF_CUTOFF_INVALID",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_4HZ", index=1, number=1, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_8HZ", index=2, number=2, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CUTOFF_16HZ", index=3, number=3, serialized_options=None, type=None
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="DLPF_CUTOFF_BYPASS",
+            index=4,
+            number=4,
+            serialized_options=None,
+            type=None,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=2456,
+    serialized_end=2582,
 )
 _sym_db.RegisterEnumDescriptor(_STARTBIOZMEASUREMENTSREQUEST_DIGITALLOWPASSFILTERCUTOFF)
 
 _STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORFREQUENCY = _descriptor.EnumDescriptor(
-  name='CurrentGeneratorFrequency',
-  full_name='StartBioZMeasurementsRequest.CurrentGeneratorFrequency',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_FREQUENCY_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_128KHZ', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_80KHZ', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_40KHZ', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_18KHZ', index=4, number=4,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_8KHZ', index=5, number=5,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_4KHZ', index=6, number=6,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_2KHZ', index=7, number=7,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_1KHZ', index=8, number=8,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_500HZ', index=9, number=9,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_250HZ', index=10, number=10,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_125HZ', index=11, number=11,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=2585,
-  serialized_end=2897,
+    name="CurrentGeneratorFrequency",
+    full_name="StartBioZMeasurementsRequest.CurrentGeneratorFrequency",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_FREQUENCY_INVALID",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_128KHZ",
+            index=1,
+            number=1,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_80KHZ",
+            index=2,
+            number=2,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_40KHZ",
+            index=3,
+            number=3,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_18KHZ",
+            index=4,
+            number=4,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_8KHZ",
+            index=5,
+            number=5,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_4KHZ",
+            index=6,
+            number=6,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_2KHZ",
+            index=7,
+            number=7,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_1KHZ",
+            index=8,
+            number=8,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_500HZ",
+            index=9,
+            number=9,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_250HZ",
+            index=10,
+            number=10,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_125HZ",
+            index=11,
+            number=11,
+            serialized_options=None,
+            type=None,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=2585,
+    serialized_end=2897,
 )
 _sym_db.RegisterEnumDescriptor(_STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORFREQUENCY)
 
 _STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORMAGNITUDE = _descriptor.EnumDescriptor(
-  name='CurrentGeneratorMagnitude',
-  full_name='StartBioZMeasurementsRequest.CurrentGeneratorMagnitude',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_MAGNITUDE_INVALUD', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_DISABLED', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_8UA', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_16UA', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_32UA', index=4, number=4,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_48UA', index=5, number=5,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_64UA', index=6, number=6,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_80UA', index=7, number=7,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CURRENT_GEN_96UA', index=8, number=8,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=2900,
-  serialized_end=3141,
+    name="CurrentGeneratorMagnitude",
+    full_name="StartBioZMeasurementsRequest.CurrentGeneratorMagnitude",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_MAGNITUDE_INVALUD",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_DISABLED",
+            index=1,
+            number=1,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_8UA",
+            index=2,
+            number=2,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_16UA",
+            index=3,
+            number=3,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_32UA",
+            index=4,
+            number=4,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_48UA",
+            index=5,
+            number=5,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_64UA",
+            index=6,
+            number=6,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_80UA",
+            index=7,
+            number=7,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CURRENT_GEN_96UA",
+            index=8,
+            number=8,
+            serialized_options=None,
+            type=None,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=2900,
+    serialized_end=3141,
 )
 _sym_db.RegisterEnumDescriptor(_STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORMAGNITUDE)
 
 _ERRORRESPONSE_TYPE = _descriptor.EnumDescriptor(
-  name='Type',
-  full_name='ErrorResponse.Type',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='ERROR_TYPE_INVALID', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='UNKNOWN_REQUEST', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='COULDNT_PARSE_REQUEST', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='INVALID_DEVICE_STATE', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='INVALID_ARGUMENTS', index=4, number=4,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=3474,
-  serialized_end=3601,
+    name="Type",
+    full_name="ErrorResponse.Type",
+    filename=None,
+    file=DESCRIPTOR,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="ERROR_TYPE_INVALID",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="UNKNOWN_REQUEST",
+            index=1,
+            number=1,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="COULDNT_PARSE_REQUEST",
+            index=2,
+            number=2,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="INVALID_DEVICE_STATE",
+            index=3,
+            number=3,
+            serialized_options=None,
+            type=None,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="INVALID_ARGUMENTS",
+            index=4,
+            number=4,
+            serialized_options=None,
+            type=None,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=3474,
+    serialized_end=3601,
 )
 _sym_db.RegisterEnumDescriptor(_ERRORRESPONSE_TYPE)
 
 
 _PING = _descriptor.Descriptor(
-  name='Ping',
-  full_name='Ping',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='pingID', full_name='Ping.pingID', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='expectedAmountOfPongs', full_name='Ping.expectedAmountOfPongs', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='delayBetweenPongs', full_name='Ping.delayBetweenPongs', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=34,
-  serialized_end=114,
+    name="Ping",
+    full_name="Ping",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="pingID",
+            full_name="Ping.pingID",
+            index=0,
+            number=1,
+            type=5,
+            cpp_type=1,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="expectedAmountOfPongs",
+            full_name="Ping.expectedAmountOfPongs",
+            index=1,
+            number=2,
+            type=5,
+            cpp_type=1,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="delayBetweenPongs",
+            full_name="Ping.delayBetweenPongs",
+            index=2,
+            number=3,
+            type=5,
+            cpp_type=1,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=34,
+    serialized_end=114,
 )
 
 
 _PONG = _descriptor.Descriptor(
-  name='Pong',
-  full_name='Pong',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='pongID', full_name='Pong.pongID', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=116,
-  serialized_end=138,
+    name="Pong",
+    full_name="Pong",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="pongID",
+            full_name="Pong.pongID",
+            index=0,
+            number=1,
+            type=5,
+            cpp_type=1,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=116,
+    serialized_end=138,
 )
 
 
 _DIAGNOSTICSREQUEST = _descriptor.Descriptor(
-  name='DiagnosticsRequest',
-  full_name='DiagnosticsRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='checkMAX30001', full_name='DiagnosticsRequest.checkMAX30001', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=140,
-  serialized_end=183,
+    name="DiagnosticsRequest",
+    full_name="DiagnosticsRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="checkMAX30001",
+            full_name="DiagnosticsRequest.checkMAX30001",
+            index=0,
+            number=1,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=140,
+    serialized_end=183,
 )
 
 
 _DIAGNOSTICSRESPONSE = _descriptor.Descriptor(
-  name='DiagnosticsResponse',
-  full_name='DiagnosticsResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='max30001AStatus', full_name='DiagnosticsResponse.max30001AStatus', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='max30001BStatus', full_name='DiagnosticsResponse.max30001BStatus', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _DIAGNOSTICSRESPONSE_STATUS,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=186,
-  serialized_end=410,
+    name="DiagnosticsResponse",
+    full_name="DiagnosticsResponse",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="max30001AStatus",
+            full_name="DiagnosticsResponse.max30001AStatus",
+            index=0,
+            number=1,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="max30001BStatus",
+            full_name="DiagnosticsResponse.max30001BStatus",
+            index=1,
+            number=2,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[
+        _DIAGNOSTICSRESPONSE_STATUS,
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=186,
+    serialized_end=410,
 )
 
 
 _STOPMEASUREMENTSREQUEST = _descriptor.Descriptor(
-  name='StopMeasurementsRequest',
-  full_name='StopMeasurementsRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=412,
-  serialized_end=437,
+    name="StopMeasurementsRequest",
+    full_name="StopMeasurementsRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=412,
+    serialized_end=437,
 )
 
 
 _STOPMEASUREMENTSRESPONSE = _descriptor.Descriptor(
-  name='StopMeasurementsResponse',
-  full_name='StopMeasurementsResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='measurementsStopped', full_name='StopMeasurementsResponse.measurementsStopped', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=439,
-  serialized_end=494,
+    name="StopMeasurementsResponse",
+    full_name="StopMeasurementsResponse",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="measurementsStopped",
+            full_name="StopMeasurementsResponse.measurementsStopped",
+            index=0,
+            number=1,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=439,
+    serialized_end=494,
 )
 
 
 _STARTECGMEASUREMENTSREQUEST = _descriptor.Descriptor(
-  name='StartECGMeasurementsRequest',
-  full_name='StartECGMeasurementsRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='type', full_name='StartECGMeasurementsRequest.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='rate', full_name='StartECGMeasurementsRequest.rate', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='gain', full_name='StartECGMeasurementsRequest.gain', index=2,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='lowPassFilterCutoff', full_name='StartECGMeasurementsRequest.lowPassFilterCutoff', index=3,
-      number=4, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='highPassFilterEnabled', full_name='StartECGMeasurementsRequest.highPassFilterEnabled', index=4,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _STARTECGMEASUREMENTSREQUEST_TYPE,
-    _STARTECGMEASUREMENTSREQUEST_RATE,
-    _STARTECGMEASUREMENTSREQUEST_GAIN,
-    _STARTECGMEASUREMENTSREQUEST_LOWPASSFILTERCUTOFF,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=497,
-  serialized_end=1134,
+    name="StartECGMeasurementsRequest",
+    full_name="StartECGMeasurementsRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="type",
+            full_name="StartECGMeasurementsRequest.type",
+            index=0,
+            number=1,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="rate",
+            full_name="StartECGMeasurementsRequest.rate",
+            index=1,
+            number=2,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="gain",
+            full_name="StartECGMeasurementsRequest.gain",
+            index=2,
+            number=3,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="lowPassFilterCutoff",
+            full_name="StartECGMeasurementsRequest.lowPassFilterCutoff",
+            index=3,
+            number=4,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="highPassFilterEnabled",
+            full_name="StartECGMeasurementsRequest.highPassFilterEnabled",
+            index=4,
+            number=5,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[
+        _STARTECGMEASUREMENTSREQUEST_TYPE,
+        _STARTECGMEASUREMENTSREQUEST_RATE,
+        _STARTECGMEASUREMENTSREQUEST_GAIN,
+        _STARTECGMEASUREMENTSREQUEST_LOWPASSFILTERCUTOFF,
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=497,
+    serialized_end=1134,
 )
 
 
 _STARTECGMEASUREMENTSRESPONSE = _descriptor.Descriptor(
-  name='StartECGMeasurementsResponse',
-  full_name='StartECGMeasurementsResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='isTypeValid', full_name='StartECGMeasurementsResponse.isTypeValid', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='isRateValid', full_name='StartECGMeasurementsResponse.isRateValid', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='isGainValid', full_name='StartECGMeasurementsResponse.isGainValid', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='isLowPassFilterCutoffValid', full_name='StartECGMeasurementsResponse.isLowPassFilterCutoffValid', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='measurementsStarted', full_name='StartECGMeasurementsResponse.measurementsStarted', index=4,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1137,
-  serialized_end=1295,
+    name="StartECGMeasurementsResponse",
+    full_name="StartECGMeasurementsResponse",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="isTypeValid",
+            full_name="StartECGMeasurementsResponse.isTypeValid",
+            index=0,
+            number=1,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="isRateValid",
+            full_name="StartECGMeasurementsResponse.isRateValid",
+            index=1,
+            number=2,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="isGainValid",
+            full_name="StartECGMeasurementsResponse.isGainValid",
+            index=2,
+            number=3,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="isLowPassFilterCutoffValid",
+            full_name="StartECGMeasurementsResponse.isLowPassFilterCutoffValid",
+            index=3,
+            number=4,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="measurementsStarted",
+            full_name="StartECGMeasurementsResponse.measurementsStarted",
+            index=4,
+            number=5,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=1137,
+    serialized_end=1295,
 )
 
 
 _STARTBIOZMEASUREMENTSREQUEST = _descriptor.Descriptor(
-  name='StartBioZMeasurementsRequest',
-  full_name='StartBioZMeasurementsRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='type', full_name='StartBioZMeasurementsRequest.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='rate', full_name='StartBioZMeasurementsRequest.rate', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='gain', full_name='StartBioZMeasurementsRequest.gain', index=2,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='analogHighPassFilterCutoff', full_name='StartBioZMeasurementsRequest.analogHighPassFilterCutoff', index=3,
-      number=4, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='digitalHighPassFilterCutoff', full_name='StartBioZMeasurementsRequest.digitalHighPassFilterCutoff', index=4,
-      number=5, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='digitalLowPassFilterCutoff', full_name='StartBioZMeasurementsRequest.digitalLowPassFilterCutoff', index=5,
-      number=6, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='currentGeneratorFrequency', full_name='StartBioZMeasurementsRequest.currentGeneratorFrequency', index=6,
-      number=7, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='currentGeneratorMagnitude', full_name='StartBioZMeasurementsRequest.currentGeneratorMagnitude', index=7,
-      number=8, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _STARTBIOZMEASUREMENTSREQUEST_TYPE,
-    _STARTBIOZMEASUREMENTSREQUEST_RATE,
-    _STARTBIOZMEASUREMENTSREQUEST_GAIN,
-    _STARTBIOZMEASUREMENTSREQUEST_ANALOGHIGHPASSFILTERCUTOFF,
-    _STARTBIOZMEASUREMENTSREQUEST_DIGITALHIGHPASSFILTERCUTOFF,
-    _STARTBIOZMEASUREMENTSREQUEST_DIGITALLOWPASSFILTERCUTOFF,
-    _STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORFREQUENCY,
-    _STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORMAGNITUDE,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1298,
-  serialized_end=3141,
+    name="StartBioZMeasurementsRequest",
+    full_name="StartBioZMeasurementsRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="type",
+            full_name="StartBioZMeasurementsRequest.type",
+            index=0,
+            number=1,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="rate",
+            full_name="StartBioZMeasurementsRequest.rate",
+            index=1,
+            number=2,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="gain",
+            full_name="StartBioZMeasurementsRequest.gain",
+            index=2,
+            number=3,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="analogHighPassFilterCutoff",
+            full_name="StartBioZMeasurementsRequest.analogHighPassFilterCutoff",
+            index=3,
+            number=4,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="digitalHighPassFilterCutoff",
+            full_name="StartBioZMeasurementsRequest.digitalHighPassFilterCutoff",
+            index=4,
+            number=5,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="digitalLowPassFilterCutoff",
+            full_name="StartBioZMeasurementsRequest.digitalLowPassFilterCutoff",
+            index=5,
+            number=6,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="currentGeneratorFrequency",
+            full_name="StartBioZMeasurementsRequest.currentGeneratorFrequency",
+            index=6,
+            number=7,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="currentGeneratorMagnitude",
+            full_name="StartBioZMeasurementsRequest.currentGeneratorMagnitude",
+            index=7,
+            number=8,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[
+        _STARTBIOZMEASUREMENTSREQUEST_TYPE,
+        _STARTBIOZMEASUREMENTSREQUEST_RATE,
+        _STARTBIOZMEASUREMENTSREQUEST_GAIN,
+        _STARTBIOZMEASUREMENTSREQUEST_ANALOGHIGHPASSFILTERCUTOFF,
+        _STARTBIOZMEASUREMENTSREQUEST_DIGITALHIGHPASSFILTERCUTOFF,
+        _STARTBIOZMEASUREMENTSREQUEST_DIGITALLOWPASSFILTERCUTOFF,
+        _STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORFREQUENCY,
+        _STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORMAGNITUDE,
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=1298,
+    serialized_end=3141,
 )
 
 
 _STARTBIOZMEASUREMENTSRESPONSE = _descriptor.Descriptor(
-  name='StartBioZMeasurementsResponse',
-  full_name='StartBioZMeasurementsResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='isTypeValid', full_name='StartBioZMeasurementsResponse.isTypeValid', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='isRateValid', full_name='StartBioZMeasurementsResponse.isRateValid', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='isGainValid', full_name='StartBioZMeasurementsResponse.isGainValid', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='isAHPFCutoffValid', full_name='StartBioZMeasurementsResponse.isAHPFCutoffValid', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='isDHPFCutoffValid', full_name='StartBioZMeasurementsResponse.isDHPFCutoffValid', index=4,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='isDLPFCutoffValid', full_name='StartBioZMeasurementsResponse.isDLPFCutoffValid', index=5,
-      number=6, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='isCurrentGenFrequencyValid', full_name='StartBioZMeasurementsResponse.isCurrentGenFrequencyValid', index=6,
-      number=7, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='isCurrentGenMagnitudeValid', full_name='StartBioZMeasurementsResponse.isCurrentGenMagnitudeValid', index=7,
-      number=8, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3144,
-  serialized_end=3391,
+    name="StartBioZMeasurementsResponse",
+    full_name="StartBioZMeasurementsResponse",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="isTypeValid",
+            full_name="StartBioZMeasurementsResponse.isTypeValid",
+            index=0,
+            number=1,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="isRateValid",
+            full_name="StartBioZMeasurementsResponse.isRateValid",
+            index=1,
+            number=2,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="isGainValid",
+            full_name="StartBioZMeasurementsResponse.isGainValid",
+            index=2,
+            number=3,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="isAHPFCutoffValid",
+            full_name="StartBioZMeasurementsResponse.isAHPFCutoffValid",
+            index=3,
+            number=4,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="isDHPFCutoffValid",
+            full_name="StartBioZMeasurementsResponse.isDHPFCutoffValid",
+            index=4,
+            number=5,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="isDLPFCutoffValid",
+            full_name="StartBioZMeasurementsResponse.isDLPFCutoffValid",
+            index=5,
+            number=6,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="isCurrentGenFrequencyValid",
+            full_name="StartBioZMeasurementsResponse.isCurrentGenFrequencyValid",
+            index=6,
+            number=7,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="isCurrentGenMagnitudeValid",
+            full_name="StartBioZMeasurementsResponse.isCurrentGenMagnitudeValid",
+            index=7,
+            number=8,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=3144,
+    serialized_end=3391,
 )
 
 
 _ERRORRESPONSE = _descriptor.Descriptor(
-  name='ErrorResponse',
-  full_name='ErrorResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='type', full_name='ErrorResponse.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='description', full_name='ErrorResponse.description', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\222?\002pd', file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _ERRORRESPONSE_TYPE,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3394,
-  serialized_end=3601,
+    name="ErrorResponse",
+    full_name="ErrorResponse",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="type",
+            full_name="ErrorResponse.type",
+            index=0,
+            number=1,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="description",
+            full_name="ErrorResponse.description",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\222?\002pd",
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[
+        _ERRORRESPONSE_TYPE,
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=3394,
+    serialized_end=3601,
 )
 
-_DIAGNOSTICSRESPONSE.fields_by_name['max30001AStatus'].enum_type = _DIAGNOSTICSRESPONSE_STATUS
-_DIAGNOSTICSRESPONSE.fields_by_name['max30001BStatus'].enum_type = _DIAGNOSTICSRESPONSE_STATUS
+_DIAGNOSTICSRESPONSE.fields_by_name[
+    "max30001AStatus"
+].enum_type = _DIAGNOSTICSRESPONSE_STATUS
+_DIAGNOSTICSRESPONSE.fields_by_name[
+    "max30001BStatus"
+].enum_type = _DIAGNOSTICSRESPONSE_STATUS
 _DIAGNOSTICSRESPONSE_STATUS.containing_type = _DIAGNOSTICSRESPONSE
-_STARTECGMEASUREMENTSREQUEST.fields_by_name['type'].enum_type = _STARTECGMEASUREMENTSREQUEST_TYPE
-_STARTECGMEASUREMENTSREQUEST.fields_by_name['rate'].enum_type = _STARTECGMEASUREMENTSREQUEST_RATE
-_STARTECGMEASUREMENTSREQUEST.fields_by_name['gain'].enum_type = _STARTECGMEASUREMENTSREQUEST_GAIN
-_STARTECGMEASUREMENTSREQUEST.fields_by_name['lowPassFilterCutoff'].enum_type = _STARTECGMEASUREMENTSREQUEST_LOWPASSFILTERCUTOFF
+_STARTECGMEASUREMENTSREQUEST.fields_by_name[
+    "type"
+].enum_type = _STARTECGMEASUREMENTSREQUEST_TYPE
+_STARTECGMEASUREMENTSREQUEST.fields_by_name[
+    "rate"
+].enum_type = _STARTECGMEASUREMENTSREQUEST_RATE
+_STARTECGMEASUREMENTSREQUEST.fields_by_name[
+    "gain"
+].enum_type = _STARTECGMEASUREMENTSREQUEST_GAIN
+_STARTECGMEASUREMENTSREQUEST.fields_by_name[
+    "lowPassFilterCutoff"
+].enum_type = _STARTECGMEASUREMENTSREQUEST_LOWPASSFILTERCUTOFF
 _STARTECGMEASUREMENTSREQUEST_TYPE.containing_type = _STARTECGMEASUREMENTSREQUEST
 _STARTECGMEASUREMENTSREQUEST_RATE.containing_type = _STARTECGMEASUREMENTSREQUEST
 _STARTECGMEASUREMENTSREQUEST_GAIN.containing_type = _STARTECGMEASUREMENTSREQUEST
-_STARTECGMEASUREMENTSREQUEST_LOWPASSFILTERCUTOFF.containing_type = _STARTECGMEASUREMENTSREQUEST
-_STARTBIOZMEASUREMENTSREQUEST.fields_by_name['type'].enum_type = _STARTBIOZMEASUREMENTSREQUEST_TYPE
-_STARTBIOZMEASUREMENTSREQUEST.fields_by_name['rate'].enum_type = _STARTBIOZMEASUREMENTSREQUEST_RATE
-_STARTBIOZMEASUREMENTSREQUEST.fields_by_name['gain'].enum_type = _STARTBIOZMEASUREMENTSREQUEST_GAIN
-_STARTBIOZMEASUREMENTSREQUEST.fields_by_name['analogHighPassFilterCutoff'].enum_type = _STARTBIOZMEASUREMENTSREQUEST_ANALOGHIGHPASSFILTERCUTOFF
-_STARTBIOZMEASUREMENTSREQUEST.fields_by_name['digitalHighPassFilterCutoff'].enum_type = _STARTBIOZMEASUREMENTSREQUEST_DIGITALHIGHPASSFILTERCUTOFF
-_STARTBIOZMEASUREMENTSREQUEST.fields_by_name['digitalLowPassFilterCutoff'].enum_type = _STARTBIOZMEASUREMENTSREQUEST_DIGITALLOWPASSFILTERCUTOFF
-_STARTBIOZMEASUREMENTSREQUEST.fields_by_name['currentGeneratorFrequency'].enum_type = _STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORFREQUENCY
-_STARTBIOZMEASUREMENTSREQUEST.fields_by_name['currentGeneratorMagnitude'].enum_type = _STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORMAGNITUDE
+_STARTECGMEASUREMENTSREQUEST_LOWPASSFILTERCUTOFF.containing_type = (
+    _STARTECGMEASUREMENTSREQUEST
+)
+_STARTBIOZMEASUREMENTSREQUEST.fields_by_name[
+    "type"
+].enum_type = _STARTBIOZMEASUREMENTSREQUEST_TYPE
+_STARTBIOZMEASUREMENTSREQUEST.fields_by_name[
+    "rate"
+].enum_type = _STARTBIOZMEASUREMENTSREQUEST_RATE
+_STARTBIOZMEASUREMENTSREQUEST.fields_by_name[
+    "gain"
+].enum_type = _STARTBIOZMEASUREMENTSREQUEST_GAIN
+_STARTBIOZMEASUREMENTSREQUEST.fields_by_name[
+    "analogHighPassFilterCutoff"
+].enum_type = _STARTBIOZMEASUREMENTSREQUEST_ANALOGHIGHPASSFILTERCUTOFF
+_STARTBIOZMEASUREMENTSREQUEST.fields_by_name[
+    "digitalHighPassFilterCutoff"
+].enum_type = _STARTBIOZMEASUREMENTSREQUEST_DIGITALHIGHPASSFILTERCUTOFF
+_STARTBIOZMEASUREMENTSREQUEST.fields_by_name[
+    "digitalLowPassFilterCutoff"
+].enum_type = _STARTBIOZMEASUREMENTSREQUEST_DIGITALLOWPASSFILTERCUTOFF
+_STARTBIOZMEASUREMENTSREQUEST.fields_by_name[
+    "currentGeneratorFrequency"
+].enum_type = _STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORFREQUENCY
+_STARTBIOZMEASUREMENTSREQUEST.fields_by_name[
+    "currentGeneratorMagnitude"
+].enum_type = _STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORMAGNITUDE
 _STARTBIOZMEASUREMENTSREQUEST_TYPE.containing_type = _STARTBIOZMEASUREMENTSREQUEST
 _STARTBIOZMEASUREMENTSREQUEST_RATE.containing_type = _STARTBIOZMEASUREMENTSREQUEST
 _STARTBIOZMEASUREMENTSREQUEST_GAIN.containing_type = _STARTBIOZMEASUREMENTSREQUEST
-_STARTBIOZMEASUREMENTSREQUEST_ANALOGHIGHPASSFILTERCUTOFF.containing_type = _STARTBIOZMEASUREMENTSREQUEST
-_STARTBIOZMEASUREMENTSREQUEST_DIGITALHIGHPASSFILTERCUTOFF.containing_type = _STARTBIOZMEASUREMENTSREQUEST
-_STARTBIOZMEASUREMENTSREQUEST_DIGITALLOWPASSFILTERCUTOFF.containing_type = _STARTBIOZMEASUREMENTSREQUEST
-_STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORFREQUENCY.containing_type = _STARTBIOZMEASUREMENTSREQUEST
-_STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORMAGNITUDE.containing_type = _STARTBIOZMEASUREMENTSREQUEST
-_ERRORRESPONSE.fields_by_name['type'].enum_type = _ERRORRESPONSE_TYPE
+_STARTBIOZMEASUREMENTSREQUEST_ANALOGHIGHPASSFILTERCUTOFF.containing_type = (
+    _STARTBIOZMEASUREMENTSREQUEST
+)
+_STARTBIOZMEASUREMENTSREQUEST_DIGITALHIGHPASSFILTERCUTOFF.containing_type = (
+    _STARTBIOZMEASUREMENTSREQUEST
+)
+_STARTBIOZMEASUREMENTSREQUEST_DIGITALLOWPASSFILTERCUTOFF.containing_type = (
+    _STARTBIOZMEASUREMENTSREQUEST
+)
+_STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORFREQUENCY.containing_type = (
+    _STARTBIOZMEASUREMENTSREQUEST
+)
+_STARTBIOZMEASUREMENTSREQUEST_CURRENTGENERATORMAGNITUDE.containing_type = (
+    _STARTBIOZMEASUREMENTSREQUEST
+)
+_ERRORRESPONSE.fields_by_name["type"].enum_type = _ERRORRESPONSE_TYPE
 _ERRORRESPONSE_TYPE.containing_type = _ERRORRESPONSE
-DESCRIPTOR.message_types_by_name['Ping'] = _PING
-DESCRIPTOR.message_types_by_name['Pong'] = _PONG
-DESCRIPTOR.message_types_by_name['DiagnosticsRequest'] = _DIAGNOSTICSREQUEST
-DESCRIPTOR.message_types_by_name['DiagnosticsResponse'] = _DIAGNOSTICSRESPONSE
-DESCRIPTOR.message_types_by_name['StopMeasurementsRequest'] = _STOPMEASUREMENTSREQUEST
-DESCRIPTOR.message_types_by_name['StopMeasurementsResponse'] = _STOPMEASUREMENTSRESPONSE
-DESCRIPTOR.message_types_by_name['StartECGMeasurementsRequest'] = _STARTECGMEASUREMENTSREQUEST
-DESCRIPTOR.message_types_by_name['StartECGMeasurementsResponse'] = _STARTECGMEASUREMENTSRESPONSE
-DESCRIPTOR.message_types_by_name['StartBioZMeasurementsRequest'] = _STARTBIOZMEASUREMENTSREQUEST
-DESCRIPTOR.message_types_by_name['StartBioZMeasurementsResponse'] = _STARTBIOZMEASUREMENTSRESPONSE
-DESCRIPTOR.message_types_by_name['ErrorResponse'] = _ERRORRESPONSE
+DESCRIPTOR.message_types_by_name["Ping"] = _PING
+DESCRIPTOR.message_types_by_name["Pong"] = _PONG
+DESCRIPTOR.message_types_by_name["DiagnosticsRequest"] = _DIAGNOSTICSREQUEST
+DESCRIPTOR.message_types_by_name["DiagnosticsResponse"] = _DIAGNOSTICSRESPONSE
+DESCRIPTOR.message_types_by_name["StopMeasurementsRequest"] = _STOPMEASUREMENTSREQUEST
+DESCRIPTOR.message_types_by_name["StopMeasurementsResponse"] = _STOPMEASUREMENTSRESPONSE
+DESCRIPTOR.message_types_by_name[
+    "StartECGMeasurementsRequest"
+] = _STARTECGMEASUREMENTSREQUEST
+DESCRIPTOR.message_types_by_name[
+    "StartECGMeasurementsResponse"
+] = _STARTECGMEASUREMENTSRESPONSE
+DESCRIPTOR.message_types_by_name[
+    "StartBioZMeasurementsRequest"
+] = _STARTBIOZMEASUREMENTSREQUEST
+DESCRIPTOR.message_types_by_name[
+    "StartBioZMeasurementsResponse"
+] = _STARTBIOZMEASUREMENTSRESPONSE
+DESCRIPTOR.message_types_by_name["ErrorResponse"] = _ERRORRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-Ping = _reflection.GeneratedProtocolMessageType('Ping', (_message.Message,), {
-  'DESCRIPTOR' : _PING,
-  '__module__' : 'management_pb2'
-  # @@protoc_insertion_point(class_scope:Ping)
-  })
+Ping = _reflection.GeneratedProtocolMessageType(
+    "Ping",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _PING,
+        "__module__": "management_pb2"
+        # @@protoc_insertion_point(class_scope:Ping)
+    },
+)
 _sym_db.RegisterMessage(Ping)
 
-Pong = _reflection.GeneratedProtocolMessageType('Pong', (_message.Message,), {
-  'DESCRIPTOR' : _PONG,
-  '__module__' : 'management_pb2'
-  # @@protoc_insertion_point(class_scope:Pong)
-  })
+Pong = _reflection.GeneratedProtocolMessageType(
+    "Pong",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _PONG,
+        "__module__": "management_pb2"
+        # @@protoc_insertion_point(class_scope:Pong)
+    },
+)
 _sym_db.RegisterMessage(Pong)
 
-DiagnosticsRequest = _reflection.GeneratedProtocolMessageType('DiagnosticsRequest', (_message.Message,), {
-  'DESCRIPTOR' : _DIAGNOSTICSREQUEST,
-  '__module__' : 'management_pb2'
-  # @@protoc_insertion_point(class_scope:DiagnosticsRequest)
-  })
+DiagnosticsRequest = _reflection.GeneratedProtocolMessageType(
+    "DiagnosticsRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DIAGNOSTICSREQUEST,
+        "__module__": "management_pb2"
+        # @@protoc_insertion_point(class_scope:DiagnosticsRequest)
+    },
+)
 _sym_db.RegisterMessage(DiagnosticsRequest)
 
-DiagnosticsResponse = _reflection.GeneratedProtocolMessageType('DiagnosticsResponse', (_message.Message,), {
-  'DESCRIPTOR' : _DIAGNOSTICSRESPONSE,
-  '__module__' : 'management_pb2'
-  # @@protoc_insertion_point(class_scope:DiagnosticsResponse)
-  })
+DiagnosticsResponse = _reflection.GeneratedProtocolMessageType(
+    "DiagnosticsResponse",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DIAGNOSTICSRESPONSE,
+        "__module__": "management_pb2"
+        # @@protoc_insertion_point(class_scope:DiagnosticsResponse)
+    },
+)
 _sym_db.RegisterMessage(DiagnosticsResponse)
 
-StopMeasurementsRequest = _reflection.GeneratedProtocolMessageType('StopMeasurementsRequest', (_message.Message,), {
-  'DESCRIPTOR' : _STOPMEASUREMENTSREQUEST,
-  '__module__' : 'management_pb2'
-  # @@protoc_insertion_point(class_scope:StopMeasurementsRequest)
-  })
+StopMeasurementsRequest = _reflection.GeneratedProtocolMessageType(
+    "StopMeasurementsRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _STOPMEASUREMENTSREQUEST,
+        "__module__": "management_pb2"
+        # @@protoc_insertion_point(class_scope:StopMeasurementsRequest)
+    },
+)
 _sym_db.RegisterMessage(StopMeasurementsRequest)
 
-StopMeasurementsResponse = _reflection.GeneratedProtocolMessageType('StopMeasurementsResponse', (_message.Message,), {
-  'DESCRIPTOR' : _STOPMEASUREMENTSRESPONSE,
-  '__module__' : 'management_pb2'
-  # @@protoc_insertion_point(class_scope:StopMeasurementsResponse)
-  })
+StopMeasurementsResponse = _reflection.GeneratedProtocolMessageType(
+    "StopMeasurementsResponse",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _STOPMEASUREMENTSRESPONSE,
+        "__module__": "management_pb2"
+        # @@protoc_insertion_point(class_scope:StopMeasurementsResponse)
+    },
+)
 _sym_db.RegisterMessage(StopMeasurementsResponse)
 
-StartECGMeasurementsRequest = _reflection.GeneratedProtocolMessageType('StartECGMeasurementsRequest', (_message.Message,), {
-  'DESCRIPTOR' : _STARTECGMEASUREMENTSREQUEST,
-  '__module__' : 'management_pb2'
-  # @@protoc_insertion_point(class_scope:StartECGMeasurementsRequest)
-  })
+StartECGMeasurementsRequest = _reflection.GeneratedProtocolMessageType(
+    "StartECGMeasurementsRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _STARTECGMEASUREMENTSREQUEST,
+        "__module__": "management_pb2"
+        # @@protoc_insertion_point(class_scope:StartECGMeasurementsRequest)
+    },
+)
 _sym_db.RegisterMessage(StartECGMeasurementsRequest)
 
-StartECGMeasurementsResponse = _reflection.GeneratedProtocolMessageType('StartECGMeasurementsResponse', (_message.Message,), {
-  'DESCRIPTOR' : _STARTECGMEASUREMENTSRESPONSE,
-  '__module__' : 'management_pb2'
-  # @@protoc_insertion_point(class_scope:StartECGMeasurementsResponse)
-  })
+StartECGMeasurementsResponse = _reflection.GeneratedProtocolMessageType(
+    "StartECGMeasurementsResponse",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _STARTECGMEASUREMENTSRESPONSE,
+        "__module__": "management_pb2"
+        # @@protoc_insertion_point(class_scope:StartECGMeasurementsResponse)
+    },
+)
 _sym_db.RegisterMessage(StartECGMeasurementsResponse)
 
-StartBioZMeasurementsRequest = _reflection.GeneratedProtocolMessageType('StartBioZMeasurementsRequest', (_message.Message,), {
-  'DESCRIPTOR' : _STARTBIOZMEASUREMENTSREQUEST,
-  '__module__' : 'management_pb2'
-  # @@protoc_insertion_point(class_scope:StartBioZMeasurementsRequest)
-  })
+StartBioZMeasurementsRequest = _reflection.GeneratedProtocolMessageType(
+    "StartBioZMeasurementsRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _STARTBIOZMEASUREMENTSREQUEST,
+        "__module__": "management_pb2"
+        # @@protoc_insertion_point(class_scope:StartBioZMeasurementsRequest)
+    },
+)
 _sym_db.RegisterMessage(StartBioZMeasurementsRequest)
 
-StartBioZMeasurementsResponse = _reflection.GeneratedProtocolMessageType('StartBioZMeasurementsResponse', (_message.Message,), {
-  'DESCRIPTOR' : _STARTBIOZMEASUREMENTSRESPONSE,
-  '__module__' : 'management_pb2'
-  # @@protoc_insertion_point(class_scope:StartBioZMeasurementsResponse)
-  })
+StartBioZMeasurementsResponse = _reflection.GeneratedProtocolMessageType(
+    "StartBioZMeasurementsResponse",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _STARTBIOZMEASUREMENTSRESPONSE,
+        "__module__": "management_pb2"
+        # @@protoc_insertion_point(class_scope:StartBioZMeasurementsResponse)
+    },
+)
 _sym_db.RegisterMessage(StartBioZMeasurementsResponse)
 
-ErrorResponse = _reflection.GeneratedProtocolMessageType('ErrorResponse', (_message.Message,), {
-  'DESCRIPTOR' : _ERRORRESPONSE,
-  '__module__' : 'management_pb2'
-  # @@protoc_insertion_point(class_scope:ErrorResponse)
-  })
+ErrorResponse = _reflection.GeneratedProtocolMessageType(
+    "ErrorResponse",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _ERRORRESPONSE,
+        "__module__": "management_pb2"
+        # @@protoc_insertion_point(class_scope:ErrorResponse)
+    },
+)
 _sym_db.RegisterMessage(ErrorResponse)
 
 
-_ERRORRESPONSE.fields_by_name['description']._options = None
+_ERRORRESPONSE.fields_by_name["description"]._options = None
 # @@protoc_insertion_point(module_scope)

@@ -1,6 +1,3 @@
-
-
-
 class ManageSensor:
     def __init__(self) -> None:
         self.quantity_sensor: int = 0
@@ -8,32 +5,32 @@ class ManageSensor:
         self.list_sensor_ip: list = []
         self.id_user: list = []
 
-    def getQuantityDataSensor(self)-> int:
+    def getQuantityDataSensor(self) -> int:
         return self.quantity_sensor
-    
+
     def setQuantityDataSensor(self, quantity: int):
         self.quantity_sensor = quantity
 
-    def getDataSensor(self)->dict:
+    def getDataSensor(self) -> dict:
         return self.data_sensor
-    
-    def setDataSensor(self, data_sensor:dict):
+
+    def setDataSensor(self, data_sensor: dict):
         self.data_sensor = data_sensor
-    
+
     def addKeyValueDataSensor(self, name: str, value: list):
         self.data_sensor[name] = value
 
     def addIpAddressSensor(self, ip_address: str):
         self.list_sensor_ip.append(ip_address)
-    
-    def getIpAddressSensor(self)-> list:
+
+    def getIpAddressSensor(self) -> list:
         return self.list_sensor_ip
 
     def deleteKeyValueDataSensor(self, key_name: str):
         del self.data_sensor[key_name]
 
-    def setIdUsers(self, id_user:list):
+    def setIdUsers(self, id_user: list):
         self.id_user = id_user
 
-    def getIdUsers(self)-> list:
+    def getIdUsers(self) -> list:
         return self.id_user

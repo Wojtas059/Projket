@@ -44,7 +44,7 @@ class SingInWidget(Screen):
         instance.createConnection()
         bool_Advance_User = instance.findUserPrivilegesByLogin(self.login_)
         row = instance.getUserCredentials(self.login_)
-        self.parent.log_in(row[0],self.login_, row[1], row[2], row[3])
+        self.parent.log_in(row[0], self.login_, row[1], row[2], row[3])
         instance.closeConnection()
         if bool_Advance_User:
             self.parent.set_type("Auto")
