@@ -133,12 +133,8 @@ class HomeWidget(QWidget):
 
     def userProfilShow(self):
         self.parent().userProfilSeeShow()
-<<<<<<< HEAD
     def histroySeeShow(self):
         self.parent().histroySeeShow()
-=======
-
->>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
     def addButtonHistoryUserSee(self):
         self.see_users = QtWidgets.QPushButton(self.scrollAreaWidgetContents_6)
         self.see_users.setObjectName("see_users")

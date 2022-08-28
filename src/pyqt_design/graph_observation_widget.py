@@ -47,13 +47,8 @@ class GraphObservationWidget(QWidget):
         self.verticalLayout.addWidget(self.scrollArea_2)
         self.verticalLayout.addLayout(self.horizontalLayout_6)
 
-<<<<<<< HEAD
         self.x = list(range(800))  # 100 time points
         self.y = [0 for _ in range(800)]  # 100 data points
-=======
-        self.x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        self.y = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
->>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
         self.graphWidget = pg.PlotWidget()
         self.verticalLayout_1.addWidget(self.graphWidget)
         self.data_line = self.graphWidget.plot(self.x, self.y)

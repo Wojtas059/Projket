@@ -44,9 +44,9 @@ class UserSeeList(QHBoxLayout):
         self.email.setObjectName("email")
         self.email.setText(kwargs.get("email", ""))
         self.addWidget(self.email)
-        self.see_history = QtWidgets.QPushButton()
-        self.see_history.setObjectName("see_history")
-        self.addWidget(self.see_history)
+        # self.see_history = QtWidgets.QPushButton()
+        # self.see_history.setObjectName("see_history")
+        # self.addWidget(self.see_history)
         spacerItem1 = QtWidgets.QSpacerItem(
             40,
             20,
@@ -54,11 +54,11 @@ class UserSeeList(QHBoxLayout):
             QtWidgets.QSizePolicy.Policy.Minimum,
         )
         self.addItem(spacerItem1)
-        self.retranslateUi()
+        # self.retranslateUi()
 
-    def retranslateUi(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.see_history.setText(_translate("ManagmentSensor", "Zobacz historię"))
+    # def retranslateUi(self):
+    #     _translate = QtCore.QCoreApplication.translate
+        # self.see_history.setText(_translate("ManagmentSensor", "Zobacz historię"))
 
 
 class ListUsers(QWidget):
@@ -192,7 +192,7 @@ class ListUsers(QWidget):
                         if instance.insertUserAndAdvanced(
                             self.parent().user_login.get_id(), self.email.text()
                         ):
-                            self.createMessageBox("Pomyślnie dodałeś użytkownika")
+                            self.createMessageBox("Pomyślnie dodałeś użytkownika","Sukces")
                             instance.closeConnection()
                             self.parent().listUsersShow()
                     else:
@@ -207,11 +207,11 @@ class ListUsers(QWidget):
                 self.createMessageBox("Użytkonik o podanym emailu nie istnije")
             instance.closeConnection()
 
-    def createMessageBox(self, message: str):
+    def createMessageBox(self, message: str, title:str = "Błąd"):
         msg = QMessageBox()
-        msg.setWindowTitle("Błąd")
+        msg.setWindowTitle(title)
         msg.setText(message)
         msg.exec()
-
+        
     def backScreen(self):
         self.parent().openLastWidget()

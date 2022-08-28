@@ -3,7 +3,7 @@ import queue
 import sqlite3
 from datetime import datetime
 from typing import List
-import os
+from os.path import exists
 
 
 # isort: split
@@ -122,6 +122,7 @@ class DatabaseHandler:
         self.createTableMuscles()
         self.fillTablesMuscles()
         self.closeConnection()
+        
     def CreateTables(self):
         try:
             self.createConnection()
@@ -220,6 +221,26 @@ class DatabaseHandler:
         sql_command = "insert into Measurement values (?,?,?,?)"
         self.cursor.execute(sql_command, [trainer_id, user_id, table_name, muscle_name])
         self.connection.commit()
+
+    def findMeasurement(self, id_user):
+        self.cursor.execute("""select * from Measurement where id_user=?""",
+            str(id_user),
+        )
+        row = self.cursor.fetchall()
+        if row is None:
+            return []
+        return row
+    
+    def findMeasurementAdvance(self, id_user):
+        self.cursor.execute("""select * from Measurement where id_advanced_user=?""",
+            str(id_user),
+        )
+        row = self.cursor.fetchall()
+        if row is None:
+            return []
+        return row
+    
+        
 
     def generateMusclesNames(self):
         musclesFile = open(MUSCLES_FILE, "r", encoding="utf-8")
@@ -451,3 +472,6 @@ class DatabaseHandler:
             open("database.db")
         except:
             pass
+    
+    def isExistDatabaseFile(self):
+        return exists("database.db")

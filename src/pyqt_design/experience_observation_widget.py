@@ -163,7 +163,6 @@ class ExperienceObservationWidget(QWidget):
             self.parent().homeShow()
 
     def showScreen(self):
-<<<<<<< HEAD
         self.parent().stopSTMdata()
         self.parent().closeBaseStation()
         self.start.setEnabled(False)
@@ -171,9 +170,6 @@ class ExperienceObservationWidget(QWidget):
         self.see_graph.setEnabled(False)
         self.finish_exp.setEnabled(False)
         self.analitik.setEnabled(True)
-=======
-        self.parent().videoPlayerShow()
->>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
 
     def getWidget(self):
         return str(self.objectName())

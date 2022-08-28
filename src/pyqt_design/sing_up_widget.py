@@ -248,8 +248,8 @@ class SingUp(QWidget):
                 if licznik == 0:
                     databaseHandler = DatabaseHandler()
                     databaseHandler.createUser(new_user)
-                    self.createMessageBox("Rejestracja powowiodła się pomyślnie")
-                    return True
+                    self.createMessageBox("Rejestracja powowiodła się pomyślnie", "Sukces")
+                    self.parent().singInShow()
                 else:
                     self.createMessageBox(str_error)
                     return False
@@ -257,9 +257,9 @@ class SingUp(QWidget):
                 message = "Hasła się niepokrywają"
                 self.createMessageBox(message)
 
-    def createMessageBox(self, message: str):
+    def createMessageBox(self, message: str, title:str = "Błąd"):
         msg = QMessageBox()
-        msg.setWindowTitle("Błąd")
+        msg.setWindowTitle(title)
         msg.setText(message)
         msg.exec()
 

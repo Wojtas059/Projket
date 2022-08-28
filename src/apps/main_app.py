@@ -2,15 +2,10 @@
 #noqa: C901
 import queue
 import sys
+from threading import Thread
 from optparse import Values
-<<<<<<< HEAD
 from PyQt6 import QtWidgets,QtCore
 from PyQt6.QtWidgets import (QWidget)
-=======
-from threading import Thread
-
-from PyQt6 import QtWidgets
->>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMainWindow, QWidget
 from src.database_handlers.database_handler import DatabaseHandler
@@ -40,16 +35,12 @@ from src.pyqt_design.sing_up_widget import SingUp
 from src.pyqt_design.start_exp_widget import StartExperience
 from src.pyqt_design.start_reference_widget import StartReference
 from src.pyqt_design.user_profil_widget import UserProfilSee
-<<<<<<< HEAD
 from src.pyqt_design.list_users_widget import ListUsers
 from src.pyqt_design.choose_lots_muscles_advanced_widget import ChooseLotsMusclesAdvanced
 from src.pyqt_design.experience_observation_widget import ExperienceObservationWidget
 from src.pyqt_design.graph_observation_widget import GraphObservationWidget
 from src.pyqt_design.history_see import HistorySeeWidget
-=======
 from src.pyqt_design.video_player import VideoPlayer
->>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
-
 # Import class
 from src.user.user_logIn import UserLogIn
 
@@ -62,13 +53,10 @@ class MyApp(QMainWindow):
         self.see_grpah: bool = False
         self.see_number: int = None
         self.dataQueue_1 = queue.Queue()
-<<<<<<< HEAD
         self.dataQueue_2 = queue.Queue()
         self.experience:bool = False
         self.login_in:bool = False
         
-=======
->>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
 
         ### Create central widget ###
         self.homeShow()
@@ -158,7 +146,6 @@ class MyApp(QMainWindow):
     def deleteKeyValueManageSensor(self, key_name: str):
         self.manage_sensor.deleteKeyValueDataSensor(key_name)
 
-<<<<<<< HEAD
 
     def setActivityExperience(self, type_activity: str, type_exercise: str, type_physique: str,humidity: str):
         self.activity_experience = ActivityExperience(type_activity=type_activity, type_exercise=type_exercise, type_physique=type_physique, humidity=humidity )
@@ -167,19 +154,6 @@ class MyApp(QMainWindow):
 
     def connectBaseStation(self)->bool:
         
-=======
-    def setActivityExperience(
-        self, type_activity: str, type_exercise: str, type_physique: str, humidity: str
-    ):
-        self.activity_experience = ActivityExperience(
-            type_activity=type_activity,
-            type_exercise=type_exercise,
-            type_physique=type_physique,
-            humidity=humidity,
-        )
-
-    def connectBaseStation(self) -> bool:
->>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
         self.client_connect = ClientPi()
         if self.client_connect.connect() and self.client_connect.startSTM():
             Thread(target=self.getDataSTM).start()
@@ -202,7 +176,6 @@ class MyApp(QMainWindow):
         
 
     def stopSTMdata(self):
-<<<<<<< HEAD
         self.experience = False
         if self.client_connect.stopSTM():
             print("Udało się ")
@@ -210,22 +183,12 @@ class MyApp(QMainWindow):
             print("Nie udało się")
 
   
-=======
-        self.client_connect.stopSTM()
-
-    def startSTM(self):
-        if self.client_connect.startSTM():
-            self.threadi = Thread(target=self.getDataSTM).start()
->>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
 
     def setSeeNumberGraph(self, number: int):
         self.see_number = number
         self.see_grpah = True
         self.dataQueue_1 = queue.Queue()
-<<<<<<< HEAD
         
-=======
->>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
 
     def getDataSTM(self):
         # database_inserter=DatabaseInserter()
@@ -239,7 +202,6 @@ class MyApp(QMainWindow):
                 dataarray = result.data.split(",")
                 # database_inserter.database_handler.DataQueue.put_nowait(float(dataarray[self.see_number]))
                 if self.see_grpah:
-<<<<<<< HEAD
                     try:
                         self.dataQueue_1.put(float(dataarray[self.see_number]))
                     except IndexError:
@@ -254,14 +216,6 @@ class MyApp(QMainWindow):
                 
 ### Function set central widget ! ###
     
-=======
-                    self.dataQueue_1.put_nowait(float(dataarray[self.see_number]))
-
-        # database_inserter.stop()
-
-    ### Function set central widget ! ###
-
->>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
     # Function set center widget - home widget
     def homeShow(self):
         self.manage_sensor = ManageSensor()
@@ -368,12 +322,7 @@ class MyApp(QMainWindow):
         self.setCentralWidget(widget)
         self.show()
     def openLastWidget(self):
-<<<<<<< HEAD
         widget_name:str = self.lastScreen()
-=======
-    
-        widget_name = self.lastScreen()
->>>>>>> a4d7e71faf77039444ce46283e84dccd2e95a0d4
         if widget_name.__eq__("Home Widget"):
             self.homeShow()
         elif widget_name.__eq__("Home Widget Succes Login"):
@@ -402,6 +351,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = MyApp()
     db_h=DatabaseHandler()
-    db_h.createDatabaseFile()
-    db_h.CreateTables()
+    if not db_h.isExistDatabaseFile():
+        db_h.createDatabaseFile()
+        db_h.CreateTables()
     sys.exit(app.exec())

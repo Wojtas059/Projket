@@ -24,8 +24,7 @@ class HistorySeeWidget(QWidget):
 
         exp_measurment = self.getMeasurment()
         for i in exp_measurment:
-            print(i)
-            self.choose_muscles.addItem(str(i[2]))
+            self.choose_muscles.addItem(str(i[2])+' '+str(i[3])+' dla '+str(i[2]))
         self.horizontalLayout_6.addWidget(self.choose_muscles)
         self.show = QtWidgets.QPushButton(self)
         self.show.setObjectName("show")
@@ -87,9 +86,10 @@ class HistorySeeWidget(QWidget):
     def getMeasurment(self):
         instance = DatabaseHandler()
         instance.createConnection()
-        row = instance.findMeansurment(self.parent().user_login.get_id())
-        print(self.parent().user_login.get_id())
-        print(row)
+        if not self.parent().user_login.get_advanced():
+            row = instance.findMeasurementAdvance(self.parent().user_login.get_id())
+        else:
+            row = instance.findMeasurement(self.parent().user_login.get_id())
         instance.closeConnection()
         return row
 
