@@ -243,12 +243,18 @@ class DatabaseHandler:
         
 
     def generateMusclesNames(self):
-        musclesFile = open(MUSCLES_FILE, "r", encoding="utf-8")
-        musclesNames = musclesFile.readlines()
-        clearMusclesNames = []
+        # musclesFile = open(MUSCLES_FILE, "r", encoding="utf-8")
+        # musclesNames = musclesFile.readlines()
+        # clearMusclesNames = []
 
-        for name in musclesNames:
-            clearMusclesNames.append(name.rstrip())
+        # for name in musclesNames:
+        #     clearMusclesNames.append(name.rstrip())
+        clearMusclesNames = [
+            "MIĘSIEŃ BRZUCHATY ŁYDKI: GŁOWA BOCZNA I PRZYŚRODKOWA",
+            "MIĘSIEŃ PÓŁŚCIĘGNISTY I GŁOWA DŁUGA MIĘŚNIA DWUGŁOWEGO UDA",
+            "MIĘSIEŃ CZWOROGŁOWY UDA: M. PROSTY UDA, M. OBSZERNY BOCZNY I PRZYŚRODKOWY",
+            "MIĘSIEŃ CZWOROBOCZNY GRZBIETU: CZĘŚĆ ZSTĘPUJĄCA"
+        ]
         for name in clearMusclesNames:
             yield tuple([name])
 
