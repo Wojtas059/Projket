@@ -10,6 +10,12 @@ pip install -r  <nazwa_pliku>.<rozszerzenie>
 
 Jeśli są problemy z nazwą zmienić na typowe requirements.txt
 
+
+## Jak uruchomić aplikacje:
+
+
+Z głównego folderu python -m src.apps.main_app
+
 ## Ważne!
 
 Zalecamy korzystać z środowiska wirtualnego.
