@@ -15,7 +15,7 @@ class ChooseMethod(QWidget):
     def __init__(self, parent):
         super(ChooseMethod, self).__init__(parent)
         self.setObjectName("Choose Method")
-        
+
         self.resize(406, 422)
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
         self.verticalLayout.setObjectName("verticalLayout")

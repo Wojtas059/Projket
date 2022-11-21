@@ -12,7 +12,6 @@ from PyQt6.QtWidgets import QMessageBox, QWidget
 from src.database_handlers.database_handler import DatabaseHandler
 
 
-
 class UserProfilSee(QWidget):
     def __init__(self, parent):
         super(UserProfilSee, self).__init__(parent)

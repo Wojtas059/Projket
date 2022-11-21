@@ -23,12 +23,22 @@ class Ui_Form(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout.addItem(spacerItem)
         self.pushButton = QtWidgets.QPushButton(self.scrollAreaWidgetContents_8)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout.addWidget(self.pushButton)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.scrollArea_3 = QtWidgets.QScrollArea(self.scrollAreaWidgetContents_8)
@@ -41,12 +51,22 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.scrollArea_3)
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_7.addItem(spacerItem2)
         self.pushButton_7 = QtWidgets.QPushButton(self.scrollAreaWidgetContents_8)
         self.pushButton_7.setObjectName("pushButton_7")
         self.horizontalLayout_7.addWidget(self.pushButton_7)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem3 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_7.addItem(spacerItem3)
         self.verticalLayout.addLayout(self.horizontalLayout_7)
         self.scrollArea_4 = QtWidgets.QScrollArea(self.scrollAreaWidgetContents_8)
@@ -59,12 +79,22 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.scrollArea_4)
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem4 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_8.addItem(spacerItem4)
         self.pushButton_8 = QtWidgets.QPushButton(self.scrollAreaWidgetContents_8)
         self.pushButton_8.setObjectName("pushButton_8")
         self.horizontalLayout_8.addWidget(self.pushButton_8)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem5 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_8.addItem(spacerItem5)
         self.verticalLayout.addLayout(self.horizontalLayout_8)
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_8)

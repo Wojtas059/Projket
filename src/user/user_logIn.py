@@ -10,7 +10,7 @@ class UserLogIn:
         self.email_user = kwargs.get("email", "")
         self.advanced_user = kwargs.get("advanced", True)
 
-    def get_id(self)->str:
+    def get_id(self) -> str:
         return self.id_user
 
     def set_id(self, id_user):

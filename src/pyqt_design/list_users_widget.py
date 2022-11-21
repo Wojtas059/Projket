@@ -12,7 +12,6 @@ from PyQt6.QtWidgets import QHBoxLayout, QMessageBox, QWidget
 from src.database_handlers.database_handler import DatabaseHandler
 
 
-
 class UserSeeList(QHBoxLayout):
     def __init__(self, **kwargs):
         super(UserSeeList, self).__init__()
@@ -58,7 +57,7 @@ class UserSeeList(QHBoxLayout):
 
     # def retranslateUi(self):
     #     _translate = QtCore.QCoreApplication.translate
-        # self.see_history.setText(_translate("ManagmentSensor", "Zobacz historię"))
+    # self.see_history.setText(_translate("ManagmentSensor", "Zobacz historię"))
 
 
 class ListUsers(QWidget):
@@ -192,7 +191,9 @@ class ListUsers(QWidget):
                         if instance.insertUserAndAdvanced(
                             self.parent().user_login.get_id(), self.email.text()
                         ):
-                            self.createMessageBox("Pomyślnie dodałeś użytkownika","Sukces")
+                            self.createMessageBox(
+                                "Pomyślnie dodałeś użytkownika", "Sukces"
+                            )
                             instance.closeConnection()
                             self.parent().listUsersShow()
                     else:
@@ -207,11 +208,11 @@ class ListUsers(QWidget):
                 self.createMessageBox("Użytkonik o podanym emailu nie istnije")
             instance.closeConnection()
 
-    def createMessageBox(self, message: str, title:str = "Błąd"):
+    def createMessageBox(self, message: str, title: str = "Błąd"):
         msg = QMessageBox()
         msg.setWindowTitle(title)
         msg.setText(message)
         msg.exec()
-        
+
     def backScreen(self):
         self.parent().openLastWidget()
