@@ -151,7 +151,7 @@ class SingIn(QWidget):
             bool_advanced = self.getUserPrivileges()
             self.getUserCredentials(bool_advanced)
             self.parent().homeShowSuccesLogIn()
-            
+
     def checkCredentials(self):
         if self.login.text() == "" or self.password.text() == "":
             self.createMessageBox("Uzupełnij wszytskie pola")

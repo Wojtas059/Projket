@@ -1,16 +1,16 @@
-#flake8: noqa
-#noqa: C901
+# flake8: noqa
+# noqa: C901
 import queue
 import sys
-from threading import Thread
 from optparse import Values
-from PyQt6 import QtWidgets,QtCore
-from PyQt6.QtWidgets import (QWidget)
+from threading import Thread
+
+from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QMainWindow, QWidget
-from src.database_handlers.database_handler import DatabaseHandler
 
 import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2 as ServicerMethods
+from src.database_handlers.database_handler import DatabaseHandler
 from src.database_handlers.database_inserter import DatabaseInserter
 from src.experience_class.activity_exp import ActivityExperience
 from src.experience_class.manage_sensor import ManageSensor
@@ -24,6 +24,7 @@ from src.pyqt_design.choose_lots_muscles_widget import ChooseLotsMuscles
 from src.pyqt_design.choose_method_widget import ChooseMethod
 from src.pyqt_design.experience_observation_widget import ExperienceObservationWidget
 from src.pyqt_design.graph_observation_widget import GraphObservationWidget
+from src.pyqt_design.history_see import HistorySeeWidget
 
 # Import class of type QWidget from file
 from src.pyqt_design.home_widget import HomeWidget
@@ -35,12 +36,8 @@ from src.pyqt_design.sing_up_widget import SingUp
 from src.pyqt_design.start_exp_widget import StartExperience
 from src.pyqt_design.start_reference_widget import StartReference
 from src.pyqt_design.user_profil_widget import UserProfilSee
-from src.pyqt_design.list_users_widget import ListUsers
-from src.pyqt_design.choose_lots_muscles_advanced_widget import ChooseLotsMusclesAdvanced
-from src.pyqt_design.experience_observation_widget import ExperienceObservationWidget
-from src.pyqt_design.graph_observation_widget import GraphObservationWidget
-from src.pyqt_design.history_see import HistorySeeWidget
 from src.pyqt_design.video_player import VideoPlayer
+
 # Import class
 from src.user.user_logIn import UserLogIn
 
@@ -54,9 +51,8 @@ class MyApp(QMainWindow):
         self.see_number: int = None
         self.dataQueue_1 = queue.Queue()
         self.dataQueue_2 = queue.Queue()
-        self.experience:bool = False
-        self.login_in:bool = False
-        
+        self.experience: bool = False
+        self.login_in: bool = False
 
         ### Create central widget ###
         self.homeShow()
@@ -146,26 +142,30 @@ class MyApp(QMainWindow):
     def deleteKeyValueManageSensor(self, key_name: str):
         self.manage_sensor.deleteKeyValueDataSensor(key_name)
 
+    def setActivityExperience(
+        self, type_activity: str, type_exercise: str, type_physique: str, humidity: str
+    ):
+        self.activity_experience = ActivityExperience(
+            type_activity=type_activity,
+            type_exercise=type_exercise,
+            type_physique=type_physique,
+            humidity=humidity,
+        )
 
-    def setActivityExperience(self, type_activity: str, type_exercise: str, type_physique: str,humidity: str):
-        self.activity_experience = ActivityExperience(type_activity=type_activity, type_exercise=type_exercise, type_physique=type_physique, humidity=humidity )
+    def connectBaseStation(self) -> bool:
 
-    
-
-    def connectBaseStation(self)->bool:
-        
         self.client_connect = ClientPi()
         if self.client_connect.connect() and self.client_connect.startSTM():
             Thread(target=self.getDataSTM).start()
             self.experience = True
-            #if not self.user_login.get_name().__eq__(""):
-                #self.login_in = True
-                #self.dataQueue_2 = queue.Queue()
-                #Thread(target=self.insertDataBase).start()
-                #self.timer = QtCore.QTimer()
-                #self.timer.setInterval(200)
-                #self.timer.timeout.connect(Thread(target=self.insertDataBase).start())
-                #self.timer.start()
+            # if not self.user_login.get_name().__eq__(""):
+            # self.login_in = True
+            # self.dataQueue_2 = queue.Queue()
+            # Thread(target=self.insertDataBase).start()
+            # self.timer = QtCore.QTimer()
+            # self.timer.setInterval(200)
+            # self.timer.timeout.connect(Thread(target=self.insertDataBase).start())
+            # self.timer.start()
             return True
         else:
             return False
@@ -173,7 +173,6 @@ class MyApp(QMainWindow):
     def closeBaseStation(self):
         self.client_connect.stop_connection()
         self.experience = False
-        
 
     def stopSTMdata(self):
         self.experience = False
@@ -182,17 +181,14 @@ class MyApp(QMainWindow):
         else:
             print("Nie udało się")
 
-  
-
     def setSeeNumberGraph(self, number: int):
         self.see_number = number
         self.see_grpah = True
         self.dataQueue_1 = queue.Queue()
-        
 
     def getDataSTM(self):
-        # database_inserter=DatabaseInserter()
-        # database_inserter.start()
+        database_inserter=DatabaseInserter()
+        database_inserter.start()
         if self.client_connect.transfer_status:
 
             results = self.client_connect.stub.sendSTMData(ServicerMethods.Void())
@@ -200,7 +196,7 @@ class MyApp(QMainWindow):
             for result in results:
 
                 dataarray = result.data.split(",")
-                # database_inserter.database_handler.DataQueue.put_nowait(float(dataarray[self.see_number]))
+                database_inserter.database_handler.DataQueue.put_nowait(float(dataarray[self.see_number]))
                 if self.see_grpah:
                     try:
                         self.dataQueue_1.put(float(dataarray[self.see_number]))
@@ -211,11 +207,11 @@ class MyApp(QMainWindow):
 
     def insertDataBase(self):
         while self.experience:
-            if not(self.experience):
-                        break
-                
-### Function set central widget ! ###
-    
+            if not (self.experience):
+                break
+
+    ### Function set central widget ! ###
+
     # Function set center widget - home widget
     def homeShow(self):
         self.manage_sensor = ManageSensor()
@@ -321,36 +317,37 @@ class MyApp(QMainWindow):
     def openWidget(self, widget: QWidget):
         self.setCentralWidget(widget)
         self.show()
+
     def openLastWidget(self):
-        widget_name:str = self.lastScreen()
+        widget_name: str = self.lastScreen()
         if widget_name.__eq__("Home Widget"):
             self.homeShow()
         elif widget_name.__eq__("Home Widget Succes Login"):
             self.homeShowSuccesLogIn()
-        elif  widget_name.__eq__("Choose Method"):
+        elif widget_name.__eq__("Choose Method"):
             self.chooseMethodShow()
-        elif  widget_name.__eq__("Choose Lots Muscles"):
+        elif widget_name.__eq__("Choose Lots Muscles"):
             self.chooseLotsMusclesShow()
-        elif  widget_name.__eq__("Choose Lots Muscles Advanced"):
+        elif widget_name.__eq__("Choose Lots Muscles Advanced"):
             self.chooseLotsMusclesAdvancedShow()
-        elif  widget_name.__eq__("Managment Sensor"):
+        elif widget_name.__eq__("Managment Sensor"):
             self.managmentSensorShow()
-        elif  widget_name.__eq__("Start Reference"):
+        elif widget_name.__eq__("Start Reference"):
             self.startReferenceShow()
-        elif  widget_name.__eq__("Video Player"):
+        elif widget_name.__eq__("Video Player"):
             self.videoPlayerShow()
-        elif  widget_name.__eq__("Observation Reference"):
+        elif widget_name.__eq__("Observation Reference"):
             self.observationReferenceShow()
-        elif  widget_name.__eq__("Start Experience"):
+        elif widget_name.__eq__("Start Experience"):
             self.startExperienceShow()
-        elif  widget_name.__eq__("Experience"):
+        elif widget_name.__eq__("Experience"):
             self.experienceObservationShow()
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = MyApp()
-    db_h=DatabaseHandler()
+    db_h = DatabaseHandler()
     if not db_h.isExistDatabaseFile():
         db_h.createDatabaseFile()
         db_h.CreateTables()

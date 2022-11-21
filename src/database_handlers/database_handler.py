@@ -1,10 +1,9 @@
-from pathlib import Path
 import queue
 import sqlite3
 from datetime import datetime
-from typing import List
 from os.path import exists
-
+from pathlib import Path
+from typing import List
 
 # isort: split
 from src.crypto.security_creator import SecurityCreator
@@ -122,7 +121,7 @@ class DatabaseHandler:
         self.createTableMuscles()
         self.fillTablesMuscles()
         self.closeConnection()
-        
+
     def CreateTables(self):
         try:
             self.createConnection()
@@ -135,6 +134,7 @@ class DatabaseHandler:
             self.closeConnection()
         except:
             pass
+
     # Create table for results
     def createResultTable(self):
 
@@ -163,13 +163,7 @@ class DatabaseHandler:
         try:
             self.cursor.execute(
                 """insert into Users values (null,?,?,?,?,?)""",
-                (
-                    user.name,
-                    user.surname,
-                    user.login,
-                    user.email,
-                    user.advanced,
-                ),
+                (user.name, user.surname, user.login, user.email, user.advanced,),
             )
             self.connection.commit()
             return self.findUserByLogin(user)
@@ -196,10 +190,7 @@ class DatabaseHandler:
             if user.advanced == 0:
                 self.cursor.execute(
                     """insert into passwords (id_user,hash) values (?,?)""",
-                    (
-                        user.id_user,
-                        hashed_password,
-                    ),
+                    (user.id_user, hashed_password,),
                 )
             else:
                 advanced_user_key = SecurityCreator.createAdvancedUserCode()
@@ -207,11 +198,7 @@ class DatabaseHandler:
                     advanced_user_key = SecurityCreator.createAdvancedUserCode()
                 self.cursor.execute(
                     """insert into passwords values (?,?,?)""",
-                    (
-                        user.id_user,
-                        hashed_password,
-                        advanced_user_key,
-                    ),
+                    (user.id_user, hashed_password, advanced_user_key,),
                 )
             self.connection.commit()
         except sqlite3.Error:
@@ -223,24 +210,22 @@ class DatabaseHandler:
         self.connection.commit()
 
     def findMeasurement(self, id_user):
-        self.cursor.execute("""select * from Measurement where id_user=?""",
-            str(id_user),
+        self.cursor.execute(
+            """select * from Measurement where id_user=?""", str(id_user),
         )
         row = self.cursor.fetchall()
         if row is None:
             return []
         return row
-    
+
     def findMeasurementAdvance(self, id_user):
-        self.cursor.execute("""select * from Measurement where id_advanced_user=?""",
-            str(id_user),
+        self.cursor.execute(
+            """select * from Measurement where id_advanced_user=?""", str(id_user),
         )
         row = self.cursor.fetchall()
         if row is None:
             return []
         return row
-    
-        
 
     def generateMusclesNames(self):
         # musclesFile = open(MUSCLES_FILE, "r", encoding="utf-8")
@@ -253,7 +238,7 @@ class DatabaseHandler:
             "MIĘSIEŃ BRZUCHATY ŁYDKI: GŁOWA BOCZNA I PRZYŚRODKOWA",
             "MIĘSIEŃ PÓŁŚCIĘGNISTY I GŁOWA DŁUGA MIĘŚNIA DWUGŁOWEGO UDA",
             "MIĘSIEŃ CZWOROGŁOWY UDA: M. PROSTY UDA, M. OBSZERNY BOCZNY I PRZYŚRODKOWY",
-            "MIĘSIEŃ CZWOROBOCZNY GRZBIETU: CZĘŚĆ ZSTĘPUJĄCA"
+            "MIĘSIEŃ CZWOROBOCZNY GRZBIETU: CZĘŚĆ ZSTĘPUJĄCA",
         ]
         for name in clearMusclesNames:
             yield tuple([name])
@@ -272,10 +257,7 @@ class DatabaseHandler:
         try:
             self.cursor.execute(
                 """update user set trainer_code=? where id_user=? """,
-                (
-                    trainer_key,
-                    user.id_user,
-                ),
+                (trainer_key, user.id_user,),
             )
         except sqlite3.Error:
             self.closeConnection()
@@ -286,10 +268,7 @@ class DatabaseHandler:
 
             self.cursor.execute(
                 """update passwords set hash= ? where id_user= ? """,
-                (
-                    hashed_password,
-                    user.id_user,
-                ),
+                (hashed_password, user.id_user,),
             )
 
             self.connection.commit()
@@ -302,10 +281,7 @@ class DatabaseHandler:
 
             self.cursor.execute(
                 """update passwords set hash= ? where id_user= ? """,
-                (
-                    hashed_password,
-                    id_user,
-                ),
+                (hashed_password, id_user,),
             )
 
             self.connection.commit()
@@ -400,10 +376,7 @@ class DatabaseHandler:
     def findUserExistForAdvanced(self, id_userAdvanced: str, id_user: str):
         self.cursor.execute(
             "select id_user from UserAndAdvanced where id_userAdvanced=? and id_user=?",
-            (
-                id_userAdvanced,
-                id_user,
-            ),
+            (id_userAdvanced, id_user,),
         )
         row = self.cursor.fetchone()
         if row is None:
@@ -478,6 +451,6 @@ class DatabaseHandler:
             open("database.db")
         except:
             pass
-    
+
     def isExistDatabaseFile(self):
         return exists("database.db")

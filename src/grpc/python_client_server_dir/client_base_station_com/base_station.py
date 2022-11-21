@@ -53,16 +53,16 @@ class BaseStation(Servicer.ClientBaseStationServicer):
             try:
                 self._spirit_manager.ecg_data = self._spirit_manager.read_next_packet()
                 if self._spirit_manager.ecg_data is None:
-                    self._spirit_manager.ecg_data = (
-                        self._spirit_manager.read_next_packet(False, wait_time=4)
+                    self._spirit_manager.ecg_data = self._spirit_manager.read_next_packet(
+                        False, wait_time=4
                     )
                 i = 0
                 while i < 5 and not self._spirit_manager.process_packet(
                     self._spirit_manager.ecg_data
                 ):
                     i += 1
-                    self._spirit_manager.ecg_data = (
-                        self._spirit_manager.read_next_packet(False)
+                    self._spirit_manager.ecg_data = self._spirit_manager.read_next_packet(
+                        False
                     )
             except KeyboardInterrupt:
                 print(

@@ -1,38 +1,35 @@
 # IMPORTANT
 ## REQUIREMENTS:
-- python version>=3.9 && version<3.10
-- flake8  4.0.1 (mccabe: 0.6.1, pycodestyle: 2.8.0, pyflakes: 2.4.0) CPython 3.9.4 on Windows
-- isort   VERSION 5.10.1
-- black 22.1.0 (compiled: yes)
-- bcrypt             3.2.0
-- Kivy               2.0.0
-- kivy-garden.graph  0.4.0
-- serial pyserial-3.5
-- pytest             7.0.1
-- google-api-python-client 2.37
-- grpcio             1.44.0
-- grpcio-tools       1.44.0
-##  How to generate/update python files from proton:
-Go in terminal to protos_dir then use for example:
+- python version>=3.9 && version<3.10 komputer diagnosty
+- python version == 3.7 stacja bazowa
+W pliku requirements.txt zostały umieszczone wszystkie narzędzia jakie były wykorzystywane w toku pracu nad aplikacją i stacją bazową, która wymagała mniejszej liczy, jednkaże jak było napisane w cześniej, to jest świadectwo wykorzystywanych narzędzi.
+W pliku requirements_pred.txt są narzędzia potrzebne do uruchamienia narzędzia predykcji.
+
+Instalowanie wymaganych zależności:
+pip install -r  <nazwa_pliku>.<rozszerzenie> 
+
+Jeśli są problemy z nazwą zmienić na typowe requirements.txt
+
+## Ważne!
+
+Zalecamy korzystać z środowiska wirtualnego.
+
+## Jak można generować pliki dla grpc/protobuf, przykład jaki my wykorzystwaliśmy:
+
+Przejść w terminalu do folderu grpc/protos_dir i  wywołać komendę:
 python -m grpc_tools.protoc -I./protos_base_station_com --python_out=./protos_base_station_com/ --grpc_python_out=./protos_base_station_com/ ./protos_base_station_com/client_base_station.proto
-if your protos is in diffrent dir then:
-python -m grpc_tools.protoc -I./your_dir --python_out=./your_dir/ --grpc_python_out=./your_dir/ ./your_dir/your_protos.proto
 
-# STM32 <-> PC communication example - Python project
 
-This project contains example code that can be used to communicate with STM32 via Protobuf API.
+## Jak do tej pory eksportowaliśmy aplikację
+Komenda:
+w folderze z repozytorium komenda:
+pyinstaller --noconfirm --onefile --windowed --name "<nazwa do wyeksportowania>"  --paths "<ścieżka do folderu z paczkami w środowisku wirtualnym>\<nazwa folderu z środowiska wirtualnego>\Lib\site-packages" --hidden-import "PyQt6.sip"  --hidden-import pyqtgraph.graphicsItems.ViewBox.axisCtrlTemplate_pyqt6 --hidden-import pyqtgraph.graphicsItems.PlotItem plotConfigTemplate_pyqt6 --hidden-import sqlite3  --hidden-import pyqtgraph.imageview.ImageViewTemplate_pyqt6 "<ścieżka do foldoru z repozytorium>\src\apps\main_app.py"
 
-The communication is done via UART peripheral, accesible via USB thanks to UART-to-USB converter implemented on STLink/V2 debugger, since i'm using Nucleo board - however, any UART-to-USB converter supported by your OS will do the job here.
+Powyższa komenda powinna być w jednej linii.
+## Kod do predykcji został wykonany jako POC(proof of concept) - obrazuje on jako można go w pełni wdrożyć z pewnymi poprawkami, na ten moment po udanym wykaniu predykcji należy zabić terminal.
 
-The version of Python i'm using is 3.9, and i don't intend to support any other. However, it should work just fine on slightly newer or older versions (you may need to change the version in `Pipfile`, if you're not using 3.9)
+Uruchomienie należy przeprowadzić z folderu pred i wywołać odpowiedni plik w terminalu.
 
-## Running the project with pipenv
+## Ostatnia uwaga
 
-If you wanna use prepared virtualenv for this project, run `pipenv run main.py [SERIAL PORT]` - everything should set-up automatically and the script should run, talking to STM32 and printing the results in console. Replace `[SERIAL PORT]` with STM32 port path, for example `COM3` or `/dev/ttyACM0`. This script will always list available COM devices, so you can run it without providing serial port name to check which port is the STM32.
-
-If you've configured different baudrate, pass it as optional argument `--baud`, for example: `pipenv run main.py /dev/ttyACM0 --baud 921600`. The default baudrate is `115200`, and script will always print currently used baudrate.
-
-## Running the project manually
-
-Install the dependencies manually, via `pip`, or other package manager. This script requires only `pyserial` and `protobuf` to run.
-
+To co jest w <> należy uzupełnić własnymi danymi

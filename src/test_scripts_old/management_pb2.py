@@ -20,9 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
     syntax="proto3",
     serialized_options=None,
     serialized_pb=b'\n\x10management.proto\x1a\x0cnanopb.proto"P\n\x04Ping\x12\x0e\n\x06pingID\x18\x01 \x01(\x05\x12\x1d\n\x15\x65xpectedAmountOfPongs\x18\x02 \x01(\x05\x12\x19\n\x11\x64\x65layBetweenPongs\x18\x03 \x01(\x05"\x16\n\x04Pong\x12\x0e\n\x06pongID\x18\x01 \x01(\x05"+\n\x12\x44iagnosticsRequest\x12\x15\n\rcheckMAX30001\x18\x01 \x01(\x08"\xe0\x01\n\x13\x44iagnosticsResponse\x12\x34\n\x0fmax30001AStatus\x18\x01 \x01(\x0e\x32\x1b.DiagnosticsResponse.Status\x12\x34\n\x0fmax30001BStatus\x18\x02 \x01(\x0e\x32\x1b.DiagnosticsResponse.Status"]\n\x06Status\x12 \n\x1c\x44IAG_RESPONSE_STATUS_INVALID\x10\x00\x12\x0e\n\nNOT_TESTED\x10\x01\x12\r\n\tTESTED_OK\x10\x02\x12\x12\n\x0eTESTED_FAILURE\x10\x03"\x19\n\x17StopMeasurementsRequest"7\n\x18StopMeasurementsResponse\x12\x1b\n\x13measurementsStopped\x18\x01 \x01(\x08"\xfd\x04\n\x1bStartECGMeasurementsRequest\x12/\n\x04type\x18\x01 \x01(\x0e\x32!.StartECGMeasurementsRequest.Type\x12/\n\x04rate\x18\x02 \x01(\x0e\x32!.StartECGMeasurementsRequest.Rate\x12/\n\x04gain\x18\x03 \x01(\x0e\x32!.StartECGMeasurementsRequest.Gain\x12M\n\x13lowPassFilterCutoff\x18\x04 \x01(\x0e\x32\x30.StartECGMeasurementsRequest.LowPassFilterCutoff\x12\x1d\n\x15highPassFilterEnabled\x18\x05 \x01(\x08";\n\x04Type\x12 \n\x1c\x45\x43G_MEASUREMENT_TYPE_INVALID\x10\x00\x12\x07\n\x03\x45MG\x10\x01\x12\x08\n\x04TEST\x10\x02"L\n\x04Rate\x12\x14\n\x10\x45\x43G_RATE_INVALID\x10\x00\x12\x0e\n\nRATE_512HZ\x10\x01\x12\x0e\n\nRATE_256HZ\x10\x02\x12\x0e\n\nRATE_128HZ\x10\x03"Y\n\x04Gain\x12\x14\n\x10\x45\x43G_GAIN_INVALID\x10\x00\x12\r\n\tGAIN_20VV\x10\x01\x12\r\n\tGAIN_40VV\x10\x02\x12\r\n\tGAIN_80VV\x10\x03\x12\x0e\n\nGAIN_160VV\x10\x04"w\n\x13LowPassFilterCutoff\x12\x16\n\x12LPF_CUTOFF_INVALID\x10\x00\x12\x0f\n\x0b\x43UTOFF_40HZ\x10\x01\x12\x10\n\x0c\x43UTOFF_100HZ\x10\x02\x12\x10\n\x0c\x43UTOFF_150HZ\x10\x03\x12\x13\n\x0f\x43UTOFF_DISABLED\x10\x04"\x9e\x01\n\x1cStartECGMeasurementsResponse\x12\x13\n\x0bisTypeValid\x18\x01 \x01(\x08\x12\x13\n\x0bisRateValid\x18\x02 \x01(\x08\x12\x13\n\x0bisGainValid\x18\x03 \x01(\x08\x12"\n\x1aisLowPassFilterCutoffValid\x18\x04 \x01(\x08\x12\x1b\n\x13measurementsStarted\x18\x05 \x01(\x08"\xcf\x01\n\rErrorResponse\x12!\n\x04type\x18\x01 \x01(\x0e\x32\x13.ErrorResponse.Type\x12\x1a\n\x0b\x64\x65scription\x18\x02 \x01(\tB\x05\x92?\x02pd"\x7f\n\x04Type\x12\x16\n\x12\x45RROR_TYPE_INVALID\x10\x00\x12\x13\n\x0fUNKNOWN_REQUEST\x10\x01\x12\x19\n\x15\x43OULDNT_PARSE_REQUEST\x10\x02\x12\x18\n\x14INVALID_DEVICE_STATE\x10\x03\x12\x15\n\x11INVALID_ARGUMENTS\x10\x04\x62\x06proto3',
-    dependencies=[
-        nanopb__pb2.DESCRIPTOR,
-    ],
+    dependencies=[nanopb__pb2.DESCRIPTOR,],
 )
 
 
@@ -432,9 +430,7 @@ _DIAGNOSTICSRESPONSE = _descriptor.Descriptor(
     ],
     extensions=[],
     nested_types=[],
-    enum_types=[
-        _DIAGNOSTICSRESPONSE_STATUS,
-    ],
+    enum_types=[_DIAGNOSTICSRESPONSE_STATUS,],
     serialized_options=None,
     is_extendable=False,
     syntax="proto3",
@@ -777,9 +773,7 @@ _ERRORRESPONSE = _descriptor.Descriptor(
     ],
     extensions=[],
     nested_types=[],
-    enum_types=[
-        _ERRORRESPONSE_TYPE,
-    ],
+    enum_types=[_ERRORRESPONSE_TYPE,],
     serialized_options=None,
     is_extendable=False,
     syntax="proto3",

@@ -111,7 +111,7 @@ class HomeWidget(QWidget):
         self.sing_up.setText(_translate("Home Widget", "Profil"))
         self.sing_up.clicked.connect(lambda: self.userProfilShow())
         self.sing_in.setText(_translate("Home Widget", "Historia pomiarowa"))
-        self.sing_in.clicked.connect(lambda:self.histroySeeShow())
+        self.sing_in.clicked.connect(lambda: self.histroySeeShow())
         self.log_out = QtWidgets.QPushButton(self.scrollAreaWidgetContents_6)
         self.log_out.setObjectName("see_history")
         self.horizontalLayout_3.addWidget(self.log_out)
@@ -133,8 +133,10 @@ class HomeWidget(QWidget):
 
     def userProfilShow(self):
         self.parent().userProfilSeeShow()
+
     def histroySeeShow(self):
         self.parent().histroySeeShow()
+
     def addButtonHistoryUserSee(self):
         self.see_users = QtWidgets.QPushButton(self.scrollAreaWidgetContents_6)
         self.see_users.setObjectName("see_users")
