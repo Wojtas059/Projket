@@ -88,11 +88,10 @@ class StartExperience(QWidget):
         self.parent().openLastWidget()
 
     def showScreen(self):
-        if self.parent().connectBaseStation():
-            self.parent().addScreen(self.getWidget())
-            self.parent().experienceObservationShow()
-        else:
-            self.createMessageBox("Nie udało się połączyć ze stacją bazową")
+        # if self.parent().connectBaseStation():
+        self.parent().addScreen(self.getWidget())
+        self.parent().experienceObservationShow()
+
 
     def createMessageBox(self, message: str):
         msg = QMessageBox()

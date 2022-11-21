@@ -100,20 +100,20 @@ class ObservationExpWidget(Screen):
             print(results)
             for result in results:
                 try:
-                    dupa = []
-                    dupa = result.data.split(",")
-                    self.dataQueue_1.put(float(dupa[0]))
-                    # self.dataQueue_2.put(float(dupa[1]))
+                    list_exp = []
+                    list_exp = result.data.split(",")
+                    self.dataQueue_1.put(float(list_exp[0]))
+                    # self.dataQueue_2.put(float(list_exp[1]))
 
                 # points.pop(0)
 
                 # points_dequeued=deque(points)
                 # points_dequeued.rotate(-1)
                 # points_dequeued=list(points_dequeued)
-                # dupa = []
-                # dupa = result.data.split(',')
-                ##print(dupa[0])
-                # points_dequeued.append((  998,float(dupa[0])   ))
+                # list_exp = []
+                # list_exp = result.data.split(',')
+                ##print(list_exp[0])
+                # points_dequeued.append((  998,float(list_exp[0])   ))
                 # print(points_dequeued[-1])
                 # self.plot.points = points_dequeued
                 # self.graph_test.add_plot(self.plot.points)

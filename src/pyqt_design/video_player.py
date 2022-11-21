@@ -1,4 +1,3 @@
-# Form implementation generated from reading ui file '.\dupa_medialna.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #

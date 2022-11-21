@@ -80,7 +80,6 @@ class MyGrid(Widget):
     def getDataSTM(self):
         # file = open("data_stm_sampling.csv","w")
         # file.write("Value A, Value B, Value C, Constant value\n")
-        # print("Dupa")
         # file.close
         # queue_data = queue.Queue()
         self.com.text += "\nRozpoczęto pomiar\n\n"

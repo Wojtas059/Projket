@@ -27,7 +27,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.y = [0 for _ in range(700)]  # 100 data points
         #Thread(target=self.saveFileValue).start()
 
-        Thread(target=self.dupa).start()
+        Thread(target=self.function).start()
 
         pen = pg.mkPen(color=(255, 0, 0))
         self.data_line =  self.graphWidget.plot(self.x, self.y, pen)
@@ -36,7 +36,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.timer.timeout.connect(self.update_plot_data)
         self.timer.start()
 
-    def dupa(self):
+    def function(self):
         while True:
             f = open("static/po/test.csv", "r")
 

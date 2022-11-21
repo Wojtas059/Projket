@@ -61,11 +61,3 @@ class Client:
             results = self.stub.sendSTMData(ServicerMethods.Void())
             for result in results:
                 queue_data.put(float(result.data))
-                # file.write(result.data)
-        # file = open("data_stm_sampling.csv","a")
-        # while queue_data.qsize() > 0:
-        #    file.write(queue_data.get())
-        # file.close()
-
-    # for x in results:
-    # print(x.data)

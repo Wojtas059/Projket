@@ -67,7 +67,6 @@ class UsersSeeWidget(Screen):
             print(content)
             for con in content:
                 next_list.append(con[0])
-            # "Wojciech Maj 1", "Piotr Łach 2 ","Wojciech Maj 3","Wojciech Maj 4","Wojciech Maj 5 ","Wojciech Maj 6", "Piotr Łach 7", "Dupa 8"]
             if not content:
                 content = []
             else:

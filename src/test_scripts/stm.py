@@ -5,11 +5,7 @@ import serial
 from messages import parse_message, serialize_message
 
 # STM_COM_PORT = "COM3"
-<<<<<<< HEAD
 STM_COM_PORT = "COM3"
-=======
-STM_COM_PORT = "COM6"
->>>>>>> a1e48792c9af8d21dcfbf337f39a73377175a44a
 STM_BAUDRATE = 921600
 
 stm = serial.Serial(STM_COM_PORT, STM_BAUDRATE, timeout=None)
@@ -43,11 +39,7 @@ def send_message(message: object) -> None:
 
 def read_message(
     wait_time: float = 0.1, wait_precision: float = 0.01, print_bytes: bool = False, print_size: bool = True
-<<<<<<< HEAD
 ):
-=======
-) :
->>>>>>> a1e48792c9af8d21dcfbf337f39a73377175a44a
     total_wait_time: float = 0
 
     while stm.in_waiting == 0 and total_wait_time < wait_time:

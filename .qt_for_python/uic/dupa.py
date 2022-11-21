@@ -1,4 +1,3 @@
-# Form implementation generated from reading ui file 'd:\Files\Desktop\Projektowe Active Life\Projekt kivy\repo\src\pyqt_design\ui_file\dupa.ui'
 #
 # Created by: PyQt6 UI code generator 6.2.3
 #

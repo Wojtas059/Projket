@@ -7,7 +7,7 @@ import grpc
 import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2 as ServicerMethods
 import src.grpc.protos_dir.protos_base_station_com.client_base_station_pb2_grpc as Servicer
 from file.mygrid import Connect as ConnectSTM32
-from src.python_class.medical_research.ecg_tests import ECGTests
+from src.medical_research.ecg_tests import ECGTests
 
 
 class BaseStation(Servicer.ClientBaseStationServicer):
@@ -40,8 +40,8 @@ class BaseStation(Servicer.ClientBaseStationServicer):
 
         while True:
             if self._stm_status == "Sampling":
-                if self._spirit_manager.queqe_data.qsize() > 0:
-                    data_stm = self._spirit_manager.queqe_data.get()
+                if self._stm_manager.queue.qsize() > 0:
+                    data_stm = self._stm_manager.queue.get()
 
                     yield ServicerMethods.STMData(data=data_stm)
 
